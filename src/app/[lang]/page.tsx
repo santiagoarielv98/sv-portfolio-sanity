@@ -1,8 +1,6 @@
-import { Card } from "@/components/ui/card";
-import React from "react";
-
 import { BellRing, Check } from "lucide-react";
 
+import { Badge } from "@/components/extended-badge";
 import { Button } from "@/components/extended-button";
 import {
   CardContent,
@@ -10,9 +8,9 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
+  ExtendedCard,
+} from "@/components/extended-card";
 import { cn } from "@/lib/utils";
-import { Badge } from "@/components/extended-badge";
 
 const notifications = [
   {
@@ -29,11 +27,9 @@ const notifications = [
   },
 ];
 
-type CardProps = React.ComponentProps<typeof Card>;
-
-function CardDemo({ className, ...props }: CardProps) {
+function CardDemo() {
   return (
-    <Card className={cn("w-[380px]", className)} {...props}>
+    <ExtendedCard className={cn("w-[380px]")} hover="illuminate">
       <CardHeader>
         <CardTitle>Notifications</CardTitle>
         <CardDescription>You have 3 unread messages.</CardDescription>
@@ -75,7 +71,7 @@ function CardDemo({ className, ...props }: CardProps) {
           <Check /> Mark all as read
         </Button>
       </CardFooter>
-    </Card>
+    </ExtendedCard>
   );
 }
 
