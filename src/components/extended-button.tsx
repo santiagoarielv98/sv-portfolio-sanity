@@ -8,13 +8,6 @@ const extendedButtonVariants = cva(
   {
     variants: {
       variant: {
-        default: [
-          "bg-primary",
-          "text-primary-foreground font-medium",
-          "shadow-[0_0_20px_rgba(var(--primary),0.2)]",
-          "active:scale-[0.98]",
-          "focus-visible:ring-2 focus-visible:ring-primary/70",
-        ].join(" "),
         solid: [
           "bg-gradient-to-r from-primary to-secondary",
           "text-primary-foreground font-bold",
@@ -33,6 +26,13 @@ const extendedButtonVariants = cva(
           "before:bg-gradient-to-r before:from-transparent before:via-white/40 before:to-transparent",
           "before:translate-x-[-200%] before:skew-x-[-20deg]",
           "before:transition-transform before:duration-500 before:ease-out",
+          "active:scale-[0.98]",
+          "focus-visible:ring-2 focus-visible:ring-primary/70",
+        ].join(" "),
+        soft: [
+          "bg-primary/10",
+          "text-primary font-medium",
+          "border-2 border-primary/20",
           "active:scale-[0.98]",
           "focus-visible:ring-2 focus-visible:ring-primary/70",
         ].join(" "),
@@ -100,7 +100,7 @@ const extendedButtonVariants = cva(
       },
     },
     defaultVariants: {
-      variant: "default",
+      variant: "neon",
       size: "default",
       scale: "md",
       glow: "md",
