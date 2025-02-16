@@ -1,7 +1,7 @@
-import { BellRing, Check } from "lucide-react";
+import { BellRing, Check, Code } from "lucide-react";
 
-import { Badge } from "@/components/extended-badge";
-import { Button } from "@/components/extended-button";
+import { ExtendedBadge } from "@/components/extended-badge";
+import { ExtendedButton } from "@/components/extended-button";
 import {
   CardContent,
   CardDescription,
@@ -30,9 +30,23 @@ const notifications = [
 function CardDemo() {
   return (
     <ExtendedCard className={cn("w-[380px]")}>
-      <CardHeader>
-        <CardTitle>Notifications</CardTitle>
-        <CardDescription>You have 3 unread messages.</CardDescription>
+      <CardHeader className="flex-row gap-4">
+        <ExtendedButton
+          size="icon"
+          asChild
+          shine="none"
+          float="none"
+          scale="none"
+          gradient="none"
+        >
+          <div>
+            <Code />
+          </div>
+        </ExtendedButton>
+        <div className="flex gap-1.5 flex-col flex-1">
+          <CardTitle>Notifications</CardTitle>
+          <CardDescription>You have 3 unread messages.</CardDescription>
+        </div>
       </CardHeader>
       <CardContent className="grid gap-4">
         <div className="flex items-center space-x-4 rounded-md border p-4">
@@ -64,12 +78,12 @@ function CardDemo() {
             </div>
           ))}
         </div>
-        <Badge>View all notifications</Badge>
+        <ExtendedBadge>View all notifications</ExtendedBadge>
       </CardContent>
       <CardFooter>
-        <Button className="w-full">
+        <ExtendedButton className="w-full">
           <Check /> Mark all as read
-        </Button>
+        </ExtendedButton>
       </CardFooter>
     </ExtendedCard>
   );

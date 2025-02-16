@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/card";
 import { cva, type VariantProps } from "class-variance-authority";
 
-const cardNeonVariants = cva(
+const extendedCardNeonVariants = cva(
   "relative transition-all duration-500 rounded-xl overflow-hidden backdrop-blur-sm group",
   {
     variants: {
@@ -76,7 +76,7 @@ const cardNeonVariants = cva(
 
 interface ExtendedCardProps
   extends React.ComponentProps<typeof Card>,
-    VariantProps<typeof cardNeonVariants> {}
+    VariantProps<typeof extendedCardNeonVariants> {}
 
 function ExtendedCard({
   className,
@@ -91,7 +91,7 @@ function ExtendedCard({
   return (
     <Card
       className={cn(
-        cardNeonVariants({
+        extendedCardNeonVariants({
           variant,
           scale,
           rotate,

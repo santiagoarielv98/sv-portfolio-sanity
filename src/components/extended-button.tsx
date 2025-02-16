@@ -3,12 +3,12 @@ import { cva, type VariantProps } from "class-variance-authority";
 import * as React from "react";
 import { cn } from "@/lib/utils";
 
-const buttonVariants = cva(
+const extendedButtonVariants = cva(
   "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all duration-300 relative overflow-hidden group",
   {
     variants: {
       variant: {
-        neon: [
+        default: [
           // Base mejorada
           "bg-gradient-to-r from-primary via-secondary to-accent",
           "text-primary-foreground font-bold",
@@ -89,7 +89,7 @@ const buttonVariants = cva(
       },
     },
     defaultVariants: {
-      variant: "neon",
+      variant: "default",
       size: "default",
       scale: "md",
       glow: "md",
@@ -100,7 +100,7 @@ const buttonVariants = cva(
   },
 );
 
-function Button({
+function ExtendedButton({
   className,
   variant,
   size,
@@ -112,7 +112,7 @@ function Button({
   asChild = false,
   ...props
 }: React.ComponentProps<"button"> &
-  VariantProps<typeof buttonVariants> & {
+  VariantProps<typeof extendedButtonVariants> & {
     asChild?: boolean;
   }) {
   const Comp = asChild ? Slot : "button";
@@ -121,7 +121,7 @@ function Button({
     <Comp
       data-slot="button"
       className={cn(
-        buttonVariants({
+        extendedButtonVariants({
           variant,
           size,
           scale,
@@ -137,4 +137,4 @@ function Button({
   );
 }
 
-export { Button, buttonVariants };
+export { ExtendedButton, extendedButtonVariants };
