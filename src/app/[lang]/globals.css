@@ -91,6 +91,8 @@
 }
 
 @theme {
+  --font-space: var(--font-space);
+  --font-urbanist: var(--font-urbanist);
   --animate-shimmer: shimmer 0.3s ease-out;
 
   @keyframes shimmer {

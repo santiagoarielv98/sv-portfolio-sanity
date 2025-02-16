@@ -36,7 +36,9 @@ export default async function RootLayout({
 
   return (
     <html lang={lang}>
-      <body className={`${spaceGrotesk.variable} ${urbanist.variable}`}>
+      <body
+        className={`dark ${spaceGrotesk.variable} ${urbanist.variable} font-urbanist min-h-screen`}
+      >
         {children}
       </body>
     </html>
