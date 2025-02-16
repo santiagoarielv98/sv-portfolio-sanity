@@ -1,16 +1,19 @@
 import { Calendar, ChevronDown, Code, MapPin } from "lucide-react";
+import Image from "next/image";
 
 import { ExtendedBadge } from "@/components/extended-badge";
 import { ExtendedButton } from "@/components/extended-button";
 import {
   CardContent,
   CardDescription,
+  CardFooter,
   CardHeader,
   CardTitle,
   ExtendedCard,
 } from "@/components/extended-card";
 import { ExtendedSeparator } from "@/components/extended-separator";
 import { Typography } from "@/components/ui/typography";
+
 export interface Experience {
   title: string;
   company: string;
@@ -18,6 +21,16 @@ export interface Experience {
   location: string;
   description: string;
   technologies: string[];
+}
+
+export interface Project {
+  title: string;
+  description: string;
+  image: string;
+  technologies: string[];
+  demoUrl?: string;
+  repoUrl?: string;
+  category: "frontend" | "backend" | "fullstack";
 }
 
 export const experiences: Experience[] = [
@@ -49,6 +62,39 @@ export const experiences: Experience[] = [
     technologies: ["HTML", "CSS", "JavaScript"],
   },
 ];
+
+export const projects: Project[] = [
+  {
+    title: "Portfolio Website",
+    description:
+      "Personal portfolio built with Next.js, Tailwind CSS, and Sanity CMS",
+    image: "/projects/portfolio.png",
+    technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Sanity"],
+    demoUrl: "https://portfolio.dev",
+    repoUrl: "https://github.com/user/portfolio",
+    category: "frontend",
+  },
+  {
+    title: "E-commerce Platform",
+    description:
+      "Full-stack e-commerce solution with real-time inventory management",
+    image: "/projects/ecommerce.png",
+    technologies: ["React", "Node.js", "MongoDB", "Express"],
+    demoUrl: "https://ecommerce.dev",
+    repoUrl: "https://github.com/user/ecommerce",
+    category: "fullstack",
+  },
+  {
+    title: "Task Management API",
+    description:
+      "RESTful API for task management with authentication and real-time updates",
+    image: "/projects/taskapi.png",
+    technologies: ["Node.js", "Express", "PostgreSQL", "Socket.io"],
+    repoUrl: "https://github.com/user/taskapi",
+    category: "backend",
+  },
+];
+
 const Home = () => {
   return (
     <main>
@@ -193,6 +239,86 @@ const Home = () => {
                 ))}
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+      <section className="py-20">
+        <div className="container mx-auto px-4">
+          <div className="mb-12 space-y-4 text-center">
+            <ExtendedBadge className="mx-auto flex items-center gap-2">
+              <Code />
+              Projects
+            </ExtendedBadge>
+            <div className="flex items-center gap-4 max-w-2xl mx-auto">
+              <ExtendedSeparator className="flex-1 from-transparent to-primary/30 via-none" />
+              <Typography variant="h2">Projects</Typography>
+              <ExtendedSeparator className="flex-1 from-primary/30 to-transparent via-none" />
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-12">
+            {projects.map((project, index) => (
+              <ExtendedCard
+                key={index}
+                className="group overflow-hidden flex flex-col"
+                scale="none"
+              >
+                <div className="relative w-full aspect-video">
+                  <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-background/20 z-10 group-hover:opacity-50 transition-opacity" />
+                  <Image
+                    src={project.image}
+                    alt={project.title}
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  />
+                </div>
+
+                <CardHeader className="relative">
+                  <CardTitle className="group-hover:text-primary transition-colors">
+                    {project.title}
+                  </CardTitle>
+                  <CardDescription>{project.description}</CardDescription>
+                </CardHeader>
+
+                <CardContent>
+                  <div className="flex flex-wrap gap-2">
+                    {project.technologies.map((tech, techIndex) => (
+                      <ExtendedBadge
+                        key={techIndex}
+                        variant="ghost"
+                        scale="none"
+                      >
+                        {tech}
+                      </ExtendedBadge>
+                    ))}
+                  </div>
+                </CardContent>
+                <ExtendedSeparator className="mb-6 mt-auto" />
+                <CardFooter className="gap-4">
+                  {project.demoUrl && (
+                    <ExtendedButton
+                      variant="outline"
+                      size="sm"
+                      className="flex-1"
+                    >
+                      <Code className="w-4 h-4 mr-1" />
+                      Live Demo
+                    </ExtendedButton>
+                  )}
+                  {project.repoUrl && (
+                    <ExtendedButton
+                      variant="outline"
+                      size="sm"
+                      className="flex-1"
+                    >
+                      <Code className="w-4 h-4 mr-1" />
+                      Source Code
+                    </ExtendedButton>
+                  )}
+                </CardFooter>
+              </ExtendedCard>
+            ))}
           </div>
         </div>
       </section>
