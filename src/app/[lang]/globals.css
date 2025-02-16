@@ -5,19 +5,19 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --background: hsl(230, 20%, 95%);
-  --foreground: hsl(235, 80%, 15%);
-  --card: hsl(230, 20%, 98%);
-  --card-foreground: hsl(235, 80%, 15%);
-  --popover: hsl(230, 20%, 98%);
-  --popover-foreground: hsl(235, 80%, 15%);
-  --primary: hsl(260, 100%, 60%);
+  --background: hsl(230, 25%, 98%);
+  --foreground: hsl(235, 85%, 12%);
+  --card: hsl(230, 25%, 99%);
+  --card-foreground: hsl(235, 85%, 12%);
+  --popover: hsl(230, 25%, 99%);
+  --popover-foreground: hsl(235, 85%, 12%);
+  --primary: hsl(280, 100%, 65%);
   --primary-foreground: hsl(0, 0%, 100%);
-  --secondary: hsl(180, 100%, 50%);
-  --secondary-foreground: hsl(235, 80%, 15%);
+  --secondary: hsl(190, 100%, 55%);
+  --secondary-foreground: hsl(235, 85%, 12%);
   --muted: hsl(230, 20%, 90%);
   --muted-foreground: hsl(235, 30%, 40%);
-  --accent: hsl(320, 100%, 60%);
+  --accent: hsl(330, 100%, 65%);
   --accent-foreground: hsl(0, 0%, 100%);
   --destructive: hsl(0, 100%, 60%);
   --destructive-foreground: hsl(0, 0%, 100%);
@@ -33,20 +33,20 @@
 }
 
 .dark {
-  --background: hsl(235, 80%, 8%);
-  --foreground: hsl(230, 100%, 95%);
-  --card: hsl(235, 80%, 10%);
-  --card-foreground: hsl(230, 100%, 95%);
-  --popover: hsl(235, 80%, 10%);
-  --popover-foreground: hsl(230, 100%, 95%);
-  --primary: hsl(260, 100%, 70%);
-  --primary-foreground: hsl(235, 80%, 8%);
-  --secondary: hsl(180, 100%, 60%);
-  --secondary-foreground: hsl(235, 80%, 8%);
+  --background: hsl(235, 85%, 6%);
+  --foreground: hsl(230, 100%, 97%);
+  --card: hsl(235, 85%, 8%);
+  --card-foreground: hsl(230, 100%, 97%);
+  --popover: hsl(235, 85%, 8%);
+  --popover-foreground: hsl(230, 100%, 97%);
+  --primary: hsl(280, 100%, 75%);
+  --primary-foreground: hsl(235, 85%, 6%);
+  --secondary: hsl(190, 100%, 65%);
+  --secondary-foreground: hsl(235, 85%, 6%);
   --muted: hsl(235, 60%, 15%);
   --muted-foreground: hsl(230, 60%, 80%);
-  --accent: hsl(320, 100%, 70%);
-  --accent-foreground: hsl(235, 80%, 8%);
+  --accent: hsl(330, 100%, 75%);
+  --accent-foreground: hsl(235, 85%, 6%);
   --destructive: hsl(0, 100%, 70%);
   --destructive-foreground: hsl(235, 80%, 8%);
   --border: hsl(235, 60%, 15%);
@@ -100,6 +100,16 @@
     100% {
       background-position: -200% 50%;
     }
+  }
+
+  @keyframes glow {
+    0%, 100% { filter: brightness(1); }
+    50% { filter: brightness(1.3); }
+  }
+
+  @keyframes floatingScale {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.02); }
   }
 }
 

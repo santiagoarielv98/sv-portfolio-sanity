@@ -4,39 +4,38 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const badgeVariants = cva(
-  "inline-flex items-center justify-center rounded-md text-xs font-semibold w-fit whitespace-nowrap shrink-0 [&>svg]:size-3 gap-1 px-3 py-1 transition-all duration-300 backdrop-blur-sm",
+  "inline-flex items-center justify-center rounded-md text-xs font-semibold w-fit whitespace-nowrap shrink-0 [&>svg]:size-3 gap-1.5 px-3 py-1 transition-all duration-300 backdrop-blur-sm relative group",
   {
     variants: {
       variant: {
         neon: [
-          "bg-gradient-to-r from-primary/10 via-secondary/10 to-primary/10",
-          "text-primary/70 border-2 border-primary/20",
-          "shadow-[0_0_15px_rgba(var(--primary),0.1),inset_0_0_10px_rgba(var(--secondary),0.1)]",
-          "animate-shimmer",
+          // Base mejorada
+          "bg-gradient-to-r from-primary/5 via-secondary/5 to-accent/5",
+          "text-primary/80 border border-primary/30",
+          "shadow-[0_0_15px_rgba(var(--primary),0.1)]",
+          // Efecto de brillo interno
+          "before:absolute before:inset-0 before:rounded-[6px]",
+          "before:bg-gradient-to-r before:from-primary/10 before:via-secondary/10 before:to-accent/10",
+          "before:opacity-0 before:transition-opacity before:duration-300",
+          // Animación de fondo
+          "animate-shimmer bg-[length:200%_100%]",
         ].join(" "),
       },
       hover: {
-        scale: "hover:scale-105",
-        glow: [
-          "hover:shadow-[0_0_20px_rgba(var(--primary),0.3),0_0_40px_rgba(var(--secondary),0.2)]",
-          "hover:border-primary/60",
-        ].join(" "),
-        gradient: [
-          "hover:bg-gradient-to-r hover:from-primary/20 hover:via-secondary/20 hover:to-primary/20",
+        modern: [
+          "hover:scale-[1.02]",
+          "hover:shadow-[0_0_20px_rgba(var(--primary),0.2)]",
+          "hover:border-primary/50",
           "hover:text-primary",
-        ].join(" "),
-        all: [
-          "hover:scale-105",
-          "hover:shadow-[0_0_20px_rgba(var(--primary),0.3),0_0_40px_rgba(var(--secondary),0.2)]",
-          "hover:border-primary/60",
-          "hover:bg-gradient-to-r hover:from-primary/20 hover:via-secondary/20 hover:to-primary/20",
-          "hover:text-primary",
+          "hover:before:opacity-100",
+          "[&>*]:hover:translate-y-[-1px]",
+          "[&>*]:transition-transform [&>*]:duration-300",
         ].join(" "),
       },
     },
     defaultVariants: {
       variant: "neon",
-      hover: "all",
+      hover: "modern",
     },
   },
 );

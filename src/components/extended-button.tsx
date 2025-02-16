@@ -4,19 +4,26 @@ import * as React from "react";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all duration-300 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 [&_svg]:shrink-0 relative overflow-hidden",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all duration-300 relative overflow-hidden group",
   {
     variants: {
       variant: {
         neon: [
-          "bg-gradient-to-r from-secondary to-primary",
+          // Base mejorada
+          "bg-gradient-to-r from-primary via-secondary to-accent",
           "text-primary-foreground font-bold",
-          "shadow-[0_0_20px_rgba(var(--primary),0.4)]",
-          "active:scale-[0.98]",
-          "active:shadow-[0_0_15px_rgba(var(--primary),0.5)]",
-          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary",
-          "before:absolute before:inset-0 before:bg-gradient-to-r before:from-transparent before:via-white/20 before:to-transparent",
-          "before:translate-x-[-200%] before:transition-transform before:duration-[1s]",
+          "shadow-[0_0_20px_rgba(var(--primary),0.3)]",
+          // Efectos de capa
+          "after:absolute after:inset-0 after:bg-black/10",
+          "after:transition-opacity after:duration-300",
+          // Efecto de brillo
+          "before:absolute before:inset-0",
+          "before:bg-gradient-to-r before:from-transparent before:via-white/30 before:to-transparent",
+          "before:translate-x-[-200%] before:transition-transform before:duration-500",
+          "before:skew-x-[-20deg]",
+          // Estados activos
+          "active:scale-[0.98] active:shadow-[0_0_15px_rgba(var(--primary),0.5)]",
+          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/70",
         ].join(" "),
       },
       size: {
@@ -26,23 +33,20 @@ const buttonVariants = cva(
         icon: "size-9",
       },
       hover: {
-        scale: "hover:scale-105",
-        glow: "hover:shadow-[0_0_25px_rgba(var(--primary),0.6)]",
-        gradient:
-          "hover:bg-gradient-to-r hover:from-primary hover:to-secondary",
-        shine: "hover:before:translate-x-[200%]",
-        all: [
+        modern: [
           "hover:scale-105",
-          "hover:shadow-[0_0_25px_rgba(var(--primary),0.6)]",
-          "hover:bg-gradient-to-r hover:from-primary hover:to-secondary",
+          "hover:shadow-[0_0_30px_rgba(var(--primary),0.5)]",
+          "hover:after:opacity-0",
           "hover:before:translate-x-[200%]",
+          "[&>*]:hover:translate-y-[-1px]",
+          "[&>*]:transition-transform [&>*]:duration-300",
         ].join(" "),
       },
     },
     defaultVariants: {
       variant: "neon",
+      hover: "modern",
       size: "default",
-      hover: "all",
     },
   },
 );
