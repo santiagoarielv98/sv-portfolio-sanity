@@ -1,54 +1,54 @@
-import { Check, ChevronDown, Code } from "lucide-react";
+import { Calendar, ChevronDown, Code, MapPin } from "lucide-react";
 
 import { ExtendedBadge } from "@/components/extended-badge";
 import { ExtendedButton } from "@/components/extended-button";
 import {
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
   ExtendedCard,
 } from "@/components/extended-card";
 import { ExtendedSeparator } from "@/components/extended-separator";
 import { Typography } from "@/components/ui/typography";
-import { cn } from "@/lib/utils";
-
-function CardDemo() {
-  return (
-    <ExtendedCard className={cn("w-[380px]")} scale="none">
-      <CardHeader className="flex-row gap-4">
-        <ExtendedButton
-          size="icon"
-          asChild
-          shine="none"
-          float="none"
-          scale="none"
-          gradient="none"
-          variant="soft"
-        >
-          <div>
-            <Code />
-          </div>
-        </ExtendedButton>
-        <div className="flex gap-1.5 flex-col flex-1">
-          <CardTitle>Notifications</CardTitle>
-          <CardDescription>You have 3 unread messages.</CardDescription>
-        </div>
-      </CardHeader>
-      <CardContent className="grid gap-4">
-        <ExtendedBadge>View all notifications</ExtendedBadge>
-      </CardContent>
-      <ExtendedSeparator className="my-6" />
-      <CardFooter>
-        <ExtendedButton className="w-full">
-          <Check /> Mark all as read
-        </ExtendedButton>
-      </CardFooter>
-    </ExtendedCard>
-  );
+export interface Experience {
+  title: string;
+  company: string;
+  period: string;
+  location: string;
+  description: string;
+  technologies: string[];
 }
 
+export const experiences: Experience[] = [
+  {
+    title: "Senior Developer",
+    company: "TechnoSoft",
+    period: "2019 - Present",
+    location: "New York, USA",
+    description:
+      "Led development of multiple web applications using React and Node.js",
+    technologies: ["React", "Node.js"],
+  },
+  {
+    title: "Full Stack Developer",
+    company: "WebSolutions Inc",
+    period: "2017 - 2019",
+    location: "San Francisco, USA",
+    description:
+      "Developed and maintained enterprise web applications using Angular and Java",
+    technologies: ["Angular", "Java", "Spring Boot"],
+  },
+  {
+    title: "Web Development Internship",
+    company: "StartupTech",
+    period: "2016 - 2017",
+    location: "Remote",
+    description:
+      "Assisted in frontend development and learned modern web technologies",
+    technologies: ["HTML", "CSS", "JavaScript"],
+  },
+];
 const Home = () => {
   return (
     <main>
@@ -122,36 +122,50 @@ const Home = () => {
               <ExtendedSeparator className="flex-1 from-primary/30 to-transparent via-none" />
             </div>
             <div className="mt-12 grid gap-6">
-              <ExtendedCard>
-                <CardHeader className="flex-row gap-4">
-                  <ExtendedButton
-                    size="icon"
-                    variant="soft"
-                    shine="none"
-                    float="none"
-                    scale="none"
-                    gradient="none"
-                  >
-                    <Code />
-                  </ExtendedButton>
-                  <div className="flex gap-1.5 flex-col flex-1">
-                    <CardTitle>Senior Developer</CardTitle>
-                    <CardDescription>2021 - Present</CardDescription>
-                  </div>
-                </CardHeader>
-                <CardContent>
-                  <Typography variant="body1">
-                    Led development of multiple web applications using React and
-                    Node.js
-                  </Typography>
-                </CardContent>
-                <CardContent>
-                  <ExtendedSeparator />
-                </CardContent>
-                <CardFooter>
-                  <ExtendedBadge>React & Node.js</ExtendedBadge>
-                </CardFooter>
-              </ExtendedCard>
+              {experiences.map((experience, index) => (
+                <ExtendedCard key={index}>
+                  <CardHeader className="flex-row gap-4">
+                    <ExtendedButton
+                      size="icon"
+                      variant="soft"
+                      shine="none"
+                      float="none"
+                      scale="none"
+                      gradient="none"
+                    >
+                      <Code />
+                    </ExtendedButton>
+                    <div className="flex gap-1.5 flex-col flex-1">
+                      <CardTitle>{experience.title}</CardTitle>
+                      <CardDescription>{experience.company}</CardDescription>
+                    </div>
+                  </CardHeader>
+                  <CardContent className="space-y-6">
+                    <div className="flex gap-2">
+                      <ExtendedBadge>
+                        <Calendar className="mr-1" />
+                        {experience.period}
+                      </ExtendedBadge>
+                      <ExtendedBadge>
+                        <MapPin className="mr-1" />
+                        {experience.location}
+                      </ExtendedBadge>
+                    </div>
+
+                    <Typography variant="body1">
+                      {experience.description}
+                    </Typography>
+
+                    <ExtendedSeparator />
+
+                    <div className="flex flex-wrap gap-2">
+                      {experience.technologies.map((tech, techIndex) => (
+                        <ExtendedBadge key={techIndex}>{tech}</ExtendedBadge>
+                      ))}
+                    </div>
+                  </CardContent>
+                </ExtendedCard>
+              ))}
             </div>
           </div>
         </div>
