@@ -21,35 +21,42 @@ const badgeVariants = cva(
           "animate-shimmer bg-[length:200%_100%]",
         ].join(" "),
       },
-      hoverScale: {
+      scale: {
+        none: "",
+        xs: "hover:scale-[1.005]",
         sm: "hover:scale-[1.01]",
         md: "hover:scale-[1.02]",
         lg: "hover:scale-[1.03]",
       },
-      hoverGlow: {
+      glow: {
+        none: "",
+        xs: "hover:shadow-[0_0_10px_rgba(var(--primary),0.1)]",
         sm: "hover:shadow-[0_0_15px_rgba(var(--primary),0.15)]",
         md: "hover:shadow-[0_0_20px_rgba(var(--primary),0.2)]",
         lg: "hover:shadow-[0_0_25px_rgba(var(--primary),0.25)]",
       },
-      hoverBorder: {
-        subtle: "hover:border-primary/40",
+      border: {
+        none: "",
+        light: "hover:border-primary/40",
         medium: "hover:border-primary/60",
         strong: "hover:border-primary/80",
       },
-      hoverText: {
+      highlight: {
+        none: "",
         true: "hover:text-primary",
       },
-      hoverContent: {
-        lift: "[&>*]:hover:translate-y-[-1px] [&>*]:transition-transform [&>*]:duration-300",
+      float: {
+        none: "",
+        true: "[&>*]:hover:translate-y-[-1px] [&>*]:transition-transform [&>*]:duration-300",
       },
     },
     defaultVariants: {
       variant: "neon",
-      hoverScale: "md",
-      hoverGlow: "md",
-      hoverBorder: "medium",
-      hoverText: true,
-      hoverContent: "lift",
+      scale: "md",
+      glow: "md",
+      border: "medium",
+      highlight: true,
+      float: true,
     },
   },
 );
@@ -57,11 +64,11 @@ const badgeVariants = cva(
 function Badge({
   className,
   variant,
-  hoverScale,
-  hoverGlow,
-  hoverBorder,
-  hoverText,
-  hoverContent,
+  scale,
+  glow,
+  border,
+  highlight,
+  float,
   asChild = false,
   ...props
 }: React.ComponentProps<"span"> &
@@ -74,11 +81,11 @@ function Badge({
       className={cn(
         badgeVariants({
           variant,
-          hoverScale,
-          hoverGlow,
-          hoverBorder,
-          hoverText,
-          hoverContent,
+          scale,
+          glow,
+          border,
+          highlight,
+          float,
         }),
         className,
       )}

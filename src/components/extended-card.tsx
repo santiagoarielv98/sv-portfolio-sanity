@@ -33,36 +33,43 @@ const cardNeonVariants = cva(
           "[&>*]:relative [&>*]:z-[2]",
         ].join(" "),
       },
-      hoverScale: {
+      scale: {
+        none: "",
+        xs: "hover:scale-[1.005]",
         sm: "hover:scale-[1.01]",
         md: "hover:scale-[1.02]",
         lg: "hover:scale-[1.03]",
       },
-      hoverRotate: {
+      rotate: {
+        none: "",
         left: "hover:rotate-[-0.5deg]",
         right: "hover:rotate-[0.5deg]",
       },
-      hoverGlow: {
+      glow: {
+        none: "",
+        xs: "hover:shadow-[0_0_15px_rgba(var(--primary),0.1)]",
         sm: "hover:shadow-[0_0_20px_rgba(var(--primary),0.15)]",
         md: "hover:shadow-[0_0_30px_rgba(var(--primary),0.2)]",
         lg: "hover:shadow-[0_0_40px_rgba(var(--primary),0.25)]",
       },
-      hoverBorder: {
-        subtle: "hover:border-primary/30",
+      border: {
+        none: "",
+        light: "hover:border-primary/30",
         medium: "hover:border-primary/50",
         strong: "hover:border-primary/70",
       },
-      hoverLift: {
+      float: {
+        none: "",
         true: "hover:translate-y-[-2px]",
       },
     },
     // Valores por defecto
     defaultVariants: {
       variant: "neon",
-      hoverScale: "md",
-      hoverGlow: "md",
-      hoverBorder: "medium",
-      hoverLift: true,
+      scale: "md",
+      glow: "md",
+      border: "medium",
+      float: true,
     },
   },
 );
@@ -74,11 +81,11 @@ interface ExtendedCardProps
 function ExtendedCard({
   className,
   variant,
-  hoverScale,
-  hoverRotate,
-  hoverGlow,
-  hoverBorder,
-  hoverLift,
+  scale,
+  rotate,
+  glow,
+  border,
+  float,
   ...props
 }: ExtendedCardProps) {
   return (
@@ -86,11 +93,11 @@ function ExtendedCard({
       className={cn(
         cardNeonVariants({
           variant,
-          hoverScale,
-          hoverRotate,
-          hoverGlow,
-          hoverBorder,
-          hoverLift,
+          scale,
+          rotate,
+          glow,
+          border,
+          float,
         }),
         className,
       )}
