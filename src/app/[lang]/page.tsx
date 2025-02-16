@@ -76,23 +76,21 @@ const Home = () => {
       {/* about me*/}
       <section className="py-20">
         <div className="container mx-auto px-4">
-          <div className="mb-12 space-y-4">
-            <ExtendedBadge>
+          <div className="mb-12 space-y-4 text-center">
+            <ExtendedBadge className="mx-auto flex items-center gap-2">
               <Code />
               About Me
             </ExtendedBadge>
             <div className="flex items-center gap-4 max-w-2xl mx-auto">
               <ExtendedSeparator className="flex-1 from-transparent to-primary/30 via-none" />
-              <Typography variant="h2" className="text-center">
-                About Me
-              </Typography>
+              <Typography variant="h2">About Me</Typography>
               <ExtendedSeparator className="flex-1 from-primary/30 to-transparent via-none" />
             </div>
           </div>
           <div className="grid grid-cols-1 gap-8 mt-12 md:grid-cols-2">
             <div>
               <Typography variant="h3">Who am I?</Typography>
-              <Typography variant="p" className="mt-4">
+              <Typography variant="body1" className="mt-4">
                 I am a Full Stack Developer with a passion for creating
                 high-performance web applications with innovative technologies.
                 I have experience in building scalable and responsive web
@@ -101,7 +99,7 @@ const Home = () => {
             </div>
             <div>
               <Typography variant="h3">What do I do?</Typography>
-              <Typography variant="p" className="mt-4">
+              <Typography variant="body1" className="mt-4">
                 I specialize in creating high-performance web applications with
                 innovative technologies. I have experience in building scalable
                 and responsive web applications using modern front-end and
@@ -111,7 +109,53 @@ const Home = () => {
           </div>
         </div>
       </section>
-      <CardDemo />
+      <section className="py-20">
+        <div className="container mx-auto px-4">
+          <div className="mb-12 space-y-4">
+            <ExtendedBadge className="mx-auto flex items-center gap-2">
+              <Code />
+              Experience
+            </ExtendedBadge>
+            <div className="flex items-center gap-4 max-w-2xl mx-auto">
+              <ExtendedSeparator className="flex-1 from-transparent to-primary/30 via-none" />
+              <Typography variant="h2">Experience</Typography>
+              <ExtendedSeparator className="flex-1 from-primary/30 to-transparent via-none" />
+            </div>
+            <div className="mt-12 grid gap-6">
+              <ExtendedCard>
+                <CardHeader className="flex-row gap-4">
+                  <ExtendedButton
+                    size="icon"
+                    variant="soft"
+                    shine="none"
+                    float="none"
+                    scale="none"
+                    gradient="none"
+                  >
+                    <Code />
+                  </ExtendedButton>
+                  <div className="flex gap-1.5 flex-col flex-1">
+                    <CardTitle>Senior Developer</CardTitle>
+                    <CardDescription>2021 - Present</CardDescription>
+                  </div>
+                </CardHeader>
+                <CardContent>
+                  <Typography variant="body1">
+                    Led development of multiple web applications using React and
+                    Node.js
+                  </Typography>
+                </CardContent>
+                <CardContent>
+                  <ExtendedSeparator />
+                </CardContent>
+                <CardFooter>
+                  <ExtendedBadge>React & Node.js</ExtendedBadge>
+                </CardFooter>
+              </ExtendedCard>
+            </div>
+          </div>
+        </div>
+      </section>
     </main>
   );
 };
