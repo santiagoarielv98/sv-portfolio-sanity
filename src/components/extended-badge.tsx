@@ -12,16 +12,31 @@ const badgeVariants = cva(
           "bg-gradient-to-r from-primary/10 via-secondary/10 to-primary/10",
           "text-primary/70 border-2 border-primary/20",
           "shadow-[0_0_15px_rgba(var(--primary),0.1),inset_0_0_10px_rgba(var(--secondary),0.1)]",
-          "hover:text-primary hover:border-primary/60",
+          "animate-shimmer",
+        ].join(" "),
+      },
+      hover: {
+        scale: "hover:scale-105",
+        glow: [
           "hover:shadow-[0_0_20px_rgba(var(--primary),0.3),0_0_40px_rgba(var(--secondary),0.2)]",
+          "hover:border-primary/60",
+        ].join(" "),
+        gradient: [
           "hover:bg-gradient-to-r hover:from-primary/20 hover:via-secondary/20 hover:to-primary/20",
+          "hover:text-primary",
+        ].join(" "),
+        all: [
           "hover:scale-105",
-          "animate-shimmer bg-[length:200%_100%]",
+          "hover:shadow-[0_0_20px_rgba(var(--primary),0.3),0_0_40px_rgba(var(--secondary),0.2)]",
+          "hover:border-primary/60",
+          "hover:bg-gradient-to-r hover:from-primary/20 hover:via-secondary/20 hover:to-primary/20",
+          "hover:text-primary",
         ].join(" "),
       },
     },
     defaultVariants: {
       variant: "neon",
+      hover: "all",
     },
   },
 );

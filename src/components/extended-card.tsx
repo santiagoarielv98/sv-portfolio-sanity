@@ -25,23 +25,14 @@ const cardNeonVariants = cva(
           "before:translate-x-[-200%] before:transition-transform before:duration-[2s]",
         ].join(" "),
       },
-      // Efectos hover
       hover: {
-        none: "",
-        illuminate: [
-          "hover:border-primary/50",
-          "hover:shadow-[0_0_30px_rgba(var(--primary),0.3),0_0_50px_rgba(var(--secondary),0.2)]",
-          "hover:before:translate-x-[200%]",
-        ].join(" "),
-        scale: [
+        scale: "hover:scale-[1.02]",
+        glow: "hover:shadow-[0_0_30px_rgba(var(--primary),0.2),inset_0_0_20px_rgba(var(--secondary),0.15)] hover:border-primary/40",
+        shine: "hover:before:translate-x-[200%]",
+        all: [
           "hover:scale-[1.02]",
+          "hover:shadow-[0_0_30px_rgba(var(--primary),0.2),inset_0_0_20px_rgba(var(--secondary),0.15)]",
           "hover:border-primary/40",
-          "hover:shadow-[0_0_25px_rgba(var(--primary),0.2)]",
-        ].join(" "),
-        full: [
-          "hover:scale-[1.02]",
-          "hover:border-primary/50",
-          "hover:shadow-[0_0_30px_rgba(var(--primary),0.3),0_0_50px_rgba(var(--secondary),0.2)]",
           "hover:before:translate-x-[200%]",
         ].join(" "),
       },
@@ -49,7 +40,7 @@ const cardNeonVariants = cva(
     // Valores por defecto
     defaultVariants: {
       variant: "neon",
-      hover: "none",
+      hover: "all",
     },
   },
 );

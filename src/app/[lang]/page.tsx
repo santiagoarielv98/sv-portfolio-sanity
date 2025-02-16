@@ -29,7 +29,7 @@ const notifications = [
 
 function CardDemo() {
   return (
-    <ExtendedCard className={cn("w-[380px]")} hover="illuminate">
+    <ExtendedCard className={cn("w-[380px]")}>
       <CardHeader>
         <CardTitle>Notifications</CardTitle>
         <CardDescription>You have 3 unread messages.</CardDescription>

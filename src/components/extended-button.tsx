@@ -4,34 +4,19 @@ import * as React from "react";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all duration-300 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 [&_svg]:shrink-0",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all duration-300 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 [&_svg]:shrink-0 relative overflow-hidden",
   {
     variants: {
       variant: {
         neon: [
-          // Gradiente y fondo base más intenso
-          "bg-gradient-to-r from-primary/20 via-secondary/20 to-primary/20",
-          "backdrop-blur-md bg-[length:200%_100%]",
-          // Borde y texto inicial más visible
-          "border-2 border-primary/40",
-          "text-primary/80",
-          // Sombras iniciales más fuertes
-          "shadow-[0_0_20px_rgba(var(--primary),0.2),0_0_30px_rgba(var(--secondary),0.2),inset_0_0_15px_rgba(var(--primary),0.2)]",
-          // Efectos hover más intensos
-          "hover:border-primary/80",
-          "hover:text-primary",
-          "hover:bg-gradient-to-r hover:from-primary/40 hover:via-secondary/40 hover:to-primary/40",
-          "hover:shadow-[0_0_25px_rgba(var(--primary),0.4),0_0_50px_rgba(var(--secondary),0.3),0_0_75px_rgba(var(--primary),0.2),inset_0_0_20px_rgba(var(--secondary),0.2)]",
-          "hover:scale-[1.02]",
-          // Efectos active más pronunciados
+          "bg-gradient-to-r from-secondary to-primary",
+          "text-primary-foreground font-bold",
+          "shadow-[0_0_20px_rgba(var(--primary),0.4)]",
           "active:scale-[0.98]",
-          "active:shadow-[0_0_15px_rgba(var(--primary),0.3)]",
-          // Animación
-          "animate-shimmer",
-          // Enfoque más visible
-          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/70",
-          // Efecto de resplandor adicional
-          "after:absolute after:inset-0 after:rounded-md after:bg-gradient-to-r after:from-transparent after:via-primary/10 after:to-transparent after:pointer-events-none",
+          "active:shadow-[0_0_15px_rgba(var(--primary),0.5)]",
+          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary",
+          "before:absolute before:inset-0 before:bg-gradient-to-r before:from-transparent before:via-white/20 before:to-transparent",
+          "before:translate-x-[-200%] before:transition-transform before:duration-[1s]",
         ].join(" "),
       },
       size: {
@@ -40,10 +25,24 @@ const buttonVariants = cva(
         lg: "h-10 rounded-md px-6 has-[>svg]:px-4",
         icon: "size-9",
       },
+      hover: {
+        scale: "hover:scale-105",
+        glow: "hover:shadow-[0_0_25px_rgba(var(--primary),0.6)]",
+        gradient:
+          "hover:bg-gradient-to-r hover:from-primary hover:to-secondary",
+        shine: "hover:before:translate-x-[200%]",
+        all: [
+          "hover:scale-105",
+          "hover:shadow-[0_0_25px_rgba(var(--primary),0.6)]",
+          "hover:bg-gradient-to-r hover:from-primary hover:to-secondary",
+          "hover:before:translate-x-[200%]",
+        ].join(" "),
+      },
     },
     defaultVariants: {
       variant: "neon",
       size: "default",
+      hover: "all",
     },
   },
 );
