@@ -121,51 +121,77 @@ const Home = () => {
               <Typography variant="h2">Experience</Typography>
               <ExtendedSeparator className="flex-1 from-primary/30 to-transparent via-none" />
             </div>
-            <div className="mt-12 grid gap-6">
-              {experiences.map((experience, index) => (
-                <ExtendedCard key={index}>
-                  <CardHeader className="flex-row gap-4">
-                    <ExtendedButton
-                      size="icon"
-                      variant="soft"
-                      shine="none"
-                      float="none"
-                      scale="none"
-                      gradient="none"
+
+            {/* Timeline container */}
+            <div className="relative mt-12">
+              {/* Línea vertical central */}
+              <div className="absolute md:left-1/2 h-full w-0.5 bg-gradient-to-b from-primary/5 via-primary/20 to-transparent" />
+
+              <div className="md:-space-y-8 space-y-8">
+                {experiences.map((experience, index) => (
+                  <div
+                    key={index}
+                    data-direction={index % 2 === 0 ? "left" : "right"}
+                    className="flex items-center gap-8 data-[direction=left]:flex-row data-[direction=right]:flex-row-reverse"
+                  >
+                    {/* Punto en la línea de tiempo */}
+                    <div className="absolute md:left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-primary/20 border-2 border-primary/30" />
+
+                    {/* Card de experiencia */}
+                    <div
+                      data-direction={index % 2 === 0 ? "left" : "right"}
+                      className="md:w-1/2 data-[direction=left]:md:pr-8 data-[direction=right]:md:pl-8 md:ml-0 ml-4"
                     >
-                      <Code />
-                    </ExtendedButton>
-                    <div className="flex gap-1.5 flex-col flex-1">
-                      <CardTitle>{experience.title}</CardTitle>
-                      <CardDescription>{experience.company}</CardDescription>
-                    </div>
-                  </CardHeader>
-                  <CardContent className="space-y-6">
-                    <div className="flex gap-2">
-                      <ExtendedBadge>
-                        <Calendar className="mr-1" />
-                        {experience.period}
-                      </ExtendedBadge>
-                      <ExtendedBadge>
-                        <MapPin className="mr-1" />
-                        {experience.location}
-                      </ExtendedBadge>
-                    </div>
+                      <ExtendedCard scale="none" variant="soft">
+                        <CardHeader className="flex-row gap-4">
+                          <ExtendedButton
+                            size="icon"
+                            variant="soft"
+                            shine="none"
+                            float="none"
+                            scale="none"
+                            gradient="none"
+                          >
+                            <Code />
+                          </ExtendedButton>
+                          <div className="flex gap-1.5 flex-col flex-1">
+                            <CardTitle>{experience.title}</CardTitle>
+                            <CardDescription>
+                              {experience.company}
+                            </CardDescription>
+                          </div>
+                        </CardHeader>
+                        <CardContent className="space-y-6">
+                          <div className="flex gap-2 flex-wrap">
+                            <ExtendedBadge>
+                              <Calendar className="mr-1" />
+                              {experience.period}
+                            </ExtendedBadge>
+                            <ExtendedBadge>
+                              <MapPin className="mr-1" />
+                              {experience.location}
+                            </ExtendedBadge>
+                          </div>
 
-                    <Typography variant="body1">
-                      {experience.description}
-                    </Typography>
+                          <Typography variant="body1">
+                            {experience.description}
+                          </Typography>
 
-                    <ExtendedSeparator />
+                          <ExtendedSeparator />
 
-                    <div className="flex flex-wrap gap-2">
-                      {experience.technologies.map((tech, techIndex) => (
-                        <ExtendedBadge key={techIndex}>{tech}</ExtendedBadge>
-                      ))}
+                          <div className="flex flex-wrap gap-2">
+                            {experience.technologies.map((tech, techIndex) => (
+                              <ExtendedBadge key={techIndex} variant="ghost">
+                                {tech}
+                              </ExtendedBadge>
+                            ))}
+                          </div>
+                        </CardContent>
+                      </ExtendedCard>
                     </div>
-                  </CardContent>
-                </ExtendedCard>
-              ))}
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
