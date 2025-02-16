@@ -8,7 +8,7 @@ const extendedBadgeVariants = cva(
   {
     variants: {
       variant: {
-        neon: [
+        default: [
           // Base mejorada
           "bg-gradient-to-r from-primary/5 via-secondary/5 to-accent/5",
           "text-primary/80 border border-primary/30",
@@ -51,7 +51,7 @@ const extendedBadgeVariants = cva(
       },
     },
     defaultVariants: {
-      variant: "neon",
+      variant: "default",
       scale: "md",
       glow: "md",
       border: "medium",

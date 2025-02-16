@@ -31,6 +31,15 @@ const extendedButtonVariants = cva(
           "[&::after]:-z-10 [&::before]:-z-10",
           "z-0",
         ].join(" "),
+        outline: [
+          "bg-transparent",
+          "border-2 border-primary",
+          "text-primary font-semibold",
+          "shadow-none",
+          // Estados activos outline
+          "active:scale-[0.98]",
+          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/70",
+        ].join(" "),
       },
       size: {
         default: "h-9 px-4 py-2 has-[>svg]:px-3",

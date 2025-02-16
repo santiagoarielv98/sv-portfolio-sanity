@@ -16,7 +16,7 @@ const extendedCardNeonVariants = cva(
     variants: {
       // Estilo base neón
       variant: {
-        neon: [
+        default: [
           "bg-gradient-to-br from-background/60 via-background/80 to-background/60",
           "border-2 border-primary/20",
           "shadow-[0_0_25px_rgba(var(--primary),0.1),inset_0_0_20px_rgba(var(--secondary),0.1)]",
@@ -65,7 +65,7 @@ const extendedCardNeonVariants = cva(
     },
     // Valores por defecto
     defaultVariants: {
-      variant: "neon",
+      variant: "default",
       scale: "md",
       glow: "md",
       border: "medium",
