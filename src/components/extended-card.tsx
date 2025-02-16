@@ -33,22 +33,36 @@ const cardNeonVariants = cva(
           "[&>*]:relative [&>*]:z-[2]",
         ].join(" "),
       },
-      hover: {
-        modern: [
-          // Efectos hover modernos
-          "hover:scale-[1.02] hover:rotate-[0.5deg]",
-          "hover:shadow-[0_0_30px_rgba(var(--primary),0.2),0_0_50px_rgba(var(--secondary),0.1)]",
-          "hover:border-primary/40",
-          "hover:after:opacity-100",
-          "hover:before:from-primary/40 hover:before:via-secondary/40 hover:before:to-accent/40",
-          "group-hover:translate-y-[-2px]",
-        ].join(" "),
+      hoverScale: {
+        sm: "hover:scale-[1.01]",
+        md: "hover:scale-[1.02]",
+        lg: "hover:scale-[1.03]",
+      },
+      hoverRotate: {
+        left: "hover:rotate-[-0.5deg]",
+        right: "hover:rotate-[0.5deg]",
+      },
+      hoverGlow: {
+        sm: "hover:shadow-[0_0_20px_rgba(var(--primary),0.15)]",
+        md: "hover:shadow-[0_0_30px_rgba(var(--primary),0.2)]",
+        lg: "hover:shadow-[0_0_40px_rgba(var(--primary),0.25)]",
+      },
+      hoverBorder: {
+        subtle: "hover:border-primary/30",
+        medium: "hover:border-primary/50",
+        strong: "hover:border-primary/70",
+      },
+      hoverLift: {
+        true: "hover:translate-y-[-2px]",
       },
     },
     // Valores por defecto
     defaultVariants: {
       variant: "neon",
-      hover: "modern",
+      hoverScale: "md",
+      hoverGlow: "md",
+      hoverBorder: "medium",
+      hoverLift: true,
     },
   },
 );
@@ -60,12 +74,26 @@ interface ExtendedCardProps
 function ExtendedCard({
   className,
   variant,
-  hover,
+  hoverScale,
+  hoverRotate,
+  hoverGlow,
+  hoverBorder,
+  hoverLift,
   ...props
 }: ExtendedCardProps) {
   return (
     <Card
-      className={cn(cardNeonVariants({ variant, hover }), className)}
+      className={cn(
+        cardNeonVariants({
+          variant,
+          hoverScale,
+          hoverRotate,
+          hoverGlow,
+          hoverBorder,
+          hoverLift,
+        }),
+        className,
+      )}
       {...props}
     />
   );

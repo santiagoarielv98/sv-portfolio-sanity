@@ -32,21 +32,34 @@ const buttonVariants = cva(
         lg: "h-10 rounded-md px-6 has-[>svg]:px-4",
         icon: "size-9",
       },
-      hover: {
-        modern: [
-          "hover:scale-105",
-          "hover:shadow-[0_0_30px_rgba(var(--primary),0.5)]",
-          "hover:after:opacity-0",
-          "hover:before:translate-x-[200%]",
-          "[&>*]:hover:translate-y-[-1px]",
-          "[&>*]:transition-transform [&>*]:duration-300",
-        ].join(" "),
+      hoverScale: {
+        sm: "hover:scale-[1.01]",
+        md: "hover:scale-[1.05]",
+        lg: "hover:scale-[1.08]",
+      },
+      hoverGlow: {
+        sm: "hover:shadow-[0_0_20px_rgba(var(--primary),0.4)]",
+        md: "hover:shadow-[0_0_30px_rgba(var(--primary),0.5)]",
+        lg: "hover:shadow-[0_0_40px_rgba(var(--primary),0.6)]",
+      },
+      hoverGradient: {
+        true: "hover:bg-gradient-to-r hover:from-primary hover:to-secondary",
+      },
+      hoverShine: {
+        true: "hover:before:translate-x-[200%]",
+      },
+      hoverContent: {
+        lift: "[&>*]:hover:translate-y-[-1px] [&>*]:transition-transform [&>*]:duration-300",
       },
     },
     defaultVariants: {
       variant: "neon",
-      hover: "modern",
       size: "default",
+      hoverScale: "md",
+      hoverGlow: "md",
+      hoverGradient: true,
+      hoverShine: true,
+      hoverContent: "lift",
     },
   },
 );
@@ -55,6 +68,11 @@ function Button({
   className,
   variant,
   size,
+  hoverScale,
+  hoverGlow,
+  hoverGradient,
+  hoverShine,
+  hoverContent,
   asChild = false,
   ...props
 }: React.ComponentProps<"button"> &
@@ -66,7 +84,18 @@ function Button({
   return (
     <Comp
       data-slot="button"
-      className={cn(buttonVariants({ variant, size, className }))}
+      className={cn(
+        buttonVariants({
+          variant,
+          size,
+          hoverScale,
+          hoverGlow,
+          hoverGradient,
+          hoverShine,
+          hoverContent,
+        }),
+        className,
+      )}
       {...props}
     />
   );

@@ -21,21 +21,35 @@ const badgeVariants = cva(
           "animate-shimmer bg-[length:200%_100%]",
         ].join(" "),
       },
-      hover: {
-        modern: [
-          "hover:scale-[1.02]",
-          "hover:shadow-[0_0_20px_rgba(var(--primary),0.2)]",
-          "hover:border-primary/50",
-          "hover:text-primary",
-          "hover:before:opacity-100",
-          "[&>*]:hover:translate-y-[-1px]",
-          "[&>*]:transition-transform [&>*]:duration-300",
-        ].join(" "),
+      hoverScale: {
+        sm: "hover:scale-[1.01]",
+        md: "hover:scale-[1.02]",
+        lg: "hover:scale-[1.03]",
+      },
+      hoverGlow: {
+        sm: "hover:shadow-[0_0_15px_rgba(var(--primary),0.15)]",
+        md: "hover:shadow-[0_0_20px_rgba(var(--primary),0.2)]",
+        lg: "hover:shadow-[0_0_25px_rgba(var(--primary),0.25)]",
+      },
+      hoverBorder: {
+        subtle: "hover:border-primary/40",
+        medium: "hover:border-primary/60",
+        strong: "hover:border-primary/80",
+      },
+      hoverText: {
+        true: "hover:text-primary",
+      },
+      hoverContent: {
+        lift: "[&>*]:hover:translate-y-[-1px] [&>*]:transition-transform [&>*]:duration-300",
       },
     },
     defaultVariants: {
       variant: "neon",
-      hover: "modern",
+      hoverScale: "md",
+      hoverGlow: "md",
+      hoverBorder: "medium",
+      hoverText: true,
+      hoverContent: "lift",
     },
   },
 );
@@ -43,6 +57,11 @@ const badgeVariants = cva(
 function Badge({
   className,
   variant,
+  hoverScale,
+  hoverGlow,
+  hoverBorder,
+  hoverText,
+  hoverContent,
   asChild = false,
   ...props
 }: React.ComponentProps<"span"> &
@@ -52,7 +71,17 @@ function Badge({
   return (
     <Comp
       data-slot="badge"
-      className={cn(badgeVariants({ variant }), className)}
+      className={cn(
+        badgeVariants({
+          variant,
+          hoverScale,
+          hoverGlow,
+          hoverBorder,
+          hoverText,
+          hoverContent,
+        }),
+        className,
+      )}
       {...props}
     />
   );
