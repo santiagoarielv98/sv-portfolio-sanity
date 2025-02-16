@@ -14,22 +14,41 @@ const extendedCardNeonVariants = cva(
   "relative transition-all duration-500 rounded-xl overflow-hidden backdrop-blur-sm group",
   {
     variants: {
-      // Estilo base neón
       variant: {
         default: [
           "bg-gradient-to-br from-background/60 via-background/80 to-background/60",
           "border-2 border-primary/20",
+          "shadow-[0_0_25px_rgba(var(--primary),0.1)]",
+          "[&>*]:relative [&>*]:z-[2]",
+        ].join(" "),
+        solid: [
+          "bg-primary/10",
+          "border-2 border-primary/30",
+          "shadow-[0_0_20px_rgba(var(--primary),0.15)]",
+          "[&>*]:relative [&>*]:z-[2]",
+        ].join(" "),
+        neon: [
+          "bg-gradient-to-br from-background/60 via-background/80 to-background/60",
+          "border-2 border-primary/20",
           "shadow-[0_0_25px_rgba(var(--primary),0.1),inset_0_0_20px_rgba(var(--secondary),0.1)]",
-          // Efecto de brillo ambiental - ajustado para no interferir
           "after:absolute after:inset-0 after:bg-gradient-to-br after:from-primary/5 after:via-secondary/5 after:to-accent/5",
           "after:opacity-0 after:transition-opacity after:duration-500",
           "after:pointer-events-none after:z-[1]",
-          // Efecto de borde brillante - ajustado para no interferir
           "before:absolute before:inset-[1px] before:rounded-[10px] before:p-[1px]",
           "before:bg-gradient-to-br before:from-primary/20 before:via-secondary/20 before:to-accent/20",
           "before:mask-border before:transition-all before:duration-500",
           "before:pointer-events-none before:z-[1]",
-          // Asegurar que el contenido esté por encima
+          "[&>*]:relative [&>*]:z-[2]",
+        ].join(" "),
+        outline: [
+          "bg-transparent",
+          "border-2 border-primary/30",
+          "[&>*]:relative [&>*]:z-[2]",
+        ].join(" "),
+        ghost: [
+          "bg-background/50",
+          "border-2 border-transparent",
+          "backdrop-blur-md",
           "[&>*]:relative [&>*]:z-[2]",
         ].join(" "),
       },
@@ -63,7 +82,6 @@ const extendedCardNeonVariants = cva(
         true: "hover:translate-y-[-2px]",
       },
     },
-    // Valores por defecto
     defaultVariants: {
       variant: "default",
       scale: "md",
@@ -106,7 +124,6 @@ function ExtendedCard({
   );
 }
 
-// Re-exportamos los componentes internos de Card
 export {
   ExtendedCard,
   CardHeader,

@@ -9,36 +9,41 @@ const extendedButtonVariants = cva(
     variants: {
       variant: {
         default: [
-          // Base mejorada
-          "bg-gradient-to-r from-primary via-secondary to-accent",
+          "bg-primary",
+          "text-primary-foreground font-medium",
+          "shadow-[0_0_20px_rgba(var(--primary),0.2)]",
+          "active:scale-[0.98]",
+          "focus-visible:ring-2 focus-visible:ring-primary/70",
+        ].join(" "),
+        solid: [
+          "bg-gradient-to-r from-primary to-secondary",
           "text-primary-foreground font-bold",
           "shadow-[0_0_20px_rgba(var(--primary),0.3)]",
-          // Efectos de capa mejorados
-          "after:absolute after:inset-0",
-          "after:bg-gradient-to-r after:from-white/0 after:via-white/10 after:to-white/0",
-          "after:transition-all after:duration-500",
-          "after:opacity-0 after:scale-x-[3] after:blur-md",
-          // Efecto de brillo mejorado
-          "before:absolute before:inset-0",
-          "before:bg-gradient-to-r before:from-transparent before:via-white/40 before:to-transparent",
-          "before:translate-x-[-200%] before:skew-x-[-20deg]",
-          "before:transition-transform before:duration-500 before:ease-out",
-          // Estados activos mejorados
           "active:scale-[0.98]",
-          "active:after:opacity-20",
-          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/70",
-          // Nuevo: reflejo en los bordes
-          "[&::after]:-z-10 [&::before]:-z-10",
-          "z-0",
+          "focus-visible:ring-2 focus-visible:ring-primary/70",
+        ].join(" "),
+        neon: [
+          // ...existing neon styles...
         ].join(" "),
         outline: [
           "bg-transparent",
           "border-2 border-primary",
-          "text-primary font-semibold",
-          "shadow-none",
-          // Estados activos outline
+          "text-primary font-medium",
           "active:scale-[0.98]",
-          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/70",
+          "focus-visible:ring-2 focus-visible:ring-primary/70",
+        ].join(" "),
+        ghost: [
+          "bg-transparent",
+          "text-primary font-medium",
+          "hover:bg-primary/10",
+          "active:scale-[0.98]",
+          "focus-visible:ring-2 focus-visible:ring-primary/70",
+        ].join(" "),
+        link: [
+          "bg-transparent",
+          "text-primary underline-offset-4 hover:underline",
+          "shadow-none",
+          "focus-visible:ring-2 focus-visible:ring-primary/70",
         ].join(" "),
       },
       size: {

@@ -29,7 +29,7 @@ const notifications = [
 
 function CardDemo() {
   return (
-    <ExtendedCard className={cn("w-[380px]")}>
+    <ExtendedCard className={cn("w-[380px]")} variant="neon">
       <CardHeader className="flex-row gap-4">
         <ExtendedButton
           size="icon"
@@ -38,6 +38,7 @@ function CardDemo() {
           float="none"
           scale="none"
           gradient="none"
+          variant="solid"
         >
           <div>
             <Code />
