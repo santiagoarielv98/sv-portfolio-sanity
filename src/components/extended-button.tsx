@@ -4,7 +4,7 @@ import * as React from "react";
 import { cn } from "@/lib/utils";
 
 const extendedButtonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all duration-300 relative overflow-hidden group",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all duration-300 relative overflow-hidden isolate",
   {
     variants: {
       variant: {
@@ -23,7 +23,18 @@ const extendedButtonVariants = cva(
           "focus-visible:ring-2 focus-visible:ring-primary/70",
         ].join(" "),
         neon: [
-          // ...existing neon styles...
+          "bg-gradient-to-r from-primary via-secondary to-accent",
+          "text-primary-foreground font-bold",
+          "shadow-[0_0_20px_rgba(var(--primary),0.3)]",
+          "after:absolute after:inset-0 after:-z-10",
+          "after:bg-gradient-to-r after:from-white/0 after:via-white/10 after:to-white/0",
+          "after:transition-all after:duration-500 after:opacity-0",
+          "before:absolute before:inset-0 before:-z-10",
+          "before:bg-gradient-to-r before:from-transparent before:via-white/40 before:to-transparent",
+          "before:translate-x-[-200%] before:skew-x-[-20deg]",
+          "before:transition-transform before:duration-500 before:ease-out",
+          "active:scale-[0.98]",
+          "focus-visible:ring-2 focus-visible:ring-primary/70",
         ].join(" "),
         outline: [
           "bg-transparent",
@@ -42,41 +53,34 @@ const extendedButtonVariants = cva(
         link: [
           "bg-transparent",
           "text-primary underline-offset-4 hover:underline",
-          "shadow-none",
+          "shadow-none p-0 h-auto",
           "focus-visible:ring-2 focus-visible:ring-primary/70",
         ].join(" "),
       },
       size: {
-        default: "h-9 px-4 py-2 has-[>svg]:px-3",
-        sm: "h-8 rounded-md px-3 has-[>svg]:px-2.5",
-        lg: "h-10 rounded-md px-6 has-[>svg]:px-4",
-        icon: "size-9",
+        default: "h-9 px-4 py-2",
+        sm: "h-8 px-3 text-xs",
+        lg: "h-10 px-6 text-base",
+        icon: [
+          "size-9 p-2",
+          "[&_svg]:size-5",
+          "[&_svg]:transition-transform",
+          "[&_svg]:duration-300",
+        ].join(" "),
       },
       scale: {
         none: "",
-        xs: "hover:scale-[1.02] active:hover:scale-[1.01]",
-        sm: "hover:scale-[1.04] active:hover:scale-[1.02]",
-        md: "hover:scale-[1.05] active:hover:scale-[1.03]",
-        lg: "hover:scale-[1.08] active:hover:scale-[1.05]",
+        xs: ["hover:scale-[1.02]", "active:scale-[0.98]"].join(" "),
+        sm: ["hover:scale-[1.04]", "active:scale-[0.98]"].join(" "),
+        md: ["hover:scale-[1.05]", "active:scale-[0.98]"].join(" "),
+        lg: ["hover:scale-[1.08]", "active:scale-[0.98]"].join(" "),
       },
       glow: {
         none: "",
-        xs: [
-          "hover:shadow-[0_0_15px_rgba(var(--primary),0.3)]",
-          "hover:after:opacity-10",
-        ].join(" "),
-        sm: [
-          "hover:shadow-[0_0_20px_rgba(var(--primary),0.4)]",
-          "hover:after:opacity-20",
-        ].join(" "),
-        md: [
-          "hover:shadow-[0_0_30px_rgba(var(--primary),0.5)]",
-          "hover:after:opacity-30",
-        ].join(" "),
-        lg: [
-          "hover:shadow-[0_0_40px_rgba(var(--primary),0.6)]",
-          "hover:after:opacity-40",
-        ].join(" "),
+        xs: "hover:shadow-[0_0_15px_rgba(var(--primary),0.3)]",
+        sm: "hover:shadow-[0_0_20px_rgba(var(--primary),0.4)]",
+        md: "hover:shadow-[0_0_30px_rgba(var(--primary),0.5)]",
+        lg: "hover:shadow-[0_0_40px_rgba(var(--primary),0.6)]",
       },
       gradient: {
         none: "",
@@ -88,18 +92,11 @@ const extendedButtonVariants = cva(
       },
       shine: {
         none: "",
-        true: [
-          "hover:before:translate-x-[200%]",
-          "hover:after:scale-x-100 hover:after:opacity-30",
-        ].join(" "),
+        true: "hover:before:translate-x-[200%]",
       },
       float: {
         none: "",
-        true: [
-          "[&>*]:hover:translate-y-[-1px]",
-          "[&>*]:transition-transform [&>*]:duration-300",
-          "hover:shadow-lg hover:shadow-primary/20",
-        ].join(" "),
+        true: "hover:translate-y-[-1px]",
       },
     },
     defaultVariants: {
