@@ -8,12 +8,7 @@ const extendedBadgeVariants = cva(
   {
     variants: {
       variant: {
-        solid: [
-          "bg-gradient-to-r from-primary/20 to-secondary/20",
-          "text-primary font-medium",
-          "border border-primary/30",
-        ].join(" "),
-        neon: [
+        default: [
           "bg-gradient-to-r from-primary/5 via-secondary/5 to-accent/5",
           "text-primary/80 border border-primary/30",
           // Efectos neón
@@ -22,10 +17,20 @@ const extendedBadgeVariants = cva(
           "before:opacity-0 before:transition-opacity before:duration-300",
           "animate-shimmer bg-[length:200%_100%]",
         ].join(" "),
+        solid: [
+          "bg-gradient-to-r from-primary/20 to-secondary/20",
+          "text-primary font-medium",
+          "border border-primary/30",
+        ].join(" "),
         ghost: [
           "bg-primary/5",
           "text-primary/80 font-medium",
           "border border-transparent",
+        ].join(" "),
+        gradient: [
+          "bg-gradient-to-r from-primary/20 via-secondary/20 to-accent/20",
+          "text-primary font-medium",
+          "border border-primary/30",
         ].join(" "),
         secondary: [
           "bg-secondary/10",
@@ -42,7 +47,7 @@ const extendedBadgeVariants = cva(
       // },
     },
     defaultVariants: {
-      variant: "neon",
+      variant: "default",
       // glow: "md",
     },
   },

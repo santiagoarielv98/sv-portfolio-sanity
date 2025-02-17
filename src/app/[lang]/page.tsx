@@ -283,7 +283,7 @@ const Home = () => {
                         <CardHeader className="flex-row gap-4">
                           <ExtendedButton
                             size="icon"
-                            variant="soft"
+                            variant="ghost"
                             float="none"
                           >
                             <Code />
@@ -350,7 +350,7 @@ const Home = () => {
                 key={index}
                 className="group overflow-hidden flex flex-col"
               >
-                <div className="relative w-full aspect-video">
+                <div className="relative w-full aspect-video overflow-hidden">
                   <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-background/20 z-10 group-hover:opacity-50 transition-opacity" />
                   <Image
                     src={project.image}
