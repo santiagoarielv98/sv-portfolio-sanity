@@ -380,21 +380,13 @@ const Home = () => {
                 <ExtendedSeparator className="mb-6 mt-auto" />
                 <CardFooter className="gap-4">
                   {project.demoUrl && (
-                    <ExtendedButton
-                      variant="outline"
-                      size="sm"
-                      className="flex-1"
-                    >
+                    <ExtendedButton variant="soft" size="sm" className="flex-1">
                       <Code className="w-4 h-4 mr-1" />
                       Live Demo
                     </ExtendedButton>
                   )}
                   {project.repoUrl && (
-                    <ExtendedButton
-                      variant="outline"
-                      size="sm"
-                      className="flex-1"
-                    >
+                    <ExtendedButton variant="soft" size="sm" className="flex-1">
                       <Code className="w-4 h-4 mr-1" />
                       Source Code
                     </ExtendedButton>
@@ -558,7 +550,7 @@ const Home = () => {
                   {contactInfo.socials.map((social, index) => (
                     <ExtendedButton
                       key={index}
-                      variant="outline"
+                      variant="soft"
                       size="sm"
                       asChild
                       className="flex-1"

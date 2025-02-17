@@ -24,16 +24,6 @@ const extendedBadgeVariants = cva(
           "before:opacity-0 before:transition-opacity before:duration-300",
           "animate-shimmer bg-[length:200%_100%]",
         ].join(" "),
-        soft: [
-          "bg-primary/10",
-          "text-primary/80 font-medium",
-          "border border-primary/20",
-        ].join(" "),
-        outline: [
-          "bg-transparent",
-          "border border-primary/50",
-          "text-primary font-medium",
-        ].join(" "),
         ghost: [
           "bg-primary/5",
           "text-primary/80 font-medium",
@@ -45,14 +35,13 @@ const extendedBadgeVariants = cva(
           "border border-secondary/20",
         ].join(" "),
       },
-
-      glow: {
-        none: "",
-        xs: "hover:shadow-[0_0_10px_rgba(var(--primary),0.1)]",
-        sm: "hover:shadow-[0_0_15px_rgba(var(--primary),0.15)]",
-        md: "hover:shadow-[0_0_20px_rgba(var(--primary),0.2)]",
-        lg: "hover:shadow-[0_0_25px_rgba(var(--primary),0.25)]",
-      },
+      // glow: {
+      //   none: "",
+      //   xs: "hover:shadow-[0_0_10px_rgba(var(--primary),0.1)]",
+      //   sm: "hover:shadow-[0_0_15px_rgba(var(--primary),0.15)]",
+      //   md: "hover:shadow-[0_0_20px_rgba(var(--primary),0.2)]",
+      //   lg: "hover:shadow-[0_0_25px_rgba(var(--primary),0.25)]",
+      // },
       border: {
         none: "",
         light: "hover:border-primary/40",
@@ -70,7 +59,7 @@ const extendedBadgeVariants = cva(
     },
     defaultVariants: {
       variant: "neon",
-      glow: "md",
+      // glow: "md",
       border: "medium",
       highlight: true,
       float: true,
@@ -81,7 +70,7 @@ const extendedBadgeVariants = cva(
 function ExtendedBadge({
   className,
   variant,
-  glow,
+  // glow,
   border,
   highlight,
   float,
@@ -97,7 +86,7 @@ function ExtendedBadge({
       className={cn(
         extendedBadgeVariants({
           variant,
-          glow,
+          // glow,
           border,
           highlight,
           float,

@@ -8,13 +8,6 @@ const extendedButtonVariants = cva(
   {
     variants: {
       variant: {
-        solid: [
-          "bg-gradient-to-r from-primary to-secondary",
-          "text-primary-foreground font-bold",
-          "shadow-[0_0_20px_rgba(var(--primary),0.3)]",
-          "active:scale-[0.98]",
-          "focus-visible:ring-2 focus-visible:ring-primary/70",
-        ].join(" "),
         neon: [
           "bg-gradient-to-r from-primary via-secondary to-accent",
           "text-primary-foreground font-bold",
@@ -38,24 +31,11 @@ const extendedButtonVariants = cva(
           "active:scale-[0.98]",
           "focus-visible:ring-2 focus-visible:ring-primary/70",
         ].join(" "),
-        outline: [
-          "bg-transparent",
-          "border-2 border-primary",
-          "text-primary font-medium",
-          "active:scale-[0.98]",
-          "focus-visible:ring-2 focus-visible:ring-primary/70",
-        ].join(" "),
         ghost: [
           "bg-transparent",
           "text-primary font-medium",
           "hover:bg-primary/10",
           "active:scale-[0.98]",
-          "focus-visible:ring-2 focus-visible:ring-primary/70",
-        ].join(" "),
-        link: [
-          "bg-transparent",
-          "text-primary underline-offset-4 hover:underline",
-          "shadow-none p-0 h-auto",
           "focus-visible:ring-2 focus-visible:ring-primary/70",
         ].join(" "),
       },
@@ -70,13 +50,13 @@ const extendedButtonVariants = cva(
           "[&_svg]:duration-300",
         ].join(" "),
       },
-      glow: {
-        none: "",
-        xs: "hover:shadow-[0_0_15px_rgba(var(--primary),0.3)]",
-        sm: "hover:shadow-[0_0_20px_rgba(var(--primary),0.4)]",
-        md: "hover:shadow-[0_0_30px_rgba(var(--primary),0.5)]",
-        lg: "hover:shadow-[0_0_40px_rgba(var(--primary),0.6)]",
-      },
+      // glow: {
+      //   none: "",
+      //   xs: "hover:shadow-[0_0_15px_rgba(var(--primary),0.3)]",
+      //   sm: "hover:shadow-[0_0_20px_rgba(var(--primary),0.4)]",
+      //   md: "hover:shadow-[0_0_30px_rgba(var(--primary),0.5)]",
+      //   lg: "hover:shadow-[0_0_40px_rgba(var(--primary),0.6)]",
+      // },
       shine: {
         none: "",
         true: [
@@ -95,8 +75,7 @@ const extendedButtonVariants = cva(
     defaultVariants: {
       variant: "neon",
       size: "default",
-      glow: "md",
-      // gradient: true,
+      // glow: "md",
       shine: true,
       float: true,
     },
@@ -107,7 +86,7 @@ function ExtendedButton({
   className,
   variant,
   size,
-  glow,
+  // glow,
   shine,
   float,
   asChild = false,
@@ -125,7 +104,7 @@ function ExtendedButton({
         extendedButtonVariants({
           variant,
           size,
-          glow,
+          // glow,
           shine,
           float,
         }),
