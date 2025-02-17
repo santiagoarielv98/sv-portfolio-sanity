@@ -200,7 +200,7 @@ const Home = () => {
 
           <ExtendedSeparator />
 
-          <ExtendedButton size="lg" className="font-display">
+          <ExtendedButton size="lg" variant="default" className="font-display">
             <Code className="w-6 h-6 mr-2" />
             Get Started
           </ExtendedButton>
@@ -214,7 +214,10 @@ const Home = () => {
       <section className="py-20">
         <div className="container mx-auto px-4">
           <div className="mb-12 space-y-4 text-center">
-            <ExtendedBadge className="mx-auto flex items-center gap-2">
+            <ExtendedBadge
+              variant="gradient"
+              className="mx-auto flex items-center gap-2"
+            >
               <Code />
               About Me
             </ExtendedBadge>
@@ -249,7 +252,10 @@ const Home = () => {
       <section className="py-20">
         <div className="container mx-auto px-4">
           <div className="mb-12 space-y-4">
-            <ExtendedBadge className="mx-auto flex items-center gap-2">
+            <ExtendedBadge
+              variant="gradient"
+              className="mx-auto flex items-center gap-2"
+            >
               <Code />
               Experience
             </ExtendedBadge>
@@ -283,7 +289,7 @@ const Home = () => {
                         <CardHeader className="flex-row gap-4">
                           <ExtendedButton
                             size="icon"
-                            variant="ghost"
+                            variant="gradient"
                             float="none"
                           >
                             <Code />
@@ -297,11 +303,11 @@ const Home = () => {
                         </CardHeader>
                         <CardContent className="space-y-6">
                           <div className="flex gap-2 flex-wrap">
-                            <ExtendedBadge>
+                            <ExtendedBadge variant="default">
                               <Calendar className="mr-1" />
                               {experience.period}
                             </ExtendedBadge>
-                            <ExtendedBadge>
+                            <ExtendedBadge variant="default">
                               <MapPin className="mr-1" />
                               {experience.location}
                             </ExtendedBadge>
@@ -333,7 +339,10 @@ const Home = () => {
       <section className="py-20">
         <div className="container mx-auto px-4">
           <div className="mb-12 space-y-4 text-center">
-            <ExtendedBadge className="mx-auto flex items-center gap-2">
+            <ExtendedBadge
+              variant="gradient"
+              className="mx-auto flex items-center gap-2"
+            >
               <Code />
               Projects
             </ExtendedBadge>
@@ -348,6 +357,7 @@ const Home = () => {
             {projects.map((project, index) => (
               <ExtendedCard
                 key={index}
+                variant="default"
                 className="group overflow-hidden flex flex-col"
               >
                 <div className="relative w-full aspect-video overflow-hidden">
@@ -381,7 +391,7 @@ const Home = () => {
                 <CardFooter className="gap-4">
                   {project.demoUrl && (
                     <ExtendedButton
-                      variant="solid"
+                      variant="default"
                       size="sm"
                       className="flex-1"
                     >
@@ -409,7 +419,10 @@ const Home = () => {
       <section className="py-20">
         <div className="container mx-auto px-4">
           <div className="mb-12 space-y-4 text-center">
-            <ExtendedBadge className="mx-auto flex items-center gap-2">
+            <ExtendedBadge
+              variant="gradient"
+              className="mx-auto flex items-center gap-2"
+            >
               <Code />
               Skills
             </ExtendedBadge>
@@ -424,10 +437,10 @@ const Home = () => {
               <ExtendedCard
                 key={index}
                 className="flex flex-col"
-                variant="solid"
+                variant="default"
               >
                 <CardHeader className="flex-row gap-4">
-                  <ExtendedButton size="icon" variant="solid" float="none">
+                  <ExtendedButton size="icon" variant="gradient" float="none">
                     <Code />
                   </ExtendedButton>
                   <div className="flex gap-1.5 flex-col flex-1">
@@ -477,7 +490,10 @@ const Home = () => {
       <section className="py-20 bg-primary/5">
         <div className="container mx-auto px-4">
           <div className="mb-12 space-y-4 text-center">
-            <ExtendedBadge className="mx-auto flex items-center gap-2">
+            <ExtendedBadge
+              variant="gradient"
+              className="mx-auto flex items-center gap-2"
+            >
               <Mail />
               Contact
             </ExtendedBadge>
@@ -494,7 +510,7 @@ const Home = () => {
               {/* Email Card */}
               <ExtendedCard variant="solid" className="overflow-hidden">
                 <CardHeader className="flex-row items-center gap-4">
-                  <ExtendedButton size="icon" variant="solid" float="none">
+                  <ExtendedButton size="icon" variant="gradient" float="none">
                     <Mail />
                   </ExtendedButton>
                   <div>
@@ -509,7 +525,7 @@ const Home = () => {
               {/* Location Card */}
               <ExtendedCard variant="solid" className="overflow-hidden">
                 <CardHeader className="flex-row items-center gap-4">
-                  <ExtendedButton size="icon" variant="solid" float="none">
+                  <ExtendedButton size="icon" variant="gradient" float="none">
                     <MapPin />
                   </ExtendedButton>
                   <div>
@@ -526,7 +542,7 @@ const Home = () => {
                 <CardHeader className="flex-row items-center gap-4">
                   <ExtendedButton
                     size="icon"
-                    variant="solid"
+                    variant="gradient"
                     float="none"
                     className="text-green-500"
                   >
@@ -580,7 +596,7 @@ const Home = () => {
 
             {/* Contact Form Column */}
             <div className="lg:col-span-2">
-              <ExtendedCard className="h-full">
+              <ExtendedCard variant="default" className="h-full">
                 <CardHeader>
                   <CardTitle>Send me a message</CardTitle>
                   <CardDescription>
@@ -612,7 +628,7 @@ const Home = () => {
                   </div>
                 </CardContent>
                 <CardFooter>
-                  <ExtendedButton className="w-full">
+                  <ExtendedButton variant="default" className="w-full">
                     <Mail className="w-4 h-4 mr-2" />
                     Send Message
                   </ExtendedButton>
