@@ -544,12 +544,10 @@ const Home = () => {
                     size="icon"
                     variant="gradient"
                     float="none"
-                    className="text-green-500"
+                    className="relative grid place-items-center"
                   >
-                    <div className="relative">
-                      <div className="absolute top-1 right-1 w-2 h-2 bg-green-500 rounded-full" />
-                      <Calendar />
-                    </div>
+                    <span className="absolute inline-flex size-4 animate-ping rounded-full bg-green-400 opacity-75"></span>
+                    <span className="relative inline-flex size-2.5 rounded-full bg-green-500"></span>
                   </ExtendedButton>
                   <div>
                     <CardTitle className="text-sm">Availability</CardTitle>
