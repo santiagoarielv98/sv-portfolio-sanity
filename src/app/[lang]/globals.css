@@ -159,7 +159,7 @@
       linear-gradient(90deg, --alpha(var(--primary) / 1%) 2px, transparent 2px),
       linear-gradient(--alpha(var(--primary) / 7%) 1px, transparent 1px),
       linear-gradient(90deg, --alpha(var(--primary) / 7%) 1px, transparent 1px);
-    background-size: 60px 60px, 60px 60px, 10px 10px, 10px 10px;
+    background-size: 60px 60px, 60px 60px, 15px 15px, 15px 15px;
     background-position: -2px -2px, -2px -2px, -1px -1px, -1px -1px;
   }
 
