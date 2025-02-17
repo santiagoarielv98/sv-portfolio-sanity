@@ -3,6 +3,8 @@ import { i18n } from "@/lib/i18n/config";
 import type { Metadata } from "next";
 import { Space_Grotesk, Urbanist } from "next/font/google";
 import "./globals.css";
+import { SiteHeader } from "@/components/site-header";
+import { SiteFooter } from "@/components/site-footer";
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
@@ -39,7 +41,9 @@ export default async function RootLayout({
       <body
         className={`dark ${spaceGrotesk.variable} ${urbanist.variable} font-urbanist min-h-screen`}
       >
+        <SiteHeader />
         {children}
+        <SiteFooter />
       </body>
     </html>
   );
