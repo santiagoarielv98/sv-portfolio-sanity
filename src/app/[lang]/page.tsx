@@ -1,5 +1,6 @@
-import { Calendar, ChevronDown, Code, MapPin } from "lucide-react";
+import { Calendar, ChevronDown, Code } from "lucide-react";
 import Image from "next/image";
+import { ExternalLink, Github, Linkedin, Mail, MapPin } from "lucide-react";
 
 import { ExtendedBadge } from "@/components/extended-badge";
 import { ExtendedButton } from "@/components/extended-button";
@@ -13,6 +14,8 @@ import {
 } from "@/components/extended-card";
 import { ExtendedSeparator } from "@/components/extended-separator";
 import { Typography } from "@/components/ui/typography";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 
 export interface Experience {
   title: string;
@@ -40,6 +43,17 @@ export interface Skill {
   technologies: Array<{
     name: string;
     level: "basic" | "intermediate" | "advanced" | "expert";
+  }>;
+}
+
+interface ContactInfo {
+  email: string;
+  location: string;
+  availability: string;
+  socials: Array<{
+    name: string;
+    url: string;
+    icon: React.ReactNode;
   }>;
 }
 
@@ -148,6 +162,29 @@ export const skills: Skill[] = [
     ],
   },
 ];
+
+const contactInfo: ContactInfo = {
+  email: "contact@example.com",
+  location: "Buenos Aires, Argentina",
+  availability: "Open to work - Full-time opportunities",
+  socials: [
+    {
+      name: "GitHub",
+      url: "https://github.com/yourusername",
+      icon: <Github className="w-4 h-4" />,
+    },
+    {
+      name: "LinkedIn",
+      url: "https://linkedin.com/in/yourusername",
+      icon: <Linkedin className="w-4 h-4" />,
+    },
+    {
+      name: "Portfolio",
+      url: "https://yourportfolio.com",
+      icon: <ExternalLink className="w-4 h-4" />,
+    },
+  ],
+};
 
 const Home = () => {
   return (
@@ -449,6 +486,172 @@ const Home = () => {
                 </CardContent>
               </ExtendedCard>
             ))}
+          </div>
+        </div>
+      </section>
+      {/* Contact section */}
+      <section className="py-20 bg-primary/5">
+        <div className="container mx-auto px-4">
+          <div className="mb-12 space-y-4 text-center">
+            <ExtendedBadge className="mx-auto flex items-center gap-2">
+              <Mail />
+              Contact
+            </ExtendedBadge>
+            <div className="flex items-center gap-4 max-w-2xl mx-auto">
+              <ExtendedSeparator className="flex-1 from-transparent to-primary/30 via-none" />
+              <Typography variant="h2">Get in Touch</Typography>
+              <ExtendedSeparator className="flex-1 from-primary/30 to-transparent via-none" />
+            </div>
+          </div>
+
+          <div className="grid gap-6 lg:grid-cols-3 max-w-6xl mx-auto">
+            {/* Contact Info Cards Column */}
+            <div className="space-y-6">
+              {/* Email Card */}
+              <ExtendedCard variant="soft" className="overflow-hidden">
+                <CardHeader className="flex-row items-center gap-4">
+                  <ExtendedButton
+                    size="icon"
+                    variant="soft"
+                    shine="none"
+                    float="none"
+                    scale="none"
+                    gradient="none"
+                  >
+                    <Mail />
+                  </ExtendedButton>
+                  <div>
+                    <CardTitle className="text-sm">Email</CardTitle>
+                    <CardDescription className="text-primary">
+                      {contactInfo.email}
+                    </CardDescription>
+                  </div>
+                </CardHeader>
+              </ExtendedCard>
+
+              {/* Location Card */}
+              <ExtendedCard variant="soft" className="overflow-hidden">
+                <CardHeader className="flex-row items-center gap-4">
+                  <ExtendedButton
+                    size="icon"
+                    variant="soft"
+                    shine="none"
+                    float="none"
+                    scale="none"
+                    gradient="none"
+                  >
+                    <MapPin />
+                  </ExtendedButton>
+                  <div>
+                    <CardTitle className="text-sm">Location</CardTitle>
+                    <CardDescription className="text-primary">
+                      {contactInfo.location}
+                    </CardDescription>
+                  </div>
+                </CardHeader>
+              </ExtendedCard>
+
+              {/* Availability Card */}
+              <ExtendedCard variant="soft" className="overflow-hidden">
+                <CardHeader className="flex-row items-center gap-4">
+                  <ExtendedButton
+                    size="icon"
+                    variant="soft"
+                    shine="none"
+                    float="none"
+                    scale="none"
+                    gradient="none"
+                    className="text-green-500"
+                  >
+                    <div className="relative">
+                      <div className="absolute top-1 right-1 w-2 h-2 bg-green-500 rounded-full" />
+                      <Calendar />
+                    </div>
+                  </ExtendedButton>
+                  <div>
+                    <CardTitle className="text-sm">Availability</CardTitle>
+                    <CardDescription className="text-green-500">
+                      {contactInfo.availability}
+                    </CardDescription>
+                  </div>
+                </CardHeader>
+              </ExtendedCard>
+
+              <div className="flex items-center gap-4">
+                <ExtendedSeparator className="flex-1 from-transparent to-primary/30 via-none" />
+                <Typography variant="h3">Social Links</Typography>
+                <ExtendedSeparator className="flex-1 from-primary/30 to-transparent via-none" />
+              </div>
+              {/* Social Links Card */}
+              <ExtendedCard variant="soft">
+                <CardHeader>
+                  <CardTitle className="text-sm">Connect with me</CardTitle>
+                </CardHeader>
+                <CardContent className="flex flex-wrap gap-2">
+                  {contactInfo.socials.map((social, index) => (
+                    <ExtendedButton
+                      key={index}
+                      variant="outline"
+                      size="sm"
+                      asChild
+                      className="flex-1"
+                    >
+                      <a
+                        href={social.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center justify-center gap-2"
+                      >
+                        {social.icon}
+                        {social.name}
+                      </a>
+                    </ExtendedButton>
+                  ))}
+                </CardContent>
+              </ExtendedCard>
+            </div>
+
+            {/* Contact Form Column */}
+            <div className="lg:col-span-2">
+              <ExtendedCard className="h-full">
+                <CardHeader>
+                  <CardTitle>Send me a message</CardTitle>
+                  <CardDescription>
+                    Fill out the form below and I&apos;ll get back to you as
+                    soon as possible.
+                  </CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-6">
+                  <div className="grid gap-6 md:grid-cols-2">
+                    <div className="space-y-2">
+                      <Typography variant="small">Name</Typography>
+                      <Input placeholder="Your name" />
+                    </div>
+                    <div className="space-y-2">
+                      <Typography variant="small">Email</Typography>
+                      <Input type="email" placeholder="your@email.com" />
+                    </div>
+                  </div>
+                  <div className="space-y-2">
+                    <Typography variant="small">Subject</Typography>
+                    <Input placeholder="What's this about?" />
+                  </div>
+                  <div className="space-y-2">
+                    <Typography variant="small">Message</Typography>
+                    <Textarea
+                      placeholder="Your message"
+                      className="min-h-[100px] resize-none"
+                    />
+                  </div>
+                </CardContent>
+                <CardFooter>
+                  <ExtendedButton className="w-full">
+                    <Mail className="w-4 h-4 mr-2" />
+                    Send Message
+                  </ExtendedButton>
+                </CardFooter>
+              </ExtendedCard>
+            </div>
           </div>
         </div>
       </section>
