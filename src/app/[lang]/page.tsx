@@ -189,8 +189,15 @@ const contactInfo: ContactInfo = {
 
 const Home = () => {
   return (
-    <main>
-      <section className="flex min-h-[90vh] items-center justify-center relative">
+    <main className="relative">
+      {/* Global noise overlay */}
+      <div className="fixed inset-0 -z-50 pattern-noise pointer-events-none" />
+      {/* Global gradient mesh */}
+      <div className="fixed inset-0 -z-40 gradient-mesh pointer-events-none opacity-50" />
+
+      {/* Hero section */}
+      <section className="relative flex min-h-[90vh] items-center justify-center overflow-hidden">
+        <div className="absolute inset-0 -z-20 pattern-topography opacity-[0.015]" />
         <div className="mx-auto my-20 max-w-4xl space-y-8 px-4 text-center">
           <Typography variant="h1">Welcome to my Portfolio</Typography>
 
@@ -211,8 +218,10 @@ const Home = () => {
           <ChevronDown className="h-8 w-8 text-muted-foreground" />
         </div>
       </section>
-      {/* about me*/}
-      <section className="py-20">
+
+      {/* About section */}
+      <section className="relative py-20 overflow-hidden">
+        <div className="absolute inset-0 -z-20 pattern-dots opacity-30" />
         <div className="container mx-auto px-4">
           <div className="mb-12 space-y-4 text-center">
             <ExtendedBadge
@@ -250,7 +259,10 @@ const Home = () => {
           </div>
         </div>
       </section>
-      <section className="py-20">
+
+      {/* Experience section */}
+      <section className="relative py-20 overflow-hidden">
+        <div className="absolute inset-0 -z-20 pattern-grid opacity-20" />
         <div className="container mx-auto px-4">
           <div className="mb-12 space-y-4">
             <ExtendedBadge
@@ -337,7 +349,10 @@ const Home = () => {
           </div>
         </div>
       </section>
-      <section className="py-20">
+
+      {/* Projects section */}
+      <section className="relative py-20 overflow-hidden gradient-shine">
+        <div className="absolute inset-0 -z-20 pattern-circuit opacity-[0.015]" />
         <div className="container mx-auto px-4">
           <div className="mb-12 space-y-4 text-center">
             <ExtendedBadge
@@ -431,8 +446,10 @@ const Home = () => {
           </div>
         </div>
       </section>
-      {/* skills */}
-      <section className="py-20">
+
+      {/* Skills section */}
+      <section className="relative py-20 overflow-hidden">
+        <div className="absolute inset-0 -z-20 pattern-dots opacity-30" />
         <div className="container mx-auto px-4">
           <div className="mb-12 space-y-4 text-center">
             <ExtendedBadge
@@ -502,8 +519,10 @@ const Home = () => {
           </div>
         </div>
       </section>
-      {/* Contact section */}
-      <section className="py-20 bg-primary/5">
+
+      {/* Contact section - keep its existing bg-primary/5 but add pattern */}
+      <section className="relative py-20 overflow-hidden bg-primary/5">
+        <div className="absolute inset-0 -z-20 pattern-grid opacity-10" />
         <div className="container mx-auto px-4">
           <div className="mb-12 space-y-4 text-center">
             <ExtendedBadge
@@ -562,8 +581,8 @@ const Home = () => {
                     float="none"
                     className="relative grid place-items-center"
                   >
-                    <span className="absolute inline-flex size-4 animate-ping rounded-full bg-green-400 opacity-75"></span>
-                    <span className="relative inline-flex size-2.5 rounded-full bg-green-500"></span>
+                    <span className="absolute inline-flex size-4 animate-ping rounded-full bg-green-400 opacity-75" />
+                    <span className="relative inline-flex size-2.5 rounded-full bg-green-500" />
                   </ExtendedButton>
                   <div>
                     <CardTitle className="text-sm">Availability</CardTitle>
