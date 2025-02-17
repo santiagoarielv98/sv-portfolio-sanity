@@ -38,7 +38,7 @@ export default async function RootLayout({
   const { lang } = await params;
 
   return (
-    <html lang={lang}>
+    <html lang={lang} suppressHydrationWarning>
       <body
         className={`${spaceGrotesk.variable} ${urbanist.variable} font-urbanist min-h-screen`}
       >

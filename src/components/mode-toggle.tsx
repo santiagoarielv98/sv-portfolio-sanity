@@ -1,6 +1,6 @@
 "use client";
 
-import { Laptop, Moon, Sun } from "lucide-react";
+import { Check, Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 
 import {
@@ -9,10 +9,16 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import type { Locale } from "@/lib/i18n/config";
+import type { ColorScheme } from "@/lib/theme/config";
+import { colorScheme } from "@/lib/theme/config";
+import { cn } from "@/lib/utils";
+import { useParams } from "next/navigation";
 import { ExtendedButton } from "./extended-button";
 
 export function ModeToggle() {
-  const { setTheme } = useTheme();
+  const { lang } = useParams<{ lang: Locale }>();
+  const { setTheme, theme: currentTheme, themes } = useTheme();
 
   return (
     <DropdownMenu>
@@ -24,18 +30,17 @@ export function ModeToggle() {
         </ExtendedButton>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        <DropdownMenuItem onClick={() => setTheme("light")}>
-          <Sun className="h-4 w-4 mr-2" />
-          Light
-        </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme("dark")}>
-          <Moon className="h-4 w-4 mr-2" />
-          Dark
-        </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme("system")}>
-          <Laptop className="h-4 w-4 mr-2" />
-          System
-        </DropdownMenuItem>
+        {themes.map((theme) => (
+          <DropdownMenuItem key={theme} onClick={() => setTheme(theme)}>
+            {colorScheme[theme as ColorScheme][lang]}
+            <Check
+              className={cn(
+                "ml-auto",
+                currentTheme === theme ? "opacity-100" : "opacity-0",
+              )}
+            />
+          </DropdownMenuItem>
+        ))}
       </DropdownMenuContent>
     </DropdownMenu>
   );

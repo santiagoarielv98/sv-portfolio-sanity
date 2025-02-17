@@ -1,15 +1,10 @@
 "use client";
 
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Code, Globe, Menu, X } from "lucide-react";
+import { Code, Menu, X } from "lucide-react";
 import { useState } from "react";
 import { ExtendedButton } from "./extended-button";
 import { ExtendedSeparator } from "./extended-separator";
+import ModeLang from "./mode-lang";
 import { ModeToggle } from "./mode-toggle";
 
 const navigation = [
@@ -18,11 +13,6 @@ const navigation = [
   { name: "Projects", href: "#projects" },
   { name: "Skills", href: "#skills" },
   { name: "Contact", href: "#contact" },
-];
-
-const languages = [
-  { code: "en", name: "English" },
-  { code: "es", name: "Español" },
 ];
 
 export function SiteHeader() {
@@ -56,20 +46,7 @@ export function SiteHeader() {
               <ExtendedSeparator orientation="vertical" className="mx-2 h-6" />
 
               {/* Language Selector */}
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <ExtendedButton size="icon" variant="ghost">
-                    <Globe className="h-4 w-4" />
-                  </ExtendedButton>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end">
-                  {languages.map((lang) => (
-                    <DropdownMenuItem key={lang.code}>
-                      {lang.name}
-                    </DropdownMenuItem>
-                  ))}
-                </DropdownMenuContent>
-              </DropdownMenu>
+              <ModeLang />
               <ModeToggle />
               {/* Theme Toggle Dropdown */}
 
@@ -84,20 +61,7 @@ export function SiteHeader() {
             {/* Mobile Menu Button */}
             <div className="flex items-center gap-2 md:hidden">
               {/* Language Selector Mobile */}
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <ExtendedButton variant="ghost" size="icon">
-                    <Globe className="h-4 w-4" />
-                  </ExtendedButton>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end">
-                  {languages.map((lang) => (
-                    <DropdownMenuItem key={lang.code}>
-                      {lang.name}
-                    </DropdownMenuItem>
-                  ))}
-                </DropdownMenuContent>
-              </DropdownMenu>
+              <ModeLang />
 
               {/* Theme Toggle Mobile */}
               <ModeToggle />
