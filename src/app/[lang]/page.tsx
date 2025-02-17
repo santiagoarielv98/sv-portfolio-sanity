@@ -16,6 +16,7 @@ import { ExtendedSeparator } from "@/components/extended-separator";
 import { Typography } from "@/components/ui/typography";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import Link from "next/link";
 
 export interface Experience {
   title: string;
@@ -412,6 +413,21 @@ const Home = () => {
                 </CardFooter>
               </ExtendedCard>
             ))}
+          </div>
+
+          {/* View More Projects Button */}
+          <div className="mt-12 text-center">
+            <ExtendedButton
+              variant="gradient"
+              size="lg"
+              className="font-display group"
+              asChild
+            >
+              <Link href="/projects">
+                <span>Ver más proyectos</span>
+                <Code className="w-5 h-5 transition-transform group-hover:rotate-12" />
+              </Link>
+            </ExtendedButton>
           </div>
         </div>
       </section>
