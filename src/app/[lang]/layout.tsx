@@ -1,10 +1,11 @@
+import { SiteFooter } from "@/components/site-footer";
+import { SiteHeader } from "@/components/site-header";
+import { ThemeProvider } from "./provider";
 import type { Locale } from "@/lib/i18n/config";
 import { i18n } from "@/lib/i18n/config";
 import type { Metadata } from "next";
 import { Space_Grotesk, Urbanist } from "next/font/google";
 import "./globals.css";
-import { SiteHeader } from "@/components/site-header";
-import { SiteFooter } from "@/components/site-footer";
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
@@ -39,11 +40,18 @@ export default async function RootLayout({
   return (
     <html lang={lang}>
       <body
-        className={`dark ${spaceGrotesk.variable} ${urbanist.variable} font-urbanist min-h-screen`}
+        className={`${spaceGrotesk.variable} ${urbanist.variable} font-urbanist min-h-screen`}
       >
-        <SiteHeader />
-        {children}
-        <SiteFooter />
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <SiteHeader />
+          {children}
+          <SiteFooter />
+        </ThemeProvider>
       </body>
     </html>
   );

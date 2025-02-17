@@ -1,16 +1,16 @@
 "use client";
 
-import { Code, Globe, Menu, Moon, Sun, X } from "lucide-react";
-import { ExtendedButton } from "./extended-button";
-import { ExtendedSeparator } from "./extended-separator";
-import { ExtendedBadge } from "./extended-badge";
-import { useState } from "react";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { Code, Globe, Menu, X } from "lucide-react";
+import { useState } from "react";
+import { ExtendedButton } from "./extended-button";
+import { ExtendedSeparator } from "./extended-separator";
+import { ModeToggle } from "./mode-toggle";
 
 const navigation = [
   { name: "About", href: "#about" },
@@ -27,13 +27,6 @@ const languages = [
 
 export function SiteHeader() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [theme, setTheme] = useState<"light" | "dark">("light");
-
-  const toggleTheme = () => {
-    const newTheme = theme === "light" ? "dark" : "light";
-    setTheme(newTheme);
-    document.documentElement.classList.toggle("dark");
-  };
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-primary/10 bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -77,15 +70,8 @@ export function SiteHeader() {
                   ))}
                 </DropdownMenuContent>
               </DropdownMenu>
-
-              {/* Theme Toggle */}
-              <ExtendedButton variant="ghost" size="icon" onClick={toggleTheme}>
-                {theme === "light" ? (
-                  <Moon className="h-4 w-4" />
-                ) : (
-                  <Sun className="h-4 w-4" />
-                )}
-              </ExtendedButton>
+              <ModeToggle />
+              {/* Theme Toggle Dropdown */}
 
               <ExtendedSeparator orientation="vertical" className="mx-2 h-6" />
 
@@ -114,14 +100,7 @@ export function SiteHeader() {
               </DropdownMenu>
 
               {/* Theme Toggle Mobile */}
-              <ExtendedButton variant="ghost" size="icon" onClick={toggleTheme}>
-                {theme === "light" ? (
-                  <Moon className="h-4 w-4" />
-                ) : (
-                  <Sun className="h-4 w-4" />
-                )}
-              </ExtendedButton>
-
+              <ModeToggle />
               {/* Menu Toggle */}
               <ExtendedButton
                 variant="ghost"
