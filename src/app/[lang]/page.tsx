@@ -187,17 +187,19 @@ const contactInfo: ContactInfo = {
   ],
 };
 
-const Home = () => {
+export default function Home() {
   return (
     <main className="relative">
-      {/* Global noise overlay */}
+      {/* Global patterns */}
       <div className="fixed inset-0 -z-50 pattern-noise pointer-events-none" />
-      {/* Global gradient mesh */}
       <div className="fixed inset-0 -z-40 gradient-mesh pointer-events-none" />
 
       {/* Hero section */}
       <section className="relative flex min-h-[90vh] items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 -z-20 pattern-topography opacity-80" />
+        <div className="absolute inset-0 -z-20">
+          <div className="absolute inset-0 pattern-topography pattern-fade-in" />
+          <div className="pattern-connector pattern-connector-bottom pattern-dots" />
+        </div>
         <div className="mx-auto my-20 max-w-4xl space-y-8 px-4 text-center">
           <Typography variant="h1">Welcome to my Portfolio</Typography>
 
@@ -221,7 +223,11 @@ const Home = () => {
 
       {/* About section */}
       <section className="relative py-20 overflow-hidden">
-        <div className="absolute inset-0 -z-20 pattern-dots opacity-100" />
+        <div className="absolute inset-0 -z-20">
+          <div className="pattern-connector pattern-connector-top pattern-topography" />
+          <div className="absolute inset-0 pattern-dots" />
+          <div className="pattern-connector pattern-connector-bottom pattern-circuit" />
+        </div>
         <div className="container mx-auto px-4">
           <div className="mb-12 space-y-4 text-center">
             <ExtendedBadge
@@ -262,7 +268,11 @@ const Home = () => {
 
       {/* Experience section */}
       <section className="relative py-20 overflow-hidden">
-        <div className="absolute inset-0 -z-20 pattern-grid opacity-100" />
+        <div className="absolute inset-0 -z-20">
+          <div className="pattern-connector pattern-connector-top pattern-dots" />
+          <div className="absolute inset-0 pattern-circuit" />
+          <div className="pattern-connector pattern-connector-bottom pattern-grid" />
+        </div>
         <div className="container mx-auto px-4">
           <div className="mb-12 space-y-4">
             <ExtendedBadge
@@ -351,8 +361,12 @@ const Home = () => {
       </section>
 
       {/* Projects section */}
-      <section className="relative py-20 overflow-hidden gradient-shine">
-        <div className="absolute inset-0 -z-20 pattern-circuit opacity-70" />
+      <section className="relative py-20 overflow-hidden">
+        <div className="absolute inset-0 -z-20">
+          <div className="pattern-connector pattern-connector-top pattern-circuit" />
+          <div className="absolute inset-0 pattern-grid" />
+          <div className="pattern-connector pattern-connector-bottom pattern-dots" />
+        </div>
         <div className="container mx-auto px-4">
           <div className="mb-12 space-y-4 text-center">
             <ExtendedBadge
@@ -449,7 +463,11 @@ const Home = () => {
 
       {/* Skills section */}
       <section className="relative py-20 overflow-hidden">
-        <div className="absolute inset-0 -z-20 pattern-dots opacity-100" />
+        <div className="absolute inset-0 -z-20">
+          <div className="pattern-connector pattern-connector-top pattern-grid" />
+          <div className="absolute inset-0 pattern-dots" />
+          <div className="pattern-connector pattern-connector-bottom pattern-circuit" />
+        </div>
         <div className="container mx-auto px-4">
           <div className="mb-12 space-y-4 text-center">
             <ExtendedBadge
@@ -520,9 +538,13 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Contact section - keep its existing bg-primary/5 but add pattern */}
+      {/* Contact section */}
       <section className="relative py-20 overflow-hidden bg-primary/5">
-        <div className="absolute inset-0 -z-20 pattern-grid opacity-80" />
+        <div className="absolute inset-0 -z-20">
+          <div className="pattern-connector pattern-connector-top pattern-dots" />
+          <div className="absolute inset-0 pattern-circuit" />
+          <div className="absolute inset-0 pattern-fade-out" />
+        </div>
         <div className="container mx-auto px-4">
           <div className="mb-12 space-y-4 text-center">
             <ExtendedBadge
@@ -673,6 +695,4 @@ const Home = () => {
       </section>
     </main>
   );
-};
-
-export default Home;
+}

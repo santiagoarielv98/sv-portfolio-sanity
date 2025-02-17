@@ -91,8 +91,14 @@ export default function ProjectsPage() {
       {/* Global gradient mesh */}
       <div className="fixed inset-0 -z-40 gradient-mesh pointer-events-none" />
 
-      <section className="py-20">
-        <div className="absolute inset-0 -z-20 pattern-topography opacity-80" />
+      {/* Projects Section */}
+      <section className="relative py-20">
+        {/* Pattern with connectors */}
+        <div className="absolute inset-0 -z-20">
+          <div className="absolute inset-0 pattern-topography opacity-80 pattern-fade-in" />
+          <div className="pattern-connector pattern-connector-bottom pattern-dots opacity-80" />
+        </div>
+
         <div className="container mx-auto px-4">
           {/* Back to Home Button */}
           <div className="mb-8">

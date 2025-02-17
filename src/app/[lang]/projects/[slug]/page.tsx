@@ -82,8 +82,11 @@ export default function ProjectDetailPage() {
       <div className="fixed inset-0 -z-40 gradient-mesh pointer-events-none" />
 
       {/* Header Section */}
-      <section className="py-20">
-        <div className="absolute inset-0 -z-20 pattern-circuit opacity-70" />
+      <section className="relative py-20">
+        <div className="absolute inset-0 -z-20">
+          <div className="absolute inset-0 pattern-circuit opacity-70 pattern-fade-in" />
+          <div className="pattern-connector pattern-connector-bottom pattern-dots opacity-80" />
+        </div>
         <div className="container mx-auto px-4">
           {/* Back Button */}
           <div className="mb-8">
@@ -203,7 +206,11 @@ export default function ProjectDetailPage() {
 
       {/* Project Content */}
       <section className="relative py-20 bg-primary/5">
-        <div className="absolute inset-0 -z-20 pattern-dots opacity-80" />
+        <div className="absolute inset-0 -z-20">
+          <div className="pattern-connector pattern-connector-top pattern-circuit opacity-70" />
+          <div className="absolute inset-0 pattern-dots opacity-80" />
+          <div className="pattern-connector pattern-connector-bottom pattern-grid opacity-70" />
+        </div>
         <div className="container mx-auto px-4">
           <div className="grid gap-8 lg:grid-cols-3">
             {/* Main Content */}
@@ -311,7 +318,10 @@ export default function ProjectDetailPage() {
 
       {/* Gallery Section */}
       <section className="relative py-20">
-        <div className="absolute inset-0 -z-20 pattern-grid opacity-70" />
+        <div className="absolute inset-0 -z-20">
+          <div className="pattern-connector pattern-connector-top pattern-dots opacity-80" />
+          <div className="absolute inset-0 pattern-grid opacity-70 pattern-fade-out" />
+        </div>
         <div className="container mx-auto px-4">
           <div className="grid gap-4 sm:grid-cols-2">
             {projectDetail.gallery.map((image, index) => (
