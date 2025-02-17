@@ -279,7 +279,7 @@ const Home = () => {
                       data-direction={index % 2 === 0 ? "left" : "right"}
                       className="md:w-1/2 data-[direction=left]:md:pr-8 data-[direction=right]:md:pl-8 md:ml-0 ml-4"
                     >
-                      <ExtendedCard variant="soft">
+                      <ExtendedCard variant="solid">
                         <CardHeader className="flex-row gap-4">
                           <ExtendedButton
                             size="icon"
@@ -416,7 +416,7 @@ const Home = () => {
               <ExtendedCard
                 key={index}
                 className="flex flex-col"
-                variant="soft"
+                variant="solid"
               >
                 <CardHeader className="flex-row gap-4">
                   <ExtendedButton size="icon" variant="soft" float="none">
@@ -484,7 +484,7 @@ const Home = () => {
             {/* Contact Info Cards Column */}
             <div className="space-y-6">
               {/* Email Card */}
-              <ExtendedCard variant="soft" className="overflow-hidden">
+              <ExtendedCard variant="solid" className="overflow-hidden">
                 <CardHeader className="flex-row items-center gap-4">
                   <ExtendedButton size="icon" variant="soft" float="none">
                     <Mail />
@@ -499,7 +499,7 @@ const Home = () => {
               </ExtendedCard>
 
               {/* Location Card */}
-              <ExtendedCard variant="soft" className="overflow-hidden">
+              <ExtendedCard variant="solid" className="overflow-hidden">
                 <CardHeader className="flex-row items-center gap-4">
                   <ExtendedButton size="icon" variant="soft" float="none">
                     <MapPin />
@@ -514,7 +514,7 @@ const Home = () => {
               </ExtendedCard>
 
               {/* Availability Card */}
-              <ExtendedCard variant="soft" className="overflow-hidden">
+              <ExtendedCard variant="solid" className="overflow-hidden">
                 <CardHeader className="flex-row items-center gap-4">
                   <ExtendedButton
                     size="icon"
@@ -542,7 +542,7 @@ const Home = () => {
                 <ExtendedSeparator className="flex-1 from-primary/30 to-transparent via-none" />
               </div>
               {/* Social Links Card */}
-              <ExtendedCard variant="soft">
+              <ExtendedCard variant="solid">
                 <CardHeader>
                   <CardTitle className="text-sm">Connect with me</CardTitle>
                 </CardHeader>

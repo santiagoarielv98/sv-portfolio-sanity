@@ -33,36 +33,19 @@ const extendedCardNeonVariants = cva(
           "shadow-[0_0_20px_rgba(var(--primary),0.15)]",
           "[&>*]:relative [&>*]:z-[2]",
         ].join(" "),
-        soft: [
-          "bg-primary/5",
-          "border-2 border-primary/20",
-          "shadow-[0_0_25px_rgba(var(--primary),0.1)]",
-          "[&>*]:relative [&>*]:z-[2]",
-        ].join(" "),
-        outline: [
-          "bg-transparent",
-          "border-2 border-primary/30",
-          "[&>*]:relative [&>*]:z-[2]",
-        ].join(" "),
-        ghost: [
-          "bg-background/50",
-          "border-2 border-transparent",
-          "backdrop-blur-md",
-          "[&>*]:relative [&>*]:z-[2]",
-        ].join(" "),
       },
       rotate: {
         none: "",
         left: "hover:rotate-[-0.5deg]",
         right: "hover:rotate-[0.5deg]",
       },
-      glow: {
-        none: "",
-        xs: "hover:shadow-[0_0_15px_rgba(var(--primary),0.1)]",
-        sm: "hover:shadow-[0_0_20px_rgba(var(--primary),0.15)]",
-        md: "hover:shadow-[0_0_30px_rgba(var(--primary),0.2)]",
-        lg: "hover:shadow-[0_0_40px_rgba(var(--primary),0.25)]",
-      },
+      // glow: {
+      //   none: "",
+      //   xs: "hover:shadow-[0_0_15px_rgba(var(--primary),0.1)]",
+      //   sm: "hover:shadow-[0_0_20px_rgba(var(--primary),0.15)]",
+      //   md: "hover:shadow-[0_0_30px_rgba(var(--primary),0.2)]",
+      //   lg: "hover:shadow-[0_0_40px_rgba(var(--primary),0.25)]",
+      // },
       border: {
         none: "",
         light: "hover:border-primary/30",
@@ -76,7 +59,7 @@ const extendedCardNeonVariants = cva(
     },
     defaultVariants: {
       variant: "neon",
-      glow: "md",
+      // glow: "md",
       border: "medium",
       float: true,
     },
@@ -91,7 +74,7 @@ function ExtendedCard({
   className,
   variant,
   rotate,
-  glow,
+  // glow,
   border,
   float,
   ...props
@@ -102,7 +85,7 @@ function ExtendedCard({
         extendedCardNeonVariants({
           variant,
           rotate,
-          glow,
+          // glow,
           border,
           float,
         }),

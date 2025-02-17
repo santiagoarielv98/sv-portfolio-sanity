@@ -11,7 +11,6 @@ const extendedButtonVariants = cva(
         neon: [
           "bg-gradient-to-r from-primary via-secondary to-accent",
           "text-primary-foreground font-bold",
-          "shadow-[0_0_20px_rgba(var(--primary),0.3)]",
           "after:absolute after:inset-0 after:-z-10",
           "after:bg-gradient-to-r after:from-white/0 after:via-white/10 after:to-white/0",
           "after:transition-all after:duration-500 after:opacity-0",

@@ -89,7 +89,7 @@ export function SiteHeader() {
 
               <ExtendedSeparator orientation="vertical" className="mx-2 h-6" />
 
-              <ExtendedBadge variant="soft" className="animate-pulse">
+              <ExtendedBadge className="animate-pulse">
                 Available for hire
               </ExtendedBadge>
               <ExtendedButton>Let&apos;s Talk</ExtendedButton>
@@ -149,7 +149,7 @@ export function SiteHeader() {
                 </ExtendedButton>
               ))}
               <ExtendedSeparator className="my-4" />
-              <ExtendedBadge variant="soft" className="animate-pulse w-full">
+              <ExtendedBadge className="animate-pulse w-full">
                 Available for hire
               </ExtendedBadge>
               <ExtendedButton className="w-full mt-4">

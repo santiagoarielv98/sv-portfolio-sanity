@@ -78,7 +78,7 @@ export function SiteFooter() {
           {/* Contact Card */}
           <div className="space-y-4">
             <Typography variant="h4">Let&apos;s Connect</Typography>
-            <ExtendedCard variant="soft" className="backdrop-blur-none">
+            <ExtendedCard variant="solid" className="backdrop-blur-none">
               <div className="p-6 space-y-4">
                 <Typography variant="body2" className="text-muted-foreground">
                   Available for freelance opportunities and full-time positions.
