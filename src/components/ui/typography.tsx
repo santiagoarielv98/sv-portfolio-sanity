@@ -16,6 +16,7 @@ const typographyVariants = cva("max-w-prose", {
       // p: "leading-7 [&:not(:first-child)]:mt-6",
       body1: "leading-7",
       body2: "leading-6",
+      small: "text-sm",
       blockquote: "mt-6 border-l-2 pl-6 italic",
       code: "relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold",
     },
