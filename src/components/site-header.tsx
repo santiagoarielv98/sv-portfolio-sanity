@@ -41,12 +41,7 @@ export function SiteHeader() {
         <nav className="flex h-16 items-center">
           <div className="flex gap-6 md:gap-10 w-full justify-between items-center">
             {/* Logo */}
-            <ExtendedButton
-              gradient="none"
-              variant="ghost"
-              className="font-bold"
-              asChild
-            >
+            <ExtendedButton variant="ghost" className="font-bold" asChild>
               <a href="#" className="flex items-center gap-2">
                 <Code className="h-5 w-5" />
                 <span className="font-display">Portfolio</span>
@@ -59,9 +54,6 @@ export function SiteHeader() {
                 <ExtendedButton
                   key={item.name}
                   variant="ghost"
-                  scale="none"
-                  gradient="none"
-                  shine="none"
                   size="sm"
                   asChild
                 >
@@ -73,12 +65,7 @@ export function SiteHeader() {
               {/* Language Selector */}
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <ExtendedButton
-                    shine="none"
-                    size="icon"
-                    gradient="none"
-                    variant="ghost"
-                  >
+                  <ExtendedButton size="icon" variant="ghost">
                     <Globe className="h-4 w-4" />
                   </ExtendedButton>
                 </DropdownMenuTrigger>
@@ -92,13 +79,7 @@ export function SiteHeader() {
               </DropdownMenu>
 
               {/* Theme Toggle */}
-              <ExtendedButton
-                shine="none"
-                gradient="none"
-                variant="ghost"
-                size="icon"
-                onClick={toggleTheme}
-              >
+              <ExtendedButton variant="ghost" size="icon" onClick={toggleTheme}>
                 {theme === "light" ? (
                   <Moon className="h-4 w-4" />
                 ) : (

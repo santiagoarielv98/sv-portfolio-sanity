@@ -51,13 +51,6 @@ const extendedCardNeonVariants = cva(
           "[&>*]:relative [&>*]:z-[2]",
         ].join(" "),
       },
-      scale: {
-        none: "",
-        xs: "hover:scale-[1.005]",
-        sm: "hover:scale-[1.01]",
-        md: "hover:scale-[1.02]",
-        lg: "hover:scale-[1.03]",
-      },
       rotate: {
         none: "",
         left: "hover:rotate-[-0.5deg]",
@@ -83,7 +76,6 @@ const extendedCardNeonVariants = cva(
     },
     defaultVariants: {
       variant: "neon",
-      scale: "md",
       glow: "md",
       border: "medium",
       float: true,
@@ -98,7 +90,6 @@ interface ExtendedCardProps
 function ExtendedCard({
   className,
   variant,
-  scale,
   rotate,
   glow,
   border,
@@ -110,7 +101,6 @@ function ExtendedCard({
       className={cn(
         extendedCardNeonVariants({
           variant,
-          scale,
           rotate,
           glow,
           border,

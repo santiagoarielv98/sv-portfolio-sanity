@@ -28,6 +28,8 @@ const extendedButtonVariants = cva(
           "before:transition-transform before:duration-500 before:ease-out",
           "active:scale-[0.98]",
           "focus-visible:ring-2 focus-visible:ring-primary/70",
+          "hover:before:translate-x-[200%]",
+          "hover:after:opacity-100",
         ].join(" "),
         soft: [
           "bg-primary/10",
@@ -68,27 +70,12 @@ const extendedButtonVariants = cva(
           "[&_svg]:duration-300",
         ].join(" "),
       },
-      scale: {
-        none: "",
-        xs: ["hover:scale-[1.02]", "active:scale-[0.98]"].join(" "),
-        sm: ["hover:scale-[1.04]", "active:scale-[0.98]"].join(" "),
-        md: ["hover:scale-[1.05]", "active:scale-[0.98]"].join(" "),
-        lg: ["hover:scale-[1.08]", "active:scale-[0.98]"].join(" "),
-      },
       glow: {
         none: "",
         xs: "hover:shadow-[0_0_15px_rgba(var(--primary),0.3)]",
         sm: "hover:shadow-[0_0_20px_rgba(var(--primary),0.4)]",
         md: "hover:shadow-[0_0_30px_rgba(var(--primary),0.5)]",
         lg: "hover:shadow-[0_0_40px_rgba(var(--primary),0.6)]",
-      },
-      gradient: {
-        none: "",
-        true: [
-          "hover:bg-[length:100%_100%]",
-          "hover:animate-shimmer",
-          "hover:bg-gradient-to-l hover:from-primary hover:via-secondary hover:to-accent",
-        ].join(" "),
       },
       shine: {
         none: "",
@@ -108,9 +95,8 @@ const extendedButtonVariants = cva(
     defaultVariants: {
       variant: "neon",
       size: "default",
-      scale: "md",
       glow: "md",
-      gradient: true,
+      // gradient: true,
       shine: true,
       float: true,
     },
@@ -121,9 +107,7 @@ function ExtendedButton({
   className,
   variant,
   size,
-  scale,
   glow,
-  gradient,
   shine,
   float,
   asChild = false,
@@ -141,9 +125,7 @@ function ExtendedButton({
         extendedButtonVariants({
           variant,
           size,
-          scale,
           glow,
-          gradient,
           shine,
           float,
         }),

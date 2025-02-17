@@ -45,13 +45,7 @@ const extendedBadgeVariants = cva(
           "border border-secondary/20",
         ].join(" "),
       },
-      scale: {
-        none: "",
-        xs: "hover:scale-[1.005]",
-        sm: "hover:scale-[1.01]",
-        md: "hover:scale-[1.02]",
-        lg: "hover:scale-[1.03]",
-      },
+
       glow: {
         none: "",
         xs: "hover:shadow-[0_0_10px_rgba(var(--primary),0.1)]",
@@ -76,7 +70,6 @@ const extendedBadgeVariants = cva(
     },
     defaultVariants: {
       variant: "neon",
-      scale: "md",
       glow: "md",
       border: "medium",
       highlight: true,
@@ -88,7 +81,6 @@ const extendedBadgeVariants = cva(
 function ExtendedBadge({
   className,
   variant,
-  scale,
   glow,
   border,
   highlight,
@@ -105,7 +97,6 @@ function ExtendedBadge({
       className={cn(
         extendedBadgeVariants({
           variant,
-          scale,
           glow,
           border,
           highlight,

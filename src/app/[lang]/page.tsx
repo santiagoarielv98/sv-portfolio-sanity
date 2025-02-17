@@ -279,15 +279,12 @@ const Home = () => {
                       data-direction={index % 2 === 0 ? "left" : "right"}
                       className="md:w-1/2 data-[direction=left]:md:pr-8 data-[direction=right]:md:pl-8 md:ml-0 ml-4"
                     >
-                      <ExtendedCard scale="none" variant="soft">
+                      <ExtendedCard variant="soft">
                         <CardHeader className="flex-row gap-4">
                           <ExtendedButton
                             size="icon"
                             variant="soft"
-                            shine="none"
                             float="none"
-                            scale="none"
-                            gradient="none"
                           >
                             <Code />
                           </ExtendedButton>
@@ -352,7 +349,6 @@ const Home = () => {
               <ExtendedCard
                 key={index}
                 className="group overflow-hidden flex flex-col"
-                scale="none"
               >
                 <div className="relative w-full aspect-video">
                   <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-background/20 z-10 group-hover:opacity-50 transition-opacity" />
@@ -375,11 +371,7 @@ const Home = () => {
                 <CardContent>
                   <div className="flex flex-wrap gap-2">
                     {project.technologies.map((tech, techIndex) => (
-                      <ExtendedBadge
-                        key={techIndex}
-                        variant="ghost"
-                        scale="none"
-                      >
+                      <ExtendedBadge key={techIndex} variant="ghost">
                         {tech}
                       </ExtendedBadge>
                     ))}
@@ -432,18 +424,10 @@ const Home = () => {
               <ExtendedCard
                 key={index}
                 className="flex flex-col"
-                scale="none"
                 variant="soft"
               >
                 <CardHeader className="flex-row gap-4">
-                  <ExtendedButton
-                    size="icon"
-                    variant="soft"
-                    shine="none"
-                    float="none"
-                    scale="none"
-                    gradient="none"
-                  >
+                  <ExtendedButton size="icon" variant="soft" float="none">
                     <Code />
                   </ExtendedButton>
                   <div className="flex gap-1.5 flex-col flex-1">
@@ -456,7 +440,7 @@ const Home = () => {
                   {skill.technologies.map((tech, techIndex) => (
                     <div key={techIndex} className="space-y-2">
                       <div className="flex justify-between items-center">
-                        <ExtendedBadge variant="ghost" scale="none">
+                        <ExtendedBadge variant="ghost">
                           {tech.name}
                         </ExtendedBadge>
                         <Typography
@@ -510,14 +494,7 @@ const Home = () => {
               {/* Email Card */}
               <ExtendedCard variant="soft" className="overflow-hidden">
                 <CardHeader className="flex-row items-center gap-4">
-                  <ExtendedButton
-                    size="icon"
-                    variant="soft"
-                    shine="none"
-                    float="none"
-                    scale="none"
-                    gradient="none"
-                  >
+                  <ExtendedButton size="icon" variant="soft" float="none">
                     <Mail />
                   </ExtendedButton>
                   <div>
@@ -532,14 +509,7 @@ const Home = () => {
               {/* Location Card */}
               <ExtendedCard variant="soft" className="overflow-hidden">
                 <CardHeader className="flex-row items-center gap-4">
-                  <ExtendedButton
-                    size="icon"
-                    variant="soft"
-                    shine="none"
-                    float="none"
-                    scale="none"
-                    gradient="none"
-                  >
+                  <ExtendedButton size="icon" variant="soft" float="none">
                     <MapPin />
                   </ExtendedButton>
                   <div>
@@ -557,10 +527,7 @@ const Home = () => {
                   <ExtendedButton
                     size="icon"
                     variant="soft"
-                    shine="none"
                     float="none"
-                    scale="none"
-                    gradient="none"
                     className="text-green-500"
                   >
                     <div className="relative">
