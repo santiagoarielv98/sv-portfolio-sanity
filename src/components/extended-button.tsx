@@ -8,25 +8,16 @@ const extendedButtonVariants = cva(
   {
     variants: {
       variant: {
-        neon: [
+        default: [
           "bg-gradient-to-r from-primary via-secondary to-accent",
           "text-primary-foreground font-bold",
-          "after:absolute after:inset-0 after:-z-10",
-          "after:bg-gradient-to-r after:from-white/0 after:via-white/10 after:to-white/0",
-          "after:transition-all after:duration-500 after:opacity-0",
-          "before:absolute before:inset-0 before:-z-10",
-          "before:bg-gradient-to-r before:from-transparent before:via-white/40 before:to-transparent",
-          "before:translate-x-[-200%] before:skew-x-[-20deg]",
-          "before:transition-transform before:duration-500 before:ease-out",
+          "shadow-[0_0_20px_rgba(var(--primary),0.3)]",
           "active:scale-[0.98]",
           "focus-visible:ring-2 focus-visible:ring-primary/70",
-          "hover:before:translate-x-[200%]",
-          "hover:after:opacity-100",
         ].join(" "),
-        soft: [
-          "bg-primary/10",
-          "text-primary font-medium",
-          "border-2 border-primary/20",
+        solid: [
+          "bg-primary",
+          "text-primary-foreground font-bold",
           "active:scale-[0.98]",
           "focus-visible:ring-2 focus-visible:ring-primary/70",
         ].join(" "),
@@ -34,6 +25,22 @@ const extendedButtonVariants = cva(
           "bg-transparent",
           "text-primary font-medium",
           "hover:bg-primary/10",
+          "active:scale-[0.98]",
+          "focus-visible:ring-2 focus-visible:ring-primary/70",
+        ].join(" "),
+        outline: [
+          "bg-transparent",
+          "border-2 border-primary",
+          "text-primary font-medium",
+          "active:scale-[0.98]",
+          "focus-visible:ring-2 focus-visible:ring-primary/70",
+        ].join(" "),
+        gradient: [
+          "bg-gradient-to-r from-primary/20 via-secondary/20 to-accent/20",
+          "text-primary font-medium",
+          "border border-primary/30",
+          "shadow-[0_0_15px_rgba(var(--primary),0.15)]",
+          "hover:bg-gradient-to-r hover:from-primary/30 hover:via-secondary/30 hover:to-accent/30",
           "active:scale-[0.98]",
           "focus-visible:ring-2 focus-visible:ring-primary/70",
         ].join(" "),
@@ -49,13 +56,6 @@ const extendedButtonVariants = cva(
           "[&_svg]:duration-300",
         ].join(" "),
       },
-      // glow: {
-      //   none: "",
-      //   xs: "hover:shadow-[0_0_15px_rgba(var(--primary),0.3)]",
-      //   sm: "hover:shadow-[0_0_20px_rgba(var(--primary),0.4)]",
-      //   md: "hover:shadow-[0_0_30px_rgba(var(--primary),0.5)]",
-      //   lg: "hover:shadow-[0_0_40px_rgba(var(--primary),0.6)]",
-      // },
       shine: {
         none: "",
         true: [
@@ -72,9 +72,8 @@ const extendedButtonVariants = cva(
       },
     },
     defaultVariants: {
-      variant: "neon",
+      variant: "default",
       size: "default",
-      // glow: "md",
       shine: true,
       float: true,
     },
@@ -85,7 +84,6 @@ function ExtendedButton({
   className,
   variant,
   size,
-  // glow,
   shine,
   float,
   asChild = false,
@@ -103,7 +101,6 @@ function ExtendedButton({
         extendedButtonVariants({
           variant,
           size,
-          // glow,
           shine,
           float,
         }),

@@ -18,24 +18,28 @@ const extendedCardNeonVariants = cva(
         default: [
           "bg-gradient-to-br from-background/60 via-background/80 to-background/60",
           "border-2 border-primary/20",
-          "shadow-[0_0_25px_rgba(var(--primary),0.1),inset_0_0_20px_rgba(var(--secondary),0.1)]",
-          // Efectos neón
-          "after:absolute after:inset-0 after:bg-gradient-to-br after:from-primary/5 after:via-secondary/5 after:to-accent/5",
-          "after:opacity-0 after:transition-opacity after:duration-500 after:pointer-events-none after:z-[1]",
-          "before:absolute before:inset-[1px] before:rounded-[10px] before:p-[1px]",
-          "before:bg-gradient-to-br before:from-primary/20 before:via-secondary/20 before:to-accent/20",
-          "before:mask-border before:transition-all before:duration-500 before:pointer-events-none before:z-[1]",
+          "shadow-[0_0_25px_rgba(var(--primary),0.1)]",
           "[&>*]:relative [&>*]:z-[2]",
         ].join(" "),
         solid: [
-          "bg-gradient-to-r from-primary/10 to-secondary/10",
+          "bg-primary/10",
           "border-2 border-primary/30",
-          "shadow-[0_0_20px_rgba(var(--primary),0.15)]",
           "[&>*]:relative [&>*]:z-[2]",
         ].join(" "),
         ghost: [
           "bg-background/60",
           "border border-border",
+          "[&>*]:relative [&>*]:z-[2]",
+        ].join(" "),
+        outline: [
+          "bg-transparent",
+          "border-2 border-primary",
+          "[&>*]:relative [&>*]:z-[2]",
+        ].join(" "),
+        gradient: [
+          "bg-gradient-to-r from-primary/20 via-secondary/20 to-accent/20",
+          "border-2 border-primary/30",
+          "shadow-[0_0_30px_rgba(var(--primary),0.2)]",
           "[&>*]:relative [&>*]:z-[2]",
         ].join(" "),
       },

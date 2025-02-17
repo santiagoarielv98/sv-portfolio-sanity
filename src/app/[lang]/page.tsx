@@ -380,13 +380,21 @@ const Home = () => {
                 <ExtendedSeparator className="mb-6 mt-auto" />
                 <CardFooter className="gap-4">
                   {project.demoUrl && (
-                    <ExtendedButton variant="soft" size="sm" className="flex-1">
+                    <ExtendedButton
+                      variant="solid"
+                      size="sm"
+                      className="flex-1"
+                    >
                       <Code className="w-4 h-4 mr-1" />
                       Live Demo
                     </ExtendedButton>
                   )}
                   {project.repoUrl && (
-                    <ExtendedButton variant="soft" size="sm" className="flex-1">
+                    <ExtendedButton
+                      variant="solid"
+                      size="sm"
+                      className="flex-1"
+                    >
                       <Code className="w-4 h-4 mr-1" />
                       Source Code
                     </ExtendedButton>
@@ -419,7 +427,7 @@ const Home = () => {
                 variant="solid"
               >
                 <CardHeader className="flex-row gap-4">
-                  <ExtendedButton size="icon" variant="soft" float="none">
+                  <ExtendedButton size="icon" variant="solid" float="none">
                     <Code />
                   </ExtendedButton>
                   <div className="flex gap-1.5 flex-col flex-1">
@@ -486,7 +494,7 @@ const Home = () => {
               {/* Email Card */}
               <ExtendedCard variant="solid" className="overflow-hidden">
                 <CardHeader className="flex-row items-center gap-4">
-                  <ExtendedButton size="icon" variant="soft" float="none">
+                  <ExtendedButton size="icon" variant="solid" float="none">
                     <Mail />
                   </ExtendedButton>
                   <div>
@@ -501,7 +509,7 @@ const Home = () => {
               {/* Location Card */}
               <ExtendedCard variant="solid" className="overflow-hidden">
                 <CardHeader className="flex-row items-center gap-4">
-                  <ExtendedButton size="icon" variant="soft" float="none">
+                  <ExtendedButton size="icon" variant="solid" float="none">
                     <MapPin />
                   </ExtendedButton>
                   <div>
@@ -518,7 +526,7 @@ const Home = () => {
                 <CardHeader className="flex-row items-center gap-4">
                   <ExtendedButton
                     size="icon"
-                    variant="soft"
+                    variant="solid"
                     float="none"
                     className="text-green-500"
                   >
@@ -550,7 +558,7 @@ const Home = () => {
                   {contactInfo.socials.map((social, index) => (
                     <ExtendedButton
                       key={index}
-                      variant="soft"
+                      variant="solid"
                       size="sm"
                       asChild
                       className="flex-1"
