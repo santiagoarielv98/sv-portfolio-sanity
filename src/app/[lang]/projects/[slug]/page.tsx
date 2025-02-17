@@ -82,10 +82,10 @@ export default function ProjectDetailPage() {
       <div className="fixed inset-0 -z-40 gradient-mesh pointer-events-none" />
 
       {/* Header Section */}
-      <section className="relative py-20">
+      <section className="relative pb-10 pt-4">
         <div className="absolute inset-0 -z-20">
-          <div className="absolute inset-0 pattern-circuit opacity-70 pattern-fade-in" />
-          <div className="pattern-connector pattern-connector-bottom pattern-dots opacity-80" />
+          <div className="absolute inset-0 pattern-circuit pattern-fade-in" />
+          <div className="pattern-connector pattern-connector-bottom pattern-dots" />
         </div>
         <div className="container mx-auto px-4">
           {/* Back Button */}

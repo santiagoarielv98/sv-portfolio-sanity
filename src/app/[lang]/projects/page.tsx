@@ -92,7 +92,7 @@ export default function ProjectsPage() {
       <div className="fixed inset-0 -z-40 gradient-mesh pointer-events-none" />
 
       {/* Projects Section */}
-      <section className="relative py-20">
+      <section className="relative pb-20 pt-4">
         {/* Pattern with connectors */}
         <div className="absolute inset-0 -z-20">
           <div className="absolute inset-0 pattern-topography opacity-80 pattern-fade-in" />
