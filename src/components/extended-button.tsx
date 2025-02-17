@@ -92,7 +92,13 @@ const extendedButtonVariants = cva(
       },
       shine: {
         none: "",
-        true: "hover:before:translate-x-[200%]",
+        true: [
+          "after:absolute after:inset-0 after:-z-10",
+          "after:bg-gradient-to-r after:from-white/0 after:via-white/20 after:to-white/0",
+          "after:translate-x-[-200%] after:skew-x-[-20deg]",
+          "after:transition-transform after:duration-500 after:ease-out",
+          "hover:after:translate-x-[200%]",
+        ].join(" "),
       },
       float: {
         none: "",

@@ -1,10 +1,16 @@
 "use client";
 
-import { Code, Menu, X } from "lucide-react";
+import { Code, Globe, Menu, Moon, Sun, X } from "lucide-react";
 import { ExtendedButton } from "./extended-button";
 import { ExtendedSeparator } from "./extended-separator";
 import { ExtendedBadge } from "./extended-badge";
 import { useState } from "react";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 const navigation = [
   { name: "About", href: "#about" },
@@ -14,8 +20,20 @@ const navigation = [
   { name: "Contact", href: "#contact" },
 ];
 
+const languages = [
+  { code: "en", name: "English" },
+  { code: "es", name: "Español" },
+];
+
 export function SiteHeader() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [theme, setTheme] = useState<"light" | "dark">("light");
+
+  const toggleTheme = () => {
+    const newTheme = theme === "light" ? "dark" : "light";
+    setTheme(newTheme);
+    document.documentElement.classList.toggle("dark");
+  };
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-primary/10 bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -23,7 +41,12 @@ export function SiteHeader() {
         <nav className="flex h-16 items-center">
           <div className="flex gap-6 md:gap-10 w-full justify-between items-center">
             {/* Logo */}
-            <ExtendedButton variant="ghost" className="font-bold" asChild>
+            <ExtendedButton
+              gradient="none"
+              variant="ghost"
+              className="font-bold"
+              asChild
+            >
               <a href="#" className="flex items-center gap-2">
                 <Code className="h-5 w-5" />
                 <span className="font-display">Portfolio</span>
@@ -36,6 +59,9 @@ export function SiteHeader() {
                 <ExtendedButton
                   key={item.name}
                   variant="ghost"
+                  scale="none"
+                  gradient="none"
+                  shine="none"
                   size="sm"
                   asChild
                 >
@@ -43,6 +69,45 @@ export function SiteHeader() {
                 </ExtendedButton>
               ))}
               <ExtendedSeparator orientation="vertical" className="mx-2 h-6" />
+
+              {/* Language Selector */}
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <ExtendedButton
+                    shine="none"
+                    size="icon"
+                    gradient="none"
+                    variant="ghost"
+                  >
+                    <Globe className="h-4 w-4" />
+                  </ExtendedButton>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end">
+                  {languages.map((lang) => (
+                    <DropdownMenuItem key={lang.code}>
+                      {lang.name}
+                    </DropdownMenuItem>
+                  ))}
+                </DropdownMenuContent>
+              </DropdownMenu>
+
+              {/* Theme Toggle */}
+              <ExtendedButton
+                shine="none"
+                gradient="none"
+                variant="ghost"
+                size="icon"
+                onClick={toggleTheme}
+              >
+                {theme === "light" ? (
+                  <Moon className="h-4 w-4" />
+                ) : (
+                  <Sun className="h-4 w-4" />
+                )}
+              </ExtendedButton>
+
+              <ExtendedSeparator orientation="vertical" className="mx-2 h-6" />
+
               <ExtendedBadge variant="soft" className="animate-pulse">
                 Available for hire
               </ExtendedBadge>
@@ -50,14 +115,41 @@ export function SiteHeader() {
             </div>
 
             {/* Mobile Menu Button */}
-            <ExtendedButton
-              variant="ghost"
-              size="icon"
-              className="md:hidden"
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-            >
-              {isMenuOpen ? <X /> : <Menu />}
-            </ExtendedButton>
+            <div className="flex items-center gap-2 md:hidden">
+              {/* Language Selector Mobile */}
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <ExtendedButton variant="ghost" size="icon">
+                    <Globe className="h-4 w-4" />
+                  </ExtendedButton>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end">
+                  {languages.map((lang) => (
+                    <DropdownMenuItem key={lang.code}>
+                      {lang.name}
+                    </DropdownMenuItem>
+                  ))}
+                </DropdownMenuContent>
+              </DropdownMenu>
+
+              {/* Theme Toggle Mobile */}
+              <ExtendedButton variant="ghost" size="icon" onClick={toggleTheme}>
+                {theme === "light" ? (
+                  <Moon className="h-4 w-4" />
+                ) : (
+                  <Sun className="h-4 w-4" />
+                )}
+              </ExtendedButton>
+
+              {/* Menu Toggle */}
+              <ExtendedButton
+                variant="ghost"
+                size="icon"
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
+              >
+                {isMenuOpen ? <X /> : <Menu />}
+              </ExtendedButton>
+            </div>
           </div>
         </nav>
 
