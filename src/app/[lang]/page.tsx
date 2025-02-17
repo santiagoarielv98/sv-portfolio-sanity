@@ -193,11 +193,11 @@ const Home = () => {
       {/* Global noise overlay */}
       <div className="fixed inset-0 -z-50 pattern-noise pointer-events-none" />
       {/* Global gradient mesh */}
-      <div className="fixed inset-0 -z-40 gradient-mesh pointer-events-none opacity-50" />
+      <div className="fixed inset-0 -z-40 gradient-mesh pointer-events-none" />
 
       {/* Hero section */}
       <section className="relative flex min-h-[90vh] items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 -z-20 pattern-topography opacity-[0.015]" />
+        <div className="absolute inset-0 -z-20 pattern-topography opacity-80" />
         <div className="mx-auto my-20 max-w-4xl space-y-8 px-4 text-center">
           <Typography variant="h1">Welcome to my Portfolio</Typography>
 
@@ -221,7 +221,7 @@ const Home = () => {
 
       {/* About section */}
       <section className="relative py-20 overflow-hidden">
-        <div className="absolute inset-0 -z-20 pattern-dots opacity-30" />
+        <div className="absolute inset-0 -z-20 pattern-dots opacity-100" />
         <div className="container mx-auto px-4">
           <div className="mb-12 space-y-4 text-center">
             <ExtendedBadge
@@ -262,7 +262,7 @@ const Home = () => {
 
       {/* Experience section */}
       <section className="relative py-20 overflow-hidden">
-        <div className="absolute inset-0 -z-20 pattern-grid opacity-20" />
+        <div className="absolute inset-0 -z-20 pattern-grid opacity-100" />
         <div className="container mx-auto px-4">
           <div className="mb-12 space-y-4">
             <ExtendedBadge
@@ -352,7 +352,7 @@ const Home = () => {
 
       {/* Projects section */}
       <section className="relative py-20 overflow-hidden gradient-shine">
-        <div className="absolute inset-0 -z-20 pattern-circuit opacity-[0.015]" />
+        <div className="absolute inset-0 -z-20 pattern-circuit opacity-70" />
         <div className="container mx-auto px-4">
           <div className="mb-12 space-y-4 text-center">
             <ExtendedBadge
@@ -449,7 +449,7 @@ const Home = () => {
 
       {/* Skills section */}
       <section className="relative py-20 overflow-hidden">
-        <div className="absolute inset-0 -z-20 pattern-dots opacity-30" />
+        <div className="absolute inset-0 -z-20 pattern-dots opacity-100" />
         <div className="container mx-auto px-4">
           <div className="mb-12 space-y-4 text-center">
             <ExtendedBadge
@@ -522,7 +522,7 @@ const Home = () => {
 
       {/* Contact section - keep its existing bg-primary/5 but add pattern */}
       <section className="relative py-20 overflow-hidden bg-primary/5">
-        <div className="absolute inset-0 -z-20 pattern-grid opacity-10" />
+        <div className="absolute inset-0 -z-20 pattern-grid opacity-80" />
         <div className="container mx-auto px-4">
           <div className="mb-12 space-y-4 text-center">
             <ExtendedBadge
