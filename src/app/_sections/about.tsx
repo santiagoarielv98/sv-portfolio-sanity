@@ -104,21 +104,21 @@ const AboutSection = () => {
               <Typography variant="h3" className="mb-4">
                 ¿Quién soy?
               </Typography>
-              <Typography variant="body1" className="space-y-4">
-                <p>
+              <div className="space-y-4">
+                <Typography variant="body1">
                   Soy un Desarrollador Full Stack Junior con una sólida base en
                   desarrollo web y pasión por crear aplicaciones amigables para
                   el usuario. Mi viaje en tecnología comenzó con aprendizaje
                   autodidacta y formación en bootcamp, lo que me ha dado una
                   comprensión sólida de las tecnologías web modernas.
-                </p>
-                <p>
+                </Typography>
+                <Typography variant="body1">
                   Me enfoco en React.js para desarrollo frontend y Node.js para
                   backend. Me entusiasma aprender nuevas tecnologías y mejorar
                   constantemente mis habilidades a través de experiencia
                   práctica en proyectos.
-                </p>
-              </Typography>
+                </Typography>
+              </div>
             </div>
 
             <ExtendedSeparator />
