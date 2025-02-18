@@ -52,10 +52,10 @@ export const experiences: Experience[] = [
 
 const ExperienceSection = () => {
   return (
-    <section className="relative py-20 overflow-hidden">
+    <section className="relative overflow-hidden py-20">
       <div className="absolute inset-0 -z-20">
         <div className="pattern-connector pattern-connector-top pattern-dots" />
-        <div className="absolute inset-0 pattern-circuit" />
+        <div className="pattern-circuit absolute inset-0" />
         <div className="pattern-connector pattern-connector-bottom pattern-grid" />
       </div>
       <div className="container mx-auto px-4">
@@ -67,18 +67,18 @@ const ExperienceSection = () => {
             <Code />
             Experience
           </ExtendedBadge>
-          <div className="flex items-center gap-4 max-w-2xl mx-auto">
-            <ExtendedSeparator className="flex-1 from-transparent to-primary/30 via-none" />
+          <div className="mx-auto flex max-w-2xl items-center gap-4">
+            <ExtendedSeparator className="to-primary/30 flex-1 via-none from-transparent" />
             <Typography variant="h2">Experience</Typography>
-            <ExtendedSeparator className="flex-1 from-primary/30 to-transparent via-none" />
+            <ExtendedSeparator className="from-primary/30 flex-1 via-none to-transparent" />
           </div>
 
           {/* Timeline container */}
           <div className="relative mt-12">
             {/* Línea vertical central */}
-            <div className="absolute md:left-1/2 h-full w-0.5 bg-gradient-to-b from-primary/5 via-primary/20 to-transparent" />
+            <div className="from-primary/5 via-primary/20 absolute h-full w-0.5 bg-gradient-to-b to-transparent md:left-1/2" />
 
-            <div className="md:-space-y-8 space-y-8">
+            <div className="space-y-8 md:-space-y-8">
               {experiences.map((experience, index) => (
                 <div
                   key={index}
@@ -86,12 +86,12 @@ const ExperienceSection = () => {
                   className="flex items-center gap-8 data-[direction=left]:flex-row data-[direction=right]:flex-row-reverse"
                 >
                   {/* Punto en la línea de tiempo */}
-                  <div className="absolute md:left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-primary/20 border-2 border-primary/30" />
+                  <div className="bg-primary/20 border-primary/30 absolute h-4 w-4 -translate-x-1/2 rounded-full border-2 md:left-1/2" />
 
                   {/* Card de experiencia */}
                   <div
                     data-direction={index % 2 === 0 ? "left" : "right"}
-                    className="md:w-1/2 data-[direction=left]:md:pr-8 data-[direction=right]:md:pl-8 md:ml-0 ml-4"
+                    className="ml-4 md:ml-0 md:w-1/2 data-[direction=left]:md:pr-8 data-[direction=right]:md:pl-8"
                   >
                     <ExtendedCard variant="solid">
                       <CardHeader className="flex-row gap-4">
@@ -102,7 +102,7 @@ const ExperienceSection = () => {
                         >
                           <Code />
                         </ExtendedButton>
-                        <div className="flex gap-1.5 flex-col flex-1">
+                        <div className="flex flex-1 flex-col gap-1.5">
                           <CardTitle>{experience.title}</CardTitle>
                           <CardDescription>
                             {experience.company}
@@ -110,7 +110,7 @@ const ExperienceSection = () => {
                         </div>
                       </CardHeader>
                       <CardContent className="space-y-6">
-                        <div className="flex gap-2 flex-wrap">
+                        <div className="flex flex-wrap gap-2">
                           <ExtendedBadge variant="default">
                             <Calendar className="mr-1" />
                             {experience.period}

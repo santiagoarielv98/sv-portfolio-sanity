@@ -77,14 +77,14 @@ export default function ProjectDetailPage() {
   return (
     <main className="relative">
       {/* Global noise overlay */}
-      <div className="fixed inset-0 -z-50 pattern-noise pointer-events-none" />
+      <div className="pattern-noise pointer-events-none fixed inset-0 -z-50" />
       {/* Global gradient mesh */}
-      <div className="fixed inset-0 -z-40 gradient-mesh pointer-events-none" />
+      <div className="gradient-mesh pointer-events-none fixed inset-0 -z-40" />
 
       {/* Header Section */}
-      <section className="relative pb-10 pt-4">
+      <section className="relative pt-4 pb-10">
         <div className="absolute inset-0 -z-20">
-          <div className="absolute inset-0 pattern-circuit pattern-fade-in" />
+          <div className="pattern-circuit pattern-fade-in absolute inset-0" />
           <div className="pattern-connector pattern-connector-bottom pattern-dots" />
         </div>
         <div className="container mx-auto px-4">
@@ -92,14 +92,14 @@ export default function ProjectDetailPage() {
           <div className="mb-8">
             <ExtendedButton variant="ghost" size="sm" asChild>
               <Link href="/projects" className="group">
-                <ArrowLeft className="w-4 h-4 mr-2 transition-transform group-hover:-translate-x-1" />
+                <ArrowLeft className="mr-2 h-4 w-4 transition-transform group-hover:-translate-x-1" />
                 Back to Projects
               </Link>
             </ExtendedButton>
           </div>
 
           {/* Project Header */}
-          <div className="grid gap-8 lg:grid-cols-2 mb-12">
+          <div className="mb-12 grid gap-8 lg:grid-cols-2">
             {/* Left Column - Image */}
             <div className="relative aspect-video overflow-hidden rounded-xl">
               <Image
@@ -137,7 +137,7 @@ export default function ProjectDetailPage() {
                     variant="ghost"
                     className="w-full justify-start"
                   >
-                    <Calendar className="w-4 h-4 mr-2" />
+                    <Calendar className="mr-2 h-4 w-4" />
                     {projectDetail.startDate}
                   </ExtendedBadge>
                 </div>
@@ -181,7 +181,7 @@ export default function ProjectDetailPage() {
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      <Globe className="w-5 h-5 mr-2" />
+                      <Globe className="mr-2 h-5 w-5" />
                       Visit Website
                     </a>
                   </ExtendedButton>
@@ -193,7 +193,7 @@ export default function ProjectDetailPage() {
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      <GithubIcon className="w-5 h-5 mr-2" />
+                      <GithubIcon className="mr-2 h-5 w-5" />
                       View Source
                     </a>
                   </ExtendedButton>
@@ -205,21 +205,21 @@ export default function ProjectDetailPage() {
       </section>
 
       {/* Project Content */}
-      <section className="relative py-20 bg-primary/5">
+      <section className="bg-primary/5 relative py-20">
         <div className="absolute inset-0 -z-20">
           <div className="pattern-connector pattern-connector-top pattern-circuit opacity-70" />
-          <div className="absolute inset-0 pattern-dots opacity-80" />
+          <div className="pattern-dots absolute inset-0 opacity-80" />
           <div className="pattern-connector pattern-connector-bottom pattern-grid opacity-70" />
         </div>
         <div className="container mx-auto px-4">
           <div className="grid gap-8 lg:grid-cols-3">
             {/* Main Content */}
-            <div className="lg:col-span-2 space-y-8">
+            <div className="space-y-8 lg:col-span-2">
               {/* Description */}
               <ExtendedCard>
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
-                    <Layout className="w-5 h-5" />
+                    <Layout className="h-5 w-5" />
                     About the Project
                   </CardTitle>
                 </CardHeader>
@@ -234,7 +234,7 @@ export default function ProjectDetailPage() {
               <ExtendedCard>
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
-                    <Code className="w-5 h-5" />
+                    <Code className="h-5 w-5" />
                     Key Features
                   </CardTitle>
                 </CardHeader>
@@ -242,7 +242,7 @@ export default function ProjectDetailPage() {
                   <ul className="space-y-4">
                     {projectDetail.features.map((feature, index) => (
                       <li key={index} className="flex items-start gap-2">
-                        <div className="mt-1.5 size-1.5 rounded-full bg-primary/50" />
+                        <div className="bg-primary/50 mt-1.5 size-1.5 rounded-full" />
                         <Typography variant="body1">{feature}</Typography>
                       </li>
                     ))}
@@ -257,7 +257,7 @@ export default function ProjectDetailPage() {
               <ExtendedCard>
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
-                    <Link2 className="w-5 h-5" />
+                    <Link2 className="h-5 w-5" />
                     Project Links
                   </CardTitle>
                 </CardHeader>
@@ -275,7 +275,7 @@ export default function ProjectDetailPage() {
                         rel="noopener noreferrer"
                         className="flex items-center gap-2"
                       >
-                        <ExternalLink className="w-4 h-4" />
+                        <ExternalLink className="h-4 w-4" />
                         {link.title}
                       </a>
                     </ExtendedButton>
@@ -288,7 +288,7 @@ export default function ProjectDetailPage() {
                 <ExtendedCard>
                   <CardHeader>
                     <CardTitle className="flex items-center gap-2">
-                      <Github className="w-5 h-5" />
+                      <Github className="h-5 w-5" />
                       Repository
                     </CardTitle>
                   </CardHeader>
@@ -304,7 +304,7 @@ export default function ProjectDetailPage() {
                         rel="noopener noreferrer"
                         className="flex items-center gap-2"
                       >
-                        <GithubIcon className="w-4 h-4" />
+                        <GithubIcon className="h-4 w-4" />
                         View Source Code
                       </a>
                     </ExtendedButton>
@@ -320,14 +320,14 @@ export default function ProjectDetailPage() {
       <section className="relative py-20">
         <div className="absolute inset-0 -z-20">
           <div className="pattern-connector pattern-connector-top pattern-dots opacity-80" />
-          <div className="absolute inset-0 pattern-grid opacity-70 pattern-fade-out" />
+          <div className="pattern-grid pattern-fade-out absolute inset-0 opacity-70" />
         </div>
         <div className="container mx-auto px-4">
           <div className="grid gap-4 sm:grid-cols-2">
             {projectDetail.gallery.map((image, index) => (
               <div
                 key={index}
-                className="relative aspect-video rounded-lg overflow-hidden"
+                className="relative aspect-video overflow-hidden rounded-lg"
               >
                 <Image
                   src={image}

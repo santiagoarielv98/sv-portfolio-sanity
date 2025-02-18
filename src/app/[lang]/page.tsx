@@ -9,8 +9,8 @@ export default function Home() {
   return (
     <main className="relative">
       {/* Global patterns */}
-      <div className="fixed inset-0 -z-50 pattern-noise pointer-events-none" />
-      <div className="fixed inset-0 -z-40 gradient-mesh pointer-events-none" />
+      <div className="pattern-noise pointer-events-none fixed inset-0 -z-50" />
+      <div className="gradient-mesh pointer-events-none fixed inset-0 -z-40" />
 
       {/* Hero section */}
       <HeroSection />

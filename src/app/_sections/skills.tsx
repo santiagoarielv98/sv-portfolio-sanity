@@ -67,10 +67,10 @@ export const skills: Skill[] = [
 
 const SkillsSection = () => {
   return (
-    <section className="relative py-20 overflow-hidden">
+    <section className="relative overflow-hidden py-20">
       <div className="absolute inset-0 -z-20">
         <div className="pattern-connector pattern-connector-top pattern-grid" />
-        <div className="absolute inset-0 pattern-dots" />
+        <div className="pattern-dots absolute inset-0" />
         <div className="pattern-connector pattern-connector-bottom pattern-circuit" />
       </div>
       <div className="container mx-auto px-4">
@@ -82,13 +82,13 @@ const SkillsSection = () => {
             <Code />
             Skills
           </ExtendedBadge>
-          <div className="flex items-center gap-4 max-w-2xl mx-auto">
-            <ExtendedSeparator className="flex-1 from-transparent to-primary/30 via-none" />
+          <div className="mx-auto flex max-w-2xl items-center gap-4">
+            <ExtendedSeparator className="to-primary/30 flex-1 via-none from-transparent" />
             <Typography variant="h2">Skills</Typography>
-            <ExtendedSeparator className="flex-1 from-primary/30 to-transparent via-none" />
+            <ExtendedSeparator className="from-primary/30 flex-1 via-none to-transparent" />
           </div>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-12">
+        <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
           {skills.map((skill, index) => (
             <ExtendedCard
               key={index}
@@ -99,16 +99,16 @@ const SkillsSection = () => {
                 <ExtendedButton size="icon" variant="gradient" float="none">
                   <Code />
                 </ExtendedButton>
-                <div className="flex gap-1.5 flex-col flex-1">
+                <div className="flex flex-1 flex-col gap-1.5">
                   <CardTitle>{skill.title}</CardTitle>
                   <CardDescription>{skill.description}</CardDescription>
                 </div>
               </CardHeader>
 
-              <CardContent className="space-y-6 flex-1">
+              <CardContent className="flex-1 space-y-6">
                 {skill.technologies.map((tech, techIndex) => (
                   <div key={techIndex} className="space-y-2">
-                    <div className="flex justify-between items-center">
+                    <div className="flex items-center justify-between">
                       <ExtendedBadge variant="ghost">{tech.name}</ExtendedBadge>
                       <Typography
                         variant="small"
@@ -117,9 +117,9 @@ const SkillsSection = () => {
                         {tech.level}
                       </Typography>
                     </div>
-                    <div className="h-1.5 w-full bg-primary/10 rounded-full overflow-hidden">
+                    <div className="bg-primary/10 h-1.5 w-full overflow-hidden rounded-full">
                       <div
-                        className="h-full bg-gradient-to-r from-primary/40 to-primary/60 transition-all duration-300"
+                        className="from-primary/40 to-primary/60 h-full bg-gradient-to-r transition-all duration-300"
                         style={{
                           width:
                             tech.level === "expert"

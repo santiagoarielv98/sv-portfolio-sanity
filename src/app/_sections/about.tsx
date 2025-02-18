@@ -6,10 +6,10 @@ import React from "react";
 
 const AboutSection = () => {
   return (
-    <section className="relative py-20 overflow-hidden">
+    <section className="relative overflow-hidden py-20">
       <div className="absolute inset-0 -z-20">
         <div className="pattern-connector pattern-connector-top pattern-topography" />
-        <div className="absolute inset-0 pattern-dots" />
+        <div className="pattern-dots absolute inset-0" />
         <div className="pattern-connector pattern-connector-bottom pattern-circuit" />
       </div>
       <div className="container mx-auto px-4">
@@ -21,13 +21,13 @@ const AboutSection = () => {
             <Code />
             About Me
           </ExtendedBadge>
-          <div className="flex items-center gap-4 max-w-2xl mx-auto">
-            <ExtendedSeparator className="flex-1 from-transparent to-primary/30 via-none" />
+          <div className="mx-auto flex max-w-2xl items-center gap-4">
+            <ExtendedSeparator className="to-primary/30 flex-1 via-none from-transparent" />
             <Typography variant="h2">About Me</Typography>
-            <ExtendedSeparator className="flex-1 from-primary/30 to-transparent via-none" />
+            <ExtendedSeparator className="from-primary/30 flex-1 via-none to-transparent" />
           </div>
         </div>
-        <div className="grid grid-cols-1 gap-8 mt-12 md:grid-cols-2">
+        <div className="mt-12 grid grid-cols-1 gap-8 md:grid-cols-2">
           <div>
             <Typography variant="h3">Who am I?</Typography>
             <Typography variant="body1" className="mt-4">

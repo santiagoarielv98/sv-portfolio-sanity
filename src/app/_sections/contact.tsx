@@ -36,28 +36,28 @@ const contactInfo: ContactInfo = {
     {
       name: "GitHub",
       url: "https://github.com/yourusername",
-      icon: <Github className="w-4 h-4" />,
+      icon: <Github className="h-4 w-4" />,
     },
     {
       name: "LinkedIn",
       url: "https://linkedin.com/in/yourusername",
-      icon: <Linkedin className="w-4 h-4" />,
+      icon: <Linkedin className="h-4 w-4" />,
     },
     {
       name: "Portfolio",
       url: "https://yourportfolio.com",
-      icon: <ExternalLink className="w-4 h-4" />,
+      icon: <ExternalLink className="h-4 w-4" />,
     },
   ],
 };
 
 const ContactSection = () => {
   return (
-    <section className="relative py-20 overflow-hidden bg-primary/5">
+    <section className="bg-primary/5 relative overflow-hidden py-20">
       <div className="absolute inset-0 -z-20">
         <div className="pattern-connector pattern-connector-top pattern-dots" />
-        <div className="absolute inset-0 pattern-circuit" />
-        <div className="absolute inset-0 pattern-fade-out" />
+        <div className="pattern-circuit absolute inset-0" />
+        <div className="pattern-fade-out absolute inset-0" />
       </div>
       <div className="container mx-auto px-4">
         <div className="mb-12 space-y-4 text-center">
@@ -68,14 +68,14 @@ const ContactSection = () => {
             <Mail />
             Contact
           </ExtendedBadge>
-          <div className="flex items-center gap-4 max-w-2xl mx-auto">
-            <ExtendedSeparator className="flex-1 from-transparent to-primary/30 via-none" />
+          <div className="mx-auto flex max-w-2xl items-center gap-4">
+            <ExtendedSeparator className="to-primary/30 flex-1 via-none from-transparent" />
             <Typography variant="h2">Get in Touch</Typography>
-            <ExtendedSeparator className="flex-1 from-primary/30 to-transparent via-none" />
+            <ExtendedSeparator className="from-primary/30 flex-1 via-none to-transparent" />
           </div>
         </div>
 
-        <div className="grid gap-6 lg:grid-cols-3 max-w-6xl mx-auto">
+        <div className="mx-auto grid max-w-6xl gap-6 lg:grid-cols-3">
           {/* Contact Info Cards Column */}
           <div className="space-y-6">
             {/* Email Card */}
@@ -130,9 +130,9 @@ const ContactSection = () => {
             </ExtendedCard>
 
             <div className="flex items-center gap-4">
-              <ExtendedSeparator className="flex-1 from-transparent to-primary/30 via-none" />
+              <ExtendedSeparator className="to-primary/30 flex-1 via-none from-transparent" />
               <Typography variant="h3">Social Links</Typography>
-              <ExtendedSeparator className="flex-1 from-primary/30 to-transparent via-none" />
+              <ExtendedSeparator className="from-primary/30 flex-1 via-none to-transparent" />
             </div>
             {/* Social Links Card */}
             <ExtendedCard variant="solid">
@@ -198,7 +198,7 @@ const ContactSection = () => {
               </CardContent>
               <CardFooter>
                 <ExtendedButton variant="default" className="w-full">
-                  <Mail className="w-4 h-4 mr-2" />
+                  <Mail className="mr-2 h-4 w-4" />
                   Send Message
                 </ExtendedButton>
               </CardFooter>

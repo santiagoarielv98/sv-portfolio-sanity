@@ -69,10 +69,10 @@ export function SiteHeader() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-primary/10 bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <header className="border-primary/10 bg-background/80 supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50 w-full border-b backdrop-blur">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <nav className="flex h-16 items-center">
-          <div className="flex gap-6 md:gap-10 w-full justify-between items-center">
+          <div className="flex w-full items-center justify-between gap-6 md:gap-10">
             {/* Logo */}
             <ExtendedButton variant="ghost" className="font-bold" asChild>
               <a href="#" className="flex items-center gap-2">
@@ -107,7 +107,7 @@ export function SiteHeader() {
                             <div className="flex flex-col">
                               <span>{submenuItem.title}</span>
                               {submenuItem.description && (
-                                <span className="text-xs text-muted-foreground">
+                                <span className="text-muted-foreground text-xs">
                                   {submenuItem.description}
                                 </span>
                               )}
@@ -164,8 +164,8 @@ export function SiteHeader() {
 
         {/* Mobile Menu */}
         {isMenuOpen && (
-          <div className="md:hidden border-t border-primary/10">
-            <div className="py-4 space-y-4">
+          <div className="border-primary/10 border-t md:hidden">
+            <div className="space-y-4 py-4">
               {navigation.map((item) =>
                 item.hasSubmenu ? (
                   <Accordion
@@ -184,7 +184,7 @@ export function SiteHeader() {
                           <div>{item.name}</div>
                         </ExtendedButton>
                       </AccordionTrigger>
-                      <AccordionContent className="pb-0 pt-2">
+                      <AccordionContent className="pt-2 pb-0">
                         {item.submenu?.map((submenuItem) => (
                           <ExtendedButton
                             key={submenuItem.href}
@@ -220,7 +220,7 @@ export function SiteHeader() {
               {/* <ExtendedBadge className="animate-pulse w-full">
                 Available for hire
               </ExtendedBadge> */}
-              <ExtendedButton className="w-full mt-4">
+              <ExtendedButton className="mt-4 w-full">
                 Let&apos;s Talk
               </ExtendedButton>
             </div>
