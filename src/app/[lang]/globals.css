@@ -88,6 +88,26 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
+  --animate-accordion-down: accordion-down 0.2s ease-out;
+  --animate-accordion-up: accordion-up 0.2s ease-out;
+
+  @keyframes accordion-down {
+    from {
+      height: 0;
+    }
+    to {
+      height: var(--radix-accordion-content-height);
+    }
+  }
+
+  @keyframes accordion-up {
+    from {
+      height: var(--radix-accordion-content-height);
+    }
+    to {
+      height: 0;
+    }
+  }
 }
 
 @theme {
@@ -203,7 +223,7 @@
 
   @layer utilities {
     /* Existing patterns... */
-    
+
     /* Pattern connectors */
     .pattern-connector {
       position: absolute;
@@ -214,25 +234,25 @@
       -webkit-mask-image: linear-gradient(to bottom, transparent, black 50%, transparent);
       mask-image: linear-gradient(to bottom, transparent, black 50%, transparent);
     }
-  
+
     .pattern-connector-top {
       top: -60px;
     }
-  
+
     .pattern-connector-bottom {
       bottom: -60px;
     }
-  
+
     /* Pattern transitions */
     .pattern-fade-in {
       -webkit-mask-image: linear-gradient(to bottom, transparent, black 15%);
       mask-image: linear-gradient(to bottom, transparent, black 15%);
     }
-  
+
     .pattern-fade-out {
       -webkit-mask-image: linear-gradient(to top, transparent, black 15%);
       mask-image: linear-gradient(to top, transparent, black 15%);
     }
   }
-  
+
 }
