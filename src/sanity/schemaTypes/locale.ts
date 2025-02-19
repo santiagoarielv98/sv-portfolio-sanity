@@ -1,7 +1,6 @@
 import { languages } from "@/lib/i18n/config";
 import { defineField } from "sanity";
 
-// Base types for localization
 export const localeString = defineField({
   title: "Texto Traducible",
   name: "localeString",

@@ -5,15 +5,19 @@ import { heroType } from "./hero";
 import { experienceType } from "./experience";
 import { projectType } from "./project";
 import { profileType } from "./profile";
+import { aboutType } from "./about";
+import { contactType } from "./contact";
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
     localeString,
     localeText,
     sectionType,
-    profileType,
     heroType,
     experienceType,
     projectType,
+    profileType,
+    aboutType,
+    contactType,
   ],
 };
