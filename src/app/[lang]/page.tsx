@@ -1,5 +1,5 @@
 import { sanityFetch } from "@/sanity/lib/live";
-import { getAllSections } from "@/sanity/lib/queries";
+import { getAllSections, getHomePage } from "@/sanity/lib/queries";
 import AboutSection from "../_sections/about";
 import ContactSection from "../_sections/contact";
 import ExperienceSection from "../_sections/experience";
@@ -15,10 +15,12 @@ type Props = {
 
 export default async function Home(props: Props) {
   const params = await props.params;
-  const { data: sections } = await sanityFetch({
-    query: getAllSections,
+  const { data } = await sanityFetch({
+    query: getHomePage,
     params,
   });
+  const sections = data.sections;
+  const profile = data.profile;
 
   const heroSection = sections.find((section) => section.type === "hero");
   const experienceSection = sections.find(
@@ -39,7 +41,7 @@ export default async function Home(props: Props) {
       <HeroSection section={heroSection} />
 
       {/* About section */}
-      <AboutSection />
+      <AboutSection profile={profile} />
       {/* Experience section */}
       <ExperienceSection section={experienceSection} />
 

@@ -29,6 +29,7 @@ export const profileType = defineType({
       name: "image",
       title: "Imagen",
       type: "image",
+      options: { hotspot: true },
     },
     {
       name: "bio",

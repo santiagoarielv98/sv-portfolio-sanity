@@ -5,6 +5,7 @@ import { ExtendedSeparator } from "@/components/extended-separator";
 import { Typography } from "@/components/ui/typography";
 import { Code, Download, Medal, Target, Users } from "lucide-react";
 import Image from "next/image";
+import type { GetHomePageResult } from "../../../sanity.types";
 
 interface Achievement {
   icon: React.ReactNode;
@@ -30,7 +31,12 @@ const achievements: Achievement[] = [
   },
 ];
 
-const AboutSection = () => {
+type Props = {
+  profile: GetHomePageResult["profile"];
+};
+
+const AboutSection = ({ profile }: Props) => {
+  console.log(profile);
   return (
     <section className="relative overflow-hidden py-20">
       <div className="absolute inset-0 -z-20">
@@ -61,8 +67,8 @@ const AboutSection = () => {
           <div className="space-y-8">
             <div className="relative aspect-square overflow-hidden rounded-xl">
               <Image
-                src="/path-to-your-image.jpg"
-                alt="Profile Picture"
+                src={profile?.image}
+                alt={`Foto de ${profile?.name}`}
                 fill
                 className="object-cover"
               />
@@ -74,7 +80,7 @@ const AboutSection = () => {
                   <Typography variant="small" className="text-muted-foreground">
                     Ubicación
                   </Typography>
-                  <Typography variant="h4">Buenos Aires, Argentina</Typography>
+                  <Typography variant="h4">{profile?.location}</Typography>
                 </div>
                 <div>
                   <Typography variant="small" className="text-muted-foreground">
@@ -105,19 +111,11 @@ const AboutSection = () => {
                 ¿Quién soy?
               </Typography>
               <div className="space-y-4">
-                <Typography variant="body1">
-                  Soy un Desarrollador Full Stack Junior con una sólida base en
-                  desarrollo web y pasión por crear aplicaciones amigables para
-                  el usuario. Mi viaje en tecnología comenzó con aprendizaje
-                  autodidacta y formación en bootcamp, lo que me ha dado una
-                  comprensión sólida de las tecnologías web modernas.
-                </Typography>
-                <Typography variant="body1">
-                  Me enfoco en React.js para desarrollo frontend y Node.js para
-                  backend. Me entusiasma aprender nuevas tecnologías y mejorar
-                  constantemente mis habilidades a través de experiencia
-                  práctica en proyectos.
-                </Typography>
+                {profile?.bio.map((bio, index) => (
+                  <Typography key={index} variant="body1">
+                    {bio}
+                  </Typography>
+                ))}
               </div>
             </div>
 
@@ -127,14 +125,11 @@ const AboutSection = () => {
               <Typography variant="h3" className="mb-4">
                 Mis Objetivos
               </Typography>
-              <Typography variant="body1">
-                Crecer como desarrollador asumiendo proyectos desafiantes,
-                contribuyendo a aplicaciones significativas y continuando mi
-                aprendizaje junto a desarrolladores experimentados. Estoy
-                particularmente interesado en dominar las prácticas modernas de
-                desarrollo web y mejorar mis habilidades de resolución de
-                problemas.
-              </Typography>
+              {profile?.objectives.map((objective, index) => (
+                <Typography key={index} variant="body1">
+                  {objective}
+                </Typography>
+              ))}
             </div>
 
             {/* Achievements */}

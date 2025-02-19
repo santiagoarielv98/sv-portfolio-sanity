@@ -22,6 +22,18 @@ const projectFields = `
     "links": links
 `;
 
+const profileFields = `
+    "name": name[$lang],
+    "email": email,
+    "phone": phone,
+    "location": location[$lang],
+    "image": image.asset->url,
+    "bio": bio[][$lang],
+    "objectives": objectives[][$lang],
+    "languages": languages,
+    "interests": interests
+`;
+
 const contentHeroType = `
     _type == "hero" => {
         ${heroFields}
@@ -59,3 +71,12 @@ export const getAllSections = defineQuery(`
         ${sectionFields}
     }
 `);
+
+export const getHomePage = defineQuery(`{
+    "sections": *[_type == "section"] | order(order asc) {
+        ${sectionFields}
+    },
+    "profile": *[_type == "profile"][0] {
+        ${profileFields}
+    }
+}`);
