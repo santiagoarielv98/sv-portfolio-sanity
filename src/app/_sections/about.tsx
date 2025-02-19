@@ -3,36 +3,30 @@ import { ExtendedButton } from "@/components/extended-button";
 import { ExtendedCard } from "@/components/extended-card";
 import { ExtendedSeparator } from "@/components/extended-separator";
 import { Typography } from "@/components/ui/typography";
-import { Code, Download, Medal, Target, Users } from "lucide-react";
+import { Code, Download, Users } from "lucide-react";
 import Image from "next/image";
 import type {
   GetAllSectionsResult,
   GetHomePageResult,
 } from "../../../sanity.types";
 
-interface Achievement {
-  icon: React.ReactNode;
-  title: string;
-  description: string;
-}
-
-const achievements: Achievement[] = [
-  {
-    icon: <Users />,
-    title: "Trabajo en Equipo",
-    description: "Colaboración efectiva en diversos equipos de desarrollo",
-  },
-  {
-    icon: <Medal />,
-    title: "Aprendizaje Rápido",
-    description: "Rápida adaptación a nuevas tecnologías y frameworks",
-  },
-  {
-    icon: <Target />,
-    title: "Entrega de Proyectos",
-    description: "Completé exitosamente múltiples proyectos web",
-  },
-];
+// const achievements: Achievement[] = [
+//   {
+//     icon: <Users />,
+//     title: "Trabajo en Equipo",
+//     description: "Colaboración efectiva en diversos equipos de desarrollo",
+//   },
+//   {
+//     icon: <Medal />,
+//     title: "Aprendizaje Rápido",
+//     description: "Rápida adaptación a nuevas tecnologías y frameworks",
+//   },
+//   {
+//     icon: <Target />,
+//     title: "Entrega de Proyectos",
+//     description: "Completé exitosamente múltiples proyectos web",
+//   },
+// ];
 
 type Props = {
   profile: GetHomePageResult["profile"];
@@ -112,7 +106,9 @@ const AboutSection = ({ profile, section }: Props) => {
                   <Typography variant="small" className="text-muted-foreground">
                     Idiomas
                   </Typography>
-                  <Typography variant="h4">Inglés, Español</Typography>
+                  <Typography variant="h4">
+                    {profile?.languages?.join(", ")}
+                  </Typography>
                 </div>
               </div>
             </ExtendedCard>
@@ -148,18 +144,21 @@ const AboutSection = ({ profile, section }: Props) => {
 
             {/* Achievements */}
             <div className="grid gap-4 sm:grid-cols-3">
-              {achievements.map((achievement, index) => (
+              {about.achievements?.map((achievement, index) => (
                 <ExtendedCard key={index} variant="solid" className="p-4">
                   <div className="flex flex-col items-center gap-2 text-center">
                     <ExtendedButton size="icon" variant="gradient">
-                      {achievement.icon}
+                      {/* {achievement.icon} */}
+                      <Users />
                     </ExtendedButton>
-                    <Typography variant="h4">{achievement.title}</Typography>
+                    <Typography variant="h4">
+                      {achievement.title as unknown as string}
+                    </Typography>
                     <Typography
                       variant="small"
                       className="text-muted-foreground"
                     >
-                      {achievement.description}
+                      {achievement.description as unknown as string}
                     </Typography>
                   </div>
                 </ExtendedCard>

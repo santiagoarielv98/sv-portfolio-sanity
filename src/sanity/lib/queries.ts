@@ -9,6 +9,10 @@ const heroFields = `
 const aboutFields = `
     "iam": iam[$lang],
     "objective": objective[$lang],
+    "achievements": achievements[] {
+        "title": title[$lang],
+        "description": description[$lang]
+    }
 `;
 
 const experienceFields = `
@@ -35,7 +39,7 @@ const profileFields = `
     "image": image.asset->url,
     "bio": bio[][$lang],
     "objectives": objectives[][$lang],
-    "languages": languages,
+    "languages": languages[][$lang],
     "interests": interests
 `;
 

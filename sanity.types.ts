@@ -93,6 +93,11 @@ export type About = {
   _rev: string;
   iam?: LocaleString;
   objective?: LocaleString;
+  achievements?: Array<{
+    title?: LocaleString;
+    description?: LocaleText;
+    _key: string;
+  }>;
 };
 
 export type Profile = {
@@ -342,7 +347,7 @@ export type AllSanitySchemaTypes =
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./src/sanity/lib/queries.ts
 // Variable: getAllSections
-// Query: *[_type == "section"] | order(order asc) {            "title": title[$lang],    "subtitle": subtitle[$lang],    type,    "content": content[]-> {        _type,        _id,        ...select(                _type == "hero" => {            "title": title[$lang],    "subtitle": subtitle[$lang],    "cta": cta[$lang],    },                _type == "about" => {            "iam": iam[$lang],    "objective": objective[$lang],    },                _type == "experience" => {            "title": title[$lang],    "description": description[][$lang],    "organization": organization[$lang],    "location": location[$lang],    type,    "date": date    },                _type == "project" => {            "title": title[$lang],    "description": description[$lang],    "thumbnail": thumbnail.asset->url,    "links": links    },        )    }    }
+// Query: *[_type == "section"] | order(order asc) {            "title": title[$lang],    "subtitle": subtitle[$lang],    type,    "content": content[]-> {        _type,        _id,        ...select(                _type == "hero" => {            "title": title[$lang],    "subtitle": subtitle[$lang],    "cta": cta[$lang],    },                _type == "about" => {            "iam": iam[$lang],    "objective": objective[$lang],    "achievements": achievements[] {        "title": title[$lang],        "description": description[$lang]    }    },                _type == "experience" => {            "title": title[$lang],    "description": description[][$lang],    "organization": organization[$lang],    "location": location[$lang],    type,    "date": date    },                _type == "project" => {            "title": title[$lang],    "description": description[$lang],    "thumbnail": thumbnail.asset->url,    "links": links    },        )    }    }
 export type GetAllSectionsResult = Array<{
   title: Array<{
     _type: "localeString";
@@ -376,6 +381,18 @@ export type GetAllSectionsResult = Array<{
           _type: "localeString";
           es?: string;
           en?: string;
+        }> | null;
+        achievements: Array<{
+          title: Array<{
+            _type: "localeString";
+            es?: string;
+            en?: string;
+          }> | null;
+          description: Array<{
+            _type: "localeText";
+            es?: string;
+            en?: string;
+          }> | null;
         }> | null;
       }
     | {
@@ -452,7 +469,7 @@ export type GetAllSectionsResult = Array<{
   > | null;
 }>;
 // Variable: getHomePage
-// Query: {    "sections": *[_type == "section"] | order(order asc) {            "title": title[$lang],    "subtitle": subtitle[$lang],    type,    "content": content[]-> {        _type,        _id,        ...select(                _type == "hero" => {            "title": title[$lang],    "subtitle": subtitle[$lang],    "cta": cta[$lang],    },                _type == "about" => {            "iam": iam[$lang],    "objective": objective[$lang],    },                _type == "experience" => {            "title": title[$lang],    "description": description[][$lang],    "organization": organization[$lang],    "location": location[$lang],    type,    "date": date    },                _type == "project" => {            "title": title[$lang],    "description": description[$lang],    "thumbnail": thumbnail.asset->url,    "links": links    },        )    }    },    "profile": *[_type == "profile"][0] {            "name": name[$lang],    "email": email,    "phone": phone,    "location": location[$lang],    "image": image.asset->url,    "bio": bio[][$lang],    "objectives": objectives[][$lang],    "languages": languages,    "interests": interests    }}
+// Query: {    "sections": *[_type == "section"] | order(order asc) {            "title": title[$lang],    "subtitle": subtitle[$lang],    type,    "content": content[]-> {        _type,        _id,        ...select(                _type == "hero" => {            "title": title[$lang],    "subtitle": subtitle[$lang],    "cta": cta[$lang],    },                _type == "about" => {            "iam": iam[$lang],    "objective": objective[$lang],    "achievements": achievements[] {        "title": title[$lang],        "description": description[$lang]    }    },                _type == "experience" => {            "title": title[$lang],    "description": description[][$lang],    "organization": organization[$lang],    "location": location[$lang],    type,    "date": date    },                _type == "project" => {            "title": title[$lang],    "description": description[$lang],    "thumbnail": thumbnail.asset->url,    "links": links    },        )    }    },    "profile": *[_type == "profile"][0] {            "name": name[$lang],    "email": email,    "phone": phone,    "location": location[$lang],    "image": image.asset->url,    "bio": bio[][$lang],    "objectives": objectives[][$lang],    "languages": languages,    "interests": interests    }}
 export type GetHomePageResult = {
   sections: Array<{
     title: Array<{
@@ -487,6 +504,18 @@ export type GetHomePageResult = {
             _type: "localeString";
             es?: string;
             en?: string;
+          }> | null;
+          achievements: Array<{
+            title: Array<{
+              _type: "localeString";
+              es?: string;
+              en?: string;
+            }> | null;
+            description: Array<{
+              _type: "localeText";
+              es?: string;
+              en?: string;
+            }> | null;
           }> | null;
         }
       | {
@@ -599,7 +628,7 @@ export type GetHomePageResult = {
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
-    '\n    *[_type == "section"] | order(order asc) {\n        \n    "title": title[$lang],\n    "subtitle": subtitle[$lang],\n    type,\n    "content": content[]-> {\n        _type,\n        _id,\n        ...select(\n            \n    _type == "hero" => {\n        \n    "title": title[$lang],\n    "subtitle": subtitle[$lang],\n    "cta": cta[$lang],\n\n    },\n\n            \n    _type == "about" => {\n        \n    "iam": iam[$lang],\n    "objective": objective[$lang],\n\n    },\n\n            \n    _type == "experience" => {\n        \n    "title": title[$lang],\n    "description": description[][$lang],\n    "organization": organization[$lang],\n    "location": location[$lang],\n    type,\n    "date": date\n\n    },\n\n            \n    _type == "project" => {\n        \n    "title": title[$lang],\n    "description": description[$lang],\n    "thumbnail": thumbnail.asset->url,\n    "links": links\n\n    },\n\n        )\n    }\n\n    }\n': GetAllSectionsResult;
-    '{\n    "sections": *[_type == "section"] | order(order asc) {\n        \n    "title": title[$lang],\n    "subtitle": subtitle[$lang],\n    type,\n    "content": content[]-> {\n        _type,\n        _id,\n        ...select(\n            \n    _type == "hero" => {\n        \n    "title": title[$lang],\n    "subtitle": subtitle[$lang],\n    "cta": cta[$lang],\n\n    },\n\n            \n    _type == "about" => {\n        \n    "iam": iam[$lang],\n    "objective": objective[$lang],\n\n    },\n\n            \n    _type == "experience" => {\n        \n    "title": title[$lang],\n    "description": description[][$lang],\n    "organization": organization[$lang],\n    "location": location[$lang],\n    type,\n    "date": date\n\n    },\n\n            \n    _type == "project" => {\n        \n    "title": title[$lang],\n    "description": description[$lang],\n    "thumbnail": thumbnail.asset->url,\n    "links": links\n\n    },\n\n        )\n    }\n\n    },\n    "profile": *[_type == "profile"][0] {\n        \n    "name": name[$lang],\n    "email": email,\n    "phone": phone,\n    "location": location[$lang],\n    "image": image.asset->url,\n    "bio": bio[][$lang],\n    "objectives": objectives[][$lang],\n    "languages": languages,\n    "interests": interests\n\n    }\n}': GetHomePageResult;
+    '\n    *[_type == "section"] | order(order asc) {\n        \n    "title": title[$lang],\n    "subtitle": subtitle[$lang],\n    type,\n    "content": content[]-> {\n        _type,\n        _id,\n        ...select(\n            \n    _type == "hero" => {\n        \n    "title": title[$lang],\n    "subtitle": subtitle[$lang],\n    "cta": cta[$lang],\n\n    },\n\n            \n    _type == "about" => {\n        \n    "iam": iam[$lang],\n    "objective": objective[$lang],\n    "achievements": achievements[] {\n        "title": title[$lang],\n        "description": description[$lang]\n    }\n\n    },\n\n            \n    _type == "experience" => {\n        \n    "title": title[$lang],\n    "description": description[][$lang],\n    "organization": organization[$lang],\n    "location": location[$lang],\n    type,\n    "date": date\n\n    },\n\n            \n    _type == "project" => {\n        \n    "title": title[$lang],\n    "description": description[$lang],\n    "thumbnail": thumbnail.asset->url,\n    "links": links\n\n    },\n\n        )\n    }\n\n    }\n': GetAllSectionsResult;
+    '{\n    "sections": *[_type == "section"] | order(order asc) {\n        \n    "title": title[$lang],\n    "subtitle": subtitle[$lang],\n    type,\n    "content": content[]-> {\n        _type,\n        _id,\n        ...select(\n            \n    _type == "hero" => {\n        \n    "title": title[$lang],\n    "subtitle": subtitle[$lang],\n    "cta": cta[$lang],\n\n    },\n\n            \n    _type == "about" => {\n        \n    "iam": iam[$lang],\n    "objective": objective[$lang],\n    "achievements": achievements[] {\n        "title": title[$lang],\n        "description": description[$lang]\n    }\n\n    },\n\n            \n    _type == "experience" => {\n        \n    "title": title[$lang],\n    "description": description[][$lang],\n    "organization": organization[$lang],\n    "location": location[$lang],\n    type,\n    "date": date\n\n    },\n\n            \n    _type == "project" => {\n        \n    "title": title[$lang],\n    "description": description[$lang],\n    "thumbnail": thumbnail.asset->url,\n    "links": links\n\n    },\n\n        )\n    }\n\n    },\n    "profile": *[_type == "profile"][0] {\n        \n    "name": name[$lang],\n    "email": email,\n    "phone": phone,\n    "location": location[$lang],\n    "image": image.asset->url,\n    "bio": bio[][$lang],\n    "objectives": objectives[][$lang],\n    "languages": languages,\n    "interests": interests\n\n    }\n}': GetHomePageResult;
   }
 }

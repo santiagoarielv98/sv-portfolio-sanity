@@ -15,5 +15,19 @@ export const aboutType = defineType({
       title: "Objetivo",
       type: "localeString",
     },
+    {
+      name: "achievements",
+      title: "Logros",
+      type: "array",
+      of: [
+        {
+          type: "object",
+          fields: [
+            { name: "title", type: "localeString" },
+            { name: "description", type: "localeText" },
+          ],
+        },
+      ],
+    },
   ],
 });
