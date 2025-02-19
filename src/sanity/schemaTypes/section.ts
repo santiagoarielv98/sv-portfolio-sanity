@@ -47,6 +47,7 @@ export const sectionType = defineType({
             { type: "about" },
             { type: "experience" },
             { type: "project" },
+            { type: "skills" },
             { type: "contact" },
           ],
         },

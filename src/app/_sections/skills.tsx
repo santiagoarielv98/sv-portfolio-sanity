@@ -10,6 +10,7 @@ import {
 import { ExtendedSeparator } from "@/components/extended-separator";
 import { Typography } from "@/components/ui/typography";
 import { Code } from "lucide-react";
+import type { GetAllSectionsResult } from "../../../sanity.types";
 
 export interface Skill {
   title: string;
@@ -65,7 +66,16 @@ export const skills: Skill[] = [
   },
 ];
 
-const SkillsSection = () => {
+type Props = {
+  section: GetAllSectionsResult[number] & {
+    type: "skills";
+    content: Array<{
+      _type: "skills";
+    }>;
+  };
+};
+
+const SkillsSection = ({ section }: Props) => {
   return (
     <section className="relative overflow-hidden py-20">
       <div className="absolute inset-0 -z-20">
@@ -80,16 +90,18 @@ const SkillsSection = () => {
             className="mx-auto flex items-center gap-2"
           >
             <Code />
-            Skills
+            {section.subtitle as unknown as string}
           </ExtendedBadge>
           <div className="mx-auto flex max-w-2xl items-center gap-4">
             <ExtendedSeparator className="to-primary/30 flex-1 via-none from-transparent" />
-            <Typography variant="h2">Skills</Typography>
+            <Typography variant="h2">
+              {section.title as unknown as string}
+            </Typography>
             <ExtendedSeparator className="from-primary/30 flex-1 via-none to-transparent" />
           </div>
         </div>
         <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {skills.map((skill, index) => (
+          {section.content?.map((skill, index) => (
             <ExtendedCard
               key={index}
               className="flex flex-col"
@@ -100,12 +112,14 @@ const SkillsSection = () => {
                   <Code />
                 </ExtendedButton>
                 <div className="flex flex-1 flex-col gap-1.5">
-                  <CardTitle>{skill.title}</CardTitle>
-                  <CardDescription>{skill.description}</CardDescription>
+                  <CardTitle>{skill.title as unknown as string}</CardTitle>
+                  <CardDescription>
+                    {skill.description as unknown as string}
+                  </CardDescription>
                 </div>
               </CardHeader>
 
-              <CardContent className="flex-1 space-y-6">
+              {/* <CardContent className="flex-1 space-y-6">
                 {skill.technologies.map((tech, techIndex) => (
                   <div key={techIndex} className="space-y-2">
                     <div className="flex items-center justify-between">
@@ -134,7 +148,7 @@ const SkillsSection = () => {
                     </div>
                   </div>
                 ))}
-              </CardContent>
+              </CardContent> */}
             </ExtendedCard>
           ))}
         </div>

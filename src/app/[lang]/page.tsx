@@ -32,6 +32,8 @@ export default async function Home(props: Props) {
     (section) => section.type === "projects",
   );
 
+  const skillsSection = sections.find((section) => section.type === "skills");
+
   const contactSection = sections.find((section) => section.type === "contact");
 
   return (
@@ -52,7 +54,7 @@ export default async function Home(props: Props) {
       <ProjectsSection section={projectsSection} />
 
       {/* Skills section */}
-      <SkillsSection />
+      <SkillsSection section={skillsSection} />
 
       {/* Contact section */}
       <ContactSection section={contactSection} />

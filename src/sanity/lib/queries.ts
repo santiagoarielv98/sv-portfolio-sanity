@@ -43,6 +43,11 @@ const profileFields = `
     "interests": interests
 `;
 
+const skillsFields = `
+    "title": title[$lang],
+    "description": description[$lang]
+`;
+
 const contactFields = `
     "title": title[$lang],
     "description": description[$lang],
@@ -91,6 +96,12 @@ const contentProjectType = `
     },
 `;
 
+const contentSkillsType = `
+    _type == "skills" => {
+        ${skillsFields}
+    },
+`;
+
 const contentContactType = `
     _type == "contact" => {
         ${contactFields}
@@ -110,6 +121,7 @@ const sectionFields = `
             ${contentExperienceType}
             ${contentProjectType}
             ${contentContactType}
+            ${contentSkillsType}
         )
     }
 `;
