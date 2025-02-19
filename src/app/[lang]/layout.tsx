@@ -2,7 +2,6 @@ import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { Space_Grotesk, Urbanist } from "next/font/google";
 import { ThemeProvider } from "./provider";
-import "./globals.css";
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
