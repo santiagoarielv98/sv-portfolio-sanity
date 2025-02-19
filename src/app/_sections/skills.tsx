@@ -10,7 +10,10 @@ import {
 import { ExtendedSeparator } from "@/components/extended-separator";
 import { Typography } from "@/components/ui/typography";
 import { Code } from "lucide-react";
-import type { GetAllSectionsResult } from "../../../sanity.types";
+import type {
+  GetAllSectionsResult,
+  GetHomePageResult,
+} from "../../../sanity.types";
 
 export interface Skill {
   title: string;
@@ -67,7 +70,7 @@ export const skills: Skill[] = [
 ];
 
 type Props = {
-  section: GetAllSectionsResult[number] & {
+  section: GetHomePageResult["sections"][number] & {
     type: "skillCategory";
     content: Array<{
       _type: "skillCategory";

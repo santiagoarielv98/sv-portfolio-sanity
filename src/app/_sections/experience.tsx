@@ -53,7 +53,7 @@ export interface Experience {
 
 type Props = {
   section: GetHomePageResult["sections"][number] & {
-    type: "hero";
+    type: "experience";
     content: Array<{
       _type: "experience";
     }>;

@@ -59,7 +59,7 @@ import { profile } from "console";
 type Props = {
   profile: GetHomePageResult["profile"];
 
-  section: GetAllSectionsResult[number] & {
+  section: GetHomePageResult["sections"][number] & {
     type: "contact";
     content: Array<{
       _type: "contact";
