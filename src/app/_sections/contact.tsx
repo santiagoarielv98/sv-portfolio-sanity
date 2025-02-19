@@ -16,43 +16,49 @@ import { ExtendedSeparator } from "@/components/extended-separator";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Typography } from "@/components/ui/typography";
-import type { GetAllSectionsResult } from "../../../sanity.types";
+import type {
+  GetAllSectionsResult,
+  GetHomePageResult,
+} from "../../../sanity.types";
+import { profile } from "console";
 
-interface ContactInfo {
-  email: string;
-  location: string;
-  availability: string;
-  socials: Array<{
-    name: string;
-    url: string;
-    icon: React.ReactNode;
-  }>;
-}
+// interface ContactInfo {
+//   email: string;
+//   location: string;
+//   availability: string;
+//   socials: Array<{
+//     name: string;
+//     url: string;
+//     icon: React.ReactNode;
+//   }>;
+// }
 
-const contactInfo: ContactInfo = {
-  email: "contact@example.com",
-  location: "Buenos Aires, Argentina",
-  availability: "Open to work - Full-time opportunities",
-  socials: [
-    {
-      name: "GitHub",
-      url: "https://github.com/yourusername",
-      icon: <Github className="h-4 w-4" />,
-    },
-    {
-      name: "LinkedIn",
-      url: "https://linkedin.com/in/yourusername",
-      icon: <Linkedin className="h-4 w-4" />,
-    },
-    {
-      name: "Portfolio",
-      url: "https://yourportfolio.com",
-      icon: <ExternalLink className="h-4 w-4" />,
-    },
-  ],
-};
+// const contactInfo: ContactInfo = {
+//   email: "contact@example.com",
+//   location: "Buenos Aires, Argentina",
+//   availability: "Open to work - Full-time opportunities",
+//   socials: [
+//     {
+//       name: "GitHub",
+//       url: "https://github.com/yourusername",
+//       icon: <Github className="h-4 w-4" />,
+//     },
+//     {
+//       name: "LinkedIn",
+//       url: "https://linkedin.com/in/yourusername",
+//       icon: <Linkedin className="h-4 w-4" />,
+//     },
+//     {
+//       name: "Portfolio",
+//       url: "https://yourportfolio.com",
+//       icon: <ExternalLink className="h-4 w-4" />,
+//     },
+//   ],
+// };
 
 type Props = {
+  profile: GetHomePageResult["profile"];
+
   section: GetAllSectionsResult[number] & {
     type: "contact";
     content: Array<{
@@ -61,9 +67,8 @@ type Props = {
   };
 };
 
-const ContactSection = ({ section }: Props) => {
+const ContactSection = ({ section, profile }: Props) => {
   const contact = section.content[0];
-  console.log(contact);
   return (
     <section className="bg-primary/5 relative overflow-hidden py-20">
       <div className="absolute inset-0 -z-20">
@@ -101,7 +106,7 @@ const ContactSection = ({ section }: Props) => {
                 <div>
                   <CardTitle className="text-sm">Email</CardTitle>
                   <CardDescription className="text-primary">
-                    {contactInfo.email}
+                    {profile.email}
                   </CardDescription>
                 </div>
               </CardHeader>
@@ -116,7 +121,7 @@ const ContactSection = ({ section }: Props) => {
                 <div>
                   <CardTitle className="text-sm">Location</CardTitle>
                   <CardDescription className="text-primary">
-                    {contactInfo.location}
+                    {profile.location}
                   </CardDescription>
                 </div>
               </CardHeader>
@@ -137,7 +142,7 @@ const ContactSection = ({ section }: Props) => {
                 <div>
                   <CardTitle className="text-sm">Availability</CardTitle>
                   <CardDescription className="text-green-500">
-                    {contactInfo.availability}
+                    {/* {contactInfo.availability} */}
                   </CardDescription>
                 </div>
               </CardHeader>
@@ -153,7 +158,7 @@ const ContactSection = ({ section }: Props) => {
               <CardHeader>
                 <CardTitle className="text-sm">Connect with me</CardTitle>
               </CardHeader>
-              <CardContent className="flex flex-wrap gap-2">
+              {/* <CardContent className="flex flex-wrap gap-2">
                 {contactInfo.socials.map((social, index) => (
                   <ExtendedButton
                     key={index}
@@ -173,7 +178,7 @@ const ContactSection = ({ section }: Props) => {
                     </a>
                   </ExtendedButton>
                 ))}
-              </CardContent>
+              </CardContent> */}
             </ExtendedCard>
           </div>
 

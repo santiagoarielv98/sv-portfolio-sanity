@@ -5,10 +5,7 @@ import { ExtendedSeparator } from "@/components/extended-separator";
 import { Typography } from "@/components/ui/typography";
 import { Code, Download, Users } from "lucide-react";
 import Image from "next/image";
-import type {
-  GetAllSectionsResult,
-  GetHomePageResult,
-} from "../../../sanity.types";
+import type { GetHomePageResult } from "../../../sanity.types";
 
 // const achievements: Achievement[] = [
 //   {
@@ -30,7 +27,7 @@ import type {
 
 type Props = {
   profile: GetHomePageResult["profile"];
-  section: GetAllSectionsResult[number] & {
+  section: GetHomePageResult["sections"][number] & {
     type: "about";
     content: Array<{
       _type: "about";

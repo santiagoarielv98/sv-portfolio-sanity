@@ -1,8 +1,8 @@
 import { defineType } from "sanity";
 
-export const skillsType = defineType({
-  name: "skills",
-  title: "Habilidades",
+export const skillCategoryType = defineType({
+  name: "skillCategory",
+  title: "Categoría de Habilidades",
   type: "document",
   fields: [
     {
@@ -14,6 +14,11 @@ export const skillsType = defineType({
       name: "description",
       title: "Descripción",
       type: "localeText",
+    },
+    {
+      name: "icon",
+      title: "Ícono",
+      type: "string",
     },
   ],
 });

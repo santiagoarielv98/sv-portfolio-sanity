@@ -32,7 +32,9 @@ export default async function Home(props: Props) {
     (section) => section.type === "projects",
   );
 
-  const skillsSection = sections.find((section) => section.type === "skills");
+  const skillsSection = sections.find(
+    (section) => section.type === "skillCategory",
+  );
 
   const contactSection = sections.find((section) => section.type === "contact");
 
@@ -57,7 +59,7 @@ export default async function Home(props: Props) {
       <SkillsSection section={skillsSection} />
 
       {/* Contact section */}
-      <ContactSection section={contactSection} />
+      <ContactSection profile={profile} section={contactSection} />
     </main>
   );
 }

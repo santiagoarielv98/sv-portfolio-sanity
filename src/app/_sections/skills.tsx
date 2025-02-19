@@ -68,14 +68,15 @@ export const skills: Skill[] = [
 
 type Props = {
   section: GetAllSectionsResult[number] & {
-    type: "skills";
+    type: "skillCategory";
     content: Array<{
-      _type: "skills";
+      _type: "skillCategory";
     }>;
   };
 };
 
 const SkillsSection = ({ section }: Props) => {
+  console.log(section);
   return (
     <section className="relative overflow-hidden py-20">
       <div className="absolute inset-0 -z-20">
@@ -101,7 +102,7 @@ const SkillsSection = ({ section }: Props) => {
           </div>
         </div>
         <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {section.content?.map((skill, index) => (
+          {section.content?.map((category, index) => (
             <ExtendedCard
               key={index}
               className="flex flex-col"
@@ -112,43 +113,22 @@ const SkillsSection = ({ section }: Props) => {
                   <Code />
                 </ExtendedButton>
                 <div className="flex flex-1 flex-col gap-1.5">
-                  <CardTitle>{skill.title as unknown as string}</CardTitle>
+                  <CardTitle>{category.title as unknown as string}</CardTitle>
                   <CardDescription>
-                    {skill.description as unknown as string}
+                    {category.description as unknown as string}
                   </CardDescription>
                 </div>
               </CardHeader>
 
-              {/* <CardContent className="flex-1 space-y-6">
-                {skill.technologies.map((tech, techIndex) => (
-                  <div key={techIndex} className="space-y-2">
-                    <div className="flex items-center justify-between">
-                      <ExtendedBadge variant="ghost">{tech.name}</ExtendedBadge>
-                      <Typography
-                        variant="small"
-                        className="text-muted-foreground"
-                      >
-                        {tech.level}
-                      </Typography>
-                    </div>
-                    <div className="bg-primary/10 h-1.5 w-full overflow-hidden rounded-full">
-                      <div
-                        className="from-primary/40 to-primary/60 h-full bg-gradient-to-r transition-all duration-300"
-                        style={{
-                          width:
-                            tech.level === "expert"
-                              ? "100%"
-                              : tech.level === "advanced"
-                                ? "80%"
-                                : tech.level === "intermediate"
-                                  ? "60%"
-                                  : "40%",
-                        }}
-                      />
-                    </div>
-                  </div>
-                ))}
-              </CardContent> */}
+              <CardContent className="flex-1">
+                <div className="flex flex-wrap gap-2">
+                  {category.skills.map((skill) => (
+                    <ExtendedBadge key={skill.title} variant="ghost">
+                      {skill.title}
+                    </ExtendedBadge>
+                  ))}
+                </div>
+              </CardContent>
             </ExtendedCard>
           ))}
         </div>

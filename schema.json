@@ -496,7 +496,7 @@
     }
   },
   {
-    "name": "skills",
+    "name": "skill",
     "type": "document",
     "attributes": {
       "_id": {
@@ -509,7 +509,96 @@
         "type": "objectAttribute",
         "value": {
           "type": "string",
-          "value": "skills"
+          "value": "skill"
+        }
+      },
+      "_createdAt": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        }
+      },
+      "_updatedAt": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        }
+      },
+      "_rev": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        }
+      },
+      "title": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "inline",
+          "name": "localeString"
+        },
+        "optional": true
+      },
+      "icon": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
+      },
+      "level": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "number"
+        },
+        "optional": true
+      },
+      "category": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "object",
+          "attributes": {
+            "_ref": {
+              "type": "objectAttribute",
+              "value": {
+                "type": "string"
+              }
+            },
+            "_type": {
+              "type": "objectAttribute",
+              "value": {
+                "type": "string",
+                "value": "reference"
+              }
+            },
+            "_weak": {
+              "type": "objectAttribute",
+              "value": {
+                "type": "boolean"
+              },
+              "optional": true
+            }
+          },
+          "dereferencesTo": "skillCategory"
+        },
+        "optional": true
+      }
+    }
+  },
+  {
+    "name": "skillCategory",
+    "type": "document",
+    "attributes": {
+      "_id": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        }
+      },
+      "_type": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string",
+          "value": "skillCategory"
         }
       },
       "_createdAt": {
@@ -543,6 +632,13 @@
         "value": {
           "type": "inline",
           "name": "localeText"
+        },
+        "optional": true
+      },
+      "icon": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
         },
         "optional": true
       }
@@ -1594,7 +1690,7 @@
             },
             {
               "type": "string",
-              "value": "skills"
+              "value": "skillCategory"
             },
             {
               "type": "string",
@@ -1739,7 +1835,7 @@
                     "optional": true
                   }
                 },
-                "dereferencesTo": "skills"
+                "dereferencesTo": "skillCategory"
               },
               {
                 "type": "object",

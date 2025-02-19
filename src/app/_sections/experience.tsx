@@ -10,7 +10,7 @@ import {
 import { ExtendedSeparator } from "@/components/extended-separator";
 import { Typography } from "@/components/ui/typography";
 import { Calendar, Code, MapPin } from "lucide-react";
-import type { GetAllSectionsResult } from "../../../sanity.types";
+import type { GetHomePageResult } from "../../../sanity.types";
 
 export interface Experience {
   title: string;
@@ -21,38 +21,38 @@ export interface Experience {
   technologies: string[];
 }
 
-export const experiences: Experience[] = [
-  {
-    title: "Senior Developer",
-    company: "TechnoSoft",
-    period: "2019 - Present",
-    location: "New York, USA",
-    description:
-      "Led development of multiple web applications using React and Node.js",
-    technologies: ["React", "Node.js"],
-  },
-  {
-    title: "Full Stack Developer",
-    company: "WebSolutions Inc",
-    period: "2017 - 2019",
-    location: "San Francisco, USA",
-    description:
-      "Developed and maintained enterprise web applications using Angular and Java",
-    technologies: ["Angular", "Java", "Spring Boot"],
-  },
-  {
-    title: "Web Development Internship",
-    company: "StartupTech",
-    period: "2016 - 2017",
-    location: "Remote",
-    description:
-      "Assisted in frontend development and learned modern web technologies",
-    technologies: ["HTML", "CSS", "JavaScript"],
-  },
-];
+// export const experiences: Experience[] = [
+//   {
+//     title: "Senior Developer",
+//     company: "TechnoSoft",
+//     period: "2019 - Present",
+//     location: "New York, USA",
+//     description:
+//       "Led development of multiple web applications using React and Node.js",
+//     technologies: ["React", "Node.js"],
+//   },
+//   {
+//     title: "Full Stack Developer",
+//     company: "WebSolutions Inc",
+//     period: "2017 - 2019",
+//     location: "San Francisco, USA",
+//     description:
+//       "Developed and maintained enterprise web applications using Angular and Java",
+//     technologies: ["Angular", "Java", "Spring Boot"],
+//   },
+//   {
+//     title: "Web Development Internship",
+//     company: "StartupTech",
+//     period: "2016 - 2017",
+//     location: "Remote",
+//     description:
+//       "Assisted in frontend development and learned modern web technologies",
+//     technologies: ["HTML", "CSS", "JavaScript"],
+//   },
+// ];
 
 type Props = {
-  section: GetAllSectionsResult[number] & {
+  section: GetHomePageResult["sections"][number] & {
     type: "hero";
     content: Array<{
       _type: "experience";

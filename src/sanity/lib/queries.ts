@@ -43,9 +43,14 @@ const profileFields = `
     "interests": interests
 `;
 
-const skillsFields = `
+const skillCategoryFields = `
     "title": title[$lang],
-    "description": description[$lang]
+    "description": description[$lang],
+    icon,
+    "skills": *[_type == "skill" && references(^._id)] {
+        "title": title[$lang],
+        "level": level
+    }
 `;
 
 const contactFields = `
@@ -97,8 +102,8 @@ const contentProjectType = `
 `;
 
 const contentSkillsType = `
-    _type == "skills" => {
-        ${skillsFields}
+    _type == "skillCategory" => {
+        ${skillCategoryFields}
     },
 `;
 
