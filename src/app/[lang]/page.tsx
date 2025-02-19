@@ -15,7 +15,16 @@ type Props = {
 
 export default async function Home(props: Props) {
   const params = await props.params;
-  const { data: hero } = await sanityFetch({ query: getAllSections, params });
+  const { data: sections } = await sanityFetch({
+    query: getAllSections,
+    params,
+  });
+
+  const heroSection = sections.find((section) => section.type === "hero");
+  const experienceSection = sections.find(
+    (section) => section.type === "experience",
+  );
+
   return (
     <main className="relative">
       {/* Global patterns */}
@@ -23,12 +32,12 @@ export default async function Home(props: Props) {
       <div className="gradient-mesh pointer-events-none fixed inset-0 -z-40" />
 
       {/* Hero section */}
-      <HeroSection hero={hero} />
+      <HeroSection section={heroSection} />
 
       {/* About section */}
       <AboutSection />
       {/* Experience section */}
-      <ExperienceSection />
+      <ExperienceSection section={experienceSection} />
 
       {/* Projects section */}
       <ProjectsSection />

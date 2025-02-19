@@ -10,6 +10,7 @@ import {
 import { ExtendedSeparator } from "@/components/extended-separator";
 import { Typography } from "@/components/ui/typography";
 import { Calendar, Code, MapPin } from "lucide-react";
+import type { GetAllSectionsResult } from "../../../sanity.types";
 
 export interface Experience {
   title: string;
@@ -50,7 +51,24 @@ export const experiences: Experience[] = [
   },
 ];
 
-const ExperienceSection = () => {
+type Props = {
+  section: GetAllSectionsResult[number] & {
+    type: "hero";
+    content: Array<{
+      _type: "experience";
+    }>;
+  };
+};
+
+export function getFormattedDate(date: string) {
+  return new Date(date).toLocaleDateString("en-US", {
+    month: "short",
+    year: "numeric",
+  });
+}
+
+const ExperienceSection = ({ section }: Props) => {
+  console.log(section);
   return (
     <section className="relative overflow-hidden py-20">
       <div className="absolute inset-0 -z-20">
@@ -65,11 +83,13 @@ const ExperienceSection = () => {
             className="mx-auto flex items-center gap-2"
           >
             <Code />
-            Experience
+            {section.subtitle as unknown as string}
           </ExtendedBadge>
           <div className="mx-auto flex max-w-2xl items-center gap-4">
             <ExtendedSeparator className="to-primary/30 flex-1 via-none from-transparent" />
-            <Typography variant="h2">Experience</Typography>
+            <Typography variant="h2">
+              {section.title as unknown as string}
+            </Typography>
             <ExtendedSeparator className="from-primary/30 flex-1 via-none to-transparent" />
           </div>
 
@@ -79,7 +99,7 @@ const ExperienceSection = () => {
             <div className="from-primary/5 via-primary/20 absolute h-full w-0.5 bg-gradient-to-b to-transparent md:left-1/2" />
 
             <div className="space-y-8 md:-space-y-8">
-              {experiences.map((experience, index) => (
+              {section.content.map((experience, index) => (
                 <div
                   key={index}
                   data-direction={index % 2 === 0 ? "left" : "right"}
@@ -103,9 +123,11 @@ const ExperienceSection = () => {
                           <Code />
                         </ExtendedButton>
                         <div className="flex flex-1 flex-col gap-1.5">
-                          <CardTitle>{experience.title}</CardTitle>
+                          <CardTitle>
+                            {experience.title as unknown as string}
+                          </CardTitle>
                           <CardDescription>
-                            {experience.company}
+                            {experience.organization as unknown as string}
                           </CardDescription>
                         </div>
                       </CardHeader>
@@ -113,7 +135,10 @@ const ExperienceSection = () => {
                         <div className="flex flex-wrap gap-2">
                           <ExtendedBadge variant="default">
                             <Calendar className="mr-1" />
-                            {experience.period}
+                            {getFormattedDate(experience.date.start)} -{" "}
+                            {experience.date.end
+                              ? getFormattedDate(experience.date.end)
+                              : "Present"}
                           </ExtendedBadge>
                           <ExtendedBadge variant="default">
                             <MapPin className="mr-1" />
@@ -121,19 +146,28 @@ const ExperienceSection = () => {
                           </ExtendedBadge>
                         </div>
 
-                        <Typography variant="body1">
-                          {experience.description}
-                        </Typography>
+                        {experience.description?.length === 1 ? (
+                          <Typography variant="body1">
+                            {experience.description[0] as unknown as string}
+                          </Typography>
+                        ) : (
+                          <ul>
+                            {experience.description?.map((desc, descIndex) => (
+                              <Typography variant="body1" key={descIndex}>
+                                {desc as unknown as string}
+                              </Typography>
+                            ))}
+                          </ul>
+                        )}
 
                         <ExtendedSeparator />
-
-                        <div className="flex flex-wrap gap-2">
+                        {/* <div className="flex flex-wrap gap-2">
                           {experience.technologies.map((tech, techIndex) => (
                             <ExtendedBadge key={techIndex} variant="ghost">
                               {tech}
                             </ExtendedBadge>
                           ))}
-                        </div>
+                        </div> */}
                       </CardContent>
                     </ExtendedCard>
                   </div>

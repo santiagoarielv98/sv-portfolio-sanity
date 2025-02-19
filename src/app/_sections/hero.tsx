@@ -7,10 +7,16 @@ import { ChevronDown, Code } from "lucide-react";
 import type { GetAllSectionsResult } from "../../../sanity.types";
 
 type Props = {
-  hero: GetAllSectionsResult;
+  section: GetAllSectionsResult[number] & {
+    type: "hero";
+    content: Array<{
+      _type: "hero";
+    }>;
+  };
 };
 
-const HeroSection = ({ hero }: Props) => {
+const HeroSection = ({ section }: Props) => {
+  const [hero] = section.content;
   return (
     <section className="relative flex min-h-[90vh] items-center justify-center overflow-hidden">
       <div className="absolute inset-0 -z-20">
@@ -18,17 +24,17 @@ const HeroSection = ({ hero }: Props) => {
         <div className="pattern-connector pattern-connector-bottom pattern-dots" />
       </div>
       <div className="mx-auto my-20 max-w-4xl space-y-8 px-4 text-center">
-        <Typography variant="h1">{hero?.title}</Typography>
+        <Typography variant="h1">{hero.title as unknown as string}</Typography>
 
         <Typography variant="h2" className="max-w-2xl font-light">
-          {hero?.subtitle}
+          {hero.subtitle as unknown as string}
         </Typography>
 
         <ExtendedSeparator />
 
         <ExtendedButton size="lg" variant="default" className="font-display">
           <Code />
-          {hero?.cta}
+          {hero?.cta as unknown as string}
         </ExtendedButton>
       </div>
 
