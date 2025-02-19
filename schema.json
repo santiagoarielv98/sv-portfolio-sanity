@@ -376,40 +376,108 @@
         },
         "optional": true
       },
-      "formLabels": {
+      "form": {
         "type": "objectAttribute",
         "value": {
           "type": "object",
           "attributes": {
-            "name": {
+            "nameField": {
               "type": "objectAttribute",
               "value": {
-                "type": "inline",
-                "name": "localeString"
+                "type": "object",
+                "attributes": {
+                  "label": {
+                    "type": "objectAttribute",
+                    "value": {
+                      "type": "inline",
+                      "name": "localeString"
+                    },
+                    "optional": true
+                  },
+                  "placeholder": {
+                    "type": "objectAttribute",
+                    "value": {
+                      "type": "inline",
+                      "name": "localeString"
+                    },
+                    "optional": true
+                  }
+                }
               },
               "optional": true
             },
-            "email": {
+            "emailField": {
               "type": "objectAttribute",
               "value": {
-                "type": "inline",
-                "name": "localeString"
+                "type": "object",
+                "attributes": {
+                  "label": {
+                    "type": "objectAttribute",
+                    "value": {
+                      "type": "inline",
+                      "name": "localeString"
+                    },
+                    "optional": true
+                  },
+                  "placeholder": {
+                    "type": "objectAttribute",
+                    "value": {
+                      "type": "inline",
+                      "name": "localeString"
+                    },
+                    "optional": true
+                  }
+                }
               },
               "optional": true
             },
-            "subject": {
+            "subjectField": {
               "type": "objectAttribute",
               "value": {
-                "type": "inline",
-                "name": "localeString"
+                "type": "object",
+                "attributes": {
+                  "label": {
+                    "type": "objectAttribute",
+                    "value": {
+                      "type": "inline",
+                      "name": "localeString"
+                    },
+                    "optional": true
+                  },
+                  "placeholder": {
+                    "type": "objectAttribute",
+                    "value": {
+                      "type": "inline",
+                      "name": "localeString"
+                    },
+                    "optional": true
+                  }
+                }
               },
               "optional": true
             },
-            "message": {
+            "messageField": {
               "type": "objectAttribute",
               "value": {
-                "type": "inline",
-                "name": "localeString"
+                "type": "object",
+                "attributes": {
+                  "label": {
+                    "type": "objectAttribute",
+                    "value": {
+                      "type": "inline",
+                      "name": "localeString"
+                    },
+                    "optional": true
+                  },
+                  "placeholder": {
+                    "type": "objectAttribute",
+                    "value": {
+                      "type": "inline",
+                      "name": "localeString"
+                    },
+                    "optional": true
+                  }
+                }
               },
               "optional": true
             },

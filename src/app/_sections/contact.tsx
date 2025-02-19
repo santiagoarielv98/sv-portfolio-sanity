@@ -16,6 +16,7 @@ import { ExtendedSeparator } from "@/components/extended-separator";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Typography } from "@/components/ui/typography";
+import type { GetAllSectionsResult } from "../../../sanity.types";
 
 interface ContactInfo {
   email: string;
@@ -51,7 +52,18 @@ const contactInfo: ContactInfo = {
   ],
 };
 
-const ContactSection = () => {
+type Props = {
+  section: GetAllSectionsResult[number] & {
+    type: "contact";
+    content: Array<{
+      _type: "contact";
+    }>;
+  };
+};
+
+const ContactSection = ({ section }: Props) => {
+  const contact = section.content[0];
+  console.log(contact);
   return (
     <section className="bg-primary/5 relative overflow-hidden py-20">
       <div className="absolute inset-0 -z-20">
@@ -66,11 +78,13 @@ const ContactSection = () => {
             className="mx-auto flex items-center gap-2"
           >
             <Mail />
-            Contact
+            {section.subtitle as unknown as string}
           </ExtendedBadge>
           <div className="mx-auto flex max-w-2xl items-center gap-4">
             <ExtendedSeparator className="to-primary/30 flex-1 via-none from-transparent" />
-            <Typography variant="h2">Get in Touch</Typography>
+            <Typography variant="h2">
+              {section.title as unknown as string}
+            </Typography>
             <ExtendedSeparator className="from-primary/30 flex-1 via-none to-transparent" />
           </div>
         </div>
@@ -167,31 +181,53 @@ const ContactSection = () => {
           <div className="lg:col-span-2">
             <ExtendedCard variant="default" className="h-full">
               <CardHeader>
-                <CardTitle>Send me a message</CardTitle>
+                <CardTitle>{contact.title as unknown as string}</CardTitle>
                 <CardDescription>
-                  Fill out the form below and I&apos;ll get back to you as soon
-                  as possible.
+                  {contact.description as unknown as string}
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">
                 <div className="grid gap-6 md:grid-cols-2">
                   <div className="space-y-2">
-                    <Typography variant="small">Name</Typography>
-                    <Input placeholder="Santiago" />
+                    <Typography variant="small">
+                      {contact.form.nameField.label as unknown as string}
+                    </Typography>
+                    <Input
+                      placeholder={
+                        contact.form.nameField.placeholder as unknown as string
+                      }
+                    />
                   </div>
                   <div className="space-y-2">
-                    <Typography variant="small">Email</Typography>
-                    <Input type="email" placeholder="your@email.com" />
+                    <Typography variant="small">
+                      {contact.form.emailField.label as unknown as string}
+                    </Typography>
+                    <Input
+                      type="email"
+                      placeholder={
+                        contact.form.emailField.placeholder as unknown as string
+                      }
+                    />
                   </div>
                 </div>
                 <div className="space-y-2">
-                  <Typography variant="small">Subject</Typography>
-                  <Input placeholder="What's this about?" />
+                  <Typography variant="small">
+                    {contact.form.subjectField.label as unknown as string}
+                  </Typography>
+                  <Input
+                    placeholder={
+                      contact.form.subjectField.placeholder as unknown as string
+                    }
+                  />
                 </div>
                 <div className="space-y-2">
-                  <Typography variant="small">Message</Typography>
+                  <Typography variant="small">
+                    {contact.form.messageField.label as unknown as string}
+                  </Typography>
                   <Textarea
-                    placeholder="Your message"
+                    placeholder={
+                      contact.form.messageField.placeholder as unknown as string
+                    }
                     className="min-h-[100px] resize-none"
                   />
                 </div>
@@ -199,7 +235,7 @@ const ContactSection = () => {
               <CardFooter>
                 <ExtendedButton variant="default" className="w-full">
                   <Mail className="mr-2 h-4 w-4" />
-                  Send Message
+                  {contact.form.submitButton as unknown as string}
                 </ExtendedButton>
               </CardFooter>
             </ExtendedCard>

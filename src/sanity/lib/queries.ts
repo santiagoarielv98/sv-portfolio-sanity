@@ -43,6 +43,30 @@ const profileFields = `
     "interests": interests
 `;
 
+const contactFields = `
+    "title": title[$lang],
+    "description": description[$lang],
+    "form": {
+        "nameField": {
+            "label": form.nameField.label[$lang],
+            "placeholder": form.nameField.placeholder[$lang]
+        },
+        "emailField": {
+            "label": form.emailField.label[$lang],
+            "placeholder": form.emailField.placeholder[$lang]
+        },
+        "subjectField": {
+            "label": form.subjectField.label[$lang],
+            "placeholder": form.subjectField.placeholder[$lang]
+        },
+        "messageField": {
+            "label": form.messageField.label[$lang],
+            "placeholder": form.messageField.placeholder[$lang]
+        },
+        "submitButton": form.submitButton[$lang]
+    }
+`;
+
 const contentHeroType = `
     _type == "hero" => {
         ${heroFields}
@@ -67,6 +91,12 @@ const contentProjectType = `
     },
 `;
 
+const contentContactType = `
+    _type == "contact" => {
+        ${contactFields}
+    },
+`;
+
 const sectionFields = `
     "title": title[$lang],
     "subtitle": subtitle[$lang],
@@ -79,6 +109,7 @@ const sectionFields = `
             ${contentAboutType}
             ${contentExperienceType}
             ${contentProjectType}
+            ${contentContactType}
         )
     }
 `;

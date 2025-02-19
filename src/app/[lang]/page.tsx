@@ -32,6 +32,8 @@ export default async function Home(props: Props) {
     (section) => section.type === "projects",
   );
 
+  const contactSection = sections.find((section) => section.type === "contact");
+
   return (
     <main className="relative">
       {/* Global patterns */}
@@ -53,7 +55,7 @@ export default async function Home(props: Props) {
       <SkillsSection />
 
       {/* Contact section */}
-      <ContactSection />
+      <ContactSection section={contactSection} />
     </main>
   );
 }
