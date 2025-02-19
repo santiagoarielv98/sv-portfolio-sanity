@@ -23,6 +23,7 @@ export default async function Home(props: Props) {
   const profile = data.profile;
 
   const heroSection = sections.find((section) => section.type === "hero");
+  const aboutSection = sections.find((section) => section.type === "about");
   const experienceSection = sections.find(
     (section) => section.type === "experience",
   );
@@ -41,7 +42,7 @@ export default async function Home(props: Props) {
       <HeroSection section={heroSection} />
 
       {/* About section */}
-      <AboutSection profile={profile} />
+      <AboutSection profile={profile} section={aboutSection} />
       {/* Experience section */}
       <ExperienceSection section={experienceSection} />
 

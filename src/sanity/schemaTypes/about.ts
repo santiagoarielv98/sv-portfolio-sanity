@@ -6,12 +6,12 @@ export const aboutType = defineType({
   type: "document",
   fields: [
     {
-      name: "iam-title",
+      name: "iam",
       title: "Quién soy",
       type: "localeString",
     },
     {
-      name: "objective-title",
+      name: "objective",
       title: "Objetivo",
       type: "localeString",
     },

@@ -6,6 +6,11 @@ const heroFields = `
     "cta": cta[$lang],
 `;
 
+const aboutFields = `
+    "iam": iam[$lang],
+    "objective": objective[$lang],
+`;
+
 const experienceFields = `
     "title": title[$lang],
     "description": description[][$lang],
@@ -40,6 +45,12 @@ const contentHeroType = `
     },
 `;
 
+const contentAboutType = `
+    _type == "about" => {
+        ${aboutFields}
+    },
+`;
+
 const contentExperienceType = `
     _type == "experience" => {
         ${experienceFields}
@@ -61,6 +72,7 @@ const sectionFields = `
         _id,
         ...select(
             ${contentHeroType}
+            ${contentAboutType}
             ${contentExperienceType}
             ${contentProjectType}
         )

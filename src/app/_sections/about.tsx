@@ -5,7 +5,10 @@ import { ExtendedSeparator } from "@/components/extended-separator";
 import { Typography } from "@/components/ui/typography";
 import { Code, Download, Medal, Target, Users } from "lucide-react";
 import Image from "next/image";
-import type { GetHomePageResult } from "../../../sanity.types";
+import type {
+  GetAllSectionsResult,
+  GetHomePageResult,
+} from "../../../sanity.types";
 
 interface Achievement {
   icon: React.ReactNode;
@@ -33,10 +36,17 @@ const achievements: Achievement[] = [
 
 type Props = {
   profile: GetHomePageResult["profile"];
+  section: GetAllSectionsResult[number] & {
+    type: "about";
+    content: Array<{
+      _type: "about";
+    }>;
+  };
 };
 
-const AboutSection = ({ profile }: Props) => {
-  console.log(profile);
+const AboutSection = ({ profile, section }: Props) => {
+  const about = section.content[0];
+
   return (
     <section className="relative overflow-hidden py-20">
       <div className="absolute inset-0 -z-20">
@@ -52,11 +62,13 @@ const AboutSection = ({ profile }: Props) => {
             className="mx-auto flex items-center gap-2"
           >
             <Code />
-            Sobre Mí
+            {section.subtitle as unknown as string}
           </ExtendedBadge>
           <div className="mx-auto flex max-w-2xl items-center gap-4">
             <ExtendedSeparator className="to-primary/30 flex-1 via-none from-transparent" />
-            <Typography variant="h2">Sobre Mí</Typography>
+            <Typography variant="h2">
+              {section.title as unknown as string}
+            </Typography>
             <ExtendedSeparator className="from-primary/30 flex-1 via-none to-transparent" />
           </div>
         </div>
@@ -67,7 +79,7 @@ const AboutSection = ({ profile }: Props) => {
           <div className="space-y-8">
             <div className="relative aspect-square overflow-hidden rounded-xl">
               <Image
-                src={profile?.image}
+                src={profile?.image as string}
                 alt={`Foto de ${profile?.name}`}
                 fill
                 className="object-cover"
@@ -80,20 +92,22 @@ const AboutSection = ({ profile }: Props) => {
                   <Typography variant="small" className="text-muted-foreground">
                     Ubicación
                   </Typography>
-                  <Typography variant="h4">{profile?.location}</Typography>
+                  <Typography variant="h4">
+                    {profile?.location as unknown as string}
+                  </Typography>
                 </div>
-                <div>
+                {/* <div>
                   <Typography variant="small" className="text-muted-foreground">
                     Experiencia
                   </Typography>
                   <Typography variant="h4">1 Año</Typography>
-                </div>
-                <div>
+                </div> */}
+                {/* <div>
                   <Typography variant="small" className="text-muted-foreground">
                     Proyectos Completados
                   </Typography>
                   <Typography variant="h4">10+</Typography>
-                </div>
+                </div> */}
                 <div>
                   <Typography variant="small" className="text-muted-foreground">
                     Idiomas
@@ -108,12 +122,12 @@ const AboutSection = ({ profile }: Props) => {
           <div className="space-y-8">
             <div>
               <Typography variant="h3" className="mb-4">
-                ¿Quién soy?
+                {about.iam as unknown as string}
               </Typography>
               <div className="space-y-4">
-                {profile?.bio.map((bio, index) => (
+                {profile?.bio?.map((bio, index) => (
                   <Typography key={index} variant="body1">
-                    {bio}
+                    {bio as unknown as string}
                   </Typography>
                 ))}
               </div>
@@ -123,11 +137,11 @@ const AboutSection = ({ profile }: Props) => {
 
             <div>
               <Typography variant="h3" className="mb-4">
-                Mis Objetivos
+                {about.objective as unknown as string}
               </Typography>
-              {profile?.objectives.map((objective, index) => (
+              {profile?.objectives?.map((objective, index) => (
                 <Typography key={index} variant="body1">
-                  {objective}
+                  {objective as unknown as string}
                 </Typography>
               ))}
             </div>
