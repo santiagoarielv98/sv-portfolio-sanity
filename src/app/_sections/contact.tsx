@@ -177,7 +177,7 @@ const ContactSection = () => {
                 <div className="grid gap-6 md:grid-cols-2">
                   <div className="space-y-2">
                     <Typography variant="small">Name</Typography>
-                    <Input placeholder="Your name" />
+                    <Input placeholder="Santiago" />
                   </div>
                   <div className="space-y-2">
                     <Typography variant="small">Email</Typography>

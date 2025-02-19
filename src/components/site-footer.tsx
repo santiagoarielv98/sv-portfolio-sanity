@@ -37,8 +37,8 @@ const quickLinks = [
 
 export function SiteFooter() {
   return (
-    <footer className="bg-primary/5 border-t border-primary/10">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <footer className="bg-primary/5 border-primary/10 border-t">
+      <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
         <div className="grid gap-8 lg:grid-cols-3">
           {/* Brand Section */}
           <div className="space-y-4">
@@ -79,7 +79,7 @@ export function SiteFooter() {
           <div className="space-y-4">
             <Typography variant="h4">Let&apos;s Connect</Typography>
             <ExtendedCard variant="solid" className="backdrop-blur-none">
-              <div className="p-6 space-y-4">
+              <div className="space-y-4 p-6">
                 <Typography variant="body2" className="text-muted-foreground">
                   Available for freelance opportunities and full-time positions.
                 </Typography>
@@ -94,9 +94,9 @@ export function SiteFooter() {
 
         <ExtendedSeparator className="my-8" />
 
-        <div className="flex flex-col gap-4 md:flex-row md:justify-between md:items-center">
+        <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <Typography variant="small" className="text-muted-foreground">
-            © {new Date().getFullYear()} Your Name. All rights reserved.
+            © {new Date().getFullYear()} Santiago. All rights reserved.
           </Typography>
           <div className="flex gap-2">
             {socials.map((social) => (

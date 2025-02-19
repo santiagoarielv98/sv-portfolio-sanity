@@ -5,6 +5,7 @@ export const languages = [
     code: "es",
     name: "Español",
     flag: `${flagIconPath}/es.svg`,
+    defaultLocale: true,
   },
   {
     code: "en",
