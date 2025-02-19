@@ -1,3 +1,5 @@
+import { sanityFetch } from "@/sanity/lib/live";
+import { getAllSections } from "@/sanity/lib/queries";
 import AboutSection from "../_sections/about";
 import ContactSection from "../_sections/contact";
 import ExperienceSection from "../_sections/experience";
@@ -5,7 +7,15 @@ import HeroSection from "../_sections/hero";
 import ProjectsSection from "../_sections/projects";
 import SkillsSection from "../_sections/skills";
 
-export default function Home() {
+type Props = {
+  params: Promise<{
+    lang: string;
+  }>;
+};
+
+export default async function Home(props: Props) {
+  const params = await props.params;
+  const { data: hero } = await sanityFetch({ query: getAllSections, params });
   return (
     <main className="relative">
       {/* Global patterns */}
@@ -13,7 +23,7 @@ export default function Home() {
       <div className="gradient-mesh pointer-events-none fixed inset-0 -z-40" />
 
       {/* Hero section */}
-      <HeroSection />
+      <HeroSection hero={hero} />
 
       {/* About section */}
       <AboutSection />

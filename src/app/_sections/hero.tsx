@@ -4,8 +4,13 @@ import { ExtendedButton } from "@/components/extended-button";
 import { ExtendedSeparator } from "@/components/extended-separator";
 import { Typography } from "@/components/ui/typography";
 import { ChevronDown, Code } from "lucide-react";
+import type { GetAllSectionsResult } from "../../../sanity.types";
 
-const HeroSection = () => {
+type Props = {
+  hero: GetAllSectionsResult;
+};
+
+const HeroSection = ({ hero }: Props) => {
   return (
     <section className="relative flex min-h-[90vh] items-center justify-center overflow-hidden">
       <div className="absolute inset-0 -z-20">
@@ -13,18 +18,17 @@ const HeroSection = () => {
         <div className="pattern-connector pattern-connector-bottom pattern-dots" />
       </div>
       <div className="mx-auto my-20 max-w-4xl space-y-8 px-4 text-center">
-        <Typography variant="h1">Welcome to my Portfolio</Typography>
+        <Typography variant="h1">{hero?.title}</Typography>
 
         <Typography variant="h2" className="max-w-2xl font-light">
-          Full Stack Developer Specialized in creating high-performance web
-          applications with innovative technologies. 🚀
+          {hero?.subtitle}
         </Typography>
 
         <ExtendedSeparator />
 
         <ExtendedButton size="lg" variant="default" className="font-display">
           <Code />
-          Get Started
+          {hero?.cta}
         </ExtendedButton>
       </div>
 

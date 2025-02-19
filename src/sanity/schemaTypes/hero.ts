@@ -22,12 +22,3 @@ export const heroType = defineType({
     },
   ],
 });
-
-// en: Welcome to my Portfolio
-// es: Bienvenido a mi Portafolio
-
-// en: Full Stack Developer Specialized in creating high-performance web applications with innovative technologies. 🚀
-// es: Desarrollador Full Stack Especializado en la creación de aplicaciones web de alto rendimiento con tecnologías innovadoras. 🚀
-
-// en: Hire me
-// es: Contrátame
