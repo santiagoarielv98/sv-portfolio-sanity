@@ -10,10 +10,7 @@ import {
 import { ExtendedSeparator } from "@/components/extended-separator";
 import { Typography } from "@/components/ui/typography";
 import { Code } from "lucide-react";
-import type {
-  GetAllSectionsResult,
-  GetHomePageResult,
-} from "../../../sanity.types";
+import type { GetHomePageResult } from "../../../sanity.types";
 
 export interface Skill {
   title: string;

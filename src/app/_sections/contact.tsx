@@ -1,6 +1,4 @@
-import React from "react";
-
-import { ExternalLink, Github, Linkedin, Mail, MapPin } from "lucide-react";
+import { Mail, MapPin } from "lucide-react";
 
 import { ExtendedBadge } from "@/components/extended-badge";
 import { ExtendedButton } from "@/components/extended-button";
@@ -16,11 +14,7 @@ import { ExtendedSeparator } from "@/components/extended-separator";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Typography } from "@/components/ui/typography";
-import type {
-  GetAllSectionsResult,
-  GetHomePageResult,
-} from "../../../sanity.types";
-import { profile } from "console";
+import type { GetHomePageResult } from "../../../sanity.types";
 
 // interface ContactInfo {
 //   email: string;

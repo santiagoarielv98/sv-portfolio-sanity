@@ -130,11 +130,6 @@ const sectionFields = `
         )
     }
 `;
-export const getAllSections = defineQuery(`
-    *[_type == "section"] | order(order asc) {
-        ${sectionFields}
-    }
-`);
 
 export const getHomePage = defineQuery(`{
     "sections": *[_type == "section"] | order(order asc) {

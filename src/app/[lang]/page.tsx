@@ -1,5 +1,5 @@
 import { sanityFetch } from "@/sanity/lib/live";
-import { getAllSections, getHomePage } from "@/sanity/lib/queries";
+import { getHomePage } from "@/sanity/lib/queries";
 import AboutSection from "../_sections/about";
 import ContactSection from "../_sections/contact";
 import ExperienceSection from "../_sections/experience";
