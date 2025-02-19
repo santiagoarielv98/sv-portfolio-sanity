@@ -13,6 +13,7 @@ import { Typography } from "@/components/ui/typography";
 import { Code } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import type { GetAllSectionsResult } from "../../../sanity.types";
 
 export interface Project {
   title: string;
@@ -56,7 +57,17 @@ export const projects: Project[] = [
   },
 ];
 
-const ProjectsSection = () => {
+type Props = {
+  section: GetAllSectionsResult[number] & {
+    type: "projects";
+    content: Array<{
+      _type: "project";
+    }>;
+  };
+};
+
+const ProjectsSection = ({ section }: Props) => {
+  console.log(section);
   return (
     <section className="relative overflow-hidden py-20">
       <div className="absolute inset-0 -z-20">
@@ -71,17 +82,19 @@ const ProjectsSection = () => {
             className="mx-auto flex items-center gap-2"
           >
             <Code />
-            Projects
+            {section.subtitle as unknown as string}
           </ExtendedBadge>
           <div className="mx-auto flex max-w-2xl items-center gap-4">
             <ExtendedSeparator className="to-primary/30 flex-1 via-none from-transparent" />
-            <Typography variant="h2">Projects</Typography>
+            <Typography variant="h2">
+              {section.title as unknown as string}
+            </Typography>
             <ExtendedSeparator className="from-primary/30 flex-1 via-none to-transparent" />
           </div>
         </div>
 
         <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {projects.map((project, index) => (
+          {section.content.map((project, index) => (
             <ExtendedCard
               key={index}
               variant="default"
@@ -90,7 +103,7 @@ const ProjectsSection = () => {
               <div className="relative aspect-video w-full overflow-hidden">
                 <div className="from-background/80 to-background/20 absolute inset-0 z-10 bg-gradient-to-t transition-opacity group-hover:opacity-50" />
                 <Image
-                  src={project.image}
+                  src={project.thumbnail}
                   alt={project.title}
                   fill
                   className="object-cover transition-transform duration-500 group-hover:scale-105"
@@ -106,17 +119,17 @@ const ProjectsSection = () => {
               </CardHeader>
 
               <CardContent>
-                <div className="flex flex-wrap gap-2">
+                {/* <div className="flex flex-wrap gap-2">
                   {project.technologies.map((tech, techIndex) => (
                     <ExtendedBadge key={techIndex} variant="ghost">
                       {tech}
                     </ExtendedBadge>
                   ))}
-                </div>
+                </div> */}
               </CardContent>
               <ExtendedSeparator className="mt-auto mb-6" />
               <CardFooter className="gap-4">
-                {project.demoUrl && (
+                {project.links.demo && (
                   <ExtendedButton
                     variant="default"
                     size="sm"
@@ -126,7 +139,7 @@ const ProjectsSection = () => {
                     Live Demo
                   </ExtendedButton>
                 )}
-                {project.repoUrl && (
+                {project.links.repo && (
                   <ExtendedButton variant="solid" size="sm" className="flex-1">
                     <Code className="mr-1 h-4 w-4" />
                     Source Code

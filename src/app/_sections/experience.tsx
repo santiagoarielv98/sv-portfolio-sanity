@@ -68,7 +68,6 @@ export function getFormattedDate(date: string) {
 }
 
 const ExperienceSection = ({ section }: Props) => {
-  console.log(section);
   return (
     <section className="relative overflow-hidden py-20">
       <div className="absolute inset-0 -z-20">

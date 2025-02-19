@@ -15,6 +15,13 @@ const experienceFields = `
     "date": date
 `;
 
+const projectFields = `
+    "title": title[$lang],
+    "description": description[$lang],
+    "thumbnail": thumbnail.asset->url,
+    "links": links
+`;
+
 const contentHeroType = `
     _type == "hero" => {
         ${heroFields}
@@ -24,6 +31,12 @@ const contentHeroType = `
 const contentExperienceType = `
     _type == "experience" => {
         ${experienceFields}
+    },
+`;
+
+const contentProjectType = `
+    _type == "project" => {
+        ${projectFields}
     },
 `;
 
@@ -37,6 +50,7 @@ const sectionFields = `
         ...select(
             ${contentHeroType}
             ${contentExperienceType}
+            ${contentProjectType}
         )
     }
 `;

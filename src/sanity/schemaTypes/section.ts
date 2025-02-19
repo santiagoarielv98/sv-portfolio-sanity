@@ -42,7 +42,7 @@ export const sectionType = defineType({
       of: [
         {
           type: "reference",
-          to: [{ type: "hero" }, { type: "experience" }],
+          to: [{ type: "hero" }, { type: "experience" }, { type: "project" }],
         },
       ],
     },

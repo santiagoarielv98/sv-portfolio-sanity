@@ -39,22 +39,6 @@ export type SanityImageDimensions = {
   aspectRatio?: number;
 };
 
-export type SanityImageHotspot = {
-  _type: "sanity.imageHotspot";
-  x?: number;
-  y?: number;
-  height?: number;
-  width?: number;
-};
-
-export type SanityImageCrop = {
-  _type: "sanity.imageCrop";
-  top?: number;
-  bottom?: number;
-  left?: number;
-  right?: number;
-};
-
 export type SanityFileAsset = {
   _id: string;
   _type: "sanity.fileAsset";
@@ -75,6 +59,54 @@ export type SanityFileAsset = {
   path?: string;
   url?: string;
   source?: SanityAssetSourceData;
+};
+
+export type Geopoint = {
+  _type: "geopoint";
+  lat?: number;
+  lng?: number;
+  alt?: number;
+};
+
+export type Project = {
+  _id: string;
+  _type: "project";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: LocaleString;
+  description?: LocaleText;
+  thumbnail?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  links?: {
+    repo?: string;
+    demo?: string;
+  };
+};
+
+export type SanityImageCrop = {
+  _type: "sanity.imageCrop";
+  top?: number;
+  bottom?: number;
+  left?: number;
+  right?: number;
+};
+
+export type SanityImageHotspot = {
+  _type: "sanity.imageHotspot";
+  x?: number;
+  y?: number;
+  height?: number;
+  width?: number;
 };
 
 export type SanityImageAsset = {
@@ -100,6 +132,13 @@ export type SanityImageAsset = {
   source?: SanityAssetSourceData;
 };
 
+export type SanityAssetSourceData = {
+  _type: "sanity.assetSourceData";
+  name?: string;
+  id?: string;
+  url?: string;
+};
+
 export type SanityImageMetadata = {
   _type: "sanity.imageMetadata";
   location?: Geopoint;
@@ -109,20 +148,6 @@ export type SanityImageMetadata = {
   blurHash?: string;
   hasAlpha?: boolean;
   isOpaque?: boolean;
-};
-
-export type Geopoint = {
-  _type: "geopoint";
-  lat?: number;
-  lng?: number;
-  alt?: number;
-};
-
-export type SanityAssetSourceData = {
-  _type: "sanity.assetSourceData";
-  name?: string;
-  id?: string;
-  url?: string;
 };
 
 export type Experience = {
@@ -187,6 +212,12 @@ export type Section = {
         _weak?: boolean;
         [internalGroqTypeReferenceTo]?: "experience";
       }
+    | {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "project";
+      }
   >;
   order?: number;
 };
@@ -213,13 +244,14 @@ export type AllSanitySchemaTypes =
   | SanityImagePaletteSwatch
   | SanityImagePalette
   | SanityImageDimensions
-  | SanityImageHotspot
-  | SanityImageCrop
   | SanityFileAsset
-  | SanityImageAsset
-  | SanityImageMetadata
   | Geopoint
+  | Project
+  | SanityImageCrop
+  | SanityImageHotspot
+  | SanityImageAsset
   | SanityAssetSourceData
+  | SanityImageMetadata
   | Experience
   | Hero
   | Section
@@ -229,7 +261,7 @@ export type AllSanitySchemaTypes =
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./src/sanity/lib/queries.ts
 // Variable: getAllSections
-// Query: *[_type == "section"] | order(order asc) {            "title": title[$lang],    "subtitle": subtitle[$lang],    type,    "content": content[]-> {        _type,        _id,        ...select(                _type == "hero" => {            "title": title[$lang],    "subtitle": subtitle[$lang],    "cta": cta[$lang],    },                _type == "experience" => {            "title": title[$lang],    "description": description[][$lang],    "organization": organization[$lang],    "location": location[$lang],    type,    "date": date    },        )    }    }
+// Query: *[_type == "section"] | order(order asc) {            "title": title[$lang],    "subtitle": subtitle[$lang],    type,    "content": content[]-> {        _type,        _id,        ...select(                _type == "hero" => {            "title": title[$lang],    "subtitle": subtitle[$lang],    "cta": cta[$lang],    },                _type == "experience" => {            "title": title[$lang],    "description": description[][$lang],    "organization": organization[$lang],    "location": location[$lang],    type,    "date": date    },                _type == "project" => {            "title": title[$lang],    "description": description[$lang],    "thumbnail": thumbnail.asset->url,    "links": links    },        )    }    }
 export type GetAllSectionsResult = Array<{
   title: Array<{
     _type: "localeString";
@@ -299,6 +331,25 @@ export type GetAllSectionsResult = Array<{
           en?: string;
         }> | null;
       }
+    | {
+        _type: "project";
+        _id: string;
+        title: Array<{
+          _type: "localeString";
+          es?: string;
+          en?: string;
+        }> | null;
+        description: Array<{
+          _type: "localeText";
+          es?: string;
+          en?: string;
+        }> | null;
+        thumbnail: string | null;
+        links: {
+          repo?: string;
+          demo?: string;
+        } | null;
+      }
   > | null;
 }>;
 
@@ -306,6 +357,6 @@ export type GetAllSectionsResult = Array<{
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
-    '\n    *[_type == "section"] | order(order asc) {\n        \n    "title": title[$lang],\n    "subtitle": subtitle[$lang],\n    type,\n    "content": content[]-> {\n        _type,\n        _id,\n        ...select(\n            \n    _type == "hero" => {\n        \n    "title": title[$lang],\n    "subtitle": subtitle[$lang],\n    "cta": cta[$lang],\n\n    },\n\n            \n    _type == "experience" => {\n        \n    "title": title[$lang],\n    "description": description[][$lang],\n    "organization": organization[$lang],\n    "location": location[$lang],\n    type,\n    "date": date\n\n    },\n\n        )\n    }\n\n    }\n': GetAllSectionsResult;
+    '\n    *[_type == "section"] | order(order asc) {\n        \n    "title": title[$lang],\n    "subtitle": subtitle[$lang],\n    type,\n    "content": content[]-> {\n        _type,\n        _id,\n        ...select(\n            \n    _type == "hero" => {\n        \n    "title": title[$lang],\n    "subtitle": subtitle[$lang],\n    "cta": cta[$lang],\n\n    },\n\n            \n    _type == "experience" => {\n        \n    "title": title[$lang],\n    "description": description[][$lang],\n    "organization": organization[$lang],\n    "location": location[$lang],\n    type,\n    "date": date\n\n    },\n\n            \n    _type == "project" => {\n        \n    "title": title[$lang],\n    "description": description[$lang],\n    "thumbnail": thumbnail.asset->url,\n    "links": links\n\n    },\n\n        )\n    }\n\n    }\n': GetAllSectionsResult;
   }
 }
