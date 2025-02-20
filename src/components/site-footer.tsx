@@ -1,5 +1,7 @@
+import { navigation } from "@/lib/config/navigation";
 import type { Locale } from "@/lib/i18n/config";
 import { translations } from "@/lib/i18n/transalation";
+import { useTranslations } from "@/lib/i18n/useTranslations";
 import { Code, Mail } from "lucide-react";
 import type { ProfileQueryResult } from "../../sanity.types";
 import { ExtendedButton } from "./extended-button";
@@ -7,14 +9,6 @@ import { ExtendedCard } from "./extended-card";
 import { ExtendedSeparator } from "./extended-separator";
 import { getIcon } from "./icons";
 import { Typography } from "./ui/typography";
-
-const quickLinks = [
-  { name: "About", href: "#about" },
-  { name: "Experience", href: "#experience" },
-  { name: "Projects", href: "#projects" },
-  { name: "Skills", href: "#skills" },
-  { name: "Contact", href: "#contact" },
-];
 
 type SiteFooterProps = {
   footer: string;
@@ -29,6 +23,8 @@ export function SiteFooter({
   profile,
   contact,
 }: SiteFooterProps) {
+  const { t } = useTranslations(lang);
+
   return (
     <footer className="bg-primary/5 border-primary/10 border-t">
       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
@@ -57,15 +53,15 @@ export function SiteFooter({
               {translations[lang].footer.quickLinks}
             </Typography>
             <div className="grid grid-cols-2 gap-2">
-              {quickLinks.map((link) => (
+              {navigation.map((item) => (
                 <ExtendedButton
-                  key={link.name}
+                  key={item.name}
                   variant="ghost"
                   className="justify-start"
                   size="sm"
                   asChild
                 >
-                  <a href={link.href}>{link.name}</a>
+                  <a href={item.href}>{t(item.name)}</a>
                 </ExtendedButton>
               ))}
             </div>

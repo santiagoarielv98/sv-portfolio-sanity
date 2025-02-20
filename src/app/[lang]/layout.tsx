@@ -68,7 +68,7 @@ export default async function RootLayout(
         enableSystem
         disableTransitionOnChange
       >
-        <SiteHeader />
+        <SiteHeader {...params} />
         {props.children}
         <SiteFooter
           footer={settings.data?.footer as unknown as string}

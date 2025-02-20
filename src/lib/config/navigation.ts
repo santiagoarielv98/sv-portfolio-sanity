@@ -37,4 +37,4 @@ export const navigation = [
   },
   { name: "nav.skills", href: SECTIONS.SKILLS },
   { name: "nav.contact", href: SECTIONS.CONTACT },
-] as const;
+];
