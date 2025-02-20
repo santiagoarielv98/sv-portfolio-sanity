@@ -21,4 +21,10 @@ export const skillCategoryType = defineType({
       type: "string",
     },
   ],
+  preview: {
+    select: {
+      title: "title.es",
+      subtitle: "description.es",
+    },
+  },
 });

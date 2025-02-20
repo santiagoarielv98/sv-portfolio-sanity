@@ -18,6 +18,16 @@ export const localeString = defineField({
     type: "string",
     fieldset: locale.defaultLocale ? undefined : "translations",
   })),
+  preview: {
+    select: {
+      es: "es",
+    },
+    prepare({ es }) {
+      return {
+        title: es,
+      };
+    },
+  },
 });
 
 export const localeText = defineField({
@@ -37,4 +47,14 @@ export const localeText = defineField({
     type: "text",
     fieldset: locale.defaultLocale ? undefined : "translations",
   })),
+  preview: {
+    select: {
+      es: "es",
+    },
+    prepare({ es }) {
+      return {
+        title: es,
+      };
+    },
+  },
 });

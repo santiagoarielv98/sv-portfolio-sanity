@@ -56,5 +56,29 @@ export const experienceType = defineType({
       type: "array",
       of: [{ type: "localeString" }],
     },
+    {
+      name: "skills",
+      title: "Habilidades",
+      type: "array",
+      of: [{ type: "reference", to: [{ type: "skill" }] }],
+    },
   ],
+  preview: {
+    select: {
+      title: "title",
+      organization: "organization",
+      type: "type",
+      start: "date.start",
+      end: "date.end",
+    },
+    prepare: ({ title, organization, type, start, end }) => {
+      const date = `${start} - ${end}`;
+      const subtitle = `${organization} - ${date}`;
+      return {
+        title,
+        subtitle,
+        description: type,
+      };
+    },
+  },
 });

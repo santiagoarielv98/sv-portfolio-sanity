@@ -8,21 +8,11 @@ export const profileType = defineType({
     {
       name: "name",
       title: "Nombre",
-      type: "localeString",
-    },
-    {
-      name: "email",
-      title: "Correo",
       type: "string",
     },
     {
-      name: "phone",
-      title: "Teléfono",
-      type: "string",
-    },
-    {
-      name: "location",
-      title: "Ubicación",
+      name: "title",
+      title: "Título",
       type: "localeString",
     },
     {
@@ -30,6 +20,14 @@ export const profileType = defineType({
       title: "Imagen",
       type: "image",
       options: { hotspot: true },
+    },
+    {
+      name: "resume",
+      title: "Currículum",
+      type: "file",
+      options: {
+        accept: ".pdf",
+      },
     },
     {
       name: "bio",
@@ -49,23 +47,22 @@ export const profileType = defineType({
       type: "array",
       of: [{ type: "localeString" }],
     },
-    // {
-    //   name: "interests",
-    //   title: "Intereses",
-    //   type: "array",
-    //   of: [{ type: "string" }],
-    // },
     {
-      name: "social",
-      title: "Redes sociales",
+      name: "socialLinks",
+      title: "Enlaces sociales",
       type: "array",
       of: [
         {
           type: "object",
           fields: [
             {
-              name: "name",
-              title: "Nombre",
+              name: "icon",
+              title: "Icono",
+              type: "string",
+            },
+            {
+              name: "platform",
+              title: "Plataforma",
               type: "string",
             },
             {
@@ -90,4 +87,11 @@ export const profileType = defineType({
       },
     },
   ],
+  preview: {
+    select: {
+      title: "name",
+      subtitle: "title.es",
+      media: "image",
+    },
+  },
 });
