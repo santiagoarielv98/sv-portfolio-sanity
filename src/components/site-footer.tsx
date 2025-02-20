@@ -1,31 +1,12 @@
-import { ExtendedSeparator } from "./extended-separator";
-import { Typography } from "./ui/typography";
+import type { Locale } from "@/lib/i18n/config";
+import { translations } from "@/lib/i18n/transalation";
+import { Code, Mail } from "lucide-react";
+import type { ProfileQueryResult } from "../../sanity.types";
 import { ExtendedButton } from "./extended-button";
 import { ExtendedCard } from "./extended-card";
-import { Code, Github, Linkedin, Mail, Twitter } from "lucide-react";
-
-const socials = [
-  {
-    name: "GitHub",
-    href: "https://github.com",
-    icon: <Github className="h-4 w-4" />,
-  },
-  {
-    name: "LinkedIn",
-    href: "https://linkedin.com",
-    icon: <Linkedin className="h-4 w-4" />,
-  },
-  {
-    name: "Twitter",
-    href: "https://twitter.com",
-    icon: <Twitter className="h-4 w-4" />,
-  },
-  {
-    name: "Email",
-    href: "mailto:contact@example.com",
-    icon: <Mail className="h-4 w-4" />,
-  },
-];
+import { ExtendedSeparator } from "./extended-separator";
+import { getIcon } from "./icons";
+import { Typography } from "./ui/typography";
 
 const quickLinks = [
   { name: "About", href: "#about" },
@@ -35,7 +16,19 @@ const quickLinks = [
   { name: "Contact", href: "#contact" },
 ];
 
-export function SiteFooter() {
+type SiteFooterProps = {
+  footer: string;
+  lang: Locale;
+  profile: ProfileQueryResult["profile"];
+  contact: ProfileQueryResult["contact"];
+};
+
+export function SiteFooter({
+  footer,
+  lang,
+  profile,
+  contact,
+}: SiteFooterProps) {
   return (
     <footer className="bg-primary/5 border-primary/10 border-t">
       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
@@ -45,21 +38,24 @@ export function SiteFooter() {
             <ExtendedButton variant="ghost" className="font-bold" asChild>
               <a href="#" className="flex items-center gap-2">
                 <Code className="h-5 w-5" />
-                <span className="font-display">Portfolio</span>
+                <span className="font-display">
+                  {/* Portfolio */}
+                  {profile?.name}
+                </span>
               </a>
             </ExtendedButton>
             <Typography
               variant="body2"
               className="text-muted-foreground max-w-md"
             >
-              Full Stack Developer specializing in building exceptional digital
-              experiences. Let&apos;s work together to bring your ideas to life.
+              {footer}
             </Typography>
           </div>
 
-          {/* Quick Links */}
           <div className="space-y-4">
-            <Typography variant="h4">Quick Links</Typography>
+            <Typography variant="h4">
+              {translations[lang].footer.quickLinks}
+            </Typography>
             <div className="grid grid-cols-2 gap-2">
               {quickLinks.map((link) => (
                 <ExtendedButton
@@ -77,15 +73,19 @@ export function SiteFooter() {
 
           {/* Contact Card */}
           <div className="space-y-4">
-            <Typography variant="h4">Let&apos;s Connect</Typography>
+            <Typography variant="h4">
+              {translations[lang].footer.letsConnect}
+            </Typography>
             <ExtendedCard variant="solid" className="backdrop-blur-none">
               <div className="space-y-4 p-6">
                 <Typography variant="body2" className="text-muted-foreground">
-                  Available for freelance opportunities and full-time positions.
+                  {translations[lang].footer.availableFor}
                 </Typography>
-                <ExtendedButton className="w-full">
-                  <Mail className="mr-2 h-4 w-4" />
-                  Get in Touch
+                <ExtendedButton className="w-full" asChild>
+                  <a href={`mailto:${contact?.email as string}`}>
+                    <Mail className="mr-2 h-4 w-4" />
+                    {translations[lang].footer.getInTouch}
+                  </a>
                 </ExtendedButton>
               </div>
             </ExtendedCard>
@@ -95,27 +95,32 @@ export function SiteFooter() {
         <ExtendedSeparator className="my-8" />
 
         <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+          {/* © 2025 Santiago. All rights reserved. */}
           <Typography variant="small" className="text-muted-foreground">
-            © {new Date().getFullYear()} Santiago. All rights reserved.
+            © {new Date().getFullYear()} {profile?.name}.{" "}
+            {translations[lang].footer.allRightsReserved}
           </Typography>
           <div className="flex gap-2">
-            {socials.map((social) => (
-              <ExtendedButton
-                key={social.name}
-                variant="ghost"
-                size="icon"
-                asChild
-              >
-                <a
-                  href={social.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={social.name}
+            {profile?.socialLinks?.map((social) => {
+              const Icon = getIcon(social.icon as string);
+              return (
+                <ExtendedButton
+                  key={social.platform as string}
+                  variant="ghost"
+                  size="icon"
+                  asChild
                 >
-                  {social.icon}
-                </a>
-              </ExtendedButton>
-            ))}
+                  <a
+                    href={social.url as string}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={social.platform as string}
+                  >
+                    <Icon className="h-4 w-4" />
+                  </a>
+                </ExtendedButton>
+              );
+            })}
           </div>
         </div>
       </div>

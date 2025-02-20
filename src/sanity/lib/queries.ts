@@ -69,7 +69,15 @@ const contactFields = `
     address,
 `;
 
-const profileQuery = `
+const settingFields = `
+    title,
+    "description": coalesce(description[$lang], description.es),
+    "keywords": keywords,
+    author,
+    "footer": coalesce(footer[$lang], footer.es),
+`;
+
+const profileTypeQuery = `
     "profile": *[_type == "profile"][0] {
         ${profileFields}
     }
@@ -99,8 +107,19 @@ const contactQuery = `
     }
 `;
 
+export const settingQuery = defineQuery(`
+    *[_type == "setting"][0] {
+        ${settingFields}
+    }
+`);
+
+export const profileQuery = defineQuery(`{
+    ${profileTypeQuery},
+    ${contactQuery}
+}`);
+
 export const homeQuery = defineQuery(`{
-    ${profileQuery},
+    ${profileTypeQuery},
     ${featuredProjectsQuery},
     ${experiencesQuery},
     ${skillCategoriesQuery},

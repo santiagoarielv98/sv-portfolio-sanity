@@ -67,6 +67,14 @@ export const translations = {
         send: "Send message",
       },
     },
+    footer: {
+      quickLinks: "Quick Links",
+      letsConnect: "Let's Connect",
+      availableFor:
+        "Available for freelance opportunities and full-time positions.",
+      getInTouch: "Get in Touch",
+      allRightsReserved: "All rights reserved.",
+    },
     common: {
       availability: "Availability",
       email: "Email",
@@ -147,6 +155,14 @@ export const translations = {
         },
         send: "Enviar mensaje",
       },
+    },
+    footer: {
+      quickLinks: "Enlaces rápidos",
+      letsConnect: "Conéctate conmigo",
+      availableFor:
+        "Disponible para oportunidades freelance y posiciones de tiempo completo.",
+      getInTouch: "Contáctame",
+      allRightsReserved: "Todos los derechos reservados.",
     },
     common: {
       availability: "Disponibilidad",
