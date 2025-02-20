@@ -16,40 +16,6 @@ import { Textarea } from "@/components/ui/textarea";
 import { Typography } from "@/components/ui/typography";
 import type { GetHomePageResult } from "../../../sanity.types";
 
-// interface ContactInfo {
-//   email: string;
-//   location: string;
-//   availability: string;
-//   socials: Array<{
-//     name: string;
-//     url: string;
-//     icon: React.ReactNode;
-//   }>;
-// }
-
-// const contactInfo: ContactInfo = {
-//   email: "contact@example.com",
-//   location: "Buenos Aires, Argentina",
-//   availability: "Open to work - Full-time opportunities",
-//   socials: [
-//     {
-//       name: "GitHub",
-//       url: "https://github.com/yourusername",
-//       icon: <Github className="h-4 w-4" />,
-//     },
-//     {
-//       name: "LinkedIn",
-//       url: "https://linkedin.com/in/yourusername",
-//       icon: <Linkedin className="h-4 w-4" />,
-//     },
-//     {
-//       name: "Portfolio",
-//       url: "https://yourportfolio.com",
-//       icon: <ExternalLink className="h-4 w-4" />,
-//     },
-//   ],
-// };
-
 type Props = {
   profile: GetHomePageResult["profile"];
 

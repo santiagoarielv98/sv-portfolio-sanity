@@ -1,3 +1,5 @@
+"use client";
+
 import { ExtendedBadge } from "@/components/extended-badge";
 import { ExtendedButton } from "@/components/extended-button";
 import { ExtendedCard } from "@/components/extended-card";
@@ -6,6 +8,9 @@ import { Typography } from "@/components/ui/typography";
 import { Code, Download, Users } from "lucide-react";
 import Image from "next/image";
 import type { GetHomePageResult } from "../../../sanity.types";
+import { translations } from "@/lib/i18n/transalations";
+import { useParams } from "next/navigation";
+import type { Locale } from "@/lib/i18n/config";
 
 // const achievements: Achievement[] = [
 //   {
@@ -36,6 +41,7 @@ type Props = {
 };
 
 const AboutSection = ({ profile, section }: Props) => {
+  const { lang } = useParams() as { lang: Locale };
   const about = section.content[0];
 
   return (
@@ -81,7 +87,7 @@ const AboutSection = ({ profile, section }: Props) => {
               <div className="grid gap-4 sm:grid-cols-2">
                 <div>
                   <Typography variant="small" className="text-muted-foreground">
-                    Ubicación
+                    {translations[lang].globals.location}
                   </Typography>
                   <Typography variant="h4">
                     {profile?.location as unknown as string}
@@ -101,7 +107,7 @@ const AboutSection = ({ profile, section }: Props) => {
                 </div> */}
                 <div>
                   <Typography variant="small" className="text-muted-foreground">
-                    Idiomas
+                    {translations[lang].globals.languages}
                   </Typography>
                   <Typography variant="h4">
                     {profile?.languages?.join(", ")}
@@ -115,7 +121,7 @@ const AboutSection = ({ profile, section }: Props) => {
           <div className="space-y-8">
             <div>
               <Typography variant="h3" className="mb-4">
-                {about.iam as unknown as string}
+                {translations[lang].about.iam}
               </Typography>
               <div className="space-y-4">
                 {profile?.bio?.map((bio, index) => (
@@ -130,7 +136,7 @@ const AboutSection = ({ profile, section }: Props) => {
 
             <div>
               <Typography variant="h3" className="mb-4">
-                {about.objective as unknown as string}
+                {translations[lang].about.objective}
               </Typography>
               {profile?.objectives?.map((objective, index) => (
                 <Typography key={index} variant="body1">

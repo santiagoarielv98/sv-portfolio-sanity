@@ -49,11 +49,57 @@ export const profileType = defineType({
       type: "array",
       of: [{ type: "localeString" }],
     },
+    // {
+    //   name: "interests",
+    //   title: "Intereses",
+    //   type: "array",
+    //   of: [{ type: "string" }],
+    // },
     {
-      name: "interests",
-      title: "Intereses",
+      name: "social",
+      title: "Redes sociales",
       type: "array",
-      of: [{ type: "string" }],
+      of: [
+        {
+          type: "object",
+          fields: [
+            {
+              name: "name",
+              title: "Nombre",
+              type: "string",
+            },
+            {
+              name: "url",
+              title: "URL",
+              type: "url",
+            },
+          ],
+        },
+      ],
+    },
+    {
+      name: "availability",
+      title: "Disponibilidad",
+      type: "object",
+      fields: [
+        {
+          name: "status",
+          title: "Estado",
+          type: "string",
+          options: {
+            list: [
+              { title: "Disponible", value: "available" },
+              { title: "Ocupado", value: "busy" },
+              { title: "No disponible", value: "unavailable" },
+            ],
+          },
+        },
+        {
+          name: "message",
+          title: "Mensaje",
+          type: "localeString",
+        },
+      ],
     },
   ],
 });
