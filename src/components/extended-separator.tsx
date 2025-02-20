@@ -17,7 +17,7 @@ function ExtendedSeparator({
       decorative={decorative}
       orientation={orientation}
       className={cn(
-        "shrink-0 data-[orientation=horizontal]:h-0.5 data-[orientation=horizontal]:w-full data-[orientation=vertical]:h-full data-[orientation=vertical]:w-0.5 data-[orientation=horizontal]:bg-gradient-to-r from-transparent via-primary/30 to-transparent data-[orientation=vertical]:bg-gradient-to-b",
+        "via-primary/30 shrink-0 from-transparent to-transparent data-[orientation=horizontal]:h-0.5 data-[orientation=horizontal]:w-full data-[orientation=horizontal]:bg-gradient-to-r data-[orientation=vertical]:h-full data-[orientation=vertical]:w-0.5 data-[orientation=vertical]:bg-gradient-to-b",
         className,
       )}
       {...props}

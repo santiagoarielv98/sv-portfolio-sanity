@@ -25,6 +25,8 @@ export function getFormattedDate(date: string) {
 }
 
 const ExperienceSection = ({ section }: Props) => {
+  const experiences = section.content.filter((e) => e._type === "experience");
+
   return (
     <section className="relative overflow-hidden py-20">
       <div className="absolute inset-0 -z-20">
@@ -55,7 +57,7 @@ const ExperienceSection = ({ section }: Props) => {
             <div className="from-primary/5 via-primary/20 absolute h-full w-0.5 bg-gradient-to-b to-transparent md:left-1/2" />
 
             <div className="space-y-8 md:-space-y-8">
-              {section.content.map((experience, index) => (
+              {experiences.map((experience, index) => (
                 <div
                   key={index}
                   data-direction={index % 2 === 0 ? "left" : "right"}
@@ -76,7 +78,7 @@ const ExperienceSection = ({ section }: Props) => {
                           variant="gradient"
                           float="none"
                         >
-                          {getIcon(experience.type)}
+                          {getIcon(experience.type!)}
                         </ExtendedButton>
                         <div className="flex flex-1 flex-col gap-1.5">
                           <CardTitle>
@@ -91,14 +93,16 @@ const ExperienceSection = ({ section }: Props) => {
                         <div className="flex flex-wrap gap-2">
                           <ExtendedBadge variant="default">
                             <Calendar className="mr-1" />
-                            {getFormattedDate(experience.date.start)} -{" "}
-                            {experience.date.end
+                            {experience.date?.start &&
+                              getFormattedDate(experience.date.start)}{" "}
+                            -{" "}
+                            {experience.date?.end
                               ? getFormattedDate(experience.date.end)
                               : "Present"}
                           </ExtendedBadge>
                           <ExtendedBadge variant="default">
                             <MapPin className="mr-1" />
-                            {experience.location}
+                            {experience.location as unknown as string}
                           </ExtendedBadge>
                         </div>
 

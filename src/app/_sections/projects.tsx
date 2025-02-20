@@ -30,6 +30,7 @@ type Props = {
 };
 
 const ProjectsSection = ({ section }: Props) => {
+  const projects = section.content.filter((e) => e._type === "project");
   return (
     <section className="relative overflow-hidden py-20">
       <div className="absolute inset-0 -z-20">
@@ -56,7 +57,7 @@ const ProjectsSection = ({ section }: Props) => {
         </div>
 
         <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {section.content.map((project, index) => (
+          {projects.map((project, index) => (
             <ExtendedCard
               key={index}
               variant="default"
@@ -65,8 +66,8 @@ const ProjectsSection = ({ section }: Props) => {
               <div className="relative aspect-video w-full overflow-hidden">
                 <div className="from-background/80 to-background/20 absolute inset-0 z-10 bg-gradient-to-t transition-opacity group-hover:opacity-50" />
                 <Image
-                  src={project.thumbnail}
-                  alt={project.title}
+                  src={project.thumbnail!}
+                  alt={project.title as unknown as string}
                   fill
                   className="object-cover transition-transform duration-500 group-hover:scale-105"
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
@@ -75,9 +76,11 @@ const ProjectsSection = ({ section }: Props) => {
 
               <CardHeader className="relative">
                 <CardTitle className="group-hover:text-primary transition-colors">
-                  {project.title}
+                  {project.title as unknown as string}
                 </CardTitle>
-                <CardDescription>{project.description}</CardDescription>
+                <CardDescription>
+                  {project.description as unknown as string}
+                </CardDescription>
               </CardHeader>
 
               <CardContent>
@@ -91,7 +94,7 @@ const ProjectsSection = ({ section }: Props) => {
               </CardContent>
               <ExtendedSeparator className="mt-auto mb-6" />
               <CardFooter className="gap-4">
-                {project.links.demo && (
+                {project.links?.demo && (
                   <ExtendedButton
                     variant="default"
                     size="sm"
@@ -101,7 +104,7 @@ const ProjectsSection = ({ section }: Props) => {
                     Live Demo
                   </ExtendedButton>
                 )}
-                {project.links.repo && (
+                {project.links?.repo && (
                   <ExtendedButton variant="solid" size="sm" className="flex-1">
                     <Code className="mr-1 h-4 w-4" />
                     Source Code

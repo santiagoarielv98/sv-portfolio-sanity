@@ -12,66 +12,14 @@ import { Typography } from "@/components/ui/typography";
 import type { SkillCategory } from "@/types/sanity";
 import { Code } from "lucide-react";
 
-export interface Skill {
-  title: string;
-  description: string;
-  category: "frontend" | "backend" | "cloud";
-  technologies: Array<{
-    name: string;
-    level: "basic" | "intermediate" | "advanced" | "expert";
-  }>;
-}
-
-export const skills: Skill[] = [
-  {
-    title: "Frontend Development",
-    description:
-      "Building responsive and interactive user interfaces with modern web technologies",
-    category: "frontend",
-    technologies: [
-      { name: "React/Next.js", level: "expert" },
-      { name: "TypeScript", level: "advanced" },
-      { name: "Tailwind CSS", level: "expert" },
-      { name: "Redux/Zustand", level: "advanced" },
-      { name: "HTML/CSS", level: "expert" },
-      { name: "JavaScript", level: "expert" },
-    ],
-  },
-  {
-    title: "Backend Development",
-    description:
-      "Developing scalable server-side applications and RESTful APIs",
-    category: "backend",
-    technologies: [
-      { name: "Node.js", level: "advanced" },
-      { name: "Express", level: "advanced" },
-      { name: "PostgreSQL", level: "intermediate" },
-      { name: "MongoDB", level: "advanced" },
-      { name: "GraphQL", level: "intermediate" },
-      { name: "Docker", level: "intermediate" },
-    ],
-  },
-  {
-    title: "Cloud & DevOps",
-    description: "Deploying and maintaining applications in cloud environments",
-    category: "cloud",
-    technologies: [
-      { name: "AWS", level: "intermediate" },
-      { name: "Vercel", level: "advanced" },
-      { name: "CI/CD", level: "intermediate" },
-      { name: "Git", level: "advanced" },
-      { name: "Linux", level: "intermediate" },
-      { name: "Nginx", level: "basic" },
-    ],
-  },
-];
-
 type Props = {
   section: SkillCategory;
 };
 
 const SkillsSection = ({ section }: Props) => {
-  console.log(section);
+  const skillCategories = section.content.filter(
+    (e) => e._type === "skillCategory",
+  );
   return (
     <section className="relative overflow-hidden py-20">
       <div className="absolute inset-0 -z-20">
@@ -97,7 +45,7 @@ const SkillsSection = ({ section }: Props) => {
           </div>
         </div>
         <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {section.content?.map((category, index) => (
+          {skillCategories?.map((category, index) => (
             <ExtendedCard
               key={index}
               className="flex flex-col"
@@ -118,8 +66,11 @@ const SkillsSection = ({ section }: Props) => {
               <CardContent className="flex-1">
                 <div className="flex flex-wrap gap-2">
                   {category.skills.map((skill) => (
-                    <ExtendedBadge key={skill.title} variant="ghost">
-                      {skill.title}
+                    <ExtendedBadge
+                      key={skill.title as unknown as string}
+                      variant="ghost"
+                    >
+                      {skill.title as unknown as string}
                     </ExtendedBadge>
                   ))}
                 </div>

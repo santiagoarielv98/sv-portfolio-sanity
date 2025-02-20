@@ -35,13 +35,16 @@ const ModeLang = () => {
       <DropdownMenuContent align="end">
         {languages.map((language) => (
           <DropdownMenuItem key={language.code} asChild>
-            <Link href={redirectedPathname(language.code as Locale)}>
+            <Link
+              href={redirectedPathname(language.code as Locale)}
+              scroll={false}
+            >
               <Image
                 src={language.flag}
                 alt={language.name}
                 width={15}
                 height={15}
-                className="rounded-full w-3.5 h-3.5 object-cover"
+                className="h-3.5 w-3.5 rounded-full object-cover"
               />
               {language.name}
               <Check
