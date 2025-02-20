@@ -15,13 +15,7 @@ export const contactType = defineType({
       name: "phone",
       title: "Teléfono",
       type: "string",
-      validation: (Rule) =>
-        Rule.required()
-          .regex(/^\+?[0-9]{10,15}$/, {
-            name: "phone",
-            invert: false,
-          })
-          .error("Debe ser un número de teléfono válido"),
+      validation: (Rule) => Rule.required(),
     },
     {
       name: "address",

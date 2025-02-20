@@ -1,11 +1,10 @@
 import { ExtendedBadge } from "@/components/extended-badge";
 import { ExtendedButton } from "@/components/extended-button";
-import { ExtendedCard } from "@/components/extended-card";
 import { ExtendedSeparator } from "@/components/extended-separator";
 import { Typography } from "@/components/ui/typography";
 import type { Locale } from "@/lib/i18n/config";
 import { translations } from "@/lib/i18n/transalation";
-import { Code, Download } from "lucide-react";
+import { Download, UserRound } from "lucide-react";
 import Image from "next/image";
 import type { HomeQueryResult } from "../../../sanity.types";
 
@@ -29,7 +28,7 @@ const AboutSection = ({ profile, lang }: Props) => {
             variant="gradient"
             className="mx-auto flex items-center gap-2"
           >
-            <Code />
+            <UserRound />
             {translations[lang].about.subtitle}
           </ExtendedBadge>
           <div className="mx-auto flex max-w-2xl items-center gap-4">
@@ -54,38 +53,6 @@ const AboutSection = ({ profile, lang }: Props) => {
               />
               <div className="from-background/80 absolute inset-0 bg-gradient-to-t" />
             </div>
-            <ExtendedCard variant="solid" className="p-6">
-              <div className="grid gap-4 sm:grid-cols-2">
-                {/* <div>
-                  <Typography variant="small" className="text-muted-foreground">
-                    {translations[lang].globals.location}
-                  </Typography>
-                  <Typography variant="h4">
-                    {profile?.location as unknown as string}
-                  </Typography>
-                </div> */}
-                {/* <div>
-                  <Typography variant="small" className="text-muted-foreground">
-                    Experiencia
-                  </Typography>
-                  <Typography variant="h4">1 Año</Typography>
-                </div> */}
-                {/* <div>
-                  <Typography variant="small" className="text-muted-foreground">
-                    Proyectos Completados
-                  </Typography>
-                  <Typography variant="h4">10+</Typography>
-                </div> */}
-                {/* <div>
-                  <Typography variant="small" className="text-muted-foreground">
-                    {translations[lang].globals.languages}
-                  </Typography>
-                  <Typography variant="h4">
-                    {profile?.languages?.join(", ")}
-                  </Typography>
-                </div> */}
-              </div>
-            </ExtendedCard>
           </div>
 
           {/* Right Column - Text Content */}

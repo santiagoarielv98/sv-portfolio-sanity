@@ -46,7 +46,7 @@ const experienceFields = `
 `;
 
 const skillFields = `
-    "title": coalesce(title[$lang], title.es),
+    title,
     icon,
 `;
 
@@ -57,7 +57,7 @@ const skillByCategoryQuery = defineQuery(`
 `);
 
 const skillCategoryFields = `
-    "title": coalesce(title[$lang], title.es),
+    title,
     "description": coalesce(description[$lang], description.es),
     "icon": icon,
     "skills": ${skillByCategoryQuery},

@@ -33,23 +33,6 @@ export default async function Home(props: Props) {
         contact={data.contact}
         {...params}
       />
-      <pre>{JSON.stringify(data, null, 2)}</pre>
     </main>
   );
 }
-/*     
-<HeroSection section={heroSection} />
-
- About section 
-<AboutSection profile={profile} section={aboutSection} />
- Experience section 
-<ExperienceSection section={experienceSection} />
-
- Projects section 
-<ProjectsSection section={projectsSection} />
-
- Skills section 
-<SkillsSection section={skillsSection} />
-
- Contact section 
-<ContactSection profile={profile} section={contactSection} /> */

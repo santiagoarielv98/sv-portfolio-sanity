@@ -52,89 +52,94 @@ const ExperienceSection = ({ experiences, lang }: Props) => {
             <div className="from-primary/5 via-primary/20 absolute h-full w-0.5 bg-gradient-to-b to-transparent md:left-1/2" />
 
             <div className="space-y-8 md:-space-y-8">
-              {experiences.map((experience, index) => (
-                <div
-                  key={index}
-                  data-direction={index % 2 === 0 ? "left" : "right"}
-                  className="flex items-center gap-8 data-[direction=left]:flex-row data-[direction=right]:flex-row-reverse"
-                >
-                  {/* Punto en la línea de tiempo */}
-                  <div className="bg-primary/20 border-primary/30 absolute h-4 w-4 -translate-x-1/2 rounded-full border-2 md:left-1/2" />
-
-                  {/* Card de experiencia */}
+              {experiences.map((experience, index) => {
+                const Icon = getIcon(experience.type!);
+                return (
                   <div
+                    key={index}
                     data-direction={index % 2 === 0 ? "left" : "right"}
-                    className="ml-4 md:ml-0 md:w-1/2 data-[direction=left]:md:pr-8 data-[direction=right]:md:pl-8"
+                    className="flex items-center gap-8 data-[direction=left]:flex-row data-[direction=right]:flex-row-reverse"
                   >
-                    <ExtendedCard variant="solid">
-                      <CardHeader className="flex-row gap-4">
-                        <ExtendedButton
-                          size="icon"
-                          variant="gradient"
-                          float="none"
-                        >
-                          {getIcon(experience.type!)}
-                        </ExtendedButton>
-                        <div className="flex flex-1 flex-col gap-1.5">
-                          <CardTitle>
-                            {experience.title as unknown as string}
-                          </CardTitle>
-                          <CardDescription>
-                            {experience.organization as unknown as string}
-                          </CardDescription>
-                        </div>
-                      </CardHeader>
-                      <CardContent className="space-y-6">
-                        <div className="flex flex-wrap gap-2">
-                          <ExtendedBadge variant="default">
-                            <Calendar className="mr-1" />
-                            {experience.date?.start &&
-                              getFormattedDate(experience.date.start)}{" "}
-                            -{" "}
-                            {experience.date?.end
-                              ? getFormattedDate(experience.date.end)
-                              : "Present"}
-                          </ExtendedBadge>
-                          <ExtendedBadge variant="default">
-                            <MapPin className="mr-1" />
-                            {experience.location as unknown as string}
-                          </ExtendedBadge>
-                        </div>
+                    {/* Punto en la línea de tiempo */}
+                    <div className="bg-primary/20 border-primary/30 absolute h-4 w-4 -translate-x-1/2 rounded-full border-2 md:left-1/2" />
 
-                        {experience.description?.length === 1 ? (
-                          <Typography variant="body1">
-                            {experience.description[0] as unknown as string}
-                          </Typography>
-                        ) : (
-                          <ul>
-                            {experience.description?.map((desc, descIndex) => (
-                              <Typography variant="body1" key={descIndex}>
-                                {desc as unknown as string}
-                              </Typography>
-                            ))}
-                          </ul>
-                        )}
-                        {Array.isArray(experience.skills) &&
-                          experience.skills.length > 0 && (
-                            <>
-                              <ExtendedSeparator />
-                              <div className="flex flex-wrap gap-2">
-                                {experience.skills.map((skill) => (
-                                  <ExtendedBadge
-                                    key={skill.title as unknown as string}
-                                    variant="ghost"
-                                  >
-                                    {skill.title as unknown as string}
-                                  </ExtendedBadge>
-                                ))}
-                              </div>
-                            </>
+                    {/* Card de experiencia */}
+                    <div
+                      data-direction={index % 2 === 0 ? "left" : "right"}
+                      className="ml-4 md:ml-0 md:w-1/2 data-[direction=left]:md:pr-8 data-[direction=right]:md:pl-8"
+                    >
+                      <ExtendedCard variant="solid">
+                        <CardHeader className="flex-row gap-4">
+                          <ExtendedButton
+                            size="icon"
+                            variant="gradient"
+                            float="none"
+                          >
+                            <Icon />
+                          </ExtendedButton>
+                          <div className="flex flex-1 flex-col gap-1.5">
+                            <CardTitle>
+                              {experience.title as unknown as string}
+                            </CardTitle>
+                            <CardDescription>
+                              {experience.organization as unknown as string}
+                            </CardDescription>
+                          </div>
+                        </CardHeader>
+                        <CardContent className="space-y-6">
+                          <div className="flex flex-wrap gap-2">
+                            <ExtendedBadge variant="default">
+                              <Calendar className="mr-1" />
+                              {experience.date?.start &&
+                                getFormattedDate(experience.date.start)}{" "}
+                              -{" "}
+                              {experience.date?.end
+                                ? getFormattedDate(experience.date.end)
+                                : "Present"}
+                            </ExtendedBadge>
+                            <ExtendedBadge variant="default">
+                              <MapPin className="mr-1" />
+                              {experience.location as unknown as string}
+                            </ExtendedBadge>
+                          </div>
+
+                          {experience.description?.length === 1 ? (
+                            <Typography variant="body1">
+                              {experience.description[0] as unknown as string}
+                            </Typography>
+                          ) : (
+                            <ul>
+                              {experience.description?.map(
+                                (desc, descIndex) => (
+                                  <Typography variant="body1" key={descIndex}>
+                                    {desc as unknown as string}
+                                  </Typography>
+                                ),
+                              )}
+                            </ul>
                           )}
-                      </CardContent>
-                    </ExtendedCard>
+                          {Array.isArray(experience.skills) &&
+                            experience.skills.length > 0 && (
+                              <>
+                                <ExtendedSeparator />
+                                <div className="flex flex-wrap gap-2">
+                                  {experience.skills.map((skill) => (
+                                    <ExtendedBadge
+                                      key={skill.title as unknown as string}
+                                      variant="ghost"
+                                    >
+                                      {skill.title as unknown as string}
+                                    </ExtendedBadge>
+                                  ))}
+                                </div>
+                              </>
+                            )}
+                        </CardContent>
+                      </ExtendedCard>
+                    </div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
         </div>

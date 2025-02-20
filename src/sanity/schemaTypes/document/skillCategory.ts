@@ -8,7 +8,7 @@ export const skillCategoryType = defineType({
     {
       name: "title",
       title: "Título",
-      type: "localeString",
+      type: "string",
       validation: (Rule) => Rule.required(),
     },
     {
@@ -26,7 +26,7 @@ export const skillCategoryType = defineType({
   ],
   preview: {
     select: {
-      title: "title.es",
+      title: "title",
       subtitle: "description.es",
     },
   },

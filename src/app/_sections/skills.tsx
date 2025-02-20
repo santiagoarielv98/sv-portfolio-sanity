@@ -8,11 +8,12 @@ import {
   ExtendedCard,
 } from "@/components/extended-card";
 import { ExtendedSeparator } from "@/components/extended-separator";
+import { getIcon } from "@/components/icons";
 import { Typography } from "@/components/ui/typography";
+import type { Locale } from "@/lib/i18n/config";
+import { translations } from "@/lib/i18n/transalation";
 import { Code } from "lucide-react";
 import type { HomeQueryResult } from "../../../sanity.types";
-import { translations } from "@/lib/i18n/transalation";
-import type { Locale } from "@/lib/i18n/config";
 
 type Props = {
   skillCategories: HomeQueryResult["skillCategories"];
@@ -45,39 +46,43 @@ const SkillsSection = ({ skillCategories, lang }: Props) => {
           </div>
         </div>
         <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {skillCategories?.map((category, index) => (
-            <ExtendedCard
-              key={index}
-              className="flex flex-col"
-              variant="default"
-            >
-              <CardHeader className="flex-row gap-4">
-                <ExtendedButton size="icon" variant="gradient" float="none">
-                  <Code />
-                </ExtendedButton>
-                <div className="flex flex-1 flex-col gap-1.5">
-                  <CardTitle>{category.title as unknown as string}</CardTitle>
-                  <CardDescription>
-                    {category.description as unknown as string}
-                  </CardDescription>
-                </div>
-              </CardHeader>
-              {Array.isArray(category.skills) && category.skills.length > 0 && (
-                <CardContent className="flex-1">
-                  <div className="flex flex-wrap gap-2">
-                    {category.skills?.map((skill) => (
-                      <ExtendedBadge
-                        key={skill.title as unknown as string}
-                        variant="ghost"
-                      >
-                        {skill.title as unknown as string}
-                      </ExtendedBadge>
-                    ))}
+          {skillCategories?.map((category, index) => {
+            const Icon = getIcon(category.icon!);
+            return (
+              <ExtendedCard
+                key={index}
+                className="flex flex-col"
+                variant="default"
+              >
+                <CardHeader className="flex-row gap-4">
+                  <ExtendedButton size="icon" variant="gradient" float="none">
+                    <Icon />
+                  </ExtendedButton>
+                  <div className="flex flex-1 flex-col gap-1.5">
+                    <CardTitle>{category.title as unknown as string}</CardTitle>
+                    <CardDescription>
+                      {category.description as unknown as string}
+                    </CardDescription>
                   </div>
-                </CardContent>
-              )}
-            </ExtendedCard>
-          ))}
+                </CardHeader>
+                {Array.isArray(category.skills) &&
+                  category.skills.length > 0 && (
+                    <CardContent className="flex-1">
+                      <div className="flex flex-wrap gap-2">
+                        {category.skills?.map((skill) => (
+                          <ExtendedBadge
+                            key={skill.title as unknown as string}
+                            variant="ghost"
+                          >
+                            {skill.title as unknown as string}
+                          </ExtendedBadge>
+                        ))}
+                      </div>
+                    </CardContent>
+                  )}
+              </ExtendedCard>
+            );
+          })}
         </div>
       </div>
     </section>
