@@ -43,12 +43,6 @@ export const profileType = defineType({
       of: [{ type: "localeString" }],
     },
     {
-      name: "languages",
-      title: "Idiomas",
-      type: "array",
-      of: [{ type: "localeString" }],
-    },
-    {
       name: "socialLinks",
       title: "Enlaces sociales",
       type: "array",

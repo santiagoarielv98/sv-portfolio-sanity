@@ -1,128 +1,99 @@
 import { defineQuery } from "next-sanity";
 
-const heroFields = `
+const profileFields = `
+    name,
     "title": title[$lang],
-    "subtitle": subtitle[$lang],
-    "cta": cta[$lang],
+    "avatar": image.asset->url,
+    "bio": bio[$lang],
+    "objectives": objectives[$lang],
+    "socialLinks": socialLinks[]{
+        icon,
+        platform,
+        url,
+    },
+    availability,
+    "resume": resume.asset->url
 `;
 
-const aboutFields = `
-    "iam": iam[$lang],
-    "objective": objective[$lang],
-    "achievements": achievements[] {
-        icon,
+const baseProjectsFields = `
+    "title": title[$lang],
+    "description": description[$lang],
+    "thumbnail": thumbnail.asset->url,
+    "skills": skills[]->{
         "title": title[$lang],
-        "description": description[$lang]
-    }
+        icon,
+    },
+    links{
+        repo,
+        demo,
+    },
 `;
 
 const experienceFields = `
     "title": title[$lang],
-    "description": description[][$lang],
     "organization": organization[$lang],
-    "location": location[$lang],
     type,
-    "date": date
-`;
-
-const projectFields = `
-    "title": title[$lang],
-    "description": description[$lang],
-    "thumbnail": thumbnail.asset->url,
-    "links": links
-`;
-
-const profileFields = `
-    "name": name[$lang],
-    "email": email,
-    "phone": phone,
-    "location": location[$lang],
-    "image": image.asset->url,
-    "bio": bio[][$lang],
-    "objectives": objectives[][$lang],
-    "languages": languages[][$lang],
-    "interests": interests,
-    "social": social[] {
-        "name": name,
-        "url": url
+    date{
+        start,
+        end,
     },
-    availability,   
+    "description": description[$lang],
+    "skills": skills[]->{
+        "title": title[$lang],
+        icon,
+    },
 `;
 
 const skillCategoryFields = `
     "title": title[$lang],
     "description": description[$lang],
-    icon,
-    "skills": *[_type == "skill" && references(^._id)] {
+    "icon": icon,
+    "skills": skills[]->{
         "title": title[$lang],
-        "level": level
-    }
+        icon,
+    },
 `;
 
 const contactFields = `
-    "title": title[$lang],
-    "description": description[$lang],
+    email,
+    phone,
+    address,
 `;
 
-const contentHeroType = `
-    _type == "hero" => {
-        ${heroFields}
-    },
-`;
-
-const contentAboutType = `
-    _type == "about" => {
-        ${aboutFields}
-    },
-`;
-
-const contentExperienceType = `
-    _type == "experience" => {
-        ${experienceFields}
-    },
-`;
-
-const contentProjectType = `
-    _type == "project" => {
-        ${projectFields}
-    },
-`;
-
-const contentSkillsType = `
-    _type == "skillCategory" => {
-        ${skillCategoryFields}
-    },
-`;
-
-const contentContactType = `
-    _type == "contact" => {
-        ${contactFields}
-    },
-`;
-
-const sectionFields = `
-    "title": title[$lang],
-    "subtitle": subtitle[$lang],
-    type,
-    "content": content[]-> {
-        _type,
-        _id,
-        ...select(
-            ${contentHeroType}
-            ${contentAboutType}
-            ${contentExperienceType}
-            ${contentProjectType}
-            ${contentContactType}
-            ${contentSkillsType}
-        )
-    }
-`;
-
-export const getHomePage = defineQuery(`{
-    "sections": *[_type == "section"] | order(order asc) {
-        ${sectionFields}
-    },
+const profileQuery = `
     "profile": *[_type == "profile"][0] {
         ${profileFields}
     }
+`;
+
+const featuredProjectsQuery = `
+    "featuredProjects": *[_type == "project" && featured == true] {
+        ${baseProjectsFields}
+    }
+`;
+
+const experienceQuery = `
+    "experience": *[_type == "experience"] {
+        ${experienceFields}
+    }
+`;
+
+const skillCategoriesQuery = `
+    "skillCategories": *[_type == "skillCategory"] {
+        ${skillCategoryFields}
+    }
+`;
+
+const contactQuery = `
+    "contact": *[_type == "contact"][0] {
+        ${contactFields}
+    }
+`;
+
+export const homeQuery = defineQuery(`{
+    ${profileQuery},
+    ${featuredProjectsQuery},
+    ${experienceQuery},
+    ${skillCategoriesQuery},
+    ${contactQuery}
 }`);
