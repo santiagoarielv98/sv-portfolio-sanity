@@ -15,16 +15,6 @@ import { Code } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
-export interface Project {
-  title: string;
-  description: string;
-  image: string;
-  technologies: string[];
-  demoUrl?: string;
-  repoUrl?: string;
-  category: "frontend" | "backend" | "fullstack";
-}
-
 type Props = {
   section: Projects;
 };

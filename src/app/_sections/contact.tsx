@@ -1,4 +1,5 @@
 "use client";
+
 import { Mail, MapPin } from "lucide-react";
 
 import { ExtendedBadge } from "@/components/extended-badge";
@@ -23,7 +24,6 @@ import type { Contact } from "@/types/sanity";
 
 type Props = {
   profile: GetHomePageResult["profile"];
-
   section: Contact;
 };
 

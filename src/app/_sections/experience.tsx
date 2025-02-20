@@ -10,19 +10,13 @@ import {
 import { ExtendedSeparator } from "@/components/extended-separator";
 import { getIcon } from "@/components/icons";
 import { Typography } from "@/components/ui/typography";
+import { getFormattedDate } from "@/lib/utils";
 import type { Experience } from "@/types/sanity";
 import { Calendar, Code, MapPin } from "lucide-react";
 
 type Props = {
   section: Experience;
 };
-
-export function getFormattedDate(date: string) {
-  return new Date(date).toLocaleDateString("en-US", {
-    month: "short",
-    year: "numeric",
-  });
-}
 
 const ExperienceSection = ({ section }: Props) => {
   const experiences = section.content.filter((e) => e._type === "experience");
