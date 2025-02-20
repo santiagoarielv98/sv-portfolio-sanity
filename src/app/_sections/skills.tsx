@@ -9,17 +9,17 @@ import {
 } from "@/components/extended-card";
 import { ExtendedSeparator } from "@/components/extended-separator";
 import { Typography } from "@/components/ui/typography";
-import type { SkillCategory } from "@/types/sanity";
 import { Code } from "lucide-react";
+import type { HomeQueryResult } from "../../../sanity.types";
+import { translations } from "@/lib/i18n/transalation";
+import type { Locale } from "@/lib/i18n/config";
 
 type Props = {
-  section: SkillCategory;
+  skillCategories: HomeQueryResult["skillCategories"];
+  lang: Locale;
 };
 
-const SkillsSection = ({ section }: Props) => {
-  const skillCategories = section.content.filter(
-    (e) => e._type === "skillCategory",
-  );
+const SkillsSection = ({ skillCategories, lang }: Props) => {
   return (
     <section className="relative overflow-hidden py-20">
       <div className="absolute inset-0 -z-20">
@@ -34,12 +34,12 @@ const SkillsSection = ({ section }: Props) => {
             className="mx-auto flex items-center gap-2"
           >
             <Code />
-            {section.subtitle as unknown as string}
+            {translations[lang].skills.subtitle}
           </ExtendedBadge>
           <div className="mx-auto flex max-w-2xl items-center gap-4">
             <ExtendedSeparator className="to-primary/30 flex-1 via-none from-transparent" />
             <Typography variant="h2">
-              {section.title as unknown as string}
+              {translations[lang].skills.title}
             </Typography>
             <ExtendedSeparator className="from-primary/30 flex-1 via-none to-transparent" />
           </div>
@@ -62,19 +62,20 @@ const SkillsSection = ({ section }: Props) => {
                   </CardDescription>
                 </div>
               </CardHeader>
-
-              <CardContent className="flex-1">
-                <div className="flex flex-wrap gap-2">
-                  {category.skills.map((skill) => (
-                    <ExtendedBadge
-                      key={skill.title as unknown as string}
-                      variant="ghost"
-                    >
-                      {skill.title as unknown as string}
-                    </ExtendedBadge>
-                  ))}
-                </div>
-              </CardContent>
+              {Array.isArray(category.skills) && category.skills.length > 0 && (
+                <CardContent className="flex-1">
+                  <div className="flex flex-wrap gap-2">
+                    {category.skills?.map((skill) => (
+                      <ExtendedBadge
+                        key={skill.title as unknown as string}
+                        variant="ghost"
+                      >
+                        {skill.title as unknown as string}
+                      </ExtendedBadge>
+                    ))}
+                  </div>
+                </CardContent>
+              )}
             </ExtendedCard>
           ))}
         </div>

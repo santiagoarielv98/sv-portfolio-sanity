@@ -1,5 +1,10 @@
 export const translations = {
   en: {
+    availability: {
+      available: "Available",
+      unavailable: "Unavailable",
+      busy: "Busy",
+    },
     nav: {
       home: "Home",
       about: "About",
@@ -63,6 +68,12 @@ export const translations = {
       },
     },
     common: {
+      availability: "Availability",
+      email: "Email",
+      phone: "Phone",
+      location: "Location",
+      socialLinks: "Social Links",
+      connect: "Connect with me",
       cv: {
         download: "Download CV",
         view: "View CV",
@@ -70,6 +81,11 @@ export const translations = {
     },
   },
   es: {
+    availability: {
+      available: "Disponible",
+      unavailable: "No disponible",
+      busy: "Ocupado",
+    },
     nav: {
       home: "Inicio",
       about: "Sobre mí",
@@ -133,6 +149,12 @@ export const translations = {
       },
     },
     common: {
+      availability: "Disponibilidad",
+      email: "Correo electrónico",
+      phone: "Teléfono",
+      location: "Ubicación",
+      socialLinks: "Redes sociales",
+      connect: "Conéctate conmigo",
       cv: {
         download: "Descargar CV",
         view: "Ver CV",

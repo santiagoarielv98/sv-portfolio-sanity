@@ -4,6 +4,8 @@ import AboutSection from "../_sections/about";
 import type { Locale } from "@/lib/i18n/config";
 import ExperienceSection from "../_sections/experience";
 import ProjectsSection from "../_sections/projects";
+import SkillsSection from "../_sections/skills";
+import ContactSection from "../_sections/contact";
 
 type Props = {
   params: Promise<{
@@ -25,6 +27,12 @@ export default async function Home(props: Props) {
       <AboutSection profile={data.profile} {...params} />
       <ExperienceSection experiences={data.experiences} {...params} />
       <ProjectsSection projects={data.featuredProjects} {...params} />
+      <SkillsSection skillCategories={data.skillCategories} {...params} />
+      <ContactSection
+        profile={data.profile}
+        contact={data.contact}
+        {...params}
+      />
       <pre>{JSON.stringify(data, null, 2)}</pre>
     </main>
   );

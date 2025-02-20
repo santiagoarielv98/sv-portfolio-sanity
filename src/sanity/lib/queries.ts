@@ -45,14 +45,22 @@ const experienceFields = `
     },
 `;
 
+const skillFields = `
+    "title": coalesce(title[$lang], title.es),
+    icon,
+`;
+
+const skillByCategoryQuery = defineQuery(`
+    *[_type == "skill" && references(^._id)] {
+        ${skillFields}
+    }
+`);
+
 const skillCategoryFields = `
     "title": coalesce(title[$lang], title.es),
     "description": coalesce(description[$lang], description.es),
     "icon": icon,
-    "skills": skills[]->{
-        "title": coalesce(title[$lang], title.es),
-        icon,
-    },
+    "skills": ${skillByCategoryQuery},
 `;
 
 const contactFields = `

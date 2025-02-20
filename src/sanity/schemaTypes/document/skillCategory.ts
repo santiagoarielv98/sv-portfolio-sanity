@@ -15,7 +15,7 @@ export const skillCategoryType = defineType({
       name: "description",
       title: "Descripción",
       type: "localeText",
-      validation: (Rule) => Rule.required().min(10).max(500),
+      validation: (Rule) => Rule.required(),
     },
     {
       name: "icon",

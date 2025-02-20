@@ -1,5 +1,3 @@
-"use client";
-
 import { Mail, MapPin } from "lucide-react";
 
 import { ExtendedBadge } from "@/components/extended-badge";
@@ -17,21 +15,16 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Typography } from "@/components/ui/typography";
 import type { Locale } from "@/lib/i18n/config";
-import { translations } from "@/lib/i18n/transalations";
-import { useParams } from "next/navigation";
-import type { GetHomePageResult } from "../../../sanity.types";
-import type { Contact } from "@/types/sanity";
+import { translations } from "@/lib/i18n/transalation";
+import type { HomeQueryResult } from "../../../sanity.types";
 
 type Props = {
-  profile: GetHomePageResult["profile"];
-  section: Contact;
+  profile: HomeQueryResult["profile"];
+  contact: HomeQueryResult["contact"];
+  lang: Locale;
 };
 
-const ContactSection = ({ section, profile }: Props) => {
-  const { lang } = useParams() as { lang: Locale };
-
-  const contact = section.content[0];
-
+const ContactSection = ({ contact, profile, lang }: Props) => {
   return (
     <section className="bg-primary/5 relative overflow-hidden py-20">
       <div className="absolute inset-0 -z-20">
@@ -46,12 +39,12 @@ const ContactSection = ({ section, profile }: Props) => {
             className="mx-auto flex items-center gap-2"
           >
             <Mail />
-            {section.subtitle as unknown as string}
+            {translations[lang].contact.subtitle}
           </ExtendedBadge>
           <div className="mx-auto flex max-w-2xl items-center gap-4">
             <ExtendedSeparator className="to-primary/30 flex-1 via-none from-transparent" />
             <Typography variant="h2">
-              {section.title as unknown as string}
+              {translations[lang].contact.title}
             </Typography>
             <ExtendedSeparator className="from-primary/30 flex-1 via-none to-transparent" />
           </div>
@@ -68,10 +61,10 @@ const ContactSection = ({ section, profile }: Props) => {
                 </ExtendedButton>
                 <div>
                   <CardTitle className="text-sm">
-                    {translations[lang].globals.email}
+                    {translations[lang].common.email}
                   </CardTitle>
                   <CardDescription className="text-primary">
-                    {profile?.email}
+                    {contact?.email}
                   </CardDescription>
                 </div>
               </CardHeader>
@@ -85,10 +78,10 @@ const ContactSection = ({ section, profile }: Props) => {
                 </ExtendedButton>
                 <div>
                   <CardTitle className="text-sm">
-                    {translations[lang].globals.location}
+                    {translations[lang].common.location}
                   </CardTitle>
                   <CardDescription className="text-primary">
-                    {profile?.location as unknown as string}
+                    {contact?.address as unknown as string}
                   </CardDescription>
                 </div>
               </CardHeader>
@@ -109,7 +102,7 @@ const ContactSection = ({ section, profile }: Props) => {
                 </ExtendedButton>
                 <div>
                   <CardTitle className="text-sm">
-                    {translations[lang].globals.availability}
+                    {translations[lang].common.availability}
                   </CardTitle>
                   <CardDescription
                     className="text-red-500 data-[status=available]:text-green-500 data-[status=busy]:text-yellow-500"
@@ -117,7 +110,7 @@ const ContactSection = ({ section, profile }: Props) => {
                   >
                     {/* {contactInfo.availability} */}
                     {
-                      translations[lang].availableStatus[
+                      translations[lang].availability[
                         profile?.availability || "unavailable"
                       ]
                     }
@@ -129,7 +122,7 @@ const ContactSection = ({ section, profile }: Props) => {
             <div className="flex items-center gap-4">
               <ExtendedSeparator className="to-primary/30 flex-1 via-none from-transparent" />
               <Typography variant="h3">
-                {translations[lang].contact.social.social_links}
+                {translations[lang].common.socialLinks}
               </Typography>
               <ExtendedSeparator className="from-primary/30 flex-1 via-none to-transparent" />
             </div>
@@ -137,11 +130,11 @@ const ContactSection = ({ section, profile }: Props) => {
             <ExtendedCard variant="solid">
               <CardHeader>
                 <CardTitle className="text-sm">
-                  {translations[lang].contact.social.connected}
+                  {translations[lang].common.connect}
                 </CardTitle>
               </CardHeader>
               <CardContent className="flex flex-wrap gap-2">
-                {profile?.social?.map((social, index) => (
+                {profile?.socialLinks?.map((social, index) => (
                   <ExtendedButton
                     key={index}
                     variant="solid"
@@ -156,7 +149,7 @@ const ContactSection = ({ section, profile }: Props) => {
                       className="flex items-center justify-center gap-2"
                     >
                       {/* {social.icon} */}
-                      {social.name}
+                      {social.platform}
                     </a>
                   </ExtendedButton>
                 ))}
@@ -168,53 +161,45 @@ const ContactSection = ({ section, profile }: Props) => {
           <div className="lg:col-span-2">
             <ExtendedCard variant="default" className="flex h-full flex-col">
               <CardHeader>
-                <CardTitle>{contact.title as unknown as string}</CardTitle>
+                <CardTitle>{translations[lang].contact.form.title}</CardTitle>
                 <CardDescription>
-                  {contact.description as unknown as string}
+                  {translations[lang].contact.form.subtitle}
                 </CardDescription>
               </CardHeader>
               <CardContent className="flex-1 space-y-6">
                 <div className="grid gap-6 md:grid-cols-2">
                   <div className="space-y-2">
                     <Typography variant="small">
-                      {translations[lang].contact.form.nameField.label}
+                      {translations[lang].contact.form.name.label}
                     </Typography>
                     <Input
-                      placeholder={
-                        translations[lang].contact.form.nameField.label
-                      }
+                      placeholder={translations[lang].contact.form.name.label}
                     />
                   </div>
                   <div className="space-y-2">
                     <Typography variant="small">
-                      {translations[lang].contact.form.emailField.label}
+                      {translations[lang].contact.form.email.label}
                     </Typography>
                     <Input
                       type="email"
-                      placeholder={
-                        translations[lang].contact.form.emailField.label
-                      }
+                      placeholder={translations[lang].contact.form.email.label}
                     />
                   </div>
                 </div>
                 <div className="space-y-2">
                   <Typography variant="small">
-                    {translations[lang].contact.form.subjectField.label}
+                    {translations[lang].contact.form.subject.label}
                   </Typography>
                   <Input
-                    placeholder={
-                      translations[lang].contact.form.subjectField.label
-                    }
+                    placeholder={translations[lang].contact.form.subject.label}
                   />
                 </div>
                 <div className="space-y-2">
                   <Typography variant="small">
-                    {translations[lang].contact.form.messageField.label}
+                    {translations[lang].contact.form.message.label}
                   </Typography>
                   <Textarea
-                    placeholder={
-                      translations[lang].contact.form.messageField.label
-                    }
+                    placeholder={translations[lang].contact.form.message.label}
                     className="h-full min-h-[100px] resize-none"
                   />
                 </div>
@@ -222,7 +207,7 @@ const ContactSection = ({ section, profile }: Props) => {
               <CardFooter>
                 <ExtendedButton variant="default" className="w-full">
                   <Mail className="mr-2 h-4 w-4" />
-                  {translations[lang].contact.form.submitButton}
+                  {translations[lang].contact.form.send}
                 </ExtendedButton>
               </CardFooter>
             </ExtendedCard>
