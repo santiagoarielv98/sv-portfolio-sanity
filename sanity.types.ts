@@ -63,9 +63,8 @@ export type Skill = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  title?: LocaleString;
+  title?: string;
   icon?: string;
-  level?: number;
   category?: {
     _ref: string;
     _type: "reference";
@@ -80,9 +79,10 @@ export type SkillCategory = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  title?: LocaleString;
+  title?: string;
   description?: LocaleText;
   icon?: string;
+  order?: number;
 };
 
 export type Project = {
@@ -326,20 +326,13 @@ export type AllSanitySchemaTypes =
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./src/sanity/lib/queries.ts
 // Variable: skillByCategoryQuery
-// Query: *[_type == "skill" && references(^._id)] {            "title": coalesce(title[$lang], title.es),    icon,    }
+// Query: *[_type == "skill" && references(^._id)] {            title,    icon,    }
 export type SkillByCategoryQueryResult = Array<{
-  title:
-    | Array<{
-        _type: "localeString";
-        es?: string;
-        en?: string;
-      }>
-    | string
-    | null;
+  title: string | null;
   icon: string | null;
 }>;
 // Variable: homeQuery
-// Query: {        "profile": *[_type == "profile"][0] {            name,    "title": coalesce(title[$lang], title.es),    "avatar": image.asset->url,    "bio": coalesce(bio[][$lang], bio[].es),    "objectives": coalesce(objectives[][$lang], objectives[].es),    "socialLinks": socialLinks[]{        icon,        platform,        url,    },    availability,    "resume": resume.asset->url    },        "featuredProjects": *[_type == "project" && featured == true] {            "title": coalesce(title[$lang], title.es),    "description": coalesce(description[$lang], description.es),    "thumbnail": thumbnail.asset->url,    "skills": skills[]->{        "title": coalesce(title[$lang], title.es),        icon,    },    links{        repo,        demo,    },    },        "experiences": *[_type == "experience"] {            "title": coalesce(title[$lang], title.es),    "organization": coalesce(organization[$lang], organization.es),    "location": coalesce(location[$lang], location.es),    type,    date{        start,        end,    },    "description": coalesce(description[][$lang], description[].es),    "skills": skills[]->{        "title": coalesce(title[$lang], title.es),        icon,    },    },        "skillCategories": *[_type == "skillCategory"] {            "title": coalesce(title[$lang], title.es),    "description": coalesce(description[$lang], description.es),    "icon": icon,    "skills":     *[_type == "skill" && references(^._id)] {            "title": coalesce(title[$lang], title.es),    icon,    },    },        "contact": *[_type == "contact"][0] {            email,    phone,    address,    }}
+// Query: {        "profile": *[_type == "profile"][0] {            name,    "title": coalesce(title[$lang], title.es),    "avatar": image.asset->url,    "bio": coalesce(bio[][$lang], bio[].es),    "objectives": coalesce(objectives[][$lang], objectives[].es),    "socialLinks": socialLinks[]{        icon,        platform,        url,    },    availability,    "resume": resume.asset->url    },        "featuredProjects": *[_type == "project" && featured == true] {            "title": coalesce(title[$lang], title.es),    "description": coalesce(description[$lang], description.es),    "thumbnail": thumbnail.asset->url,    "skills": skills[]->{        "title": coalesce(title[$lang], title.es),        icon,    },    links{        repo,        demo,    },    },        "experiences": *[_type == "experience"] {            "title": coalesce(title[$lang], title.es),    "organization": coalesce(organization[$lang], organization.es),    "location": coalesce(location[$lang], location.es),    type,    date{        start,        end,    },    "description": coalesce(description[][$lang], description[].es),    "skills": skills[]->{        "title": coalesce(title[$lang], title.es),        icon,    },    },        "skillCategories": *[_type == "skillCategory"] {            title,    "description": coalesce(description[$lang], description.es),    "icon": icon,    "skills":     *[_type == "skill" && references(^._id)] {            title,    icon,    },    },        "contact": *[_type == "contact"][0] {            email,    phone,    address,    }}
 export type HomeQueryResult = {
   profile: {
     name: string | null;
@@ -395,14 +388,7 @@ export type HomeQueryResult = {
       | null;
     thumbnail: string | null;
     skills: Array<{
-      title:
-        | Array<{
-            _type: "localeString";
-            es?: string;
-            en?: string;
-          }>
-        | string
-        | null;
+      title: Array<string> | null;
       icon: string | null;
     }> | null;
     links: {
@@ -449,26 +435,12 @@ export type HomeQueryResult = {
       | Array<string | null>
       | null;
     skills: Array<{
-      title:
-        | Array<{
-            _type: "localeString";
-            es?: string;
-            en?: string;
-          }>
-        | string
-        | null;
+      title: Array<string> | null;
       icon: string | null;
     }> | null;
   }>;
   skillCategories: Array<{
-    title:
-      | Array<{
-          _type: "localeString";
-          es?: string;
-          en?: string;
-        }>
-      | string
-      | null;
+    title: string | null;
     description:
       | Array<{
           _type: "localeText";
@@ -479,14 +451,7 @@ export type HomeQueryResult = {
       | null;
     icon: string | null;
     skills: Array<{
-      title:
-        | Array<{
-            _type: "localeString";
-            es?: string;
-            en?: string;
-          }>
-        | string
-        | null;
+      title: string | null;
       icon: string | null;
     }>;
   }>;
@@ -501,7 +466,7 @@ export type HomeQueryResult = {
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
-    '\n    *[_type == "skill" && references(^._id)] {\n        \n    "title": coalesce(title[$lang], title.es),\n    icon,\n\n    }\n': SkillByCategoryQueryResult;
-    '{\n    \n    "profile": *[_type == "profile"][0] {\n        \n    name,\n    "title": coalesce(title[$lang], title.es),\n    "avatar": image.asset->url,\n    "bio": coalesce(bio[][$lang], bio[].es),\n    "objectives": coalesce(objectives[][$lang], objectives[].es),\n    "socialLinks": socialLinks[]{\n        icon,\n        platform,\n        url,\n    },\n    availability,\n    "resume": resume.asset->url\n\n    }\n,\n    \n    "featuredProjects": *[_type == "project" && featured == true] {\n        \n    "title": coalesce(title[$lang], title.es),\n    "description": coalesce(description[$lang], description.es),\n    "thumbnail": thumbnail.asset->url,\n    "skills": skills[]->{\n        "title": coalesce(title[$lang], title.es),\n        icon,\n    },\n    links{\n        repo,\n        demo,\n    },\n\n    }\n,\n    \n    "experiences": *[_type == "experience"] {\n        \n    "title": coalesce(title[$lang], title.es),\n    "organization": coalesce(organization[$lang], organization.es),\n    "location": coalesce(location[$lang], location.es),\n    type,\n    date{\n        start,\n        end,\n    },\n    "description": coalesce(description[][$lang], description[].es),\n    "skills": skills[]->{\n        "title": coalesce(title[$lang], title.es),\n        icon,\n    },\n\n    }\n,\n    \n    "skillCategories": *[_type == "skillCategory"] {\n        \n    "title": coalesce(title[$lang], title.es),\n    "description": coalesce(description[$lang], description.es),\n    "icon": icon,\n    "skills": \n    *[_type == "skill" && references(^._id)] {\n        \n    "title": coalesce(title[$lang], title.es),\n    icon,\n\n    }\n,\n\n    }\n,\n    \n    "contact": *[_type == "contact"][0] {\n        \n    email,\n    phone,\n    address,\n\n    }\n\n}': HomeQueryResult;
+    '\n    *[_type == "skill" && references(^._id)] {\n        \n    title,\n    icon,\n\n    }\n': SkillByCategoryQueryResult;
+    '{\n    \n    "profile": *[_type == "profile"][0] {\n        \n    name,\n    "title": coalesce(title[$lang], title.es),\n    "avatar": image.asset->url,\n    "bio": coalesce(bio[][$lang], bio[].es),\n    "objectives": coalesce(objectives[][$lang], objectives[].es),\n    "socialLinks": socialLinks[]{\n        icon,\n        platform,\n        url,\n    },\n    availability,\n    "resume": resume.asset->url\n\n    }\n,\n    \n    "featuredProjects": *[_type == "project" && featured == true] {\n        \n    "title": coalesce(title[$lang], title.es),\n    "description": coalesce(description[$lang], description.es),\n    "thumbnail": thumbnail.asset->url,\n    "skills": skills[]->{\n        "title": coalesce(title[$lang], title.es),\n        icon,\n    },\n    links{\n        repo,\n        demo,\n    },\n\n    }\n,\n    \n    "experiences": *[_type == "experience"] {\n        \n    "title": coalesce(title[$lang], title.es),\n    "organization": coalesce(organization[$lang], organization.es),\n    "location": coalesce(location[$lang], location.es),\n    type,\n    date{\n        start,\n        end,\n    },\n    "description": coalesce(description[][$lang], description[].es),\n    "skills": skills[]->{\n        "title": coalesce(title[$lang], title.es),\n        icon,\n    },\n\n    }\n,\n    \n    "skillCategories": *[_type == "skillCategory"] {\n        \n    title,\n    "description": coalesce(description[$lang], description.es),\n    "icon": icon,\n    "skills": \n    *[_type == "skill" && references(^._id)] {\n        \n    title,\n    icon,\n\n    }\n,\n\n    }\n,\n    \n    "contact": *[_type == "contact"][0] {\n        \n    email,\n    phone,\n    address,\n\n    }\n\n}': HomeQueryResult;
   }
 }

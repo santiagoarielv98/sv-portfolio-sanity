@@ -285,8 +285,7 @@
       "title": {
         "type": "objectAttribute",
         "value": {
-          "type": "inline",
-          "name": "localeString"
+          "type": "string"
         },
         "optional": true
       },
@@ -294,13 +293,6 @@
         "type": "objectAttribute",
         "value": {
           "type": "string"
-        },
-        "optional": true
-      },
-      "level": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "number"
         },
         "optional": true
       },
@@ -374,8 +366,7 @@
       "title": {
         "type": "objectAttribute",
         "value": {
-          "type": "inline",
-          "name": "localeString"
+          "type": "string"
         },
         "optional": true
       },
@@ -391,6 +382,13 @@
         "type": "objectAttribute",
         "value": {
           "type": "string"
+        },
+        "optional": true
+      },
+      "order": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "number"
         },
         "optional": true
       }

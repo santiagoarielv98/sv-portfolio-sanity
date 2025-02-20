@@ -23,6 +23,11 @@ export const skillCategoryType = defineType({
       type: "string",
       validation: (Rule) => Rule.required(),
     },
+    {
+      name: "order",
+      title: "Orden",
+      type: "number",
+    },
   ],
   preview: {
     select: {
