@@ -1,26 +1,27 @@
 import type { LucideIcon } from "lucide-react";
 import {
-  Code,
   Briefcase,
+  Cloud,
+  Code,
   GraduationCap,
   Monitor,
   Server,
-  Cloud,
 } from "lucide-react";
+import type { IconType } from "react-icons";
 import {
   FaAws,
   FaBootstrap,
   FaFigma,
-  FaGit,
+  FaGithub,
   FaGitlab,
   FaHtml5,
   FaJava,
   FaLaravel,
+  FaLinkedinIn,
   FaReact,
   FaSass,
   FaUsers,
 } from "react-icons/fa";
-import type { IconType } from "react-icons";
 import {
   SiAngular,
   SiAxios,
@@ -42,7 +43,7 @@ import {
   SiReactquery,
   SiRedux,
   SiShadcnui,
-  SiSpring,
+  SiSpringboot,
   SiSupabase,
   SiSwagger,
   SiTailwindcss,
@@ -64,8 +65,9 @@ export const icons: Record<string, LucideIcon | IconType> = {
   angular: SiAngular,
   figma: FaFigma,
   java: FaJava,
-  spring: SiSpring,
+  springboot: SiSpringboot,
   nestjs: SiNestjs,
+  linkedin: FaLinkedinIn,
   firebase: SiFirebase,
   aws: FaAws,
   docker: SiDocker,
@@ -73,7 +75,7 @@ export const icons: Record<string, LucideIcon | IconType> = {
   mysql: SiMysql,
   postgresql: SiPostgresql,
   gcp: SiGooglecloud,
-  github: FaGit,
+  github: FaGithub,
   gitlab: FaGitlab,
   laravel: FaLaravel,
   supabase: SiSupabase,

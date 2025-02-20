@@ -17,6 +17,7 @@ import { Typography } from "@/components/ui/typography";
 import type { Locale } from "@/lib/i18n/config";
 import { translations } from "@/lib/i18n/transalation";
 import type { HomeQueryResult } from "../../../sanity.types";
+import { getIcon } from "@/components/icons";
 
 type Props = {
   profile: HomeQueryResult["profile"];
@@ -134,25 +135,28 @@ const ContactSection = ({ contact, profile, lang }: Props) => {
                 </CardTitle>
               </CardHeader>
               <CardContent className="flex flex-wrap gap-2">
-                {profile?.socialLinks?.map((social, index) => (
-                  <ExtendedButton
-                    key={index}
-                    variant="solid"
-                    size="sm"
-                    asChild
-                    className="flex-1"
-                  >
-                    <a
-                      href={social.url!}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center justify-center gap-2"
+                {profile?.socialLinks?.map((social, index) => {
+                  const Icon = getIcon(social.icon!);
+                  return (
+                    <ExtendedButton
+                      key={index}
+                      variant="solid"
+                      size="sm"
+                      asChild
+                      className="flex-1"
                     >
-                      {/* {social.icon} */}
-                      {social.platform}
-                    </a>
-                  </ExtendedButton>
-                ))}
+                      <a
+                        href={social.url!}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center justify-center gap-2"
+                      >
+                        <Icon className="h-4 w-4" />
+                        {social.platform}
+                      </a>
+                    </ExtendedButton>
+                  );
+                })}
               </CardContent>
             </ExtendedCard>
           </div>

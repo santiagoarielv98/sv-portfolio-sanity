@@ -11,11 +11,12 @@ import {
 import { ExtendedSeparator } from "@/components/extended-separator";
 import { Typography } from "@/components/ui/typography";
 import type { Locale } from "@/lib/i18n/config";
-import { Code } from "lucide-react";
+import { translations } from "@/lib/i18n/transalation";
+import { ExternalLink, FolderGit, Grid2X2 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { FaGithub } from "react-icons/fa";
 import type { HomeQueryResult } from "../../../sanity.types";
-import { translations } from "@/lib/i18n/transalation";
 
 type Props = {
   projects: HomeQueryResult["featuredProjects"];
@@ -36,7 +37,7 @@ const ProjectsSection = ({ projects, lang }: Props) => {
             variant="gradient"
             className="mx-auto flex items-center gap-2"
           >
-            <Code />
+            <FolderGit />
             {translations[lang].project.subtitle}
           </ExtendedBadge>
           <div className="mx-auto flex max-w-2xl items-center gap-4">
@@ -97,13 +98,13 @@ const ProjectsSection = ({ projects, lang }: Props) => {
                     size="sm"
                     className="flex-1"
                   >
-                    <Code className="mr-1 h-4 w-4" />
+                    <ExternalLink className="mr-1 h-4 w-4" />
                     {translations[lang].project.demo}
                   </ExtendedButton>
                 )}
                 {project.links?.repo && (
                   <ExtendedButton variant="solid" size="sm" className="flex-1">
-                    <Code className="mr-1 h-4 w-4" />
+                    <FaGithub className="mr-1 h-4 w-4" />
                     {translations[lang].project.source}
                   </ExtendedButton>
                 )}
@@ -122,7 +123,7 @@ const ProjectsSection = ({ projects, lang }: Props) => {
           >
             <Link href="/projects">
               <span>{translations[lang].project.more}</span>
-              <Code className="h-5 w-5 transition-transform group-hover:rotate-12" />
+              <Grid2X2 className="h-5 w-5 transition-transform group-hover:rotate-12" />
             </Link>
           </ExtendedButton>
         </div>

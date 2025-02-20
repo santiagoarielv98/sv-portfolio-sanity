@@ -10,11 +10,11 @@ import {
 import { ExtendedSeparator } from "@/components/extended-separator";
 import { getIcon } from "@/components/icons";
 import { Typography } from "@/components/ui/typography";
-import { getFormattedDate } from "@/lib/utils";
-import { Calendar, Code, MapPin } from "lucide-react";
-import type { HomeQueryResult } from "../../../sanity.types";
-import { translations } from "@/lib/i18n/transalation";
 import type { Locale } from "@/lib/i18n/config";
+import { translations } from "@/lib/i18n/transalation";
+import { getFormattedDate } from "@/lib/utils";
+import { Briefcase, Calendar, MapPin } from "lucide-react";
+import type { HomeQueryResult } from "../../../sanity.types";
 
 type Props = {
   experiences: HomeQueryResult["experiences"];
@@ -35,7 +35,7 @@ const ExperienceSection = ({ experiences, lang }: Props) => {
             variant="gradient"
             className="mx-auto flex items-center gap-2"
           >
-            <Code />
+            <Briefcase />
             {translations[lang].experience.subtitle}
           </ExtendedBadge>
           <div className="mx-auto flex max-w-2xl items-center gap-4">

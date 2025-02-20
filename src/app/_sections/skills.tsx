@@ -12,7 +12,7 @@ import { getIcon } from "@/components/icons";
 import { Typography } from "@/components/ui/typography";
 import type { Locale } from "@/lib/i18n/config";
 import { translations } from "@/lib/i18n/transalation";
-import { Code } from "lucide-react";
+import { Brain } from "lucide-react";
 import type { HomeQueryResult } from "../../../sanity.types";
 
 type Props = {
@@ -34,7 +34,7 @@ const SkillsSection = ({ skillCategories, lang }: Props) => {
             variant="gradient"
             className="mx-auto flex items-center gap-2"
           >
-            <Code />
+            <Brain />
             {translations[lang].skills.subtitle}
           </ExtendedBadge>
           <div className="mx-auto flex max-w-2xl items-center gap-4">
@@ -69,14 +69,18 @@ const SkillsSection = ({ skillCategories, lang }: Props) => {
                   category.skills.length > 0 && (
                     <CardContent className="flex-1">
                       <div className="flex flex-wrap gap-2">
-                        {category.skills?.map((skill) => (
-                          <ExtendedBadge
-                            key={skill.title as unknown as string}
-                            variant="ghost"
-                          >
-                            {skill.title as unknown as string}
-                          </ExtendedBadge>
-                        ))}
+                        {category.skills?.map((skill) => {
+                          const Icon = getIcon(skill.icon!);
+                          return (
+                            <ExtendedBadge
+                              key={skill.title as unknown as string}
+                              variant="ghost"
+                            >
+                              <Icon />
+                              {skill.title as unknown as string}
+                            </ExtendedBadge>
+                          );
+                        })}
                       </div>
                     </CardContent>
                   )}
