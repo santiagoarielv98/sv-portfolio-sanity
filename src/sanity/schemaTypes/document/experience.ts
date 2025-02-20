@@ -71,14 +71,16 @@ export const experienceType = defineType({
   ],
   preview: {
     select: {
-      title: "title",
-      organization: "organization",
+      title: "title.es",
+      organization: "organization.es",
       type: "type",
       start: "date.start",
       end: "date.end",
     },
     prepare: ({ title, organization, type, start, end }) => {
-      const date = `${start} - ${end}`;
+      const startDate = new Date(start).getFullYear();
+      const endDate = end ? new Date(end).getFullYear() : "Actualidad";
+      const date = `${startDate} - ${endDate}`;
       const subtitle = `${organization} - ${date}`;
       return {
         title,

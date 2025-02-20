@@ -32,12 +32,13 @@ const baseProjectsFields = `
 const experienceFields = `
     "title": coalesce(title[$lang], title.es),
     "organization": coalesce(organization[$lang], organization.es),
+    "location": coalesce(location[$lang], location.es),
     type,
     date{
         start,
         end,
     },
-    "description": coalesce(description[$lang], description.es),
+    "description": coalesce(description[][$lang], description[].es),
     "skills": skills[]->{
         "title": coalesce(title[$lang], title.es),
         icon,
@@ -72,8 +73,8 @@ const featuredProjectsQuery = `
     }
 `;
 
-const experienceQuery = `
-    "experience": *[_type == "experience"] {
+const experiencesQuery = `
+    "experiences": *[_type == "experience"] {
         ${experienceFields}
     }
 `;
@@ -93,7 +94,7 @@ const contactQuery = `
 export const homeQuery = defineQuery(`{
     ${profileQuery},
     ${featuredProjectsQuery},
-    ${experienceQuery},
+    ${experiencesQuery},
     ${skillCategoriesQuery},
     ${contactQuery}
 }`);

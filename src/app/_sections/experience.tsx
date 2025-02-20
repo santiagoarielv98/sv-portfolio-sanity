@@ -11,16 +11,17 @@ import { ExtendedSeparator } from "@/components/extended-separator";
 import { getIcon } from "@/components/icons";
 import { Typography } from "@/components/ui/typography";
 import { getFormattedDate } from "@/lib/utils";
-import type { Experience } from "@/types/sanity";
 import { Calendar, Code, MapPin } from "lucide-react";
+import type { HomeQueryResult } from "../../../sanity.types";
+import { translations } from "@/lib/i18n/transalation";
+import type { Locale } from "@/lib/i18n/config";
 
 type Props = {
-  section: Experience;
+  experiences: HomeQueryResult["experiences"];
+  lang: Locale;
 };
 
-const ExperienceSection = ({ section }: Props) => {
-  const experiences = section.content.filter((e) => e._type === "experience");
-
+const ExperienceSection = ({ experiences, lang }: Props) => {
   return (
     <section className="relative overflow-hidden py-20">
       <div className="absolute inset-0 -z-20">
@@ -35,12 +36,12 @@ const ExperienceSection = ({ section }: Props) => {
             className="mx-auto flex items-center gap-2"
           >
             <Code />
-            {section.subtitle as unknown as string}
+            {translations[lang].experience.subtitle}
           </ExtendedBadge>
           <div className="mx-auto flex max-w-2xl items-center gap-4">
             <ExtendedSeparator className="to-primary/30 flex-1 via-none from-transparent" />
             <Typography variant="h2">
-              {section.title as unknown as string}
+              {translations[lang].experience.title}
             </Typography>
             <ExtendedSeparator className="from-primary/30 flex-1 via-none to-transparent" />
           </div>
@@ -113,15 +114,22 @@ const ExperienceSection = ({ section }: Props) => {
                             ))}
                           </ul>
                         )}
-
-                        <ExtendedSeparator />
-                        {/* <div className="flex flex-wrap gap-2">
-                          {experience.technologies.map((tech, techIndex) => (
-                            <ExtendedBadge key={techIndex} variant="ghost">
-                              {tech}
-                            </ExtendedBadge>
-                          ))}
-                        </div> */}
+                        {Array.isArray(experience.skills) &&
+                          experience.skills.length > 0 && (
+                            <>
+                              <ExtendedSeparator />
+                              <div className="flex flex-wrap gap-2">
+                                {experience.skills.map((skill) => (
+                                  <ExtendedBadge
+                                    key={skill.title as unknown as string}
+                                    variant="ghost"
+                                  >
+                                    {skill.title as unknown as string}
+                                  </ExtendedBadge>
+                                ))}
+                              </div>
+                            </>
+                          )}
                       </CardContent>
                     </ExtendedCard>
                   </div>

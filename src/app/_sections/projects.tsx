@@ -10,17 +10,19 @@ import {
 } from "@/components/extended-card";
 import { ExtendedSeparator } from "@/components/extended-separator";
 import { Typography } from "@/components/ui/typography";
-import type { Projects } from "@/types/sanity";
+import type { Locale } from "@/lib/i18n/config";
 import { Code } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import type { HomeQueryResult } from "../../../sanity.types";
+import { translations } from "@/lib/i18n/transalation";
 
 type Props = {
-  section: Projects;
+  projects: HomeQueryResult["featuredProjects"];
+  lang: Locale;
 };
 
-const ProjectsSection = ({ section }: Props) => {
-  const projects = section.content.filter((e) => e._type === "project");
+const ProjectsSection = ({ projects, lang }: Props) => {
   return (
     <section className="relative overflow-hidden py-20">
       <div className="absolute inset-0 -z-20">
@@ -35,12 +37,12 @@ const ProjectsSection = ({ section }: Props) => {
             className="mx-auto flex items-center gap-2"
           >
             <Code />
-            {section.subtitle as unknown as string}
+            {translations[lang].project.subtitle}
           </ExtendedBadge>
           <div className="mx-auto flex max-w-2xl items-center gap-4">
             <ExtendedSeparator className="to-primary/30 flex-1 via-none from-transparent" />
             <Typography variant="h2">
-              {section.title as unknown as string}
+              {translations[lang].project.title}
             </Typography>
             <ExtendedSeparator className="from-primary/30 flex-1 via-none to-transparent" />
           </div>
@@ -73,15 +75,20 @@ const ProjectsSection = ({ section }: Props) => {
                 </CardDescription>
               </CardHeader>
 
-              <CardContent>
-                {/* <div className="flex flex-wrap gap-2">
-                  {project.technologies.map((tech, techIndex) => (
-                    <ExtendedBadge key={techIndex} variant="ghost">
-                      {tech}
-                    </ExtendedBadge>
-                  ))}
-                </div> */}
-              </CardContent>
+              {Array.isArray(project.skills) && project.skills.length > 0 && (
+                <CardContent>
+                  <div className="flex flex-wrap gap-2">
+                    {project.skills?.map((skill) => (
+                      <ExtendedBadge
+                        key={skill.title as unknown as string}
+                        variant="ghost"
+                      >
+                        {skill.title as unknown as string}
+                      </ExtendedBadge>
+                    ))}
+                  </div>
+                </CardContent>
+              )}
               <ExtendedSeparator className="mt-auto mb-6" />
               <CardFooter className="gap-4">
                 {project.links?.demo && (
@@ -91,13 +98,13 @@ const ProjectsSection = ({ section }: Props) => {
                     className="flex-1"
                   >
                     <Code className="mr-1 h-4 w-4" />
-                    Live Demo
+                    {translations[lang].project.demo}
                   </ExtendedButton>
                 )}
                 {project.links?.repo && (
                   <ExtendedButton variant="solid" size="sm" className="flex-1">
                     <Code className="mr-1 h-4 w-4" />
-                    Source Code
+                    {translations[lang].project.source}
                   </ExtendedButton>
                 )}
               </CardFooter>
@@ -114,7 +121,7 @@ const ProjectsSection = ({ section }: Props) => {
             asChild
           >
             <Link href="/projects">
-              <span>Ver más proyectos</span>
+              <span>{translations[lang].project.more}</span>
               <Code className="h-5 w-5 transition-transform group-hover:rotate-12" />
             </Link>
           </ExtendedButton>

@@ -16,7 +16,7 @@ export const projectType = defineType({
       title: "Slug",
       type: "slug",
       options: {
-        source: "title",
+        source: "title.en",
         maxLength: 50,
       },
       validation: (Rule) => Rule.required(),
@@ -70,7 +70,7 @@ export const projectType = defineType({
   ],
   preview: {
     select: {
-      title: "title",
+      title: "title.es",
       media: "thumbnail",
     },
   },

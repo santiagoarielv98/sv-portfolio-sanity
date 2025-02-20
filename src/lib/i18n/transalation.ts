@@ -29,6 +29,8 @@ export const translations = {
       title: "Projects",
       subtitle: "Some of my work",
       more: "More projects",
+      source: "Source Code",
+      demo: "Live Demo",
     },
     skills: {
       title: "Skills",
@@ -97,6 +99,8 @@ export const translations = {
       title: "Proyectos",
       subtitle: "Algunos de mis trabajos",
       more: "Más proyectos",
+      source: "Código fuente",
+      demo: "Demo en vivo",
     },
     skills: {
       title: "Habilidades",
