@@ -9,11 +9,13 @@ export const experienceType = defineType({
       name: "title",
       title: "Título",
       type: "localeString",
+      validation: (Rule) => Rule.required(),
     },
     {
       name: "organization",
       title: "Organización",
       type: "localeString",
+      validation: (Rule) => Rule.required(),
     },
     {
       name: "location",
@@ -37,16 +39,19 @@ export const experienceType = defineType({
       name: "date",
       title: "Fecha",
       type: "object",
+      validation: (Rule) => Rule.required(),
       fields: [
         {
           name: "start",
           title: "Inicio",
           type: "date",
+          validation: (Rule) => Rule.required(),
         },
         {
           name: "end",
           title: "Fin",
           type: "date",
+          validation: (Rule) => Rule.max(new Date().toISOString()),
         },
       ],
     },
@@ -54,6 +59,7 @@ export const experienceType = defineType({
       name: "description",
       title: "Descripción",
       type: "array",
+      validation: (Rule) => Rule.required().min(1),
       of: [{ type: "localeString" }],
     },
     {

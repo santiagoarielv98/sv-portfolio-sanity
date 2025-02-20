@@ -9,6 +9,7 @@ export const profileType = defineType({
       name: "name",
       title: "Nombre",
       type: "string",
+      validation: (Rule) => Rule.required().min(2).max(100),
     },
     {
       name: "title",
@@ -51,6 +52,7 @@ export const profileType = defineType({
       name: "socialLinks",
       title: "Enlaces sociales",
       type: "array",
+      validation: (Rule) => Rule.required().min(1),
       of: [
         {
           type: "object",
@@ -59,16 +61,22 @@ export const profileType = defineType({
               name: "icon",
               title: "Icono",
               type: "string",
+              validation: (Rule) => Rule.required(),
             },
             {
               name: "platform",
               title: "Plataforma",
               type: "string",
+              validation: (Rule) => Rule.required(),
             },
             {
               name: "url",
               title: "URL",
               type: "url",
+              validation: (Rule) =>
+                Rule.required().uri({
+                  scheme: ["http", "https"],
+                }),
             },
           ],
         },
@@ -78,6 +86,7 @@ export const profileType = defineType({
       name: "availability",
       title: "Disponibilidad",
       type: "string",
+      validation: (Rule) => Rule.required(),
       options: {
         list: [
           { title: "Disponible", value: "available" },

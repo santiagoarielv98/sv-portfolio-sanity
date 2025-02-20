@@ -9,22 +9,26 @@ export const skillType = defineType({
       name: "title",
       title: "Título",
       type: "localeString",
+      validation: (Rule) => Rule.required(),
     },
     {
       name: "icon",
       title: "Ícono",
       type: "string",
+      validation: (Rule) => Rule.required(),
     },
     {
       name: "level",
       title: "Nivel",
       type: "number",
+      validation: (Rule) => Rule.required().min(1).max(100),
     },
     {
       name: "category",
       title: "Categoría",
       type: "reference",
       to: [{ type: "skillCategory" }],
+      validation: (Rule) => Rule.required(),
     },
   ],
   preview: {
