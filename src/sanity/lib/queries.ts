@@ -2,10 +2,10 @@ import { defineQuery } from "next-sanity";
 
 const profileFields = `
     name,
-    "title": title[$lang],
+    "title": coalesce(title[$lang], title.es),
     "avatar": image.asset->url,
-    "bio": bio[$lang],
-    "objectives": objectives[$lang],
+    "bio": coalesce(bio[$lang], bio.es),
+    "objectives": coalesce(objectives[$lang], objectives.es),
     "socialLinks": socialLinks[]{
         icon,
         platform,
@@ -16,11 +16,11 @@ const profileFields = `
 `;
 
 const baseProjectsFields = `
-    "title": title[$lang],
-    "description": description[$lang],
+    "title": coalesce(title[$lang], title.es),
+    "description": coalesce(description[$lang], description.es),
     "thumbnail": thumbnail.asset->url,
     "skills": skills[]->{
-        "title": title[$lang],
+        "title": coalesce(title[$lang], title.es),
         icon,
     },
     links{
@@ -30,26 +30,26 @@ const baseProjectsFields = `
 `;
 
 const experienceFields = `
-    "title": title[$lang],
-    "organization": organization[$lang],
+    "title": coalesce(title[$lang], title.es),
+    "organization": coalesce(organization[$lang], organization.es),
     type,
     date{
         start,
         end,
     },
-    "description": description[$lang],
+    "description": coalesce(description[$lang], description.es),
     "skills": skills[]->{
-        "title": title[$lang],
+        "title": coalesce(title[$lang], title.es),
         icon,
     },
 `;
 
 const skillCategoryFields = `
-    "title": title[$lang],
-    "description": description[$lang],
+    "title": coalesce(title[$lang], title.es),
+    "description": coalesce(description[$lang], description.es),
     "icon": icon,
     "skills": skills[]->{
-        "title": title[$lang],
+        "title": coalesce(title[$lang], title.es),
         icon,
     },
 `;
