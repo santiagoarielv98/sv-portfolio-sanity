@@ -170,14 +170,14 @@ const ContactSection = ({ section, profile }: Props) => {
 
           {/* Contact Form Column */}
           <div className="lg:col-span-2">
-            <ExtendedCard variant="default" className="h-full">
+            <ExtendedCard variant="default" className="flex h-full flex-col">
               <CardHeader>
                 <CardTitle>{contact.title as unknown as string}</CardTitle>
                 <CardDescription>
                   {contact.description as unknown as string}
                 </CardDescription>
               </CardHeader>
-              <CardContent className="space-y-6">
+              <CardContent className="flex-1 space-y-6">
                 <div className="grid gap-6 md:grid-cols-2">
                   <div className="space-y-2">
                     <Typography variant="small">
@@ -219,7 +219,7 @@ const ContactSection = ({ section, profile }: Props) => {
                     placeholder={
                       translations[lang].contact.form.messageField.label
                     }
-                    className="min-h-[100px] resize-none"
+                    className="h-full min-h-[100px] resize-none"
                   />
                 </div>
               </CardContent>

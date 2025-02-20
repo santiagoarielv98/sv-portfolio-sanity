@@ -8,48 +8,10 @@ import {
   ExtendedCard,
 } from "@/components/extended-card";
 import { ExtendedSeparator } from "@/components/extended-separator";
+import { getIcon } from "@/components/icons";
 import { Typography } from "@/components/ui/typography";
 import { Calendar, Code, MapPin } from "lucide-react";
 import type { GetHomePageResult } from "../../../sanity.types";
-
-export interface Experience {
-  title: string;
-  company: string;
-  period: string;
-  location: string;
-  description: string;
-  technologies: string[];
-}
-
-// export const experiences: Experience[] = [
-//   {
-//     title: "Senior Developer",
-//     company: "TechnoSoft",
-//     period: "2019 - Present",
-//     location: "New York, USA",
-//     description:
-//       "Led development of multiple web applications using React and Node.js",
-//     technologies: ["React", "Node.js"],
-//   },
-//   {
-//     title: "Full Stack Developer",
-//     company: "WebSolutions Inc",
-//     period: "2017 - 2019",
-//     location: "San Francisco, USA",
-//     description:
-//       "Developed and maintained enterprise web applications using Angular and Java",
-//     technologies: ["Angular", "Java", "Spring Boot"],
-//   },
-//   {
-//     title: "Web Development Internship",
-//     company: "StartupTech",
-//     period: "2016 - 2017",
-//     location: "Remote",
-//     description:
-//       "Assisted in frontend development and learned modern web technologies",
-//     technologies: ["HTML", "CSS", "JavaScript"],
-//   },
-// ];
 
 type Props = {
   section: GetHomePageResult["sections"][number] & {
@@ -119,7 +81,7 @@ const ExperienceSection = ({ section }: Props) => {
                           variant="gradient"
                           float="none"
                         >
-                          <Code />
+                          {getIcon(experience.type)}
                         </ExtendedButton>
                         <div className="flex flex-1 flex-col gap-1.5">
                           <CardTitle>

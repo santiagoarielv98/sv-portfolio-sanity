@@ -10,6 +10,7 @@ const aboutFields = `
     "iam": iam[$lang],
     "objective": objective[$lang],
     "achievements": achievements[] {
+        icon,
         "title": title[$lang],
         "description": description[$lang]
     }

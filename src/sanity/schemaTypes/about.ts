@@ -13,6 +13,7 @@ export const aboutType = defineType({
         {
           type: "object",
           fields: [
+            { name: "icon", type: "string" },
             { name: "title", type: "localeString" },
             { name: "description", type: "localeText" },
           ],

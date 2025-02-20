@@ -57,6 +57,10 @@ export const sectionType = defineType({
       name: "order",
       type: "number",
     },
+    {
+      name: "icon",
+      type: "string",
+    },
   ],
   preview: {
     select: {

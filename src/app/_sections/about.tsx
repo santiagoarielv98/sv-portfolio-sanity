@@ -4,31 +4,14 @@ import { ExtendedBadge } from "@/components/extended-badge";
 import { ExtendedButton } from "@/components/extended-button";
 import { ExtendedCard } from "@/components/extended-card";
 import { ExtendedSeparator } from "@/components/extended-separator";
+import { getIcon } from "@/components/icons";
 import { Typography } from "@/components/ui/typography";
-import { Code, Download, Users } from "lucide-react";
-import Image from "next/image";
-import type { GetHomePageResult } from "../../../sanity.types";
-import { translations } from "@/lib/i18n/transalations";
-import { useParams } from "next/navigation";
 import type { Locale } from "@/lib/i18n/config";
-
-// const achievements: Achievement[] = [
-//   {
-//     icon: <Users />,
-//     title: "Trabajo en Equipo",
-//     description: "Colaboración efectiva en diversos equipos de desarrollo",
-//   },
-//   {
-//     icon: <Medal />,
-//     title: "Aprendizaje Rápido",
-//     description: "Rápida adaptación a nuevas tecnologías y frameworks",
-//   },
-//   {
-//     icon: <Target />,
-//     title: "Entrega de Proyectos",
-//     description: "Completé exitosamente múltiples proyectos web",
-//   },
-// ];
+import { translations } from "@/lib/i18n/transalations";
+import { Code, Download } from "lucide-react";
+import Image from "next/image";
+import { useParams } from "next/navigation";
+import type { GetHomePageResult } from "../../../sanity.types";
 
 type Props = {
   profile: GetHomePageResult["profile"];
@@ -151,8 +134,7 @@ const AboutSection = ({ profile, section }: Props) => {
                 <ExtendedCard key={index} variant="solid" className="p-4">
                   <div className="flex flex-col items-center gap-2 text-center">
                     <ExtendedButton size="icon" variant="gradient">
-                      {/* {achievement.icon} */}
-                      <Users />
+                      {getIcon(achievement.icon!)}
                     </ExtendedButton>
                     <Typography variant="h4">
                       {achievement.title as unknown as string}
@@ -172,7 +154,7 @@ const AboutSection = ({ profile, section }: Props) => {
             <div className="pt-4">
               <ExtendedButton variant="gradient" size="lg" className="w-full">
                 <Download className="mr-2" />
-                Descargar CV
+                {translations[lang].cv.download}
               </ExtendedButton>
             </div>
           </div>

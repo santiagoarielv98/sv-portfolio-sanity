@@ -6,6 +6,10 @@ export const translations = {
       email: "Email",
       availability: "Availability",
     },
+    cv: {
+      download: "Download CV",
+      view: "View CV",
+    },
     availableStatus: {
       available: "Available",
       busy: "Busy",
@@ -52,6 +56,10 @@ export const translations = {
       languages: "Idiomas",
       email: "Correo Electrónico",
       availability: "Disponibilidad",
+    },
+    cv: {
+      download: "Descargar CV",
+      view: "Ver CV",
     },
     availableStatus: {
       available: "Disponible",
