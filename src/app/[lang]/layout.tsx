@@ -47,10 +47,6 @@ export default async function RootLayout(
   }>,
 ) {
   const params = await props.params;
-  // const { data } = await sanityFetch({
-  //   query: settingQuery,
-  //   params,
-  // });
   const [settings, profile] = await Promise.all([
     sanityFetch({
       query: settingQuery,
