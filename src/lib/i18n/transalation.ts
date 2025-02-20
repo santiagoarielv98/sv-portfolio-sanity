@@ -60,6 +60,12 @@ export const translations = {
         send: "Send message",
       },
     },
+    common: {
+      cv: {
+        download: "Download CV",
+        view: "View CV",
+      },
+    },
   },
   es: {
     nav: {
@@ -120,6 +126,12 @@ export const translations = {
           placeholder: "Escribe tu mensaje aquí",
         },
         send: "Enviar mensaje",
+      },
+    },
+    common: {
+      cv: {
+        download: "Descargar CV",
+        view: "Ver CV",
       },
     },
   },

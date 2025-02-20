@@ -1,28 +1,20 @@
-"use client";
-
 import { ExtendedBadge } from "@/components/extended-badge";
 import { ExtendedButton } from "@/components/extended-button";
 import { ExtendedCard } from "@/components/extended-card";
 import { ExtendedSeparator } from "@/components/extended-separator";
-import { getIcon } from "@/components/icons";
 import { Typography } from "@/components/ui/typography";
 import type { Locale } from "@/lib/i18n/config";
-import { translations } from "@/lib/i18n/transalations";
+import { translations } from "@/lib/i18n/transalation";
 import { Code, Download } from "lucide-react";
 import Image from "next/image";
-import { useParams } from "next/navigation";
-import type { GetHomePageResult } from "../../../sanity.types";
-import type { About } from "@/types/sanity";
+import type { HomeQueryResult } from "../../../sanity.types";
 
 type Props = {
-  profile: GetHomePageResult["profile"];
-  section: About;
+  profile: HomeQueryResult["profile"];
+  lang: Locale;
 };
 
-const AboutSection = ({ profile, section }: Props) => {
-  const { lang } = useParams() as { lang: Locale };
-  const about = section.content[0];
-
+const AboutSection = ({ profile, lang }: Props) => {
   return (
     <section className="relative overflow-hidden py-20">
       <div className="absolute inset-0 -z-20">
@@ -38,12 +30,12 @@ const AboutSection = ({ profile, section }: Props) => {
             className="mx-auto flex items-center gap-2"
           >
             <Code />
-            {section.subtitle as unknown as string}
+            {translations[lang].about.subtitle}
           </ExtendedBadge>
           <div className="mx-auto flex max-w-2xl items-center gap-4">
             <ExtendedSeparator className="to-primary/30 flex-1 via-none from-transparent" />
             <Typography variant="h2">
-              {section.title as unknown as string}
+              {translations[lang].about.title}
             </Typography>
             <ExtendedSeparator className="from-primary/30 flex-1 via-none to-transparent" />
           </div>
@@ -55,8 +47,8 @@ const AboutSection = ({ profile, section }: Props) => {
           <div className="space-y-8">
             <div className="relative aspect-square overflow-hidden rounded-xl">
               <Image
-                src={profile?.image as string}
-                alt={`Foto de ${profile?.name}`}
+                src={profile!.avatar!}
+                alt={`Foto de ${profile!.name}`}
                 fill
                 className="object-cover"
               />
@@ -64,14 +56,14 @@ const AboutSection = ({ profile, section }: Props) => {
             </div>
             <ExtendedCard variant="solid" className="p-6">
               <div className="grid gap-4 sm:grid-cols-2">
-                <div>
+                {/* <div>
                   <Typography variant="small" className="text-muted-foreground">
                     {translations[lang].globals.location}
                   </Typography>
                   <Typography variant="h4">
                     {profile?.location as unknown as string}
                   </Typography>
-                </div>
+                </div> */}
                 {/* <div>
                   <Typography variant="small" className="text-muted-foreground">
                     Experiencia
@@ -84,14 +76,14 @@ const AboutSection = ({ profile, section }: Props) => {
                   </Typography>
                   <Typography variant="h4">10+</Typography>
                 </div> */}
-                <div>
+                {/* <div>
                   <Typography variant="small" className="text-muted-foreground">
                     {translations[lang].globals.languages}
                   </Typography>
                   <Typography variant="h4">
                     {profile?.languages?.join(", ")}
                   </Typography>
-                </div>
+                </div> */}
               </div>
             </ExtendedCard>
           </div>
@@ -100,7 +92,7 @@ const AboutSection = ({ profile, section }: Props) => {
           <div className="space-y-8">
             <div>
               <Typography variant="h3" className="mb-4">
-                {translations[lang].about.iam}
+                {translations[lang].about.whoami}
               </Typography>
               <div className="space-y-4">
                 {profile?.bio?.map((bio, index) => (
@@ -115,7 +107,7 @@ const AboutSection = ({ profile, section }: Props) => {
 
             <div>
               <Typography variant="h3" className="mb-4">
-                {translations[lang].about.objective}
+                {translations[lang].about.goals}
               </Typography>
               {profile?.objectives?.map((objective, index) => (
                 <Typography key={index} variant="body1">
@@ -124,33 +116,11 @@ const AboutSection = ({ profile, section }: Props) => {
               ))}
             </div>
 
-            {/* Achievements */}
-            <div className="grid gap-4 sm:grid-cols-3">
-              {about.achievements?.map((achievement, index) => (
-                <ExtendedCard key={index} variant="solid" className="p-4">
-                  <div className="flex flex-col items-center gap-2 text-center">
-                    <ExtendedButton size="icon" variant="gradient">
-                      {getIcon(achievement.icon!)}
-                    </ExtendedButton>
-                    <Typography variant="h4">
-                      {achievement.title as unknown as string}
-                    </Typography>
-                    <Typography
-                      variant="small"
-                      className="text-muted-foreground"
-                    >
-                      {achievement.description as unknown as string}
-                    </Typography>
-                  </div>
-                </ExtendedCard>
-              ))}
-            </div>
-
             {/* Download CV Button */}
             <div className="pt-4">
               <ExtendedButton variant="gradient" size="lg" className="w-full">
                 <Download className="mr-2" />
-                {translations[lang].cv.download}
+                {translations[lang].common.cv.download}
               </ExtendedButton>
             </div>
           </div>

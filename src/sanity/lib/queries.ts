@@ -4,8 +4,8 @@ const profileFields = `
     name,
     "title": coalesce(title[$lang], title.es),
     "avatar": image.asset->url,
-    "bio": coalesce(bio[$lang], bio.es),
-    "objectives": coalesce(objectives[$lang], objectives.es),
+    "bio": coalesce(bio[][$lang], bio[].es),
+    "objectives": coalesce(objectives[][$lang], objectives[].es),
     "socialLinks": socialLinks[]{
         icon,
         platform,
