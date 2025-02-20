@@ -14,6 +14,7 @@ import type { Locale } from "@/lib/i18n/config";
 import { translations } from "@/lib/i18n/transalation";
 import { Brain } from "lucide-react";
 import type { HomeQueryResult } from "../../../sanity.types";
+import { SECTIONS } from "@/lib/config/navigation";
 
 type Props = {
   skillCategories: HomeQueryResult["skillCategories"];
@@ -22,7 +23,7 @@ type Props = {
 
 const SkillsSection = ({ skillCategories, lang }: Props) => {
   return (
-    <section className="relative overflow-hidden py-20">
+    <section id={SECTIONS.SKILLS} className="relative overflow-hidden py-20">
       <div className="absolute inset-0 -z-20">
         <div className="pattern-connector pattern-connector-top pattern-grid" />
         <div className="pattern-dots absolute inset-0" />

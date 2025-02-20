@@ -18,6 +18,7 @@ import Link from "next/link";
 import { FaGithub } from "react-icons/fa";
 import type { HomeQueryResult } from "../../../sanity.types";
 import { getIcon } from "@/components/icons";
+import { SECTIONS } from "@/lib/config/navigation";
 
 type Props = {
   projects: HomeQueryResult["featuredProjects"];
@@ -26,7 +27,7 @@ type Props = {
 
 const ProjectsSection = ({ projects, lang }: Props) => {
   return (
-    <section className="relative overflow-hidden py-20">
+    <section id={SECTIONS.PROJECTS} className="relative overflow-hidden py-20">
       <div className="absolute inset-0 -z-20">
         <div className="pattern-connector pattern-connector-top pattern-circuit" />
         <div className="pattern-grid absolute inset-0" />

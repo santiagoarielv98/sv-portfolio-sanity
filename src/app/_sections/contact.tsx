@@ -18,6 +18,7 @@ import type { Locale } from "@/lib/i18n/config";
 import { translations } from "@/lib/i18n/transalation";
 import type { HomeQueryResult } from "../../../sanity.types";
 import { getIcon } from "@/components/icons";
+import { SECTIONS } from "@/lib/config/navigation";
 
 type Props = {
   profile: HomeQueryResult["profile"];
@@ -27,7 +28,10 @@ type Props = {
 
 const ContactSection = ({ contact, profile, lang }: Props) => {
   return (
-    <section className="bg-primary/5 relative overflow-hidden py-20">
+    <section
+      id={SECTIONS.CONTACT}
+      className="bg-primary/5 relative overflow-hidden py-20"
+    >
       <div className="absolute inset-0 -z-20">
         <div className="pattern-connector pattern-connector-top pattern-dots" />
         <div className="pattern-circuit absolute inset-0" />

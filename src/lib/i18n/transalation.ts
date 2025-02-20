@@ -10,14 +10,18 @@ export const translations = {
       about: "About",
       experience: "Experience",
       projects: {
-        section: "Go to projects section",
-        all: "All projects",
+        section: "Projects Section",
+        sectionDescription: "View featured projects section",
+        all: "All Projects",
+        allDescription: "Browse complete projects catalog",
       },
       skills: "Skills",
       contact: "Contact",
     },
     hero: {
       title: "Welcome to my portfolio",
+      subtitle:
+        "Full Stack Developer specialized in creating high-performance web applications with innovative technologies. 🚀",
       cta: "Get in touch",
     },
     about: {
@@ -99,14 +103,18 @@ export const translations = {
       about: "Sobre mí",
       experience: "Experiencia",
       projects: {
-        section: "Ir a la sección de proyectos",
-        all: "Todos los proyectos",
+        section: "Sección de Proyectos",
+        sectionDescription: "Ver sección de proyectos destacados",
+        all: "Todos los Proyectos",
+        allDescription: "Explorar catálogo completo de proyectos",
       },
       skills: "Habilidades",
       contact: "Contacto",
     },
     hero: {
       title: "Bienvenido a mi portafolio",
+      subtitle:
+        "Desarrollador Full Stack Especializado en crear aplicaciones web de alto rendimiento con tecnologías innovadoras. 🚀",
       cta: "Contáctame",
     },
     about: {

@@ -1,33 +1,37 @@
 import { ExtendedButton } from "@/components/extended-button";
 import { ExtendedSeparator } from "@/components/extended-separator";
 import { Typography } from "@/components/ui/typography";
-import type { Hero } from "@/types/sanity";
+import { SECTIONS } from "@/lib/config/navigation";
+import type { Locale } from "@/lib/i18n/config";
+import { translations } from "@/lib/i18n/transalation";
 import { ChevronDown, Code } from "lucide-react";
 
 type Props = {
-  section: Hero;
+  lang: Locale;
 };
 
-const HeroSection = ({ section }: Props) => {
-  const [hero] = section.content;
+const HeroSection = ({ lang }: Props) => {
   return (
-    <section className="relative flex min-h-[90vh] items-center justify-center overflow-hidden">
+    <section
+      id={SECTIONS.HOME}
+      className="relative flex min-h-[90vh] items-center justify-center overflow-hidden"
+    >
       <div className="absolute inset-0 -z-20">
         <div className="pattern-topography pattern-fade-in absolute inset-0" />
         <div className="pattern-connector pattern-connector-bottom pattern-dots" />
       </div>
       <div className="mx-auto my-20 max-w-4xl space-y-8 px-4 text-center">
-        <Typography variant="h1">{hero.title as unknown as string}</Typography>
+        <Typography variant="h1">{translations[lang].hero.title}</Typography>
 
         <Typography variant="h2" className="max-w-2xl font-light">
-          {hero.subtitle as unknown as string}
+          {translations[lang].hero.subtitle}
         </Typography>
 
         <ExtendedSeparator />
 
         <ExtendedButton size="lg" variant="default" className="font-display">
           <Code />
-          {hero?.cta as unknown as string}
+          {translations[lang].hero.cta}
         </ExtendedButton>
       </div>
 

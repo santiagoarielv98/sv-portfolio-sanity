@@ -6,6 +6,7 @@ import ExperienceSection from "../_sections/experience";
 import ProjectsSection from "../_sections/projects";
 import SkillsSection from "../_sections/skills";
 import ContactSection from "../_sections/contact";
+import HeroSection from "../_sections/hero";
 
 type Props = {
   params: Promise<{
@@ -24,6 +25,7 @@ export default async function Home(props: Props) {
 
   return (
     <main className="relative">
+      <HeroSection {...params} />
       <AboutSection profile={data.profile} {...params} />
       <ExperienceSection experiences={data.experiences} {...params} />
       <ProjectsSection projects={data.featuredProjects} {...params} />
