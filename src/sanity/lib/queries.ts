@@ -40,7 +40,12 @@ const profileFields = `
     "bio": bio[][$lang],
     "objectives": objectives[][$lang],
     "languages": languages[][$lang],
-    "interests": interests
+    "interests": interests,
+    "social": social[] {
+        "name": name,
+        "url": url
+    },
+    availability,   
 `;
 
 const skillCategoryFields = `
@@ -56,25 +61,6 @@ const skillCategoryFields = `
 const contactFields = `
     "title": title[$lang],
     "description": description[$lang],
-    "form": {
-        "nameField": {
-            "label": form.nameField.label[$lang],
-            "placeholder": form.nameField.placeholder[$lang]
-        },
-        "emailField": {
-            "label": form.emailField.label[$lang],
-            "placeholder": form.emailField.placeholder[$lang]
-        },
-        "subjectField": {
-            "label": form.subjectField.label[$lang],
-            "placeholder": form.subjectField.placeholder[$lang]
-        },
-        "messageField": {
-            "label": form.messageField.label[$lang],
-            "placeholder": form.messageField.placeholder[$lang]
-        },
-        "submitButton": form.submitButton[$lang]
-    }
 `;
 
 const contentHeroType = `

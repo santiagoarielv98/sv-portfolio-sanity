@@ -375,123 +375,6 @@
           "name": "localeText"
         },
         "optional": true
-      },
-      "form": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "object",
-          "attributes": {
-            "nameField": {
-              "type": "objectAttribute",
-              "value": {
-                "type": "object",
-                "attributes": {
-                  "label": {
-                    "type": "objectAttribute",
-                    "value": {
-                      "type": "inline",
-                      "name": "localeString"
-                    },
-                    "optional": true
-                  },
-                  "placeholder": {
-                    "type": "objectAttribute",
-                    "value": {
-                      "type": "inline",
-                      "name": "localeString"
-                    },
-                    "optional": true
-                  }
-                }
-              },
-              "optional": true
-            },
-            "emailField": {
-              "type": "objectAttribute",
-              "value": {
-                "type": "object",
-                "attributes": {
-                  "label": {
-                    "type": "objectAttribute",
-                    "value": {
-                      "type": "inline",
-                      "name": "localeString"
-                    },
-                    "optional": true
-                  },
-                  "placeholder": {
-                    "type": "objectAttribute",
-                    "value": {
-                      "type": "inline",
-                      "name": "localeString"
-                    },
-                    "optional": true
-                  }
-                }
-              },
-              "optional": true
-            },
-            "subjectField": {
-              "type": "objectAttribute",
-              "value": {
-                "type": "object",
-                "attributes": {
-                  "label": {
-                    "type": "objectAttribute",
-                    "value": {
-                      "type": "inline",
-                      "name": "localeString"
-                    },
-                    "optional": true
-                  },
-                  "placeholder": {
-                    "type": "objectAttribute",
-                    "value": {
-                      "type": "inline",
-                      "name": "localeString"
-                    },
-                    "optional": true
-                  }
-                }
-              },
-              "optional": true
-            },
-            "messageField": {
-              "type": "objectAttribute",
-              "value": {
-                "type": "object",
-                "attributes": {
-                  "label": {
-                    "type": "objectAttribute",
-                    "value": {
-                      "type": "inline",
-                      "name": "localeString"
-                    },
-                    "optional": true
-                  },
-                  "placeholder": {
-                    "type": "objectAttribute",
-                    "value": {
-                      "type": "inline",
-                      "name": "localeString"
-                    },
-                    "optional": true
-                  }
-                }
-              },
-              "optional": true
-            },
-            "submitButton": {
-              "type": "objectAttribute",
-              "value": {
-                "type": "inline",
-                "name": "localeString"
-              },
-              "optional": true
-            }
-          }
-        },
-        "optional": true
       }
     }
   },
@@ -944,22 +827,6 @@
           "type": "string"
         }
       },
-      "iam": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "inline",
-          "name": "localeString"
-        },
-        "optional": true
-      },
-      "objective": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "inline",
-          "name": "localeString"
-        },
-        "optional": true
-      },
       "achievements": {
         "type": "objectAttribute",
         "value": {
@@ -1255,13 +1122,61 @@
         },
         "optional": true
       },
-      "interests": {
+      "social": {
         "type": "objectAttribute",
         "value": {
           "type": "array",
           "of": {
-            "type": "string"
+            "type": "object",
+            "attributes": {
+              "name": {
+                "type": "objectAttribute",
+                "value": {
+                  "type": "string"
+                },
+                "optional": true
+              },
+              "url": {
+                "type": "objectAttribute",
+                "value": {
+                  "type": "string"
+                },
+                "optional": true
+              }
+            },
+            "rest": {
+              "type": "object",
+              "attributes": {
+                "_key": {
+                  "type": "objectAttribute",
+                  "value": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
           }
+        },
+        "optional": true
+      },
+      "availability": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "union",
+          "of": [
+            {
+              "type": "string",
+              "value": "available"
+            },
+            {
+              "type": "string",
+              "value": "busy"
+            },
+            {
+              "type": "string",
+              "value": "unavailable"
+            }
+          ]
         },
         "optional": true
       }

@@ -80,26 +80,14 @@ export const profileType = defineType({
     {
       name: "availability",
       title: "Disponibilidad",
-      type: "object",
-      fields: [
-        {
-          name: "status",
-          title: "Estado",
-          type: "string",
-          options: {
-            list: [
-              { title: "Disponible", value: "available" },
-              { title: "Ocupado", value: "busy" },
-              { title: "No disponible", value: "unavailable" },
-            ],
-          },
-        },
-        {
-          name: "message",
-          title: "Mensaje",
-          type: "localeString",
-        },
-      ],
+      type: "string",
+      options: {
+        list: [
+          { title: "Disponible", value: "available" },
+          { title: "Ocupado", value: "busy" },
+          { title: "No disponible", value: "unavailable" },
+        ],
+      },
     },
   ],
 });

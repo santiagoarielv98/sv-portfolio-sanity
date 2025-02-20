@@ -76,25 +76,6 @@ export type Contact = {
   _rev: string;
   title?: LocaleString;
   description?: LocaleText;
-  form?: {
-    nameField?: {
-      label?: LocaleString;
-      placeholder?: LocaleString;
-    };
-    emailField?: {
-      label?: LocaleString;
-      placeholder?: LocaleString;
-    };
-    subjectField?: {
-      label?: LocaleString;
-      placeholder?: LocaleString;
-    };
-    messageField?: {
-      label?: LocaleString;
-      placeholder?: LocaleString;
-    };
-    submitButton?: LocaleString;
-  };
 };
 
 export type Skill = {
@@ -177,8 +158,6 @@ export type About = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  iam?: LocaleString;
-  objective?: LocaleString;
   achievements?: Array<{
     title?: LocaleString;
     description?: LocaleText;
@@ -233,7 +212,12 @@ export type Profile = {
       _key: string;
     } & LocaleString
   >;
-  interests?: Array<string>;
+  social?: Array<{
+    name?: string;
+    url?: string;
+    _key: string;
+  }>;
+  availability?: "available" | "busy" | "unavailable";
 };
 
 export type SanityImageCrop = {
@@ -395,7 +379,7 @@ export type AllSanitySchemaTypes =
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./src/sanity/lib/queries.ts
 // Variable: getHomePage
-// Query: {    "sections": *[_type == "section"] | order(order asc) {            "title": title[$lang],    "subtitle": subtitle[$lang],    type,    "content": content[]-> {        _type,        _id,        ...select(                _type == "hero" => {            "title": title[$lang],    "subtitle": subtitle[$lang],    "cta": cta[$lang],    },                _type == "about" => {            "iam": iam[$lang],    "objective": objective[$lang],    "achievements": achievements[] {        "title": title[$lang],        "description": description[$lang]    }    },                _type == "experience" => {            "title": title[$lang],    "description": description[][$lang],    "organization": organization[$lang],    "location": location[$lang],    type,    "date": date    },                _type == "project" => {            "title": title[$lang],    "description": description[$lang],    "thumbnail": thumbnail.asset->url,    "links": links    },                _type == "contact" => {            "title": title[$lang],    "description": description[$lang],    "form": {        "nameField": {            "label": form.nameField.label[$lang],            "placeholder": form.nameField.placeholder[$lang]        },        "emailField": {            "label": form.emailField.label[$lang],            "placeholder": form.emailField.placeholder[$lang]        },        "subjectField": {            "label": form.subjectField.label[$lang],            "placeholder": form.subjectField.placeholder[$lang]        },        "messageField": {            "label": form.messageField.label[$lang],            "placeholder": form.messageField.placeholder[$lang]        },        "submitButton": form.submitButton[$lang]    }    },                _type == "skillCategory" => {            "title": title[$lang],    "description": description[$lang],    icon,    "skills": *[_type == "skill" && references(^._id)] {        "title": title[$lang],        "level": level    }    },        )    }    },    "profile": *[_type == "profile"][0] {            "name": name[$lang],    "email": email,    "phone": phone,    "location": location[$lang],    "image": image.asset->url,    "bio": bio[][$lang],    "objectives": objectives[][$lang],    "languages": languages[][$lang],    "interests": interests    }}
+// Query: {    "sections": *[_type == "section"] | order(order asc) {            "title": title[$lang],    "subtitle": subtitle[$lang],    type,    "content": content[]-> {        _type,        _id,        ...select(                _type == "hero" => {            "title": title[$lang],    "subtitle": subtitle[$lang],    "cta": cta[$lang],    },                _type == "about" => {            "iam": iam[$lang],    "objective": objective[$lang],    "achievements": achievements[] {        "title": title[$lang],        "description": description[$lang]    }    },                _type == "experience" => {            "title": title[$lang],    "description": description[][$lang],    "organization": organization[$lang],    "location": location[$lang],    type,    "date": date    },                _type == "project" => {            "title": title[$lang],    "description": description[$lang],    "thumbnail": thumbnail.asset->url,    "links": links    },                _type == "contact" => {            "title": title[$lang],    "description": description[$lang],    },                _type == "skillCategory" => {            "title": title[$lang],    "description": description[$lang],    icon,    "skills": *[_type == "skill" && references(^._id)] {        "title": title[$lang],        "level": level    }    },        )    }    },    "profile": *[_type == "profile"][0] {            "name": name[$lang],    "email": email,    "phone": phone,    "location": location[$lang],    "image": image.asset->url,    "bio": bio[][$lang],    "objectives": objectives[][$lang],    "languages": languages[][$lang],    "interests": interests,    "social": social[] {        "name": name,        "url": url    },    availability,       }}
 export type GetHomePageResult = {
   sections: Array<{
     title: Array<{
@@ -421,16 +405,8 @@ export type GetHomePageResult = {
       | {
           _type: "about";
           _id: string;
-          iam: Array<{
-            _type: "localeString";
-            es?: string;
-            en?: string;
-          }> | null;
-          objective: Array<{
-            _type: "localeString";
-            es?: string;
-            en?: string;
-          }> | null;
+          iam: null;
+          objective: null;
           achievements: Array<{
             title: Array<{
               _type: "localeString";
@@ -457,61 +433,6 @@ export type GetHomePageResult = {
             es?: string;
             en?: string;
           }> | null;
-          form: {
-            nameField: {
-              label: Array<{
-                _type: "localeString";
-                es?: string;
-                en?: string;
-              }> | null;
-              placeholder: Array<{
-                _type: "localeString";
-                es?: string;
-                en?: string;
-              }> | null;
-            };
-            emailField: {
-              label: Array<{
-                _type: "localeString";
-                es?: string;
-                en?: string;
-              }> | null;
-              placeholder: Array<{
-                _type: "localeString";
-                es?: string;
-                en?: string;
-              }> | null;
-            };
-            subjectField: {
-              label: Array<{
-                _type: "localeString";
-                es?: string;
-                en?: string;
-              }> | null;
-              placeholder: Array<{
-                _type: "localeString";
-                es?: string;
-                en?: string;
-              }> | null;
-            };
-            messageField: {
-              label: Array<{
-                _type: "localeString";
-                es?: string;
-                en?: string;
-              }> | null;
-              placeholder: Array<{
-                _type: "localeString";
-                es?: string;
-                en?: string;
-              }> | null;
-            };
-            submitButton: Array<{
-              _type: "localeString";
-              es?: string;
-              en?: string;
-            }> | null;
-          };
         }
       | {
           _type: "experience";
@@ -634,7 +555,12 @@ export type GetHomePageResult = {
         _key: string;
       } & LocaleString
     > | null;
-    interests: Array<string> | null;
+    interests: null;
+    social: Array<{
+      name: string | null;
+      url: string | null;
+    }> | null;
+    availability: "available" | "busy" | "unavailable" | null;
   } | null;
 };
 
@@ -642,6 +568,6 @@ export type GetHomePageResult = {
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
-    '{\n    "sections": *[_type == "section"] | order(order asc) {\n        \n    "title": title[$lang],\n    "subtitle": subtitle[$lang],\n    type,\n    "content": content[]-> {\n        _type,\n        _id,\n        ...select(\n            \n    _type == "hero" => {\n        \n    "title": title[$lang],\n    "subtitle": subtitle[$lang],\n    "cta": cta[$lang],\n\n    },\n\n            \n    _type == "about" => {\n        \n    "iam": iam[$lang],\n    "objective": objective[$lang],\n    "achievements": achievements[] {\n        "title": title[$lang],\n        "description": description[$lang]\n    }\n\n    },\n\n            \n    _type == "experience" => {\n        \n    "title": title[$lang],\n    "description": description[][$lang],\n    "organization": organization[$lang],\n    "location": location[$lang],\n    type,\n    "date": date\n\n    },\n\n            \n    _type == "project" => {\n        \n    "title": title[$lang],\n    "description": description[$lang],\n    "thumbnail": thumbnail.asset->url,\n    "links": links\n\n    },\n\n            \n    _type == "contact" => {\n        \n    "title": title[$lang],\n    "description": description[$lang],\n    "form": {\n        "nameField": {\n            "label": form.nameField.label[$lang],\n            "placeholder": form.nameField.placeholder[$lang]\n        },\n        "emailField": {\n            "label": form.emailField.label[$lang],\n            "placeholder": form.emailField.placeholder[$lang]\n        },\n        "subjectField": {\n            "label": form.subjectField.label[$lang],\n            "placeholder": form.subjectField.placeholder[$lang]\n        },\n        "messageField": {\n            "label": form.messageField.label[$lang],\n            "placeholder": form.messageField.placeholder[$lang]\n        },\n        "submitButton": form.submitButton[$lang]\n    }\n\n    },\n\n            \n    _type == "skillCategory" => {\n        \n    "title": title[$lang],\n    "description": description[$lang],\n    icon,\n    "skills": *[_type == "skill" && references(^._id)] {\n        "title": title[$lang],\n        "level": level\n    }\n\n    },\n\n        )\n    }\n\n    },\n    "profile": *[_type == "profile"][0] {\n        \n    "name": name[$lang],\n    "email": email,\n    "phone": phone,\n    "location": location[$lang],\n    "image": image.asset->url,\n    "bio": bio[][$lang],\n    "objectives": objectives[][$lang],\n    "languages": languages[][$lang],\n    "interests": interests\n\n    }\n}': GetHomePageResult;
+    '{\n    "sections": *[_type == "section"] | order(order asc) {\n        \n    "title": title[$lang],\n    "subtitle": subtitle[$lang],\n    type,\n    "content": content[]-> {\n        _type,\n        _id,\n        ...select(\n            \n    _type == "hero" => {\n        \n    "title": title[$lang],\n    "subtitle": subtitle[$lang],\n    "cta": cta[$lang],\n\n    },\n\n            \n    _type == "about" => {\n        \n    "iam": iam[$lang],\n    "objective": objective[$lang],\n    "achievements": achievements[] {\n        "title": title[$lang],\n        "description": description[$lang]\n    }\n\n    },\n\n            \n    _type == "experience" => {\n        \n    "title": title[$lang],\n    "description": description[][$lang],\n    "organization": organization[$lang],\n    "location": location[$lang],\n    type,\n    "date": date\n\n    },\n\n            \n    _type == "project" => {\n        \n    "title": title[$lang],\n    "description": description[$lang],\n    "thumbnail": thumbnail.asset->url,\n    "links": links\n\n    },\n\n            \n    _type == "contact" => {\n        \n    "title": title[$lang],\n    "description": description[$lang],\n\n    },\n\n            \n    _type == "skillCategory" => {\n        \n    "title": title[$lang],\n    "description": description[$lang],\n    icon,\n    "skills": *[_type == "skill" && references(^._id)] {\n        "title": title[$lang],\n        "level": level\n    }\n\n    },\n\n        )\n    }\n\n    },\n    "profile": *[_type == "profile"][0] {\n        \n    "name": name[$lang],\n    "email": email,\n    "phone": phone,\n    "location": location[$lang],\n    "image": image.asset->url,\n    "bio": bio[][$lang],\n    "objectives": objectives[][$lang],\n    "languages": languages[][$lang],\n    "interests": interests,\n    "social": social[] {\n        "name": name,\n        "url": url\n    },\n    availability,   \n\n    }\n}': GetHomePageResult;
   }
 }
