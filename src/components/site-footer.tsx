@@ -9,6 +9,7 @@ import { ExtendedCard } from "./extended-card";
 import { ExtendedSeparator } from "./extended-separator";
 import { getIcon } from "./icons";
 import { Typography } from "./ui/typography";
+import Link from "next/link";
 
 type SiteFooterProps = {
   footer: string;
@@ -61,7 +62,7 @@ export function SiteFooter({
                   size="sm"
                   asChild
                 >
-                  <a href={item.href}>{t(item.name)}</a>
+                  <Link href={`/${lang}/${item.href}`}>{t(item.name)}</Link>
                 </ExtendedButton>
               ))}
             </div>
@@ -78,10 +79,10 @@ export function SiteFooter({
                   {translations[lang].footer.availableFor}
                 </Typography>
                 <ExtendedButton className="w-full" asChild>
-                  <a href={`mailto:${contact?.email as string}`}>
+                  <Link href={`mailto:${contact?.email as string}`}>
                     <Mail className="mr-2 h-4 w-4" />
                     {translations[lang].footer.getInTouch}
-                  </a>
+                  </Link>
                 </ExtendedButton>
               </div>
             </ExtendedCard>
@@ -106,14 +107,14 @@ export function SiteFooter({
                   size="icon"
                   asChild
                 >
-                  <a
+                  <Link
                     href={social.url as string}
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={social.platform as string}
                   >
                     <Icon className="h-4 w-4" />
-                  </a>
+                  </Link>
                 </ExtendedButton>
               );
             })}

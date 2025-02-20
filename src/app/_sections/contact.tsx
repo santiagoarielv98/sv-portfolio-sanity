@@ -29,7 +29,7 @@ type Props = {
 const ContactSection = ({ contact, profile, lang }: Props) => {
   return (
     <section
-      id={SECTIONS.CONTACT}
+      id={SECTIONS.CONTACT.slice(1)}
       className="bg-primary/5 relative overflow-hidden py-20"
     >
       <div className="absolute inset-0 -z-20">

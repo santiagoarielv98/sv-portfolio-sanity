@@ -61,7 +61,7 @@ export function SiteHeader({ lang }: { lang: Locale }) {
                         return (
                           <DropdownMenuItem key={submenuItem.href} asChild>
                             <Link
-                              href={submenuItem.href}
+                              href={`/${lang}${submenuItem.href}`}
                               className="flex items-center gap-2"
                             >
                               <Icon className="h-4 w-4" />
@@ -86,7 +86,7 @@ export function SiteHeader({ lang }: { lang: Locale }) {
                     size="sm"
                     asChild
                   >
-                    <a href={item.href}>{t(item.name)}</a>
+                    <a href={`/${lang}/${item.href}`}>{t(item.name)}</a>
                   </ExtendedButton>
                 ),
               )}
@@ -156,9 +156,10 @@ export function SiteHeader({ lang }: { lang: Locale }) {
                               size="sm"
                               className="w-full justify-start pl-6"
                               asChild
+                              onClick={() => setIsMenuOpen(false)}
                             >
                               <Link
-                                href={submenuItem.href}
+                                href={`/${lang}${submenuItem.href}`}
                                 className="flex items-center gap-2"
                               >
                                 <Icon className="h-4 w-4" />
@@ -176,8 +177,9 @@ export function SiteHeader({ lang }: { lang: Locale }) {
                     variant="ghost"
                     className="w-full justify-start"
                     asChild
+                    onClick={() => setIsMenuOpen(false)}
                   >
-                    <a href={item.href}>{t(item.name)}</a>
+                    <Link href={`/${lang}/${item.href}`}>{t(item.name)}</Link>
                   </ExtendedButton>
                 ),
               )}

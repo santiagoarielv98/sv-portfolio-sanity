@@ -13,7 +13,7 @@ type Props = {
 const HeroSection = ({ lang }: Props) => {
   return (
     <section
-      id={SECTIONS.HOME}
+      id={SECTIONS.HOME.slice(1)}
       className="relative flex min-h-[90vh] items-center justify-center overflow-hidden"
     >
       <div className="absolute inset-0 -z-20">

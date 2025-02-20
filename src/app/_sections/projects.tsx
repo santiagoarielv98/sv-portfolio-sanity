@@ -27,7 +27,10 @@ type Props = {
 
 const ProjectsSection = ({ projects, lang }: Props) => {
   return (
-    <section id={SECTIONS.PROJECTS} className="relative overflow-hidden py-20">
+    <section
+      id={SECTIONS.PROJECTS.slice(1)}
+      className="relative overflow-hidden py-20"
+    >
       <div className="absolute inset-0 -z-20">
         <div className="pattern-connector pattern-connector-top pattern-circuit" />
         <div className="pattern-grid absolute inset-0" />

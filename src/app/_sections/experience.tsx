@@ -25,7 +25,7 @@ type Props = {
 const ExperienceSection = ({ experiences, lang }: Props) => {
   return (
     <section
-      id={SECTIONS.EXPERIENCE}
+      id={SECTIONS.EXPERIENCE.slice(1)}
       className="relative overflow-hidden py-20"
     >
       <div className="absolute inset-0 -z-20">
