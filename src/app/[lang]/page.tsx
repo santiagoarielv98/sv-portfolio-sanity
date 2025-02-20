@@ -6,6 +6,14 @@ import ExperienceSection from "../_sections/experience";
 import HeroSection from "../_sections/hero";
 import ProjectsSection from "../_sections/projects";
 import SkillsSection from "../_sections/skills";
+import type {
+  About,
+  Contact,
+  Experience,
+  Hero,
+  Projects,
+  SkillCategory,
+} from "@/types/sanity";
 
 type Props = {
   params: Promise<{
@@ -22,21 +30,27 @@ export default async function Home(props: Props) {
   const sections = data.sections;
   const profile = data.profile;
 
-  const heroSection = sections.find((section) => section.type === "hero");
-  const aboutSection = sections.find((section) => section.type === "about");
+  const heroSection = sections.find(
+    (section) => section.type === "hero",
+  ) as Hero;
+  const aboutSection = sections.find(
+    (section) => section.type === "about",
+  ) as About;
   const experienceSection = sections.find(
     (section) => section.type === "experience",
-  );
+  ) as Experience;
 
   const projectsSection = sections.find(
     (section) => section.type === "projects",
-  );
+  ) as Projects;
 
   const skillsSection = sections.find(
     (section) => section.type === "skillCategory",
-  );
+  ) as SkillCategory;
 
-  const contactSection = sections.find((section) => section.type === "contact");
+  const contactSection = sections.find(
+    (section) => section.type === "contact",
+  ) as Contact;
 
   return (
     <main className="relative">

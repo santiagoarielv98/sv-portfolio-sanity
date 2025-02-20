@@ -1796,6 +1796,13 @@
           "type": "number"
         },
         "optional": true
+      },
+      "icon": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
       }
     }
   },

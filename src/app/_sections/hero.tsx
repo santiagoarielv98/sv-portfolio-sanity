@@ -1,16 +1,11 @@
 import { ExtendedButton } from "@/components/extended-button";
 import { ExtendedSeparator } from "@/components/extended-separator";
 import { Typography } from "@/components/ui/typography";
+import type { Hero } from "@/types/sanity";
 import { ChevronDown, Code } from "lucide-react";
-import type { GetHomePageResult } from "../../../sanity.types";
 
 type Props = {
-  section: GetHomePageResult["sections"][number] & {
-    type: "hero";
-    content: Array<{
-      _type: "hero";
-    }>;
-  };
+  section: Hero;
 };
 
 const HeroSection = ({ section }: Props) => {

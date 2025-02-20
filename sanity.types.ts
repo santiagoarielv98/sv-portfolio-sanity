@@ -334,6 +334,7 @@ export type Section = {
       }
   >;
   order?: number;
+  icon?: string;
 };
 
 export type Slug = {

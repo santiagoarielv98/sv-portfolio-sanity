@@ -12,15 +12,11 @@ import { Code, Download } from "lucide-react";
 import Image from "next/image";
 import { useParams } from "next/navigation";
 import type { GetHomePageResult } from "../../../sanity.types";
+import type { About } from "@/types/sanity";
 
 type Props = {
   profile: GetHomePageResult["profile"];
-  section: GetHomePageResult["sections"][number] & {
-    type: "about";
-    content: Array<{
-      _type: "about";
-    }>;
-  };
+  section: About;
 };
 
 const AboutSection = ({ profile, section }: Props) => {

@@ -10,16 +10,11 @@ import {
 import { ExtendedSeparator } from "@/components/extended-separator";
 import { getIcon } from "@/components/icons";
 import { Typography } from "@/components/ui/typography";
+import type { Experience } from "@/types/sanity";
 import { Calendar, Code, MapPin } from "lucide-react";
-import type { GetHomePageResult } from "../../../sanity.types";
 
 type Props = {
-  section: GetHomePageResult["sections"][number] & {
-    type: "experience";
-    content: Array<{
-      _type: "experience";
-    }>;
-  };
+  section: Experience;
 };
 
 export function getFormattedDate(date: string) {

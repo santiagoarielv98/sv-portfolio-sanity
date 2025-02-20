@@ -10,10 +10,10 @@ import {
 } from "@/components/extended-card";
 import { ExtendedSeparator } from "@/components/extended-separator";
 import { Typography } from "@/components/ui/typography";
+import type { Projects } from "@/types/sanity";
 import { Code } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import type { GetHomePageResult } from "../../../sanity.types";
 
 export interface Project {
   title: string;
@@ -25,45 +25,8 @@ export interface Project {
   category: "frontend" | "backend" | "fullstack";
 }
 
-// export const projects: Project[] = [
-//   {
-//     title: "Portfolio Website",
-//     description:
-//       "Personal portfolio built with Next.js, Tailwind CSS, and Sanity CMS",
-//     image: "https://picsum.photos/seed/portfolio/800/600",
-//     technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Sanity"],
-//     demoUrl: "https://portfolio.dev",
-//     repoUrl: "https://github.com/user/portfolio",
-//     category: "frontend",
-//   },
-//   {
-//     title: "E-commerce Platform",
-//     description:
-//       "Full-stack e-commerce solution with real-time inventory management",
-//     image: "https://picsum.photos/seed/portfolio/800/600",
-//     technologies: ["React", "Node.js", "MongoDB", "Express"],
-//     demoUrl: "https://ecommerce.dev",
-//     repoUrl: "https://github.com/user/ecommerce",
-//     category: "fullstack",
-//   },
-//   {
-//     title: "Task Management API",
-//     description:
-//       "RESTful API for task management with authentication and real-time updates",
-//     image: "https://picsum.photos/seed/portfolio/800/600",
-//     technologies: ["Node.js", "Express", "PostgreSQL", "Socket.io"],
-//     repoUrl: "https://github.com/user/taskapi",
-//     category: "backend",
-//   },
-// ];
-
 type Props = {
-  section: GetHomePageResult["sections"][number] & {
-    type: "projects";
-    content: Array<{
-      _type: "project";
-    }>;
-  };
+  section: Projects;
 };
 
 const ProjectsSection = ({ section }: Props) => {

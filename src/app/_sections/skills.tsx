@@ -9,8 +9,8 @@ import {
 } from "@/components/extended-card";
 import { ExtendedSeparator } from "@/components/extended-separator";
 import { Typography } from "@/components/ui/typography";
+import type { SkillCategory } from "@/types/sanity";
 import { Code } from "lucide-react";
-import type { GetHomePageResult } from "../../../sanity.types";
 
 export interface Skill {
   title: string;
@@ -67,12 +67,7 @@ export const skills: Skill[] = [
 ];
 
 type Props = {
-  section: GetHomePageResult["sections"][number] & {
-    type: "skillCategory";
-    content: Array<{
-      _type: "skillCategory";
-    }>;
-  };
+  section: SkillCategory;
 };
 
 const SkillsSection = ({ section }: Props) => {

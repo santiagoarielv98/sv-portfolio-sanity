@@ -19,16 +19,12 @@ import type { Locale } from "@/lib/i18n/config";
 import { translations } from "@/lib/i18n/transalations";
 import { useParams } from "next/navigation";
 import type { GetHomePageResult } from "../../../sanity.types";
+import type { Contact } from "@/types/sanity";
 
 type Props = {
   profile: GetHomePageResult["profile"];
 
-  section: GetHomePageResult["sections"][number] & {
-    type: "contact";
-    content: Array<{
-      _type: "contact";
-    }>;
-  };
+  section: Contact;
 };
 
 const ContactSection = ({ section, profile }: Props) => {
