@@ -18,6 +18,7 @@ import {
   FaJava,
   FaLaravel,
   FaLinkedinIn,
+  FaPython,
   FaReact,
   FaSass,
   FaUsers,
@@ -93,6 +94,7 @@ export const icons: Record<string, LucideIcon | IconType> = {
   prisma: SiPrisma,
   shadcn: SiShadcnui,
   mercadopago: SiMercadopago,
+  python: FaPython,
 };
 
 export const getIcon = (icon?: string) => {

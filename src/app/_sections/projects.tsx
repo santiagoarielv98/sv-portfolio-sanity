@@ -17,6 +17,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { FaGithub } from "react-icons/fa";
 import type { HomeQueryResult } from "../../../sanity.types";
+import { getIcon } from "@/components/icons";
 
 type Props = {
   projects: HomeQueryResult["featuredProjects"];
@@ -79,14 +80,18 @@ const ProjectsSection = ({ projects, lang }: Props) => {
               {Array.isArray(project.skills) && project.skills.length > 0 && (
                 <CardContent>
                   <div className="flex flex-wrap gap-2">
-                    {project.skills?.map((skill) => (
-                      <ExtendedBadge
-                        key={skill.title as unknown as string}
-                        variant="ghost"
-                      >
-                        {skill.title as unknown as string}
-                      </ExtendedBadge>
-                    ))}
+                    {project.skills?.map((skill) => {
+                      const Icon = getIcon(skill.icon!);
+                      return (
+                        <ExtendedBadge
+                          key={skill.title as unknown as string}
+                          variant="ghost"
+                        >
+                          <Icon />
+                          {skill.title as unknown as string}
+                        </ExtendedBadge>
+                      );
+                    })}
                   </div>
                 </CardContent>
               )}

@@ -20,7 +20,7 @@ const baseProjectsFields = `
     "description": coalesce(description[$lang], description.es),
     "thumbnail": thumbnail.asset->url,
     "skills": skills[]->{
-        "title": coalesce(title[$lang], title.es),
+        title,
         icon,
     },
     links{
@@ -40,7 +40,7 @@ const experienceFields = `
     },
     "description": coalesce(description[][$lang], description[].es),
     "skills": skills[]->{
-        "title": coalesce(title[$lang], title.es),
+        title,
         icon,
     },
 `;
@@ -76,13 +76,13 @@ const profileQuery = `
 `;
 
 const featuredProjectsQuery = `
-    "featuredProjects": *[_type == "project" && featured == true] {
+    "featuredProjects": *[_type == "project" && featured == true] | order(_updatedAt asc) {
         ${baseProjectsFields}
     }
 `;
 
 const experiencesQuery = `
-    "experiences": *[_type == "experience"] {
+    "experiences": *[_type == "experience"] | order(date.start desc) {
         ${experienceFields}
     }
 `;

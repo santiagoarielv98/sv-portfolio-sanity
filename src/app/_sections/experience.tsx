@@ -123,14 +123,18 @@ const ExperienceSection = ({ experiences, lang }: Props) => {
                               <>
                                 <ExtendedSeparator />
                                 <div className="flex flex-wrap gap-2">
-                                  {experience.skills.map((skill) => (
-                                    <ExtendedBadge
-                                      key={skill.title as unknown as string}
-                                      variant="ghost"
-                                    >
-                                      {skill.title as unknown as string}
-                                    </ExtendedBadge>
-                                  ))}
+                                  {experience.skills.map((skill) => {
+                                    const Icon = getIcon(skill.icon!);
+                                    return (
+                                      <ExtendedBadge
+                                        key={skill.title as unknown as string}
+                                        variant="ghost"
+                                      >
+                                        <Icon />
+                                        {skill.title as unknown as string}
+                                      </ExtendedBadge>
+                                    );
+                                  })}
                                 </div>
                               </>
                             )}
