@@ -40,6 +40,11 @@
       "source": "Código fuente",
       "demo": "Demo en vivo"
     },
+    "projects":{
+      "title":"Todos los Proyectos",
+      "subtitle":"Proyectos",
+      "description":"Explora mis últimos proyectos y experimentos. Desde aplicaciones frontend hasta soluciones full-stack, cada proyecto representa un desafío único y una experiencia de aprendizaje."
+    },
     "skills": {
       "title": "Habilidades",
       "subtitle": "Mi experiencia técnica"
@@ -111,6 +116,9 @@
       "location": "Ubicación",
       "socialLinks": "Redes sociales",
       "connect": "Conéctate conmigo",
+      "backToHome": "Volver al inicio",
+      "backToProjects": "Volver a proyectos",
+      "clearFilters": "Limpiar todos los filtros",
       "cv": {
         "download": "Descargar CV",
         "view": "Ver CV"

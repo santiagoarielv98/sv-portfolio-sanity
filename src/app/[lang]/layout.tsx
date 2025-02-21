@@ -49,14 +49,13 @@ export async function generateStaticParams() {
   return i18n.locales.map((locale) => ({ lang: locale }));
 }
 
-export default async function RootLayout({
-  children,
-  params,
-}: Readonly<{
-  children: React.ReactNode;
-}> &
-  Props) {
-  const { lang } = await params;
+export default async function RootLayout(
+  props: Readonly<{
+    children: React.ReactNode;
+  }> &
+    Props,
+) {
+  const params = await props.params;
 
   // Providing all messages to the client
   // side is the easiest way to get started
@@ -74,7 +73,7 @@ export default async function RootLayout({
   ]);
 
   return (
-    <html lang={lang} suppressHydrationWarning>
+    <html lang={params.lang} suppressHydrationWarning>
       <body
         className={`${spaceGrotesk.variable} ${urbanist.variable} font-urbanist min-h-screen`}
       >
@@ -85,11 +84,11 @@ export default async function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            <SiteHeader lang={lang} />
-            {children}
+            <SiteHeader {...params} />
+            {props.children}
             <SiteFooter
+              {...params}
               footer={settings.data?.footer as unknown as string}
-              lang={lang}
               profile={profile.data?.profile}
               contact={profile.data?.contact}
             />

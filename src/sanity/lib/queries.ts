@@ -83,6 +83,12 @@ const profileTypeQuery = `
     }
 `;
 
+const projectsQuery = `
+    "projects": *[_type == "project"] | order(_updatedAt asc) {
+        ${baseProjectsFields}
+    }
+`;
+
 const featuredProjectsQuery = `
     "featuredProjects": *[_type == "project" && featured == true] | order(_updatedAt asc) {
         ${baseProjectsFields}
@@ -124,4 +130,10 @@ export const homeQuery = defineQuery(`{
     ${experiencesQuery},
     ${skillCategoriesQuery},
     ${contactQuery}
+}`);
+
+export const projectQuery = defineQuery(`{
+    ${profileTypeQuery},
+    ${projectsQuery},
+    ${skillCategoriesQuery}
 }`);

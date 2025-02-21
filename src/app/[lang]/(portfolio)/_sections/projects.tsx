@@ -1,5 +1,5 @@
 import { ExtendedButton } from "@/components/extended-button";
-import { SECTIONS } from "@/lib/config/navigation";
+import { ROUTES, SECTIONS } from "@/lib/config/navigation";
 import { FolderGit, Grid2X2 } from "lucide-react";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
@@ -7,12 +7,14 @@ import Link from "next/link";
 import ProjectCard from "@/components/card/project-card";
 import { SectionHeader } from "@/components/section";
 import type { HomeQueryResult } from "../../../../../sanity.types";
+import type { Locale } from "@/lib/i18n/config";
 
 type Props = {
   projects: HomeQueryResult["featuredProjects"];
+  lang: Locale;
 };
 
-const ProjectsSection = ({ projects }: Props) => {
+const ProjectsSection = ({ projects, lang }: Props) => {
   const t = useTranslations("project");
   return (
     <section
@@ -45,7 +47,7 @@ const ProjectsSection = ({ projects }: Props) => {
             className="font-display group"
             asChild
           >
-            <Link href="/projects">
+            <Link href={`/${lang}${ROUTES.PROJECTS}`}>
               <span>{t("more")}</span>
               <Grid2X2 className="h-5 w-5 transition-transform group-hover:rotate-12" />
             </Link>

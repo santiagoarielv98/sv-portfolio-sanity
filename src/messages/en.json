@@ -40,6 +40,11 @@
       "source": "Source Code",
       "demo": "Live Demo"
     },
+    "projects":{
+      "title":"All Projects",
+      "subtitle":"Projects",
+      "description":"Explore my latest projects and experiments. From frontend applications to full-stack solutions, each project represents a unique challenge and learning experience."
+    },
     "skills": {
       "title": "Skills",
       "subtitle": "My technical expertise"
@@ -111,6 +116,9 @@
       "location": "Location",
       "socialLinks": "Social Links",
       "connect": "Connect with me",
+      "backToHome": "Back to Home",
+      "backToProjects": "Back to Projects",
+      "clearFilters": "Clear all filters",
       "cv": {
         "download": "Download CV",
         "view": "View CV"
