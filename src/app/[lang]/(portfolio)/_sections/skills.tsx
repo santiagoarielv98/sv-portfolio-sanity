@@ -7,7 +7,7 @@ import {
   CardTitle,
   ExtendedCard,
 } from "@/components/extended-card";
-import { getIcon } from "@/components/icons";
+import { getIcon } from "@/components/icon";
 import { SectionHeader } from "@/components/section";
 import { SECTIONS } from "@/lib/config/navigation";
 import { Brain } from "lucide-react";

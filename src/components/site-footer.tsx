@@ -1,14 +1,14 @@
 import { navigation } from "@/lib/config/navigation";
 import type { Locale } from "@/lib/i18n/config";
 import { Code, Mail } from "lucide-react";
+import { useTranslations } from "next-intl";
+import Link from "next/link";
 import type { ProfileQueryResult } from "../../sanity.types";
 import { ExtendedButton } from "./extended-button";
 import { ExtendedCard } from "./extended-card";
 import { ExtendedSeparator } from "./extended-separator";
-import { getIcon } from "./icons";
+import { Icon } from "./icon";
 import { Typography } from "./ui/typography";
-import Link from "next/link";
-import { useTranslations } from "next-intl";
 
 type SiteFooterProps = {
   footer: string;
@@ -93,26 +93,23 @@ export function SiteFooter({
             {t("allRightsReserved")}
           </Typography>
           <div className="flex gap-2">
-            {profile?.socialLinks?.map((social) => {
-              const Icon = getIcon(social.icon as string);
-              return (
-                <ExtendedButton
-                  key={social.platform as string}
-                  variant="ghost"
-                  size="icon"
-                  asChild
+            {profile?.socialLinks?.map((social) => (
+              <ExtendedButton
+                key={social.platform as string}
+                variant="ghost"
+                size="icon"
+                asChild
+              >
+                <Link
+                  href={social.url as string}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={social.platform as string}
                 >
-                  <Link
-                    href={social.url as string}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={social.platform as string}
-                  >
-                    <Icon className="h-4 w-4" />
-                  </Link>
-                </ExtendedButton>
-              );
-            })}
+                  <Icon icon={social.icon!} className="h-4 w-4" />
+                </Link>
+              </ExtendedButton>
+            ))}
           </div>
         </div>
       </div>

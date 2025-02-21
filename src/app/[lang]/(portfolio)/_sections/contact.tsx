@@ -10,13 +10,13 @@ import {
 } from "@/components/extended-card";
 import { ExtendedSeparator } from "@/components/extended-separator";
 import ContactForm from "@/components/form/contact-form";
-import { getIcon } from "@/components/icons";
 import { SectionHeader } from "@/components/section";
 import { Typography } from "@/components/ui/typography";
 import { SECTIONS } from "@/lib/config/navigation";
 import { useTranslations } from "next-intl";
 
 import type { HomeQueryResult } from "../../../../../sanity.types";
+import { Icon } from "@/components/icon";
 
 type Props = {
   profile: HomeQueryResult["profile"];
@@ -113,28 +113,25 @@ const ContactSection = ({ contact, profile }: Props) => {
                 <CardTitle className="text-sm">{common("connect")}</CardTitle>
               </CardHeader>
               <CardContent className="flex flex-wrap gap-2">
-                {profile?.socialLinks?.map((social, index) => {
-                  const Icon = getIcon(social.icon!);
-                  return (
-                    <ExtendedButton
-                      key={index}
-                      variant="solid"
-                      size="sm"
-                      asChild
-                      className="flex-1"
+                {profile?.socialLinks?.map((social, index) => (
+                  <ExtendedButton
+                    key={index}
+                    variant="solid"
+                    size="sm"
+                    asChild
+                    className="flex-1"
+                  >
+                    <a
+                      href={social.url!}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center justify-center gap-2"
                     >
-                      <a
-                        href={social.url!}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center justify-center gap-2"
-                      >
-                        <Icon className="h-4 w-4" />
-                        {social.platform}
-                      </a>
-                    </ExtendedButton>
-                  );
-                })}
+                      <Icon icon={social.icon!} className="h-4 w-4" />
+                      {social.platform}
+                    </a>
+                  </ExtendedButton>
+                ))}
               </CardContent>
             </ExtendedCard>
           </div>

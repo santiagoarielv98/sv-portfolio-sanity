@@ -100,3 +100,14 @@ export const icons: Record<string, LucideIcon | IconType> = {
 export const getIcon = (icon?: string) => {
   return icons[icon ?? ""] ?? Code;
 };
+
+export const Icon = ({
+  icon,
+  className,
+}: {
+  icon: string;
+  className?: string;
+}) => {
+  const Icon = getIcon(icon);
+  return <Icon className={className} />;
+};

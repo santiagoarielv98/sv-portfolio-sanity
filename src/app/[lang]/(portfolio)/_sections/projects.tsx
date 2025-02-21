@@ -1,22 +1,10 @@
-import { ExtendedBadge } from "@/components/extended-badge";
 import { ExtendedButton } from "@/components/extended-button";
-import {
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-  ExtendedCard,
-} from "@/components/extended-card";
-import { ExtendedSeparator } from "@/components/extended-separator";
-import { getIcon } from "@/components/icons";
 import { SECTIONS } from "@/lib/config/navigation";
-import { ExternalLink, FolderGit, Grid2X2 } from "lucide-react";
+import { FolderGit, Grid2X2 } from "lucide-react";
 import { useTranslations } from "next-intl";
-import Image from "next/image";
 import Link from "next/link";
-import { FaGithub } from "react-icons/fa";
 
+import ProjectCard from "@/components/card/project-card";
 import { SectionHeader } from "@/components/section";
 import type { HomeQueryResult } from "../../../../../sanity.types";
 
@@ -45,69 +33,7 @@ const ProjectsSection = ({ projects }: Props) => {
 
         <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
           {projects.map((project, index) => (
-            <ExtendedCard
-              key={index}
-              variant="default"
-              className="group flex flex-col overflow-hidden"
-            >
-              <div className="relative aspect-video w-full overflow-hidden">
-                <div className="from-background/80 to-background/20 absolute inset-0 z-10 bg-gradient-to-t transition-opacity group-hover:opacity-50" />
-                <Image
-                  src={project.thumbnail!}
-                  alt={project.title as unknown as string}
-                  fill
-                  className="object-cover transition-transform duration-500 group-hover:scale-105"
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                />
-              </div>
-
-              <CardHeader className="relative">
-                <CardTitle className="group-hover:text-primary transition-colors">
-                  {project.title as unknown as string}
-                </CardTitle>
-                <CardDescription>
-                  {project.description as unknown as string}
-                </CardDescription>
-              </CardHeader>
-
-              {Array.isArray(project.skills) && project.skills.length > 0 && (
-                <CardContent>
-                  <div className="flex flex-wrap gap-2">
-                    {project.skills?.map((skill) => {
-                      const Icon = getIcon(skill.icon!);
-                      return (
-                        <ExtendedBadge
-                          key={skill.title as unknown as string}
-                          variant="ghost"
-                        >
-                          <Icon />
-                          {skill.title as unknown as string}
-                        </ExtendedBadge>
-                      );
-                    })}
-                  </div>
-                </CardContent>
-              )}
-              <ExtendedSeparator className="mt-auto mb-6" />
-              <CardFooter className="gap-4">
-                {project.links?.demo && (
-                  <ExtendedButton
-                    variant="default"
-                    size="sm"
-                    className="flex-1"
-                  >
-                    <ExternalLink className="mr-1 h-4 w-4" />
-                    {t("demo")}
-                  </ExtendedButton>
-                )}
-                {project.links?.repo && (
-                  <ExtendedButton variant="solid" size="sm" className="flex-1">
-                    <FaGithub className="mr-1 h-4 w-4" />
-                    {t("source")}
-                  </ExtendedButton>
-                )}
-              </CardFooter>
-            </ExtendedCard>
+            <ProjectCard key={index} project={project} />
           ))}
         </div>
 
