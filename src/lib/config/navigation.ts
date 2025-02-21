@@ -14,27 +14,27 @@ export const ROUTES = {
 } as const;
 
 export const navigation = [
-  { name: "nav.about", href: SECTIONS.ABOUT },
-  { name: "nav.experience", href: SECTIONS.EXPERIENCE },
+  { name: "about", href: SECTIONS.ABOUT },
+  { name: "experience", href: SECTIONS.EXPERIENCE },
   {
-    name: "nav.projects.section",
+    name: "projects.section",
     href: SECTIONS.PROJECTS,
     hasSubmenu: true,
     submenu: [
       {
-        titleKey: "nav.projects.section",
+        titleKey: "projects.section",
         href: SECTIONS.PROJECTS,
         icon: FolderKanban,
-        descriptionKey: "nav.projects.sectionDescription",
+        descriptionKey: "projects.sectionDescription",
       },
       {
-        titleKey: "nav.projects.all",
+        titleKey: "projects.all",
         href: ROUTES.PROJECTS,
         icon: Grid2X2,
-        descriptionKey: "nav.projects.allDescription",
+        descriptionKey: "projects.allDescription",
       },
     ],
   },
-  { name: "nav.skills", href: SECTIONS.SKILLS },
-  { name: "nav.contact", href: SECTIONS.CONTACT },
+  { name: "skills", href: SECTIONS.SKILLS },
+  { name: "contact", href: SECTIONS.CONTACT },
 ];

@@ -10,7 +10,6 @@ import {
 } from "@/components/extended-card";
 import { ExtendedSeparator } from "@/components/extended-separator";
 import { getIcon } from "@/components/icons";
-import { Typography } from "@/components/ui/typography";
 import { SECTIONS } from "@/lib/config/navigation";
 import { ExternalLink, FolderGit, Grid2X2 } from "lucide-react";
 import { useTranslations } from "next-intl";
@@ -18,6 +17,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { FaGithub } from "react-icons/fa";
 
+import { SectionHeader } from "@/components/section";
 import type { HomeQueryResult } from "../../../../../sanity.types";
 
 type Props = {
@@ -37,20 +37,11 @@ const ProjectsSection = ({ projects }: Props) => {
         <div className="pattern-connector pattern-connector-bottom pattern-dots" />
       </div>
       <div className="container mx-auto px-4">
-        <div className="mb-12 space-y-4 text-center">
-          <ExtendedBadge
-            variant="gradient"
-            className="mx-auto flex items-center gap-2"
-          >
-            <FolderGit />
-            {t("subtitle")}
-          </ExtendedBadge>
-          <div className="mx-auto flex max-w-2xl items-center gap-4">
-            <ExtendedSeparator className="to-primary/30 flex-1 via-none from-transparent" />
-            <Typography variant="h2">{t("title")}</Typography>
-            <ExtendedSeparator className="from-primary/30 flex-1 via-none to-transparent" />
-          </div>
-        </div>
+        <SectionHeader
+          title={t("title")}
+          badge={t("subtitle")}
+          icon={FolderGit}
+        />
 
         <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
           {projects.map((project, index) => (

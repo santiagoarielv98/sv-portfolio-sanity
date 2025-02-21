@@ -27,6 +27,7 @@ import { useTranslations } from "next-intl";
 export function SiteHeader({ lang }: { lang: Locale }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const t = useTranslations();
+  const nav = useTranslations("nav");
 
   return (
     <header className="border-primary/10 bg-background/80 supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50 w-full border-b backdrop-blur">
@@ -52,7 +53,7 @@ export function SiteHeader({ lang }: { lang: Locale }) {
                         size="sm"
                         className="group"
                       >
-                        {t(item.name)}
+                        {nav(item.name)}
                         <ChevronDown className="ml-1 h-4 w-4 transition-transform group-data-[state=open]:rotate-180" />
                       </ExtendedButton>
                     </DropdownMenuTrigger>
@@ -67,10 +68,10 @@ export function SiteHeader({ lang }: { lang: Locale }) {
                             >
                               <Icon className="h-4 w-4" />
                               <div className="flex flex-col">
-                                <span>{t(submenuItem.titleKey)}</span>
+                                <span>{nav(submenuItem.titleKey)}</span>
                                 {submenuItem.descriptionKey && (
                                   <span className="text-muted-foreground text-xs">
-                                    {t(submenuItem.descriptionKey)}
+                                    {nav(submenuItem.descriptionKey)}
                                   </span>
                                 )}
                               </div>
@@ -87,7 +88,7 @@ export function SiteHeader({ lang }: { lang: Locale }) {
                     size="sm"
                     asChild
                   >
-                    <a href={`/${lang}/${item.href}`}>{t(item.name)}</a>
+                    <a href={`/${lang}/${item.href}`}>{nav(item.name)}</a>
                   </ExtendedButton>
                 ),
               )}
@@ -141,7 +142,7 @@ export function SiteHeader({ lang }: { lang: Locale }) {
                           variant="ghost"
                           className="w-full justify-start"
                         >
-                          <div>{t(item.name)}</div>
+                          <div>{nav(item.name)}</div>
                         </ExtendedButton>
                       </AccordionTrigger>
                       <AccordionContent className="pt-2 pb-0">
@@ -161,7 +162,7 @@ export function SiteHeader({ lang }: { lang: Locale }) {
                                 className="flex items-center gap-2"
                               >
                                 <Icon className="h-4 w-4" />
-                                {t(submenuItem.titleKey)}
+                                {nav(submenuItem.titleKey)}
                               </Link>
                             </ExtendedButton>
                           );

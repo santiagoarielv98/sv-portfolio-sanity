@@ -1,6 +1,6 @@
-import { ExtendedBadge } from "@/components/extended-badge";
 import { ExtendedButton } from "@/components/extended-button";
 import { ExtendedSeparator } from "@/components/extended-separator";
+import { SectionHeader } from "@/components/section";
 import { Typography } from "@/components/ui/typography";
 import { SECTIONS } from "@/lib/config/navigation";
 import { Download, UserRound } from "lucide-react";
@@ -14,7 +14,9 @@ type Props = {
 };
 
 const AboutSection = ({ profile }: Props) => {
-  const t = useTranslations();
+  const t = useTranslations("about");
+  const common = useTranslations("common");
+
   return (
     <section
       id={SECTIONS.ABOUT.slice(1)}
@@ -27,41 +29,29 @@ const AboutSection = ({ profile }: Props) => {
       </div>
       <div className="container mx-auto px-4">
         {/* Header */}
-        <div className="mb-12 space-y-4 text-center">
-          <ExtendedBadge
-            variant="gradient"
-            className="mx-auto flex items-center gap-2"
-          >
-            <UserRound />
-            {t("about.subtitle")}
-          </ExtendedBadge>
-          <div className="mx-auto flex max-w-2xl items-center gap-4">
-            <ExtendedSeparator className="to-primary/30 flex-1 via-none from-transparent" />
-            <Typography variant="h2">{t("about.title")}</Typography>
-            <ExtendedSeparator className="from-primary/30 flex-1 via-none to-transparent" />
-          </div>
-        </div>
-
+        <SectionHeader
+          title={t("title")}
+          badge={t("subtitle")}
+          icon={UserRound}
+        />
         {/* Main Content */}
         <div className="mx-auto mt-12 grid max-w-6xl gap-12 lg:grid-cols-2">
           {/* Left Column - Image and Quick Info */}
-          <div className="space-y-8">
-            <div className="relative aspect-square overflow-hidden rounded-xl">
-              <Image
-                src={profile!.avatar!}
-                alt={`${t("common.photoBy")} ${profile!.name}`}
-                fill
-                className="object-cover"
-              />
-              <div className="from-background/80 absolute inset-0 bg-gradient-to-t" />
-            </div>
+          <div className="relative aspect-square overflow-hidden rounded-xl">
+            <Image
+              src={profile!.avatar!}
+              alt={`${common("photoBy")} ${profile!.name}`}
+              fill
+              className="object-cover"
+            />
+            <div className="from-background/60 absolute inset-0 bg-gradient-to-t" />
           </div>
 
           {/* Right Column - Text Content */}
           <div className="space-y-8">
             <div>
               <Typography variant="h3" className="mb-4">
-                {t("about.whoami")}
+                {t("whoami")}
               </Typography>
               <div className="space-y-4">
                 {profile?.bio?.map((bio, index) => (
@@ -76,7 +66,7 @@ const AboutSection = ({ profile }: Props) => {
 
             <div>
               <Typography variant="h3" className="mb-4">
-                {t("about.goals")}
+                {t("goals")}
               </Typography>
               {profile?.objectives?.map((objective, index) => (
                 <Typography key={index} variant="body1">
@@ -85,8 +75,7 @@ const AboutSection = ({ profile }: Props) => {
               ))}
             </div>
 
-            {/* Download CV Button */}
-            <div className="pt-4">
+            <div>
               <ExtendedButton
                 variant="gradient"
                 size="lg"
@@ -100,7 +89,7 @@ const AboutSection = ({ profile }: Props) => {
                   download
                 >
                   <Download className="mr-2" />
-                  {t("common.cv.download")}
+                  {common("cv.download")}
                 </a>
               </ExtendedButton>
             </div>
