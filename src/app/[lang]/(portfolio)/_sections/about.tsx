@@ -46,7 +46,7 @@ const AboutSection = ({ profile, lang }: Props) => {
         </div>
 
         {/* Main Content */}
-        <div className="mt-12 grid gap-12 lg:grid-cols-2">
+        <div className="mx-auto mt-12 grid max-w-6xl gap-12 lg:grid-cols-2">
           {/* Left Column - Image and Quick Info */}
           <div className="space-y-8">
             <div className="relative aspect-square overflow-hidden rounded-xl">
@@ -91,7 +91,7 @@ const AboutSection = ({ profile, lang }: Props) => {
             {/* Download CV Button */}
             <div className="pt-4">
               <ExtendedButton variant="gradient" size="lg" className="w-full">
-                <Download className="mr-2" />
+                <Download />
                 {translations[lang].common.cv.download}
               </ExtendedButton>
             </div>
