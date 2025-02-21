@@ -9,6 +9,7 @@
       "about": "About",
       "experience": "Experience",
       "projects": {
+        "title": "Projects",
         "section": "Projects Section",
         "sectionDescription": "View featured projects section",
         "all": "All Projects",

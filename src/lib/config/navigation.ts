@@ -17,7 +17,7 @@ export const navigation = [
   { name: "about", href: SECTIONS.ABOUT },
   { name: "experience", href: SECTIONS.EXPERIENCE },
   {
-    name: "projects.section",
+    name: "projects.title",
     href: SECTIONS.PROJECTS,
     hasSubmenu: true,
     submenu: [
