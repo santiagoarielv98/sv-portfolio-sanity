@@ -96,7 +96,7 @@ const experiencesQuery = `
 `;
 
 const skillCategoriesQuery = `
-    "skillCategories": *[_type == "skillCategory"] {
+    "skillCategories": *[_type == "skillCategory"] | order(order asc) {
         ${skillCategoryFields}
     }
 `;
