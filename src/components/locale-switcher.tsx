@@ -15,7 +15,7 @@ import Link from "next/link";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 
-const ModeLang = () => {
+const LocaleSwitcher = () => {
   const { lang } = useParams();
   const pathname = usePathname();
 
@@ -61,4 +61,4 @@ const ModeLang = () => {
   );
 };
 
-export default ModeLang;
+export default LocaleSwitcher;

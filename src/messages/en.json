@@ -87,5 +87,10 @@
         "download": "Download CV",
         "view": "View CV"
       }
+    },
+    "theme": {
+      "light": "Light",
+      "dark": "Dark",
+      "system": "System"
     }
   }

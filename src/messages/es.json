@@ -87,5 +87,10 @@
         "download": "Descargar CV",
         "view": "Ver CV"
       }
+    },
+    "theme": {
+      "light": "Claro",
+      "dark": "Oscuro",
+      "system": "Sistema"
     }
   }

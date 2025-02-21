@@ -19,8 +19,8 @@ import Link from "next/link";
 import { useState } from "react";
 import { ExtendedButton } from "./extended-button";
 import { ExtendedSeparator } from "./extended-separator";
-import ModeLang from "./mode-lang";
-import { ModeToggle } from "./mode-toggle";
+import LocaleSwitcher from "./locale-switcher";
+import { ThemeSwitcher } from "./theme-switcher";
 import { ExtendedBadge } from "./extended-badge";
 import { useTranslations } from "next-intl";
 
@@ -95,8 +95,8 @@ export function SiteHeader({ lang }: { lang: Locale }) {
               <ExtendedSeparator orientation="vertical" className="mx-2 h-6" />
 
               {/* Language Selector */}
-              <ModeLang />
-              <ModeToggle />
+              <LocaleSwitcher />
+              <ThemeSwitcher />
               {/* Theme Toggle Dropdown */}
 
               <ExtendedSeparator orientation="vertical" className="mx-2 h-6" />
@@ -107,10 +107,10 @@ export function SiteHeader({ lang }: { lang: Locale }) {
             {/* Mobile Menu Button */}
             <div className="flex items-center gap-2 md:hidden">
               {/* Language Selector Mobile */}
-              <ModeLang />
+              <LocaleSwitcher />
 
               {/* Theme Toggle Mobile */}
-              <ModeToggle />
+              <ThemeSwitcher />
               {/* Menu Toggle */}
               <ExtendedButton
                 variant="ghost"

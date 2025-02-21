@@ -9,15 +9,12 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import type { Locale } from "@/lib/i18n/config";
-import type { ColorScheme } from "@/lib/theme/config";
-import { colorScheme } from "@/lib/theme/config";
 import { cn } from "@/lib/utils";
-import { useParams } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { ExtendedButton } from "./extended-button";
 
-export function ModeToggle() {
-  const { lang } = useParams<{ lang: Locale }>();
+export function ThemeSwitcher() {
+  const t = useTranslations("theme");
   const { setTheme, theme: currentTheme, themes } = useTheme();
 
   return (
@@ -32,7 +29,7 @@ export function ModeToggle() {
       <DropdownMenuContent align="end">
         {themes.map((theme) => (
           <DropdownMenuItem key={theme} onClick={() => setTheme(theme)}>
-            {colorScheme[theme as ColorScheme][lang]}
+            {t(theme)}
             <Check
               className={cn(
                 "ml-auto",
