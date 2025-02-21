@@ -58,6 +58,7 @@ const skillByCategoryQuery = defineQuery(`
 
 const skillCategoryFields = `
     title,
+    "slug": slug.current,
     "description": coalesce(description[$lang], description.es),
     "icon": icon,
     "skills": ${skillByCategoryQuery},

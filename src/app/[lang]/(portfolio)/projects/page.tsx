@@ -2,7 +2,7 @@ import ProjectCard from "@/components/card/project-card";
 import { ExtendedBadge } from "@/components/extended-badge";
 import { ExtendedButton } from "@/components/extended-button";
 import { ExtendedSeparator } from "@/components/extended-separator";
-import { Icon } from "@/components/icon";
+import CategoryFilter from "@/components/form/category-filter";
 import { Input } from "@/components/ui/input";
 import {
   Select,
@@ -17,7 +17,10 @@ import { projectQuery } from "@/sanity/lib/queries";
 import { ArrowLeft, Code, Search, SortAsc } from "lucide-react";
 import { getTranslations } from "next-intl/server";
 import Link from "next/link";
-import type { ProjectQueryResult } from "../../../../../sanity.types";
+import type {
+  ProjectQueryResult,
+  SkillCategory,
+} from "../../../../../sanity.types";
 
 const sortOptions = [
   { label: "Newest First", value: "newest" },
@@ -43,7 +46,7 @@ export default async function ProjectsPage(props: Props) {
 
   const projects = data.projects;
   console.log(data);
-  const categories = data.skillCategories;
+  const categories = data.skillCategories as unknown as SkillCategory[];
 
   return (
     <main className="relative">
@@ -96,20 +99,7 @@ export default async function ProjectsPage(props: Props) {
           {/* Search and Filters Bar */}
           <div className="mb-12 flex flex-col gap-6">
             {/* Categories Filter */}
-            <div className="flex flex-wrap justify-center gap-4">
-              {categories.map((category) => (
-                <ExtendedButton
-                  key={category.title}
-                  variant="gradient"
-                  size="sm"
-                  className="min-w-32"
-                >
-                  <Icon icon={category.icon!} className="h-4 w-4" />
-                  <span>{category.title}</span>
-                </ExtendedButton>
-              ))}
-            </div>
-
+            <CategoryFilter categories={categories} />
             {/* Search and Sort Controls */}
             <div className="mx-auto flex w-full max-w-4xl flex-col items-center justify-between gap-4 sm:flex-row">
               {/* Search Bar */}
