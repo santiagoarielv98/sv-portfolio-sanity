@@ -16,7 +16,7 @@ import { ExternalLink, FolderGit, Grid2X2 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { FaGithub } from "react-icons/fa";
-import type { HomeQueryResult } from "../../../sanity.types";
+import type { HomeQueryResult } from "../../../../../sanity.types";
 import { getIcon } from "@/components/icons";
 import { SECTIONS } from "@/lib/config/navigation";
 

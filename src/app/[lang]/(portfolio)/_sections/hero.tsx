@@ -2,9 +2,10 @@ import { ExtendedButton } from "@/components/extended-button";
 import { ExtendedSeparator } from "@/components/extended-separator";
 import { Typography } from "@/components/ui/typography";
 import { SECTIONS } from "@/lib/config/navigation";
-import type { Locale } from "@/lib/i18n/config";
 import { translations } from "@/lib/i18n/transalation";
-import { ChevronDown, Code } from "lucide-react";
+import { ChevronDown, Mail } from "lucide-react";
+
+import type { Locale } from "@/lib/i18n/config";
 
 type Props = {
   lang: Locale;
@@ -30,7 +31,7 @@ const HeroSection = ({ lang }: Props) => {
         <ExtendedSeparator />
 
         <ExtendedButton size="lg" variant="default" className="font-display">
-          <Code />
+          <Mail />
           {translations[lang].hero.cta}
         </ExtendedButton>
       </div>

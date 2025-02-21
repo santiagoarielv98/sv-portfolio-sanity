@@ -2,12 +2,13 @@ import { ExtendedBadge } from "@/components/extended-badge";
 import { ExtendedButton } from "@/components/extended-button";
 import { ExtendedSeparator } from "@/components/extended-separator";
 import { Typography } from "@/components/ui/typography";
-import type { Locale } from "@/lib/i18n/config";
+import { SECTIONS } from "@/lib/config/navigation";
 import { translations } from "@/lib/i18n/transalation";
 import { Download, UserRound } from "lucide-react";
 import Image from "next/image";
-import type { HomeQueryResult } from "../../../sanity.types";
-import { SECTIONS } from "@/lib/config/navigation";
+
+import type { Locale } from "@/lib/i18n/config";
+import type { HomeQueryResult } from "../../../../../sanity.types";
 
 type Props = {
   profile: HomeQueryResult["profile"];

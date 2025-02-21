@@ -14,7 +14,7 @@ import type { Locale } from "@/lib/i18n/config";
 import { translations } from "@/lib/i18n/transalation";
 import { getFormattedDate } from "@/lib/utils";
 import { Briefcase, Calendar, MapPin } from "lucide-react";
-import type { HomeQueryResult } from "../../../sanity.types";
+import type { HomeQueryResult } from "../../../../../sanity.types";
 import { SECTIONS } from "@/lib/config/navigation";
 
 type Props = {

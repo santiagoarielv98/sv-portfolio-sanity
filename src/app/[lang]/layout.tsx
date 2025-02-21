@@ -2,11 +2,13 @@ import type { Locale } from "@/lib/i18n/config";
 import { i18n } from "@/lib/i18n/config";
 import { Space_Grotesk, Urbanist } from "next/font/google";
 
-import "./globals.css";
+import "../globals.css";
 import { sanityFetch } from "@/sanity/lib/live";
-import { settingQuery } from "@/sanity/lib/queries";
+import { profileQuery, settingQuery } from "@/sanity/lib/queries";
 import type { Metadata } from "next";
 import { ThemeProvider } from "./provider";
+import { SiteHeader } from "@/components/site-header";
+import { SiteFooter } from "@/components/site-footer";
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
@@ -52,6 +54,17 @@ export default async function RootLayout({
   Props) {
   const { lang } = await params;
 
+  const [settings, profile] = await Promise.all([
+    sanityFetch({
+      query: settingQuery,
+      params,
+    }),
+    sanityFetch({
+      query: profileQuery,
+      params,
+    }),
+  ]);
+
   return (
     <html lang={lang} suppressHydrationWarning>
       <body
@@ -63,7 +76,14 @@ export default async function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
+          <SiteHeader lang={lang} />
           {children}
+          <SiteFooter
+            footer={settings.data?.footer as unknown as string}
+            lang={lang}
+            profile={profile.data?.profile}
+            contact={profile.data?.contact}
+          />
         </ThemeProvider>
       </body>
     </html>

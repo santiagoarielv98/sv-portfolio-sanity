@@ -16,7 +16,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Typography } from "@/components/ui/typography";
 import type { Locale } from "@/lib/i18n/config";
 import { translations } from "@/lib/i18n/transalation";
-import type { HomeQueryResult } from "../../../sanity.types";
+import type { HomeQueryResult } from "../../../../../sanity.types";
 import { getIcon } from "@/components/icons";
 import { SECTIONS } from "@/lib/config/navigation";
 

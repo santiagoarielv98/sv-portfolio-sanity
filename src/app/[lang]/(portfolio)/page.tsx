@@ -15,7 +15,6 @@ type Props = {
 };
 
 export default async function Home(props: Props) {
-  // console.log(await props.params);
   const params = await props.params;
 
   const { data } = await sanityFetch({
