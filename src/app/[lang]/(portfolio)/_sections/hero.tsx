@@ -15,13 +15,13 @@ const HeroSection = ({ lang }: Props) => {
   return (
     <section
       id={SECTIONS.HOME.slice(1)}
-      className="relative flex min-h-[90vh] items-center justify-center overflow-hidden"
+      className="relative flex min-h-[90vh] items-center justify-center overflow-hidden py-20"
     >
       <div className="absolute inset-0 -z-20">
         <div className="pattern-topography pattern-fade-in absolute inset-0" />
         <div className="pattern-connector pattern-connector-bottom pattern-dots" />
       </div>
-      <div className="mx-auto my-20 max-w-4xl space-y-8 px-4 text-center">
+      <div className="mx-auto max-w-4xl space-y-8 px-4 text-center">
         <Typography variant="h1">{translations[lang].hero.title}</Typography>
 
         <Typography variant="h2" className="max-w-2xl font-light">
