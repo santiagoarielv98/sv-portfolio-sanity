@@ -49,6 +49,14 @@
       "form": {
         "title": "Send me a message",
         "subtitle": "Fill out the form below and I'll get back to you as soon as possible.",
+        "success": {
+          "title": "Message sent!",
+          "message": "Your message has been sent successfully. Thank you for contacting me!"
+        },
+        "error": {
+          "title": "Error!",
+          "message": "An error occurred while sending your message. Please try again later."
+        },
         "name": {
           "label": "Name",
           "placeholder": "Your name"
@@ -65,7 +73,25 @@
           "label": "Message",
           "placeholder": "Write your message here"
         },
-        "send": "Send message"
+        "send": "Send message",
+        "errors": {
+          "name": {
+            "min": "Name must be at least 2 characters",
+            "required": "Name is required"
+          },
+          "email": {
+            "invalid": "Invalid email address",
+            "required": "Email is required"
+          },
+          "subject": {
+            "max": "Subject must be less than 50 characters",
+            "required": "Subject is required"
+          },
+          "message": {
+            "min": "Message must be at least 5 characters",
+            "required": "Message is required"
+          }
+        }
       }
     },
     "footer": {

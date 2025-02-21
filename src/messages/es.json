@@ -49,6 +49,14 @@
       "form": {
         "title": "Envíame un mensaje",
         "subtitle": "Completa el formulario a continuación y te responderé lo antes posible.",
+        "success": {
+          "title": "¡Mensaje enviado!",
+          "message": "Tu mensaje ha sido enviado con éxito. ¡Gracias por contactarme!"
+        },
+        "error": {
+          "title": "¡Error!",
+          "message": "Se produjo un error al enviar tu mensaje. Por favor, inténtalo de nuevo más tarde."
+        },
         "name": {
           "label": "Nombre",
           "placeholder": "Tu nombre"
@@ -65,7 +73,25 @@
           "label": "Mensaje",
           "placeholder": "Escribe tu mensaje aquí"
         },
-        "send": "Enviar mensaje"
+        "send": "Enviar mensaje",
+        "errors": {
+          "name": {
+            "min": "El nombre debe tener al menos 2 caracteres",
+            "required": "El nombre es obligatorio"
+          },
+          "email": {
+            "invalid": "Dirección de correo inválida",
+            "required": "El correo es obligatorio"
+          },
+          "subject": {
+            "max": "El asunto debe tener menos de 50 caracteres",
+            "required": "El asunto es obligatorio"
+          },
+          "message": {
+            "min": "El mensaje debe tener al menos 5 caracteres",
+            "required": "El mensaje es obligatorio"
+          }
+        }
       }
     },
     "footer": {

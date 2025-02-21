@@ -12,6 +12,7 @@ import "../globals.css";
 
 import type { Locale } from "@/lib/i18n/config";
 import type { Metadata } from "next";
+import { Toaster } from "@/components/ui/sonner";
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
@@ -94,6 +95,7 @@ export default async function RootLayout({
             />
           </ThemeProvider>
         </NextIntlClientProvider>
+        <Toaster />
       </body>
     </html>
   );
