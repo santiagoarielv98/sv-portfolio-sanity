@@ -5,28 +5,25 @@ import { ExtendedButton } from "@/components/extended-button";
 import {
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
   ExtendedCard,
 } from "@/components/extended-card";
 import { ExtendedSeparator } from "@/components/extended-separator";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Typography } from "@/components/ui/typography";
-import type { Locale } from "@/lib/i18n/config";
-import { translations } from "@/lib/i18n/transalation";
-import type { HomeQueryResult } from "../../../../../sanity.types";
+import ContactForm from "@/components/form/contact-form";
 import { getIcon } from "@/components/icons";
+import { Typography } from "@/components/ui/typography";
 import { SECTIONS } from "@/lib/config/navigation";
+import { useTranslations } from "next-intl";
+import type { HomeQueryResult } from "../../../../../sanity.types";
 
 type Props = {
   profile: HomeQueryResult["profile"];
   contact: HomeQueryResult["contact"];
-  lang: Locale;
 };
 
-const ContactSection = ({ contact, profile, lang }: Props) => {
+const ContactSection = ({ contact, profile }: Props) => {
+  const t = useTranslations();
   return (
     <section
       id={SECTIONS.CONTACT.slice(1)}
@@ -44,13 +41,11 @@ const ContactSection = ({ contact, profile, lang }: Props) => {
             className="mx-auto flex items-center gap-2"
           >
             <Mail />
-            {translations[lang].contact.subtitle}
+            {t("contact.subtitle")}
           </ExtendedBadge>
           <div className="mx-auto flex max-w-2xl items-center gap-4">
             <ExtendedSeparator className="to-primary/30 flex-1 via-none from-transparent" />
-            <Typography variant="h2">
-              {translations[lang].contact.title}
-            </Typography>
+            <Typography variant="h2">{t("contact.title")}</Typography>
             <ExtendedSeparator className="from-primary/30 flex-1 via-none to-transparent" />
           </div>
         </div>
@@ -65,9 +60,7 @@ const ContactSection = ({ contact, profile, lang }: Props) => {
                   <Mail />
                 </ExtendedButton>
                 <div>
-                  <CardTitle className="text-sm">
-                    {translations[lang].common.email}
-                  </CardTitle>
+                  <CardTitle className="text-sm">{t("common.email")}</CardTitle>
                   <CardDescription className="text-primary">
                     {contact?.email}
                   </CardDescription>
@@ -83,7 +76,7 @@ const ContactSection = ({ contact, profile, lang }: Props) => {
                 </ExtendedButton>
                 <div>
                   <CardTitle className="text-sm">
-                    {translations[lang].common.location}
+                    {t("common.location")}
                   </CardTitle>
                   <CardDescription className="text-primary">
                     {contact?.address as unknown as string}
@@ -107,18 +100,17 @@ const ContactSection = ({ contact, profile, lang }: Props) => {
                 </ExtendedButton>
                 <div>
                   <CardTitle className="text-sm">
-                    {translations[lang].common.availability}
+                    {t("common.availability")}
                   </CardTitle>
                   <CardDescription
                     className="text-red-500 data-[status=available]:text-green-500 data-[status=busy]:text-yellow-500"
                     data-status={profile?.availability || "unavailable"}
                   >
                     {/* {contactInfo.availability} */}
-                    {
-                      translations[lang].availability[
-                        profile?.availability || "unavailable"
-                      ]
-                    }
+
+                    {t(
+                      `availability.${profile?.availability || "unavailable"}`,
+                    )}
                   </CardDescription>
                 </div>
               </CardHeader>
@@ -126,17 +118,13 @@ const ContactSection = ({ contact, profile, lang }: Props) => {
 
             <div className="flex items-center gap-4">
               <ExtendedSeparator className="to-primary/30 flex-1 via-none from-transparent" />
-              <Typography variant="h3">
-                {translations[lang].common.socialLinks}
-              </Typography>
+              <Typography variant="h3">{t("common.socialLinks")}</Typography>
               <ExtendedSeparator className="from-primary/30 flex-1 via-none to-transparent" />
             </div>
             {/* Social Links Card */}
             <ExtendedCard variant="solid">
               <CardHeader>
-                <CardTitle className="text-sm">
-                  {translations[lang].common.connect}
-                </CardTitle>
+                <CardTitle className="text-sm">{t("common.connect")}</CardTitle>
               </CardHeader>
               <CardContent className="flex flex-wrap gap-2">
                 {profile?.socialLinks?.map((social, index) => {
@@ -167,58 +155,7 @@ const ContactSection = ({ contact, profile, lang }: Props) => {
 
           {/* Contact Form Column */}
           <div className="lg:col-span-2">
-            <ExtendedCard variant="default" className="flex h-full flex-col">
-              <CardHeader>
-                <CardTitle>{translations[lang].contact.form.title}</CardTitle>
-                <CardDescription>
-                  {translations[lang].contact.form.subtitle}
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="flex-1 space-y-6">
-                <div className="grid gap-6 md:grid-cols-2">
-                  <div className="space-y-2">
-                    <Typography variant="small">
-                      {translations[lang].contact.form.name.label}
-                    </Typography>
-                    <Input
-                      placeholder={translations[lang].contact.form.name.label}
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <Typography variant="small">
-                      {translations[lang].contact.form.email.label}
-                    </Typography>
-                    <Input
-                      type="email"
-                      placeholder={translations[lang].contact.form.email.label}
-                    />
-                  </div>
-                </div>
-                <div className="space-y-2">
-                  <Typography variant="small">
-                    {translations[lang].contact.form.subject.label}
-                  </Typography>
-                  <Input
-                    placeholder={translations[lang].contact.form.subject.label}
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Typography variant="small">
-                    {translations[lang].contact.form.message.label}
-                  </Typography>
-                  <Textarea
-                    placeholder={translations[lang].contact.form.message.label}
-                    className="h-full min-h-[100px] resize-none"
-                  />
-                </div>
-              </CardContent>
-              <CardFooter>
-                <ExtendedButton variant="default" className="w-full">
-                  <Mail className="mr-2 h-4 w-4" />
-                  {translations[lang].contact.form.send}
-                </ExtendedButton>
-              </CardFooter>
-            </ExtendedCard>
+            <ContactForm />
           </div>
         </div>
       </div>

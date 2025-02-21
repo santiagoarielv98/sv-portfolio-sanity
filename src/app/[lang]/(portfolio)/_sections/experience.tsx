@@ -10,19 +10,20 @@ import {
 import { ExtendedSeparator } from "@/components/extended-separator";
 import { getIcon } from "@/components/icons";
 import { Typography } from "@/components/ui/typography";
-import type { Locale } from "@/lib/i18n/config";
-import { translations } from "@/lib/i18n/transalation";
+import { SECTIONS } from "@/lib/config/navigation";
 import { getFormattedDate } from "@/lib/utils";
 import { Briefcase, Calendar, MapPin } from "lucide-react";
+import { useTranslations } from "next-intl";
+
 import type { HomeQueryResult } from "../../../../../sanity.types";
-import { SECTIONS } from "@/lib/config/navigation";
 
 type Props = {
   experiences: HomeQueryResult["experiences"];
-  lang: Locale;
 };
 
-const ExperienceSection = ({ experiences, lang }: Props) => {
+const ExperienceSection = ({ experiences }: Props) => {
+  const t = useTranslations("experience");
+
   return (
     <section
       id={SECTIONS.EXPERIENCE.slice(1)}
@@ -40,13 +41,11 @@ const ExperienceSection = ({ experiences, lang }: Props) => {
             className="mx-auto flex items-center gap-2"
           >
             <Briefcase />
-            {translations[lang].experience.subtitle}
+            {t("subtitle")}
           </ExtendedBadge>
           <div className="mx-auto flex max-w-2xl items-center gap-4">
             <ExtendedSeparator className="to-primary/30 flex-1 via-none from-transparent" />
-            <Typography variant="h2">
-              {translations[lang].experience.title}
-            </Typography>
+            <Typography variant="h2">{t("title")}</Typography>
             <ExtendedSeparator className="from-primary/30 flex-1 via-none to-transparent" />
           </div>
 

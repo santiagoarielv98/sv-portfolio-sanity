@@ -9,23 +9,23 @@ import {
   ExtendedCard,
 } from "@/components/extended-card";
 import { ExtendedSeparator } from "@/components/extended-separator";
+import { getIcon } from "@/components/icons";
 import { Typography } from "@/components/ui/typography";
-import type { Locale } from "@/lib/i18n/config";
-import { translations } from "@/lib/i18n/transalation";
+import { SECTIONS } from "@/lib/config/navigation";
 import { ExternalLink, FolderGit, Grid2X2 } from "lucide-react";
+import { useTranslations } from "next-intl";
 import Image from "next/image";
 import Link from "next/link";
 import { FaGithub } from "react-icons/fa";
+
 import type { HomeQueryResult } from "../../../../../sanity.types";
-import { getIcon } from "@/components/icons";
-import { SECTIONS } from "@/lib/config/navigation";
 
 type Props = {
   projects: HomeQueryResult["featuredProjects"];
-  lang: Locale;
 };
 
-const ProjectsSection = ({ projects, lang }: Props) => {
+const ProjectsSection = ({ projects }: Props) => {
+  const t = useTranslations("project");
   return (
     <section
       id={SECTIONS.PROJECTS.slice(1)}
@@ -43,13 +43,11 @@ const ProjectsSection = ({ projects, lang }: Props) => {
             className="mx-auto flex items-center gap-2"
           >
             <FolderGit />
-            {translations[lang].project.subtitle}
+            {t("subtitle")}
           </ExtendedBadge>
           <div className="mx-auto flex max-w-2xl items-center gap-4">
             <ExtendedSeparator className="to-primary/30 flex-1 via-none from-transparent" />
-            <Typography variant="h2">
-              {translations[lang].project.title}
-            </Typography>
+            <Typography variant="h2">{t("title")}</Typography>
             <ExtendedSeparator className="from-primary/30 flex-1 via-none to-transparent" />
           </div>
         </div>
@@ -108,13 +106,13 @@ const ProjectsSection = ({ projects, lang }: Props) => {
                     className="flex-1"
                   >
                     <ExternalLink className="mr-1 h-4 w-4" />
-                    {translations[lang].project.demo}
+                    {t("demo")}
                   </ExtendedButton>
                 )}
                 {project.links?.repo && (
                   <ExtendedButton variant="solid" size="sm" className="flex-1">
                     <FaGithub className="mr-1 h-4 w-4" />
-                    {translations[lang].project.source}
+                    {t("source")}
                   </ExtendedButton>
                 )}
               </CardFooter>
@@ -131,7 +129,7 @@ const ProjectsSection = ({ projects, lang }: Props) => {
             asChild
           >
             <Link href="/projects">
-              <span>{translations[lang].project.more}</span>
+              <span>{t("more")}</span>
               <Grid2X2 className="h-5 w-5 transition-transform group-hover:rotate-12" />
             </Link>
           </ExtendedButton>

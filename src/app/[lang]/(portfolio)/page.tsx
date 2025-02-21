@@ -24,7 +24,7 @@ export default async function Home(props: Props) {
 
   return (
     <main className="relative">
-      <HeroSection {...params} />
+      <HeroSection />
       <AboutSection profile={data.profile} {...params} />
       <ExperienceSection experiences={data.experiences} {...params} />
       <ProjectsSection projects={data.featuredProjects} {...params} />

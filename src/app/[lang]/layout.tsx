@@ -1,14 +1,17 @@
-import type { Locale } from "@/lib/i18n/config";
+import { SiteFooter } from "@/components/site-footer";
+import { SiteHeader } from "@/components/site-header";
 import { i18n } from "@/lib/i18n/config";
-import { Space_Grotesk, Urbanist } from "next/font/google";
-
-import "../globals.css";
 import { sanityFetch } from "@/sanity/lib/live";
 import { profileQuery, settingQuery } from "@/sanity/lib/queries";
-import type { Metadata } from "next";
+import { NextIntlClientProvider } from "next-intl";
+import { getMessages } from "next-intl/server";
+import { Space_Grotesk, Urbanist } from "next/font/google";
 import { ThemeProvider } from "./provider";
-import { SiteHeader } from "@/components/site-header";
-import { SiteFooter } from "@/components/site-footer";
+
+import "../globals.css";
+
+import type { Locale } from "@/lib/i18n/config";
+import type { Metadata } from "next";
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
@@ -54,6 +57,10 @@ export default async function RootLayout({
   Props) {
   const { lang } = await params;
 
+  // Providing all messages to the client
+  // side is the easiest way to get started
+  const messages = await getMessages();
+
   const [settings, profile] = await Promise.all([
     sanityFetch({
       query: settingQuery,
@@ -70,21 +77,23 @@ export default async function RootLayout({
       <body
         className={`${spaceGrotesk.variable} ${urbanist.variable} font-urbanist min-h-screen`}
       >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <SiteHeader lang={lang} />
-          {children}
-          <SiteFooter
-            footer={settings.data?.footer as unknown as string}
-            lang={lang}
-            profile={profile.data?.profile}
-            contact={profile.data?.contact}
-          />
-        </ThemeProvider>
+        <NextIntlClientProvider messages={messages}>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <SiteHeader lang={lang} />
+            {children}
+            <SiteFooter
+              footer={settings.data?.footer as unknown as string}
+              lang={lang}
+              profile={profile.data?.profile}
+              contact={profile.data?.contact}
+            />
+          </ThemeProvider>
+        </NextIntlClientProvider>
       </body>
     </html>
   );

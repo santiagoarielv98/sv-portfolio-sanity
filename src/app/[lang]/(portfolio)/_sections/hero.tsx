@@ -2,16 +2,13 @@ import { ExtendedButton } from "@/components/extended-button";
 import { ExtendedSeparator } from "@/components/extended-separator";
 import { Typography } from "@/components/ui/typography";
 import { SECTIONS } from "@/lib/config/navigation";
-import { translations } from "@/lib/i18n/transalation";
 import { ChevronDown, Mail } from "lucide-react";
 
-import type { Locale } from "@/lib/i18n/config";
+import { useTranslations } from "next-intl";
+import Link from "next/link";
 
-type Props = {
-  lang: Locale;
-};
-
-const HeroSection = ({ lang }: Props) => {
+const HeroSection = () => {
+  const t = useTranslations("hero");
   return (
     <section
       id={SECTIONS.HOME.slice(1)}
@@ -22,17 +19,24 @@ const HeroSection = ({ lang }: Props) => {
         <div className="pattern-connector pattern-connector-bottom pattern-dots" />
       </div>
       <div className="mx-auto max-w-4xl space-y-8 px-4 text-center">
-        <Typography variant="h1">{translations[lang].hero.title}</Typography>
+        <Typography variant="h1">{t("title")}</Typography>
 
         <Typography variant="h2" className="max-w-2xl font-light">
-          {translations[lang].hero.subtitle}
+          {t("subtitle")}
         </Typography>
 
         <ExtendedSeparator />
 
-        <ExtendedButton size="lg" variant="default" className="font-display">
-          <Mail />
-          {translations[lang].hero.cta}
+        <ExtendedButton
+          size="lg"
+          variant="default"
+          className="font-display"
+          asChild
+        >
+          <Link href={SECTIONS.CONTACT}>
+            <Mail className="mr-2" />
+            {t("cta")}
+          </Link>
         </ExtendedButton>
       </div>
 

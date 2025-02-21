@@ -14,7 +14,6 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { navigation } from "@/lib/config/navigation";
 import type { Locale } from "@/lib/i18n/config";
-import { useTranslations } from "@/lib/i18n/useTranslations";
 import { ChevronDown, Code, Menu, X } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
@@ -22,10 +21,12 @@ import { ExtendedButton } from "./extended-button";
 import { ExtendedSeparator } from "./extended-separator";
 import ModeLang from "./mode-lang";
 import { ModeToggle } from "./mode-toggle";
+import { ExtendedBadge } from "./extended-badge";
+import { useTranslations } from "next-intl";
 
 export function SiteHeader({ lang }: { lang: Locale }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { t } = useTranslations(lang);
+  const t = useTranslations();
 
   return (
     <header className="border-primary/10 bg-background/80 supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50 w-full border-b backdrop-blur">
@@ -99,10 +100,7 @@ export function SiteHeader({ lang }: { lang: Locale }) {
 
               <ExtendedSeparator orientation="vertical" className="mx-2 h-6" />
 
-              {/* <ExtendedBadge className="animate-pulse">
-                Available for hire
-              </ExtendedBadge> */}
-              <ExtendedButton>{t("nav.contact")}</ExtendedButton>
+              <ExtendedBadge>Available for hire</ExtendedBadge>
             </div>
 
             {/* Mobile Menu Button */}
@@ -184,12 +182,9 @@ export function SiteHeader({ lang }: { lang: Locale }) {
                 ),
               )}
               <ExtendedSeparator className="my-4" />
-              {/* <ExtendedBadge className="animate-pulse w-full">
+              <ExtendedBadge className="w-full">
                 Available for hire
-              </ExtendedBadge> */}
-              <ExtendedButton className="mt-4 w-full">
-                {t("nav.contact")}
-              </ExtendedButton>
+              </ExtendedBadge>
             </div>
           </div>
         )}

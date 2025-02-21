@@ -1,0 +1,90 @@
+{
+    "availability": {
+      "available": "Available",
+      "unavailable": "Unavailable",
+      "busy": "Busy"
+    },
+    "nav": {
+      "home": "Home",
+      "about": "About",
+      "experience": "Experience",
+      "projects": {
+        "section": "Projects Section",
+        "sectionDescription": "View featured projects section",
+        "all": "All Projects",
+        "allDescription": "Browse complete projects catalog"
+      },
+      "skills": "Skills",
+      "contact": "Contact"
+    },
+    "hero": {
+      "title": "Welcome to my portfolio",
+      "subtitle": "Full Stack Developer specialized in creating high-performance web applications with innovative technologies. 🚀",
+      "cta": "Get in touch"
+    },
+    "about": {
+      "title": "About me",
+      "subtitle": "Get to know me better",
+      "whoami": "Who am I?",
+      "goals": "My goals"
+    },
+    "experience": {
+      "title": "Experience",
+      "subtitle": "My professional journey"
+    },
+    "project": {
+      "title": "Projects",
+      "subtitle": "Some of my work",
+      "more": "More projects",
+      "source": "Source Code",
+      "demo": "Live Demo"
+    },
+    "skills": {
+      "title": "Skills",
+      "subtitle": "My technical expertise"
+    },
+    "contact": {
+      "title": "Contact",
+      "subtitle": "Let's talk",
+      "form": {
+        "title": "Send me a message",
+        "subtitle": "Fill out the form below and I'll get back to you as soon as possible.",
+        "name": {
+          "label": "Name",
+          "placeholder": "Your name"
+        },
+        "email": {
+          "label": "Email",
+          "placeholder": "your@email.com"
+        },
+        "subject": {
+          "label": "Subject",
+          "placeholder": "What's this about?"
+        },
+        "message": {
+          "label": "Message",
+          "placeholder": "Write your message here"
+        },
+        "send": "Send message"
+      }
+    },
+    "footer": {
+      "quickLinks": "Quick Links",
+      "letsConnect": "Let's Connect",
+      "availableFor": "Available for freelance opportunities and full-time positions.",
+      "getInTouch": "Get in Touch",
+      "allRightsReserved": "All rights reserved."
+    },
+    "common": {
+      "availability": "Availability",
+      "email": "Email",
+      "phone": "Phone",
+      "location": "Location",
+      "socialLinks": "Social Links",
+      "connect": "Connect with me",
+      "cv": {
+        "download": "Download CV",
+        "view": "View CV"
+      }
+    }
+  }

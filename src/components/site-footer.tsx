@@ -1,7 +1,5 @@
 import { navigation } from "@/lib/config/navigation";
 import type { Locale } from "@/lib/i18n/config";
-import { translations } from "@/lib/i18n/transalation";
-import { useTranslations } from "@/lib/i18n/useTranslations";
 import { Code, Mail } from "lucide-react";
 import type { ProfileQueryResult } from "../../sanity.types";
 import { ExtendedButton } from "./extended-button";
@@ -10,6 +8,7 @@ import { ExtendedSeparator } from "./extended-separator";
 import { getIcon } from "./icons";
 import { Typography } from "./ui/typography";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 type SiteFooterProps = {
   footer: string;
@@ -24,7 +23,7 @@ export function SiteFooter({
   profile,
   contact,
 }: SiteFooterProps) {
-  const { t } = useTranslations(lang);
+  const t = useTranslations();
 
   return (
     <footer className="bg-primary/5 border-primary/10 border-t">
@@ -50,9 +49,7 @@ export function SiteFooter({
           </div>
 
           <div className="space-y-4">
-            <Typography variant="h4">
-              {translations[lang].footer.quickLinks}
-            </Typography>
+            <Typography variant="h4">{t("footer.quickLinks")}</Typography>
             <div className="grid grid-cols-2 gap-2">
               {navigation.map((item) => (
                 <ExtendedButton
@@ -70,18 +67,16 @@ export function SiteFooter({
 
           {/* Contact Card */}
           <div className="space-y-4">
-            <Typography variant="h4">
-              {translations[lang].footer.letsConnect}
-            </Typography>
+            <Typography variant="h4">{t("footer.letsConnect")}</Typography>
             <ExtendedCard variant="solid" className="backdrop-blur-none">
               <div className="space-y-4 p-6">
                 <Typography variant="body2" className="text-muted-foreground">
-                  {translations[lang].footer.availableFor}
+                  {t("footer.availableFor")}
                 </Typography>
                 <ExtendedButton className="w-full" asChild>
                   <Link href={`mailto:${contact?.email as string}`}>
                     <Mail className="mr-2 h-4 w-4" />
-                    {translations[lang].footer.getInTouch}
+                    {t("footer.getInTouch")}
                   </Link>
                 </ExtendedButton>
               </div>
@@ -92,10 +87,9 @@ export function SiteFooter({
         <ExtendedSeparator className="my-8" />
 
         <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-          {/* © 2025 Santiago. All rights reserved. */}
           <Typography variant="small" className="text-muted-foreground">
             © {new Date().getFullYear()} {profile?.name}.{" "}
-            {translations[lang].footer.allRightsReserved}
+            {t("footer.allRightsReserved")}
           </Typography>
           <div className="flex gap-2">
             {profile?.socialLinks?.map((social) => {

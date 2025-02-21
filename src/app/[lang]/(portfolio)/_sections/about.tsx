@@ -2,20 +2,19 @@ import { ExtendedBadge } from "@/components/extended-badge";
 import { ExtendedButton } from "@/components/extended-button";
 import { ExtendedSeparator } from "@/components/extended-separator";
 import { Typography } from "@/components/ui/typography";
-import { translations } from "@/lib/i18n/transalation";
-import { Download, UserRound } from "lucide-react";
-import Image from "next/image";
 import { SECTIONS } from "@/lib/config/navigation";
+import { Download, UserRound } from "lucide-react";
+import { useTranslations } from "next-intl";
+import Image from "next/image";
 
-import type { Locale } from "@/lib/i18n/config";
 import type { HomeQueryResult } from "../../../../../sanity.types";
 
 type Props = {
   profile: HomeQueryResult["profile"];
-  lang: Locale;
 };
 
-const AboutSection = ({ profile, lang }: Props) => {
+const AboutSection = ({ profile }: Props) => {
+  const t = useTranslations();
   return (
     <section
       id={SECTIONS.ABOUT.slice(1)}
@@ -34,13 +33,11 @@ const AboutSection = ({ profile, lang }: Props) => {
             className="mx-auto flex items-center gap-2"
           >
             <UserRound />
-            {translations[lang].about.subtitle}
+            {t("about.subtitle")}
           </ExtendedBadge>
           <div className="mx-auto flex max-w-2xl items-center gap-4">
             <ExtendedSeparator className="to-primary/30 flex-1 via-none from-transparent" />
-            <Typography variant="h2">
-              {translations[lang].about.title}
-            </Typography>
+            <Typography variant="h2">{t("about.title")}</Typography>
             <ExtendedSeparator className="from-primary/30 flex-1 via-none to-transparent" />
           </div>
         </div>
@@ -64,7 +61,7 @@ const AboutSection = ({ profile, lang }: Props) => {
           <div className="space-y-8">
             <div>
               <Typography variant="h3" className="mb-4">
-                {translations[lang].about.whoami}
+                {t("about.whoami")}
               </Typography>
               <div className="space-y-4">
                 {profile?.bio?.map((bio, index) => (
@@ -79,7 +76,7 @@ const AboutSection = ({ profile, lang }: Props) => {
 
             <div>
               <Typography variant="h3" className="mb-4">
-                {translations[lang].about.goals}
+                {t("about.goals")}
               </Typography>
               {profile?.objectives?.map((objective, index) => (
                 <Typography key={index} variant="body1">
@@ -90,9 +87,21 @@ const AboutSection = ({ profile, lang }: Props) => {
 
             {/* Download CV Button */}
             <div className="pt-4">
-              <ExtendedButton variant="gradient" size="lg" className="w-full">
-                <Download />
-                {translations[lang].common.cv.download}
+              <ExtendedButton
+                variant="gradient"
+                size="lg"
+                className="w-full"
+                asChild
+              >
+                <a
+                  href={profile!.resume!}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  download
+                >
+                  <Download className="mr-2" />
+                  {t("common.cv.download")}
+                </a>
               </ExtendedButton>
             </div>
           </div>
