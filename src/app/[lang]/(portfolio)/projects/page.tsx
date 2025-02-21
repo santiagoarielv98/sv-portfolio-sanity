@@ -2,32 +2,13 @@ import ProjectCard from "@/components/card/project-card";
 import { ExtendedBadge } from "@/components/extended-badge";
 import { ExtendedButton } from "@/components/extended-button";
 import { ExtendedSeparator } from "@/components/extended-separator";
-import CategoryFilter from "@/components/form/category-filter";
-import { Input } from "@/components/ui/input";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { Typography } from "@/components/ui/typography";
 import { sanityFetch } from "@/sanity/lib/live";
 import { projectQuery } from "@/sanity/lib/queries";
-import { ArrowLeft, Code, Search, SortAsc } from "lucide-react";
+import { ArrowLeft, Code } from "lucide-react";
 import { getTranslations } from "next-intl/server";
 import Link from "next/link";
-import type {
-  ProjectQueryResult,
-  SkillCategory,
-} from "../../../../../sanity.types";
-
-const sortOptions = [
-  { label: "Newest First", value: "newest" },
-  { label: "Oldest First", value: "oldest" },
-  { label: "A-Z", value: "az" },
-  { label: "Z-A", value: "za" },
-];
+import type { ProjectQueryResult } from "../../../../../sanity.types";
 
 type Props = {
   params: Promise<{
@@ -45,8 +26,6 @@ export default async function ProjectsPage(props: Props) {
   })) as { data: ProjectQueryResult };
 
   const projects = data.projects;
-  console.log(data);
-  const categories = data.skillCategories as unknown as SkillCategory[];
 
   return (
     <main className="relative">
@@ -96,13 +75,9 @@ export default async function ProjectsPage(props: Props) {
             </Typography>
           </div>
 
-          {/* Search and Filters Bar */}
-          <div className="mb-12 flex flex-col gap-6">
-            {/* Categories Filter */}
+          {/* <div className="mb-12 flex flex-col gap-6">
             <CategoryFilter categories={categories} />
-            {/* Search and Sort Controls */}
             <div className="mx-auto flex w-full max-w-4xl flex-col items-center justify-between gap-4 sm:flex-row">
-              {/* Search Bar */}
               <div className="relative w-full flex-1">
                 <Search className="text-muted-foreground absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2" />
                 <Input
@@ -111,7 +86,6 @@ export default async function ProjectsPage(props: Props) {
                 />
               </div>
 
-              {/* Sort Dropdown */}
               <Select>
                 <SelectTrigger className="bg-background/50 w-[180px]">
                   <SortAsc className="mr-2 h-4 w-4" />
@@ -127,7 +101,6 @@ export default async function ProjectsPage(props: Props) {
               </Select>
             </div>
 
-            {/* Active Filters Display */}
             <div className="flex flex-wrap items-center justify-center gap-2">
               <ExtendedBadge variant="default" className="bg-background/50">
                 Frontend
@@ -137,12 +110,11 @@ export default async function ProjectsPage(props: Props) {
                 React
                 <button className="hover:text-primary ml-1">×</button>
               </ExtendedBadge>
-              {/* Clear Filters Button */}
               <ExtendedButton variant="ghost" size="sm">
                 {common("clearFilters")}
               </ExtendedButton>
             </div>
-          </div>
+          </div> */}
 
           {/* Projects Grid */}
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">

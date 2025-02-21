@@ -14,14 +14,17 @@ import { ExternalLink } from "lucide-react";
 import Image from "next/image";
 import { FaGithub } from "react-icons/fa";
 
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import type { HomeQueryResult } from "../../../sanity.types";
+import Link from "next/link";
+import { Typography } from "../ui/typography";
 
 type Props = {
   project: HomeQueryResult["featuredProjects"][number];
 };
 
 const ProjectCard = ({ project }: Props) => {
+  const locale = useLocale();
   const t = useTranslations("project");
   return (
     <ExtendedCard
@@ -41,7 +44,14 @@ const ProjectCard = ({ project }: Props) => {
 
       <CardHeader className="relative">
         <CardTitle className="group-hover:text-primary transition-colors">
-          {project.title as unknown as string}
+          <Typography asChild variant="h4" className="inline-flex items-center">
+            <Link
+              href={`/${locale}/projects/${project.slug as unknown as string}`}
+            >
+              <span>{project.title as unknown as string}</span>
+              <ExternalLink className="ml-1 h-4 w-4" />
+            </Link>
+          </Typography>
         </CardTitle>
         <CardDescription>
           {project.description as unknown as string}

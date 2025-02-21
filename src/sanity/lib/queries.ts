@@ -23,6 +23,8 @@ const baseProjectsFields = `
         title,
         icon,
     },
+    "slug": slug.current,
+    featured,
     links{
         repo,
         demo,
@@ -136,5 +138,4 @@ export const homeQuery = defineQuery(`{
 export const projectQuery = defineQuery(`{
     ${profileTypeQuery},
     ${projectsQuery},
-    ${skillCategoriesQuery}
 }`);
