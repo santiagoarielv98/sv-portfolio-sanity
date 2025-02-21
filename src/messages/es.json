@@ -76,6 +76,7 @@
       "allRightsReserved": "Todos los derechos reservados."
     },
     "common": {
+      "photoBy": "Foto de",
       "availability": "Disponibilidad",
       "email": "Correo electrónico",
       "phone": "Teléfono",

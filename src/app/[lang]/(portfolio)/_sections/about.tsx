@@ -49,7 +49,7 @@ const AboutSection = ({ profile }: Props) => {
             <div className="relative aspect-square overflow-hidden rounded-xl">
               <Image
                 src={profile!.avatar!}
-                alt={`Foto de ${profile!.name}`}
+                alt={`${t("common.photoBy")} ${profile!.name}`}
                 fill
                 className="object-cover"
               />
