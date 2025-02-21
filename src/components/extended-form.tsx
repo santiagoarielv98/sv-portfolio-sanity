@@ -14,8 +14,6 @@ export function ExtendedFormMessage({
   const { error, formMessageId } = useFormField();
   const body = error ? String(error?.message) : props.children;
 
-  console.log(body);
-
   if (!body) {
     return null;
   }

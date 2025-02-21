@@ -74,6 +74,7 @@
           "placeholder": "Write your message here"
         },
         "send": "Send message",
+        "sending": "Sending...",
         "errors": {
           "name": {
             "min": "Name must be at least 2 characters",

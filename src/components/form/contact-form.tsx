@@ -19,7 +19,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { contactFormSchema, type ContactFormData } from "@/lib/schemas/contact";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Mail } from "lucide-react";
+import { Loader2, Mail } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -51,13 +51,13 @@ const ContactForm = () => {
 
       if (!response.ok) throw new Error("Failed to send message");
 
-      toast(t("form.success.title"), {
-        description: t("form.success.description"),
+      toast.success(t("form.success.title"), {
+        description: t("form.success.message"),
       });
       form.reset();
     } catch {
-      toast(t("form.error.title"), {
-        description: t("form.error.description"),
+      toast.error(t("form.error.title"), {
+        description: t("form.error.message"),
       });
     } finally {
       setIsLoading(false);
@@ -154,8 +154,17 @@ const ContactForm = () => {
           disabled={isLoading}
           onClick={form.handleSubmit(onSubmit)}
         >
-          <Mail className="mr-2 h-4 w-4" />
-          {isLoading ? t("form.sending") : t("form.send")}
+          {isLoading ? (
+            <>
+              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+              {t("form.sending")}
+            </>
+          ) : (
+            <>
+              <Mail className="mr-2 h-4 w-4" />
+              {t("form.send")}
+            </>
+          )}
         </ExtendedButton>
       </CardFooter>
     </ExtendedCard>

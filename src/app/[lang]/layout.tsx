@@ -95,7 +95,7 @@ export default async function RootLayout({
             />
           </ThemeProvider>
         </NextIntlClientProvider>
-        <Toaster />
+        <Toaster richColors />
       </body>
     </html>
   );

@@ -11,9 +11,9 @@ export async function POST(request: Request) {
     const validatedData = contactFormSchema.parse(body);
 
     const { data, error } = await resend.emails.send({
-      from: "Contact Form <onboarding@resend.dev>",
-      to: process.env.EMAIL_TO || "your@email.com",
-      subject: `New Contact Form: ${validatedData.subject}`,
+      from: "onboarding@resend.dev",
+      to: process.env.EMAIL_TO!,
+      subject: `Nuevo mensaje de ${validatedData.name}`,
       react: EmailTemplate(validatedData) as ReactNode,
     });
 
