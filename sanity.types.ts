@@ -39,33 +39,24 @@ export type SanityImageDimensions = {
   aspectRatio?: number;
 };
 
-export type SanityFileAsset = {
-  _id: string;
-  _type: "sanity.fileAsset";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  originalFilename?: string;
-  label?: string;
-  title?: string;
-  description?: string;
-  altText?: string;
-  sha1hash?: string;
-  extension?: string;
-  mimeType?: string;
-  size?: number;
-  assetId?: string;
-  uploadId?: string;
-  path?: string;
-  url?: string;
-  source?: SanityAssetSourceData;
-};
-
 export type Geopoint = {
   _type: "geopoint";
   lat?: number;
   lng?: number;
   alt?: number;
+};
+
+export type Setting = {
+  _id: string;
+  _type: "setting";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  description?: LocaleText;
+  keywords?: Array<string>;
+  author?: string;
+  footer?: LocaleText;
 };
 
 export type Contact = {
@@ -74,8 +65,9 @@ export type Contact = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  title?: LocaleString;
-  description?: LocaleText;
+  email?: string;
+  phone?: string;
+  address?: string;
 };
 
 export type Skill = {
@@ -84,9 +76,8 @@ export type Skill = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  title?: LocaleString;
+  title?: string;
   icon?: string;
-  level?: number;
   category?: {
     _ref: string;
     _type: "reference";
@@ -101,9 +92,10 @@ export type SkillCategory = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  title?: LocaleString;
+  title?: string;
   description?: LocaleText;
   icon?: string;
+  order?: number;
 };
 
 export type Project = {
@@ -113,6 +105,7 @@ export type Project = {
   _updatedAt: string;
   _rev: string;
   title?: LocaleString;
+  slug?: Slug;
   description?: LocaleText;
   thumbnail?: {
     asset?: {
@@ -125,10 +118,36 @@ export type Project = {
     crop?: SanityImageCrop;
     _type: "image";
   };
+  gallery?: Array<{
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+    _key: string;
+  }>;
+  skills?: Array<{
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    _key: string;
+    [internalGroqTypeReferenceTo]?: "skill";
+  }>;
   links?: {
     repo?: string;
     demo?: string;
   };
+  featured?: boolean;
+};
+
+export type Slug = {
+  _type: "slug";
+  current?: string;
+  source?: string;
 };
 
 export type Experience = {
@@ -150,31 +169,13 @@ export type Experience = {
       _key: string;
     } & LocaleString
   >;
-};
-
-export type About = {
-  _id: string;
-  _type: "about";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  achievements?: Array<{
-    icon?: string;
-    title?: LocaleString;
-    description?: LocaleText;
+  skills?: Array<{
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
     _key: string;
+    [internalGroqTypeReferenceTo]?: "skill";
   }>;
-};
-
-export type Hero = {
-  _id: string;
-  _type: "hero";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  title?: LocaleString;
-  subtitle?: LocaleString;
-  cta?: LocaleString;
 };
 
 export type Profile = {
@@ -183,10 +184,8 @@ export type Profile = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  name?: LocaleString;
-  email?: string;
-  phone?: string;
-  location?: LocaleString;
+  name?: string;
+  title?: LocaleString;
   image?: {
     asset?: {
       _ref: string;
@@ -198,6 +197,15 @@ export type Profile = {
     crop?: SanityImageCrop;
     _type: "image";
   };
+  resume?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.fileAsset";
+    };
+    _type: "file";
+  };
   bio?: Array<
     {
       _key: string;
@@ -208,17 +216,35 @@ export type Profile = {
       _key: string;
     } & LocaleString
   >;
-  languages?: Array<
-    {
-      _key: string;
-    } & LocaleString
-  >;
-  social?: Array<{
-    name?: string;
+  socialLinks?: Array<{
+    icon?: string;
+    platform?: string;
     url?: string;
     _key: string;
   }>;
   availability?: "available" | "busy" | "unavailable";
+};
+
+export type SanityFileAsset = {
+  _id: string;
+  _type: "sanity.fileAsset";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  originalFilename?: string;
+  label?: string;
+  title?: string;
+  description?: string;
+  altText?: string;
+  sha1hash?: string;
+  extension?: string;
+  mimeType?: string;
+  size?: number;
+  assetId?: string;
+  uploadId?: string;
+  path?: string;
+  url?: string;
+  source?: SanityAssetSourceData;
 };
 
 export type SanityImageCrop = {
@@ -278,71 +304,6 @@ export type SanityImageMetadata = {
   isOpaque?: boolean;
 };
 
-export type Section = {
-  _id: string;
-  _type: "section";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  title?: LocaleString;
-  subtitle?: LocaleString;
-  identifier?: Slug;
-  type?:
-    | "hero"
-    | "about"
-    | "education"
-    | "experience"
-    | "projects"
-    | "skillCategory"
-    | "contact";
-  content?: Array<
-    | {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "hero";
-      }
-    | {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "about";
-      }
-    | {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "experience";
-      }
-    | {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "project";
-      }
-    | {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "skillCategory";
-      }
-    | {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "contact";
-      }
-  >;
-  order?: number;
-  icon?: string;
-};
-
-export type Slug = {
-  _type: "slug";
-  current?: string;
-  source?: string;
-};
-
 export type LocaleText = {
   _type: "localeText";
   es?: string;
@@ -359,211 +320,226 @@ export type AllSanitySchemaTypes =
   | SanityImagePaletteSwatch
   | SanityImagePalette
   | SanityImageDimensions
-  | SanityFileAsset
   | Geopoint
+  | Setting
   | Contact
   | Skill
   | SkillCategory
   | Project
+  | Slug
   | Experience
-  | About
-  | Hero
   | Profile
+  | SanityFileAsset
   | SanityImageCrop
   | SanityImageHotspot
   | SanityImageAsset
   | SanityAssetSourceData
   | SanityImageMetadata
-  | Section
-  | Slug
   | LocaleText
   | LocaleString;
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./src/sanity/lib/queries.ts
-// Variable: getHomePage
-// Query: {    "sections": *[_type == "section"] | order(order asc) {            "title": title[$lang],    "subtitle": subtitle[$lang],    type,    "content": content[]-> {        _type,        _id,        ...select(                _type == "hero" => {            "title": title[$lang],    "subtitle": subtitle[$lang],    "cta": cta[$lang],    },                _type == "about" => {            "iam": iam[$lang],    "objective": objective[$lang],    "achievements": achievements[] {        icon,        "title": title[$lang],        "description": description[$lang]    }    },                _type == "experience" => {            "title": title[$lang],    "description": description[][$lang],    "organization": organization[$lang],    "location": location[$lang],    type,    "date": date    },                _type == "project" => {            "title": title[$lang],    "description": description[$lang],    "thumbnail": thumbnail.asset->url,    "links": links    },                _type == "contact" => {            "title": title[$lang],    "description": description[$lang],    },                _type == "skillCategory" => {            "title": title[$lang],    "description": description[$lang],    icon,    "skills": *[_type == "skill" && references(^._id)] {        "title": title[$lang],        "level": level    }    },        )    }    },    "profile": *[_type == "profile"][0] {            "name": name[$lang],    "email": email,    "phone": phone,    "location": location[$lang],    "image": image.asset->url,    "bio": bio[][$lang],    "objectives": objectives[][$lang],    "languages": languages[][$lang],    "interests": interests,    "social": social[] {        "name": name,        "url": url    },    availability,       }}
-export type GetHomePageResult = {
-  sections: Array<{
-    title: Array<{
-      _type: "localeString";
-      es?: string;
-      en?: string;
-    }> | null;
-    subtitle: Array<{
-      _type: "localeString";
-      es?: string;
-      en?: string;
-    }> | null;
-    type:
-      | "about"
-      | "contact"
-      | "education"
-      | "experience"
-      | "hero"
-      | "projects"
-      | "skillCategory"
-      | null;
-    content: Array<
-      | {
-          _type: "about";
-          _id: string;
-          iam: null;
-          objective: null;
-          achievements: Array<{
-            icon: string | null;
-            title: Array<{
-              _type: "localeString";
-              es?: string;
-              en?: string;
-            }> | null;
-            description: Array<{
-              _type: "localeText";
-              es?: string;
-              en?: string;
-            }> | null;
-          }> | null;
-        }
-      | {
-          _type: "contact";
-          _id: string;
-          title: Array<{
-            _type: "localeString";
-            es?: string;
-            en?: string;
-          }> | null;
-          description: Array<{
-            _type: "localeText";
-            es?: string;
-            en?: string;
-          }> | null;
-        }
-      | {
-          _type: "experience";
-          _id: string;
-          title: Array<{
-            _type: "localeString";
-            es?: string;
-            en?: string;
-          }> | null;
-          description: Array<
-            {
-              _key: string;
-            } & LocaleString
-          > | null;
-          organization: Array<{
-            _type: "localeString";
-            es?: string;
-            en?: string;
-          }> | null;
-          location: Array<{
-            _type: "localeString";
-            es?: string;
-            en?: string;
-          }> | null;
-          type: "education" | "job" | "volunteer" | null;
-          date: {
-            start?: string;
-            end?: string;
-          } | null;
-        }
-      | {
-          _type: "hero";
-          _id: string;
-          title: Array<{
-            _type: "localeString";
-            es?: string;
-            en?: string;
-          }> | null;
-          subtitle: Array<{
-            _type: "localeString";
-            es?: string;
-            en?: string;
-          }> | null;
-          cta: Array<{
-            _type: "localeString";
-            es?: string;
-            en?: string;
-          }> | null;
-        }
-      | {
-          _type: "project";
-          _id: string;
-          title: Array<{
-            _type: "localeString";
-            es?: string;
-            en?: string;
-          }> | null;
-          description: Array<{
-            _type: "localeText";
-            es?: string;
-            en?: string;
-          }> | null;
-          thumbnail: string | null;
-          links: {
-            repo?: string;
-            demo?: string;
-          } | null;
-        }
-      | {
-          _type: "skillCategory";
-          _id: string;
-          title: Array<{
-            _type: "localeString";
-            es?: string;
-            en?: string;
-          }> | null;
-          description: Array<{
-            _type: "localeText";
-            es?: string;
-            en?: string;
-          }> | null;
-          icon: string | null;
-          skills: Array<{
-            title: Array<{
-              _type: "localeString";
-              es?: string;
-              en?: string;
-            }> | null;
-            level: number | null;
-          }>;
-        }
-    > | null;
-  }>;
+// Variable: skillByCategoryQuery
+// Query: *[_type == "skill" && references(^._id)] {            title,    icon,    }
+export type SkillByCategoryQueryResult = Array<{
+  title: string | null;
+  icon: string | null;
+}>;
+// Variable: settingQuery
+// Query: *[_type == "setting"][0] {            title,    "description": coalesce(description[$lang], description.es),    "keywords": keywords,    author,    "footer": coalesce(footer[$lang], footer.es),    }
+export type SettingQueryResult = {
+  title: string | null;
+  description:
+    | Array<{
+        _type: "localeText";
+        es?: string;
+        en?: string;
+      }>
+    | string
+    | null;
+  keywords: Array<string> | null;
+  author: string | null;
+  footer:
+    | Array<{
+        _type: "localeText";
+        es?: string;
+        en?: string;
+      }>
+    | string
+    | null;
+} | null;
+// Variable: profileQuery
+// Query: {        "profile": *[_type == "profile"][0] {            name,    "title": coalesce(title[$lang], title.es),    "avatar": image.asset->url,    "bio": coalesce(bio[][$lang], bio[].es),    "objectives": coalesce(objectives[][$lang], objectives[].es),    "socialLinks": socialLinks[]{        icon,        platform,        url,    },    availability,    "resume": resume.asset->url    },        "contact": *[_type == "contact"][0] {            email,    phone,    address,    }}
+export type ProfileQueryResult = {
   profile: {
-    name: Array<{
-      _type: "localeString";
-      es?: string;
-      en?: string;
-    }> | null;
-    email: string | null;
-    phone: string | null;
-    location: Array<{
-      _type: "localeString";
-      es?: string;
-      en?: string;
-    }> | null;
-    image: string | null;
-    bio: Array<
-      {
-        _key: string;
-      } & LocaleString
-    > | null;
-    objectives: Array<
-      {
-        _key: string;
-      } & LocaleString
-    > | null;
-    languages: Array<
-      {
-        _key: string;
-      } & LocaleString
-    > | null;
-    interests: null;
-    social: Array<{
-      name: string | null;
+    name: string | null;
+    title:
+      | Array<{
+          _type: "localeString";
+          es?: string;
+          en?: string;
+        }>
+      | string
+      | null;
+    avatar: string | null;
+    bio:
+      | Array<
+          {
+            _key: string;
+          } & LocaleString
+        >
+      | Array<string | null>
+      | null;
+    objectives:
+      | Array<
+          {
+            _key: string;
+          } & LocaleString
+        >
+      | Array<string | null>
+      | null;
+    socialLinks: Array<{
+      icon: string | null;
+      platform: string | null;
       url: string | null;
     }> | null;
     availability: "available" | "busy" | "unavailable" | null;
+    resume: string | null;
+  } | null;
+  contact: {
+    email: string | null;
+    phone: string | null;
+    address: string | null;
+  } | null;
+};
+// Variable: homeQuery
+// Query: {        "profile": *[_type == "profile"][0] {            name,    "title": coalesce(title[$lang], title.es),    "avatar": image.asset->url,    "bio": coalesce(bio[][$lang], bio[].es),    "objectives": coalesce(objectives[][$lang], objectives[].es),    "socialLinks": socialLinks[]{        icon,        platform,        url,    },    availability,    "resume": resume.asset->url    },        "featuredProjects": *[_type == "project" && featured == true] | order(_updatedAt asc) {            "title": coalesce(title[$lang], title.es),    "description": coalesce(description[$lang], description.es),    "thumbnail": thumbnail.asset->url,    "skills": skills[]->{        title,        icon,    },    links{        repo,        demo,    },    },        "experiences": *[_type == "experience"] | order(date.start desc) {            "title": coalesce(title[$lang], title.es),    "organization": coalesce(organization[$lang], organization.es),    "location": coalesce(location[$lang], location.es),    type,    date{        start,        end,    },    "description": coalesce(description[][$lang], description[].es),    "skills": skills[]->{        title,        icon,    },    },        "skillCategories": *[_type == "skillCategory"] {            title,    "description": coalesce(description[$lang], description.es),    "icon": icon,    "skills":     *[_type == "skill" && references(^._id)] {            title,    icon,    },    },        "contact": *[_type == "contact"][0] {            email,    phone,    address,    }}
+export type HomeQueryResult = {
+  profile: {
+    name: string | null;
+    title:
+      | Array<{
+          _type: "localeString";
+          es?: string;
+          en?: string;
+        }>
+      | string
+      | null;
+    avatar: string | null;
+    bio:
+      | Array<
+          {
+            _key: string;
+          } & LocaleString
+        >
+      | Array<string | null>
+      | null;
+    objectives:
+      | Array<
+          {
+            _key: string;
+          } & LocaleString
+        >
+      | Array<string | null>
+      | null;
+    socialLinks: Array<{
+      icon: string | null;
+      platform: string | null;
+      url: string | null;
+    }> | null;
+    availability: "available" | "busy" | "unavailable" | null;
+    resume: string | null;
+  } | null;
+  featuredProjects: Array<{
+    title:
+      | Array<{
+          _type: "localeString";
+          es?: string;
+          en?: string;
+        }>
+      | string
+      | null;
+    description:
+      | Array<{
+          _type: "localeText";
+          es?: string;
+          en?: string;
+        }>
+      | string
+      | null;
+    thumbnail: string | null;
+    skills: Array<{
+      title: string | null;
+      icon: string | null;
+    }> | null;
+    links: {
+      repo: string | null;
+      demo: string | null;
+    } | null;
+  }>;
+  experiences: Array<{
+    title:
+      | Array<{
+          _type: "localeString";
+          es?: string;
+          en?: string;
+        }>
+      | string
+      | null;
+    organization:
+      | Array<{
+          _type: "localeString";
+          es?: string;
+          en?: string;
+        }>
+      | string
+      | null;
+    location:
+      | Array<{
+          _type: "localeString";
+          es?: string;
+          en?: string;
+        }>
+      | string
+      | null;
+    type: "education" | "job" | "volunteer" | null;
+    date: {
+      start: string | null;
+      end: string | null;
+    } | null;
+    description:
+      | Array<
+          {
+            _key: string;
+          } & LocaleString
+        >
+      | Array<string | null>
+      | null;
+    skills: Array<{
+      title: string | null;
+      icon: string | null;
+    }> | null;
+  }>;
+  skillCategories: Array<{
+    title: string | null;
+    description:
+      | Array<{
+          _type: "localeText";
+          es?: string;
+          en?: string;
+        }>
+      | string
+      | null;
+    icon: string | null;
+    skills: Array<{
+      title: string | null;
+      icon: string | null;
+    }>;
+  }>;
+  contact: {
+    email: string | null;
+    phone: string | null;
+    address: string | null;
   } | null;
 };
 
@@ -571,6 +547,9 @@ export type GetHomePageResult = {
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
-    '{\n    "sections": *[_type == "section"] | order(order asc) {\n        \n    "title": title[$lang],\n    "subtitle": subtitle[$lang],\n    type,\n    "content": content[]-> {\n        _type,\n        _id,\n        ...select(\n            \n    _type == "hero" => {\n        \n    "title": title[$lang],\n    "subtitle": subtitle[$lang],\n    "cta": cta[$lang],\n\n    },\n\n            \n    _type == "about" => {\n        \n    "iam": iam[$lang],\n    "objective": objective[$lang],\n    "achievements": achievements[] {\n        icon,\n        "title": title[$lang],\n        "description": description[$lang]\n    }\n\n    },\n\n            \n    _type == "experience" => {\n        \n    "title": title[$lang],\n    "description": description[][$lang],\n    "organization": organization[$lang],\n    "location": location[$lang],\n    type,\n    "date": date\n\n    },\n\n            \n    _type == "project" => {\n        \n    "title": title[$lang],\n    "description": description[$lang],\n    "thumbnail": thumbnail.asset->url,\n    "links": links\n\n    },\n\n            \n    _type == "contact" => {\n        \n    "title": title[$lang],\n    "description": description[$lang],\n\n    },\n\n            \n    _type == "skillCategory" => {\n        \n    "title": title[$lang],\n    "description": description[$lang],\n    icon,\n    "skills": *[_type == "skill" && references(^._id)] {\n        "title": title[$lang],\n        "level": level\n    }\n\n    },\n\n        )\n    }\n\n    },\n    "profile": *[_type == "profile"][0] {\n        \n    "name": name[$lang],\n    "email": email,\n    "phone": phone,\n    "location": location[$lang],\n    "image": image.asset->url,\n    "bio": bio[][$lang],\n    "objectives": objectives[][$lang],\n    "languages": languages[][$lang],\n    "interests": interests,\n    "social": social[] {\n        "name": name,\n        "url": url\n    },\n    availability,   \n\n    }\n}': GetHomePageResult;
+    '\n    *[_type == "skill" && references(^._id)] {\n        \n    title,\n    icon,\n\n    }\n': SkillByCategoryQueryResult;
+    '\n    *[_type == "setting"][0] {\n        \n    title,\n    "description": coalesce(description[$lang], description.es),\n    "keywords": keywords,\n    author,\n    "footer": coalesce(footer[$lang], footer.es),\n\n    }\n': SettingQueryResult;
+    '{\n    \n    "profile": *[_type == "profile"][0] {\n        \n    name,\n    "title": coalesce(title[$lang], title.es),\n    "avatar": image.asset->url,\n    "bio": coalesce(bio[][$lang], bio[].es),\n    "objectives": coalesce(objectives[][$lang], objectives[].es),\n    "socialLinks": socialLinks[]{\n        icon,\n        platform,\n        url,\n    },\n    availability,\n    "resume": resume.asset->url\n\n    }\n,\n    \n    "contact": *[_type == "contact"][0] {\n        \n    email,\n    phone,\n    address,\n\n    }\n\n}': ProfileQueryResult;
+    '{\n    \n    "profile": *[_type == "profile"][0] {\n        \n    name,\n    "title": coalesce(title[$lang], title.es),\n    "avatar": image.asset->url,\n    "bio": coalesce(bio[][$lang], bio[].es),\n    "objectives": coalesce(objectives[][$lang], objectives[].es),\n    "socialLinks": socialLinks[]{\n        icon,\n        platform,\n        url,\n    },\n    availability,\n    "resume": resume.asset->url\n\n    }\n,\n    \n    "featuredProjects": *[_type == "project" && featured == true] | order(_updatedAt asc) {\n        \n    "title": coalesce(title[$lang], title.es),\n    "description": coalesce(description[$lang], description.es),\n    "thumbnail": thumbnail.asset->url,\n    "skills": skills[]->{\n        title,\n        icon,\n    },\n    links{\n        repo,\n        demo,\n    },\n\n    }\n,\n    \n    "experiences": *[_type == "experience"] | order(date.start desc) {\n        \n    "title": coalesce(title[$lang], title.es),\n    "organization": coalesce(organization[$lang], organization.es),\n    "location": coalesce(location[$lang], location.es),\n    type,\n    date{\n        start,\n        end,\n    },\n    "description": coalesce(description[][$lang], description[].es),\n    "skills": skills[]->{\n        title,\n        icon,\n    },\n\n    }\n,\n    \n    "skillCategories": *[_type == "skillCategory"] {\n        \n    title,\n    "description": coalesce(description[$lang], description.es),\n    "icon": icon,\n    "skills": \n    *[_type == "skill" && references(^._id)] {\n        \n    title,\n    icon,\n\n    }\n,\n\n    }\n,\n    \n    "contact": *[_type == "contact"][0] {\n        \n    email,\n    phone,\n    address,\n\n    }\n\n}': HomeQueryResult;
   }
 }

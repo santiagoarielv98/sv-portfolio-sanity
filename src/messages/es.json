@@ -1,0 +1,123 @@
+{
+    "availability": {
+      "available": "Disponible",
+      "unavailable": "No disponible",
+      "busy": "Ocupado"
+    },
+    "nav": {
+      "home": "Inicio",
+      "about": "Sobre mí",
+      "experience": "Experiencia",
+      "projects": {
+        "section": "Sección de Proyectos",
+        "sectionDescription": "Ver sección de proyectos destacados",
+        "all": "Todos los Proyectos",
+        "allDescription": "Explorar catálogo completo de proyectos"
+      },
+      "skills": "Habilidades",
+      "contact": "Contacto"
+    },
+    "hero": {
+      "title": "Bienvenido a mi portafolio",
+      "subtitle": "Desarrollador Full Stack Especializado en crear aplicaciones web de alto rendimiento con tecnologías innovadoras. 🚀",
+      "cta": "Contáctame"
+    },
+    "about": {
+      "title": "Sobre mí",
+      "subtitle": "Conóceme mejor",
+      "whoami": "¿Quién soy?",
+      "goals": "Mis objetivos"
+    },
+    "experience": {
+      "title": "Experiencia",
+      "subtitle": "Mi trayectoria profesional"
+    },
+    "project": {
+      "title": "Proyectos",
+      "subtitle": "Algunos de mis trabajos",
+      "more": "Más proyectos",
+      "source": "Código fuente",
+      "demo": "Demo en vivo"
+    },
+    "skills": {
+      "title": "Habilidades",
+      "subtitle": "Mi experiencia técnica"
+    },
+    "contact": {
+      "title": "Contacto",
+      "subtitle": "Hablemos",
+      "form": {
+        "title": "Envíame un mensaje",
+        "subtitle": "Completa el formulario a continuación y te responderé lo antes posible.",
+        "success": {
+          "title": "¡Mensaje enviado!",
+          "message": "Tu mensaje ha sido enviado con éxito. ¡Gracias por contactarme!"
+        },
+        "error": {
+          "title": "¡Error!",
+          "message": "Se produjo un error al enviar tu mensaje. Por favor, inténtalo de nuevo más tarde."
+        },
+        "name": {
+          "label": "Nombre",
+          "placeholder": "Tu nombre"
+        },
+        "email": {
+          "label": "Correo",
+          "placeholder": "tu@email.com"
+        },
+        "subject": {
+          "label": "Asunto",
+          "placeholder": "¿De qué se trata?"
+        },
+        "message": {
+          "label": "Mensaje",
+          "placeholder": "Escribe tu mensaje aquí"
+        },
+        "send": "Enviar mensaje",
+        "sending": "Enviando...",
+        "errors": {
+          "name": {
+            "min": "El nombre debe tener al menos 2 caracteres",
+            "required": "El nombre es obligatorio"
+          },
+          "email": {
+            "invalid": "Dirección de correo inválida",
+            "required": "El correo es obligatorio"
+          },
+          "subject": {
+            "max": "El asunto debe tener menos de 50 caracteres",
+            "required": "El asunto es obligatorio"
+          },
+          "message": {
+            "min": "El mensaje debe tener al menos 5 caracteres",
+            "required": "El mensaje es obligatorio"
+          }
+        }
+      }
+    },
+    "footer": {
+      "quickLinks": "Enlaces rápidos",
+      "letsConnect": "Conéctate conmigo",
+      "availableFor": "Disponible para oportunidades freelance y posiciones de tiempo completo.",
+      "getInTouch": "Contáctame",
+      "allRightsReserved": "Todos los derechos reservados."
+    },
+    "common": {
+      "photoBy": "Foto de",
+      "availability": "Disponibilidad",
+      "email": "Correo electrónico",
+      "phone": "Teléfono",
+      "location": "Ubicación",
+      "socialLinks": "Redes sociales",
+      "connect": "Conéctate conmigo",
+      "cv": {
+        "download": "Descargar CV",
+        "view": "Ver CV"
+      }
+    },
+    "theme": {
+      "light": "Claro",
+      "dark": "Oscuro",
+      "system": "Sistema"
+    }
+  }

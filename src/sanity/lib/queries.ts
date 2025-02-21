@@ -1,128 +1,127 @@
 import { defineQuery } from "next-sanity";
 
-const heroFields = `
-    "title": title[$lang],
-    "subtitle": subtitle[$lang],
-    "cta": cta[$lang],
+const profileFields = `
+    name,
+    "title": coalesce(title[$lang], title.es),
+    "avatar": image.asset->url,
+    "bio": coalesce(bio[][$lang], bio[].es),
+    "objectives": coalesce(objectives[][$lang], objectives[].es),
+    "socialLinks": socialLinks[]{
+        icon,
+        platform,
+        url,
+    },
+    availability,
+    "resume": resume.asset->url
 `;
 
-const aboutFields = `
-    "iam": iam[$lang],
-    "objective": objective[$lang],
-    "achievements": achievements[] {
+const baseProjectsFields = `
+    "title": coalesce(title[$lang], title.es),
+    "description": coalesce(description[$lang], description.es),
+    "thumbnail": thumbnail.asset->url,
+    "skills": skills[]->{
+        title,
         icon,
-        "title": title[$lang],
-        "description": description[$lang]
-    }
+    },
+    links{
+        repo,
+        demo,
+    },
 `;
 
 const experienceFields = `
-    "title": title[$lang],
-    "description": description[][$lang],
-    "organization": organization[$lang],
-    "location": location[$lang],
+    "title": coalesce(title[$lang], title.es),
+    "organization": coalesce(organization[$lang], organization.es),
+    "location": coalesce(location[$lang], location.es),
     type,
-    "date": date
-`;
-
-const projectFields = `
-    "title": title[$lang],
-    "description": description[$lang],
-    "thumbnail": thumbnail.asset->url,
-    "links": links
-`;
-
-const profileFields = `
-    "name": name[$lang],
-    "email": email,
-    "phone": phone,
-    "location": location[$lang],
-    "image": image.asset->url,
-    "bio": bio[][$lang],
-    "objectives": objectives[][$lang],
-    "languages": languages[][$lang],
-    "interests": interests,
-    "social": social[] {
-        "name": name,
-        "url": url
+    date{
+        start,
+        end,
     },
-    availability,   
+    "description": coalesce(description[][$lang], description[].es),
+    "skills": skills[]->{
+        title,
+        icon,
+    },
 `;
+
+const skillFields = `
+    title,
+    icon,
+`;
+
+const skillByCategoryQuery = defineQuery(`
+    *[_type == "skill" && references(^._id)] {
+        ${skillFields}
+    }
+`);
 
 const skillCategoryFields = `
-    "title": title[$lang],
-    "description": description[$lang],
-    icon,
-    "skills": *[_type == "skill" && references(^._id)] {
-        "title": title[$lang],
-        "level": level
-    }
+    title,
+    "description": coalesce(description[$lang], description.es),
+    "icon": icon,
+    "skills": ${skillByCategoryQuery},
 `;
 
 const contactFields = `
-    "title": title[$lang],
-    "description": description[$lang],
+    email,
+    phone,
+    address,
 `;
 
-const contentHeroType = `
-    _type == "hero" => {
-        ${heroFields}
-    },
+const settingFields = `
+    title,
+    "description": coalesce(description[$lang], description.es),
+    "keywords": keywords,
+    author,
+    "footer": coalesce(footer[$lang], footer.es),
 `;
 
-const contentAboutType = `
-    _type == "about" => {
-        ${aboutFields}
-    },
-`;
-
-const contentExperienceType = `
-    _type == "experience" => {
-        ${experienceFields}
-    },
-`;
-
-const contentProjectType = `
-    _type == "project" => {
-        ${projectFields}
-    },
-`;
-
-const contentSkillsType = `
-    _type == "skillCategory" => {
-        ${skillCategoryFields}
-    },
-`;
-
-const contentContactType = `
-    _type == "contact" => {
-        ${contactFields}
-    },
-`;
-
-const sectionFields = `
-    "title": title[$lang],
-    "subtitle": subtitle[$lang],
-    type,
-    "content": content[]-> {
-        _type,
-        _id,
-        ...select(
-            ${contentHeroType}
-            ${contentAboutType}
-            ${contentExperienceType}
-            ${contentProjectType}
-            ${contentContactType}
-            ${contentSkillsType}
-        )
-    }
-`;
-
-export const getHomePage = defineQuery(`{
-    "sections": *[_type == "section"] | order(order asc) {
-        ${sectionFields}
-    },
+const profileTypeQuery = `
     "profile": *[_type == "profile"][0] {
         ${profileFields}
     }
+`;
+
+const featuredProjectsQuery = `
+    "featuredProjects": *[_type == "project" && featured == true] | order(_updatedAt asc) {
+        ${baseProjectsFields}
+    }
+`;
+
+const experiencesQuery = `
+    "experiences": *[_type == "experience"] | order(date.start desc) {
+        ${experienceFields}
+    }
+`;
+
+const skillCategoriesQuery = `
+    "skillCategories": *[_type == "skillCategory"] {
+        ${skillCategoryFields}
+    }
+`;
+
+const contactQuery = `
+    "contact": *[_type == "contact"][0] {
+        ${contactFields}
+    }
+`;
+
+export const settingQuery = defineQuery(`
+    *[_type == "setting"][0] {
+        ${settingFields}
+    }
+`);
+
+export const profileQuery = defineQuery(`{
+    ${profileTypeQuery},
+    ${contactQuery}
+}`);
+
+export const homeQuery = defineQuery(`{
+    ${profileTypeQuery},
+    ${featuredProjectsQuery},
+    ${experiencesQuery},
+    ${skillCategoriesQuery},
+    ${contactQuery}
 }`);

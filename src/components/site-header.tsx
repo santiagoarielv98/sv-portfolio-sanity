@@ -12,61 +12,22 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import {
-  ChevronDown,
-  Code,
-  FolderKanban,
-  Grid2X2,
-  Menu,
-  X,
-} from "lucide-react";
+import { navigation } from "@/lib/config/navigation";
+import type { Locale } from "@/lib/i18n/config";
+import { ChevronDown, Code, Menu, X } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 import { ExtendedButton } from "./extended-button";
 import { ExtendedSeparator } from "./extended-separator";
-import ModeLang from "./mode-lang";
-import { ModeToggle } from "./mode-toggle";
+import LocaleSwitcher from "./locale-switcher";
+import { ThemeSwitcher } from "./theme-switcher";
+import { ExtendedBadge } from "./extended-badge";
+import { useTranslations } from "next-intl";
 
-interface NavigationItem {
-  name: string;
-  href: string;
-  hasSubmenu?: boolean;
-  submenu?: {
-    title: string;
-    href: string;
-    icon: React.ReactNode;
-    description?: string;
-  }[];
-}
-
-const navigation: NavigationItem[] = [
-  { name: "About", href: "#about" },
-  { name: "Experience", href: "#experience" },
-  {
-    name: "Projects",
-    href: "#projects",
-    hasSubmenu: true,
-    submenu: [
-      {
-        title: "Projects Section",
-        href: "#projects",
-        icon: <FolderKanban className="h-4 w-4" />,
-        description: "View featured projects section",
-      },
-      {
-        title: "All Projects",
-        href: "/projects",
-        icon: <Grid2X2 className="h-4 w-4" />,
-        description: "Browse complete projects catalog",
-      },
-    ],
-  },
-  { name: "Skills", href: "#skills" },
-  { name: "Contact", href: "#contact" },
-];
-
-export function SiteHeader() {
+export function SiteHeader({ lang }: { lang: Locale }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const t = useTranslations();
+  const nav = useTranslations("nav");
 
   return (
     <header className="border-primary/10 bg-background/80 supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50 w-full border-b backdrop-blur">
@@ -92,29 +53,32 @@ export function SiteHeader() {
                         size="sm"
                         className="group"
                       >
-                        {item.name}
+                        {nav(item.name)}
                         <ChevronDown className="ml-1 h-4 w-4 transition-transform group-data-[state=open]:rotate-180" />
                       </ExtendedButton>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="start" className="w-[200px]">
-                      {item.submenu?.map((submenuItem) => (
-                        <DropdownMenuItem key={submenuItem.href} asChild>
-                          <Link
-                            href={submenuItem.href}
-                            className="flex items-center gap-2"
-                          >
-                            {submenuItem.icon}
-                            <div className="flex flex-col">
-                              <span>{submenuItem.title}</span>
-                              {submenuItem.description && (
-                                <span className="text-muted-foreground text-xs">
-                                  {submenuItem.description}
-                                </span>
-                              )}
-                            </div>
-                          </Link>
-                        </DropdownMenuItem>
-                      ))}
+                      {item.submenu?.map((submenuItem) => {
+                        const Icon = submenuItem.icon;
+                        return (
+                          <DropdownMenuItem key={submenuItem.href} asChild>
+                            <Link
+                              href={`/${lang}${submenuItem.href}`}
+                              className="flex items-center gap-2"
+                            >
+                              <Icon className="h-4 w-4" />
+                              <div className="flex flex-col">
+                                <span>{nav(submenuItem.titleKey)}</span>
+                                {submenuItem.descriptionKey && (
+                                  <span className="text-muted-foreground text-xs">
+                                    {nav(submenuItem.descriptionKey)}
+                                  </span>
+                                )}
+                              </div>
+                            </Link>
+                          </DropdownMenuItem>
+                        );
+                      })}
                     </DropdownMenuContent>
                   </DropdownMenu>
                 ) : (
@@ -124,32 +88,29 @@ export function SiteHeader() {
                     size="sm"
                     asChild
                   >
-                    <a href={item.href}>{item.name}</a>
+                    <a href={`/${lang}/${item.href}`}>{nav(item.name)}</a>
                   </ExtendedButton>
                 ),
               )}
               <ExtendedSeparator orientation="vertical" className="mx-2 h-6" />
 
               {/* Language Selector */}
-              <ModeLang />
-              <ModeToggle />
+              <LocaleSwitcher />
+              <ThemeSwitcher />
               {/* Theme Toggle Dropdown */}
 
               <ExtendedSeparator orientation="vertical" className="mx-2 h-6" />
 
-              {/* <ExtendedBadge className="animate-pulse">
-                Available for hire
-              </ExtendedBadge> */}
-              <ExtendedButton>Let&apos;s Talk</ExtendedButton>
+              <ExtendedBadge>Available for hire</ExtendedBadge>
             </div>
 
             {/* Mobile Menu Button */}
             <div className="flex items-center gap-2 md:hidden">
               {/* Language Selector Mobile */}
-              <ModeLang />
+              <LocaleSwitcher />
 
               {/* Theme Toggle Mobile */}
-              <ModeToggle />
+              <ThemeSwitcher />
               {/* Menu Toggle */}
               <ExtendedButton
                 variant="ghost"
@@ -181,27 +142,31 @@ export function SiteHeader() {
                           variant="ghost"
                           className="w-full justify-start"
                         >
-                          <div>{item.name}</div>
+                          <div>{nav(item.name)}</div>
                         </ExtendedButton>
                       </AccordionTrigger>
                       <AccordionContent className="pt-2 pb-0">
-                        {item.submenu?.map((submenuItem) => (
-                          <ExtendedButton
-                            key={submenuItem.href}
-                            variant="ghost"
-                            size="sm"
-                            className="w-full justify-start pl-6"
-                            asChild
-                          >
-                            <Link
-                              href={submenuItem.href}
-                              className="flex items-center gap-2"
+                        {item.submenu?.map((submenuItem) => {
+                          const Icon = submenuItem.icon;
+                          return (
+                            <ExtendedButton
+                              key={submenuItem.href}
+                              variant="ghost"
+                              size="sm"
+                              className="w-full justify-start pl-6"
+                              asChild
+                              onClick={() => setIsMenuOpen(false)}
                             >
-                              {submenuItem.icon}
-                              {submenuItem.title}
-                            </Link>
-                          </ExtendedButton>
-                        ))}
+                              <Link
+                                href={`/${lang}${submenuItem.href}`}
+                                className="flex items-center gap-2"
+                              >
+                                <Icon className="h-4 w-4" />
+                                {nav(submenuItem.titleKey)}
+                              </Link>
+                            </ExtendedButton>
+                          );
+                        })}
                       </AccordionContent>
                     </AccordionItem>
                   </Accordion>
@@ -211,18 +176,16 @@ export function SiteHeader() {
                     variant="ghost"
                     className="w-full justify-start"
                     asChild
+                    onClick={() => setIsMenuOpen(false)}
                   >
-                    <a href={item.href}>{item.name}</a>
+                    <Link href={`/${lang}/${item.href}`}>{t(item.name)}</Link>
                   </ExtendedButton>
                 ),
               )}
               <ExtendedSeparator className="my-4" />
-              {/* <ExtendedBadge className="animate-pulse w-full">
+              <ExtendedBadge className="w-full">
                 Available for hire
-              </ExtendedBadge> */}
-              <ExtendedButton className="mt-4 w-full">
-                Let&apos;s Talk
-              </ExtendedButton>
+              </ExtendedBadge>
             </div>
           </div>
         )}
