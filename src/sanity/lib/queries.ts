@@ -139,6 +139,12 @@ export const projectQuery = defineQuery(`{
     ${projectsQuery},
 }`);
 
+export const projectMetaQuery = defineQuery(`{
+    "project": *[_type == "project" && slug.current == $slug] {
+        ${baseProjectsFields},
+    }[0]
+}`);
+
 export const projectDetailQuery = defineQuery(`{
     "project": *[_type == "project" && slug.current == $slug] {
         ${baseProjectsFields},
