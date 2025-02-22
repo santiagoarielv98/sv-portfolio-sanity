@@ -28,7 +28,7 @@ const baseProjectsFields = `
     links{
         repo,
         demo,
-    },
+    }
 `;
 
 const experienceFields = `
@@ -136,6 +136,14 @@ export const homeQuery = defineQuery(`{
 }`);
 
 export const projectQuery = defineQuery(`{
-    ${profileTypeQuery},
     ${projectsQuery},
+}`);
+
+export const projectDetailQuery = defineQuery(`{
+    "project": *[_type == "project" && slug.current == $slug] {
+        ${baseProjectsFields},
+        status,
+        "keyFeatures": keyFeatures[][$lang],
+        "content": content[$lang],
+    }[0]
 }`);

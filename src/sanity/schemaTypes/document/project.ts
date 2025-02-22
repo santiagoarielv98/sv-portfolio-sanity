@@ -28,6 +28,11 @@ export const projectType = defineType({
       validation: (Rule) => Rule.required(),
     },
     {
+      name: "content",
+      title: "Contenido",
+      type: "localeBlock",
+    },
+    {
       name: "thumbnail",
       title: "Imagen de portada",
       type: "image",
@@ -66,6 +71,40 @@ export const projectType = defineType({
       name: "featured",
       type: "boolean",
       title: "Destacado",
+    },
+    //  mas campos
+    {
+      name: "startDate",
+      title: "Fecha de inicio",
+      type: "date",
+    },
+    {
+      name: "type",
+      title: "Tipo",
+      type: "string",
+      options: {
+        list: [
+          { title: "Personal", value: "personal" },
+          { title: "Profesional", value: "professional" },
+        ],
+      },
+    },
+    {
+      name: "status",
+      title: "Estado",
+      type: "string",
+      options: {
+        list: [
+          { title: "En progreso", value: "inProgress" },
+          { title: "Finalizado", value: "finished" },
+        ],
+      },
+    },
+    {
+      name: "keyFeatures",
+      title: "Características clave",
+      type: "array",
+      of: [{ type: "localeString" }],
     },
   ],
   preview: {

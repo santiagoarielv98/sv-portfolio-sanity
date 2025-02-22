@@ -7,7 +7,11 @@ import {
   ExtendedCard,
 } from "@/components/extended-card";
 import { ExtendedSeparator } from "@/components/extended-separator";
+import { Icon } from "@/components/icon";
+import Blocks from "@/components/portable-text";
 import { Typography } from "@/components/ui/typography";
+import { sanityFetch } from "@/sanity/lib/live";
+import { projectDetailQuery } from "@/sanity/lib/queries";
 import {
   ArrowLeft,
   Calendar,
@@ -19,8 +23,11 @@ import {
   Layout,
   Link2,
 } from "lucide-react";
+import { getTranslations } from "next-intl/server";
 import Image from "next/image";
 import Link from "next/link";
+import type { ProjectDetailQueryResult } from "../../../../../../sanity.types";
+import type { PortableTextBlock } from "next-sanity";
 
 interface ProjectDetail {
   title: string;
@@ -73,7 +80,27 @@ const projectDetail: ProjectDetail = {
   ],
 };
 
-export default function ProjectDetailPage() {
+type Props = {
+  params: Promise<{
+    lang: Locale;
+    slug: string;
+  }>;
+};
+
+export default async function ProjectDetailPage(props: Props) {
+  const params = await props.params;
+  const t = await getTranslations("projects");
+
+  const common = await getTranslations("common");
+
+  const { data } = (await sanityFetch({
+    query: projectDetailQuery,
+    params,
+  })) as { data: ProjectDetailQueryResult };
+
+  const project = data.project!;
+  console.log(project);
+
   return (
     <main className="relative">
       {/* Global noise overlay */}
@@ -93,7 +120,7 @@ export default function ProjectDetailPage() {
             <ExtendedButton variant="ghost" size="sm" asChild>
               <Link href="/projects" className="group">
                 <ArrowLeft className="mr-2 h-4 w-4 transition-transform group-hover:-translate-x-1" />
-                Back to Projects
+                {common("backToProjects")}
               </Link>
             </ExtendedButton>
           </div>
@@ -103,8 +130,8 @@ export default function ProjectDetailPage() {
             {/* Left Column - Image */}
             <div className="relative aspect-video overflow-hidden rounded-xl">
               <Image
-                src={projectDetail.image}
-                alt={projectDetail.title}
+                src={project!.thumbnail!}
+                alt={project.title as unknown as string}
                 fill
                 className="object-cover"
                 priority
@@ -118,10 +145,10 @@ export default function ProjectDetailPage() {
                   {projectDetail.category}
                 </ExtendedBadge>
                 <Typography variant="h1" className="mb-2">
-                  {projectDetail.title}
+                  {project.title as unknown as string}
                 </Typography>
                 <Typography variant="body1" className="text-muted-foreground">
-                  {projectDetail.description}
+                  {project.description as unknown as string}
                 </Typography>
               </div>
 
@@ -131,7 +158,7 @@ export default function ProjectDetailPage() {
               <div className="grid gap-4 sm:grid-cols-2">
                 <div className="space-y-2">
                   <Typography variant="small" className="text-muted-foreground">
-                    Started
+                    {common("started")}
                   </Typography>
                   <ExtendedBadge
                     variant="ghost"
@@ -143,15 +170,16 @@ export default function ProjectDetailPage() {
                 </div>
                 <div className="space-y-2">
                   <Typography variant="small" className="text-muted-foreground">
-                    Status
+                    {common("status")}
                   </Typography>
                   <ExtendedBadge
                     variant={
-                      projectDetail.status === "completed" ? "default" : "ghost"
+                      project.status === "finished" ? "default" : "ghost"
                     }
                     className="w-full justify-start"
                   >
-                    {projectDetail.status}
+                    {/* {project.status} */}
+                    {t(`status.${project.status}`)}
                   </ExtendedBadge>
                 </div>
               </div>
@@ -161,12 +189,13 @@ export default function ProjectDetailPage() {
               {/* Technologies */}
               <div className="space-y-2">
                 <Typography variant="small" className="text-muted-foreground">
-                  Technologies
+                  {common("technologies")}
                 </Typography>
                 <div className="flex flex-wrap gap-2">
-                  {projectDetail.technologies.map((tech) => (
-                    <ExtendedBadge key={tech} variant="ghost">
-                      {tech}
+                  {project.skills?.map((skill) => (
+                    <ExtendedBadge key={skill.title} variant="ghost">
+                      <Icon icon={skill.icon!} />
+                      {skill.title}
                     </ExtendedBadge>
                   ))}
                 </div>
@@ -174,27 +203,27 @@ export default function ProjectDetailPage() {
 
               {/* Actions */}
               <div className="flex flex-wrap gap-4 pt-4">
-                {projectDetail.demoUrl && (
+                {project?.links?.demo && (
                   <ExtendedButton variant="default" size="lg" asChild>
                     <a
-                      href={projectDetail.demoUrl}
+                      href={project?.links?.demo}
                       target="_blank"
                       rel="noopener noreferrer"
                     >
                       <Globe className="mr-2 h-5 w-5" />
-                      Visit Website
+                      {common("demo")}
                     </a>
                   </ExtendedButton>
                 )}
-                {projectDetail.repoUrl && (
+                {project?.links?.repo && (
                   <ExtendedButton variant="outline" size="lg" asChild>
                     <a
-                      href={projectDetail.repoUrl}
+                      href={project?.links?.repo}
                       target="_blank"
                       rel="noopener noreferrer"
                     >
                       <GithubIcon className="mr-2 h-5 w-5" />
-                      View Source
+                      {common("source")}
                     </a>
                   </ExtendedButton>
                 )}
@@ -220,13 +249,11 @@ export default function ProjectDetailPage() {
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
                     <Layout className="h-5 w-5" />
-                    About the Project
+                    {t("aboutProject")}
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <Typography variant="body1" className="whitespace-pre-line">
-                    {projectDetail.longDescription}
-                  </Typography>
+                  <Blocks value={project.content as PortableTextBlock[]} />
                 </CardContent>
               </ExtendedCard>
 
@@ -235,15 +262,17 @@ export default function ProjectDetailPage() {
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
                     <Code className="h-5 w-5" />
-                    Key Features
+                    {t("keyFeatures")}
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
                   <ul className="space-y-4">
-                    {projectDetail.features.map((feature, index) => (
+                    {project.keyFeatures?.map((feature, index) => (
                       <li key={index} className="flex items-start gap-2">
-                        <div className="bg-primary/50 mt-1.5 size-1.5 rounded-full" />
-                        <Typography variant="body1">{feature}</Typography>
+                        <div className="bg-primary/50 mt-2.5 size-1.5 rounded-full" />
+                        <Typography variant="body1">
+                          {feature as unknown as string}
+                        </Typography>
                       </li>
                     ))}
                   </ul>

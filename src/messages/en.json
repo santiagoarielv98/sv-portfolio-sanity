@@ -43,7 +43,14 @@
     "projects":{
       "title":"All Projects",
       "subtitle":"Projects",
-      "description":"Explore my latest projects and experiments. From frontend applications to full-stack solutions, each project represents a unique challenge and learning experience."
+      "aboutProject":"About the project",
+      "description":"Explore my latest projects and experiments. From frontend applications to full-stack solutions, each project represents a unique challenge and learning experience.",
+      "keyFeatures": "Key Features",
+      "status":{
+        "finished": "Finished",
+        "inProgress": "In Progress",
+        "planned": "Planned"
+      }
     },
     "skills": {
       "title": "Skills",
@@ -119,6 +126,12 @@
       "backToHome": "Back to Home",
       "backToProjects": "Back to Projects",
       "clearFilters": "Clear all filters",
+      "source": "Source Code",
+      "demo": "Live Demo",
+      "technologies": "Technologies",
+      "status": "Status",
+      "started": "Started",
+      "finished": "Finished",
       "cv": {
         "download": "Download CV",
         "view": "View CV"
