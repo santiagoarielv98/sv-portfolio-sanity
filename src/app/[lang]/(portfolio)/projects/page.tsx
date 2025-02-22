@@ -6,6 +6,7 @@ import { Typography } from "@/components/ui/typography";
 import { sanityFetch } from "@/sanity/lib/live";
 import { projectQuery } from "@/sanity/lib/queries";
 import { ArrowLeft, Code } from "lucide-react";
+import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import Link from "next/link";
 import type { ProjectQueryResult } from "../../../../../sanity.types";
@@ -15,6 +16,16 @@ type Props = {
     lang: Locale;
   }>;
 };
+
+export async function generateMetadata() {
+  const t = await getTranslations("projects");
+  return {
+    title: t("metadata.title"),
+    description: t("metadata.description"),
+    // keywords: data?.keywords,
+  } satisfies Metadata;
+}
+
 export default async function ProjectsPage(props: Props) {
   const params = await props.params;
   const t = await getTranslations("projects");

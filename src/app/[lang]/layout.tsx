@@ -38,7 +38,11 @@ export async function generateMetadata({ params }: Props) {
     params,
   });
   return {
-    title: data?.title,
+    title: {
+      default: data!.title!,
+      template: "%s | " + data!.title!,
+      absolute: "",
+    },
     description: data?.description as unknown as string,
     keywords: data?.keywords,
     authors: [{ name: data!.author! }],

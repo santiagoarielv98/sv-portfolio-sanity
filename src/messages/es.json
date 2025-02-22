@@ -41,6 +41,10 @@
       "demo": "Demo en vivo"
     },
     "projects":{
+      "metadata":{
+        "title":"Proyectos",
+        "description":"Explora mis últimos proyectos y experimentos. Desde aplicaciones frontend hasta soluciones full-stack, cada proyecto representa un desafío único y una experiencia de aprendizaje."
+      },
       "title":"Todos los Proyectos",
       "subtitle":"Proyectos",
       "aboutProject":"Sobre el proyecto",
@@ -131,8 +135,7 @@
       "demo": "Demo en vivo",
       "technologies": "Tecnologías",
       "status": "Estado",
-      "started": "Comenzado",
-      "finished": "Finalizado",
+      "date": "Fecha",
       "repository": "Repositorio",
       "cv": {
         "download": "Descargar CV",
