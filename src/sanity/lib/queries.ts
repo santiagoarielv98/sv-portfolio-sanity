@@ -143,6 +143,11 @@ export const projectDetailQuery = defineQuery(`{
     "project": *[_type == "project" && slug.current == $slug] {
         ${baseProjectsFields},
         status,
+        otherLinks,
+        date{
+            start,
+            end,
+        },
         "keyFeatures": keyFeatures[][$lang],
         "content": content[$lang],
     }[0]

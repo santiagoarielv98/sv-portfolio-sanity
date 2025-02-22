@@ -16,69 +16,51 @@ import {
   ArrowLeft,
   Calendar,
   Code,
-  ExternalLink,
   Github,
   GithubIcon,
   Globe,
   Layout,
-  Link2,
 } from "lucide-react";
 import { getTranslations } from "next-intl/server";
+import type { PortableTextBlock } from "next-sanity";
 import Image from "next/image";
 import Link from "next/link";
 import type { ProjectDetailQueryResult } from "../../../../../../sanity.types";
-import type { PortableTextBlock } from "next-sanity";
 
-interface ProjectDetail {
-  title: string;
-  description: string;
-  longDescription: string;
-  image: string;
-  gallery: string[];
-  technologies: string[];
-  features: string[];
-  demoUrl?: string;
-  repoUrl?: string;
-  category: "frontend" | "backend" | "fullstack";
-  startDate: string;
-  status: "completed" | "in-progress" | "planned";
-  links: Array<{ title: string; url: string }>;
-}
-
-const projectDetail: ProjectDetail = {
-  title: "Portfolio Website",
-  description:
-    "Personal portfolio built with Next.js, Tailwind CSS, and Sanity CMS",
-  longDescription: `
-    A modern and responsive portfolio website built with the latest web technologies.
-    This project showcases my skills and experience in web development, featuring
-    a clean design, smooth animations, and excellent performance metrics.
-  `,
-  image: "https://picsum.photos/seed/portfolio/1920/1080",
-  gallery: [
-    "https://picsum.photos/seed/1/800/600",
-    "https://picsum.photos/seed/2/800/600",
-    "https://picsum.photos/seed/3/800/600",
-  ],
-  technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Sanity"],
-  features: [
-    "Responsive design with mobile-first approach",
-    "Dark mode support with system preference detection",
-    "SEO optimized with Next.js features",
-    "Content management with Sanity CMS",
-    "Performance optimized with lazy loading and image optimization",
-    "Smooth animations and transitions",
-  ],
-  demoUrl: "https://portfolio.dev",
-  repoUrl: "https://github.com/user/portfolio",
-  category: "frontend",
-  startDate: "2024-01",
-  status: "completed",
-  links: [
-    { title: "Documentation", url: "https://docs.portfolio.dev" },
-    { title: "Design System", url: "https://design.portfolio.dev" },
-  ],
-};
+// const projectDetail: ProjectDetail = {
+//   title: "Portfolio Website",
+//   description:
+//     "Personal portfolio built with Next.js, Tailwind CSS, and Sanity CMS",
+//   longDescription: `
+//     A modern and responsive portfolio website built with the latest web technologies.
+//     This project showcases my skills and experience in web development, featuring
+//     a clean design, smooth animations, and excellent performance metrics.
+//   `,
+//   image: "https://picsum.photos/seed/portfolio/1920/1080",
+//   gallery: [
+//     "https://picsum.photos/seed/1/800/600",
+//     "https://picsum.photos/seed/2/800/600",
+//     "https://picsum.photos/seed/3/800/600",
+//   ],
+//   technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Sanity"],
+//   features: [
+//     "Responsive design with mobile-first approach",
+//     "Dark mode support with system preference detection",
+//     "SEO optimized with Next.js features",
+//     "Content management with Sanity CMS",
+//     "Performance optimized with lazy loading and image optimization",
+//     "Smooth animations and transitions",
+//   ],
+//   demoUrl: "https://portfolio.dev",
+//   repoUrl: "https://github.com/user/portfolio",
+//   category: "frontend",
+//   startDate: "2024-01",
+//   status: "completed",
+//   links: [
+//     { title: "Documentation", url: "https://docs.portfolio.dev" },
+//     { title: "Design System", url: "https://design.portfolio.dev" },
+//   ],
+// };
 
 type Props = {
   params: Promise<{
@@ -141,9 +123,9 @@ export default async function ProjectDetailPage(props: Props) {
             {/* Right Column - Info */}
             <div className="space-y-6">
               <div>
-                <ExtendedBadge variant="gradient" className="mb-4">
+                {/* <ExtendedBadge variant="gradient" className="mb-4">
                   {projectDetail.category}
-                </ExtendedBadge>
+                </ExtendedBadge> */}
                 <Typography variant="h1" className="mb-2">
                   {project.title as unknown as string}
                 </Typography>
@@ -165,7 +147,7 @@ export default async function ProjectDetailPage(props: Props) {
                     className="w-full justify-start"
                   >
                     <Calendar className="mr-2 h-4 w-4" />
-                    {projectDetail.startDate}
+                    {project.date?.start}
                   </ExtendedBadge>
                 </div>
                 <div className="space-y-2">
@@ -245,80 +227,87 @@ export default async function ProjectDetailPage(props: Props) {
             {/* Main Content */}
             <div className="space-y-8 lg:col-span-2">
               {/* Description */}
-              <ExtendedCard>
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <Layout className="h-5 w-5" />
-                    {t("aboutProject")}
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <Blocks value={project.content as PortableTextBlock[]} />
-                </CardContent>
-              </ExtendedCard>
+              {Array.isArray(project.content) && project.content.length && (
+                <ExtendedCard>
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-2">
+                      <Layout className="h-5 w-5" />
+                      {t("aboutProject")}
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <Blocks value={project.content as PortableTextBlock[]} />
+                  </CardContent>
+                </ExtendedCard>
+              )}
 
               {/* Features */}
-              <ExtendedCard>
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <Code className="h-5 w-5" />
-                    {t("keyFeatures")}
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <ul className="space-y-4">
-                    {project.keyFeatures?.map((feature, index) => (
-                      <li key={index} className="flex items-start gap-2">
-                        <div className="bg-primary/50 mt-2.5 size-1.5 rounded-full" />
-                        <Typography variant="body1">
-                          {feature as unknown as string}
-                        </Typography>
-                      </li>
-                    ))}
-                  </ul>
-                </CardContent>
-              </ExtendedCard>
+              {Array.isArray(project.keyFeatures) &&
+                project.keyFeatures.length && (
+                  <ExtendedCard>
+                    <CardHeader>
+                      <CardTitle className="flex items-center gap-2">
+                        <Code className="h-5 w-5" />
+                        {t("keyFeatures")}
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <ul className="space-y-4">
+                        {project.keyFeatures?.map((feature, index) => (
+                          <li key={index} className="flex items-start gap-2">
+                            <div className="bg-primary/50 mt-2.5 size-1.5 rounded-full" />
+                            <Typography variant="body1">
+                              {feature as unknown as string}
+                            </Typography>
+                          </li>
+                        ))}
+                      </ul>
+                    </CardContent>
+                  </ExtendedCard>
+                )}
             </div>
 
             {/* Sidebar */}
             <div className="space-y-6">
               {/* Links Card */}
-              <ExtendedCard>
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <Link2 className="h-5 w-5" />
-                    Project Links
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  {projectDetail.links.map((link, index) => (
-                    <ExtendedButton
-                      key={index}
-                      variant="ghost"
-                      className="w-full justify-start"
-                      asChild
-                    >
-                      <a
-                        href={link.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center gap-2"
+              {/* {project?.otherLinks && (
+                <ExtendedCard>
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-2">
+                      <Link2 className="h-5 w-5" />
+                      Project Links
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    {projectDetail.links.map((link, index) => (
+                      <ExtendedButton
+                        key={index}
+                        variant="ghost"
+                        className="w-full justify-start"
+                        asChild
                       >
-                        <ExternalLink className="h-4 w-4" />
-                        {link.title}
-                      </a>
-                    </ExtendedButton>
-                  ))}
-                </CardContent>
-              </ExtendedCard>
+                        <a
+                          href={link.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center gap-2"
+                        >
+                          <ExternalLink className="h-4 w-4" />
+                          {link.title}
+                        </a>
+                      </ExtendedButton>
+                    ))}
+                  </CardContent>
+                </ExtendedCard>
+              )} */}
 
               {/* Repository Info */}
-              {projectDetail.repoUrl && (
+              {project.links?.repo && (
                 <ExtendedCard>
                   <CardHeader>
                     <CardTitle className="flex items-center gap-2">
                       <Github className="h-5 w-5" />
-                      Repository
+                      {common("repository")}
                     </CardTitle>
                   </CardHeader>
                   <CardContent>
@@ -328,13 +317,13 @@ export default async function ProjectDetailPage(props: Props) {
                       asChild
                     >
                       <a
-                        href={projectDetail.repoUrl}
+                        href={project.links?.repo}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="flex items-center gap-2"
                       >
                         <GithubIcon className="h-4 w-4" />
-                        View Source Code
+                        {common("source")}
                       </a>
                     </ExtendedButton>
                   </CardContent>
@@ -346,14 +335,14 @@ export default async function ProjectDetailPage(props: Props) {
       </section>
 
       {/* Gallery Section */}
-      <section className="relative py-20">
+      {/* <section className="relative py-20">
         <div className="absolute inset-0 -z-20">
           <div className="pattern-connector pattern-connector-top pattern-dots opacity-80" />
           <div className="pattern-grid pattern-fade-out absolute inset-0 opacity-70" />
         </div>
         <div className="container mx-auto px-4">
           <div className="grid gap-4 sm:grid-cols-2">
-            {projectDetail.gallery.map((image, index) => (
+            {project.gallery.map((image, index) => (
               <div
                 key={index}
                 className="relative aspect-video overflow-hidden rounded-lg"
@@ -368,7 +357,7 @@ export default async function ProjectDetailPage(props: Props) {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
     </main>
   );
 }

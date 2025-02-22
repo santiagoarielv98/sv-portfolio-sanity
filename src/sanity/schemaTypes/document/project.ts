@@ -72,11 +72,49 @@ export const projectType = defineType({
       type: "boolean",
       title: "Destacado",
     },
-    //  mas campos
     {
-      name: "startDate",
-      title: "Fecha de inicio",
-      type: "date",
+      name: "date",
+      title: "Fecha",
+      type: "object",
+      validation: (Rule) => Rule.required(),
+      fields: [
+        {
+          name: "start",
+          title: "Inicio",
+          type: "date",
+          validation: (Rule) => Rule.required(),
+        },
+        {
+          name: "end",
+          title: "Fin",
+          type: "date",
+          validation: (Rule) => Rule.max(new Date().toISOString()),
+        },
+      ],
+    },
+    {
+      name: "otherLinks",
+      title: "Otros enlaces",
+      type: "array",
+      of: [
+        {
+          type: "object",
+          fields: [
+            {
+              name: "title",
+              title: "Título",
+              type: "localeString",
+              validation: (Rule) => Rule.required(),
+            },
+            {
+              name: "url",
+              title: "URL",
+              type: "url",
+              validation: (Rule) => Rule.required(),
+            },
+          ],
+        },
+      ],
     },
     {
       name: "type",

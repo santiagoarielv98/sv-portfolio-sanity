@@ -132,6 +132,7 @@
       "status": "Status",
       "started": "Started",
       "finished": "Finished",
+      "repository": "Repository",
       "cv": {
         "download": "Download CV",
         "view": "View CV"
