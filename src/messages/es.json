@@ -137,6 +137,9 @@
       "status": "Estado",
       "date": "Fecha",
       "repository": "Repositorio",
+      "openMenu": "Abrir menú",
+      "closeMenu": "Cerrar menú",
+      "toggleMenu": "Alternar menú",
       "cv": {
         "download": "Descargar CV",
         "view": "Ver CV"

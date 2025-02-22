@@ -1,5 +1,6 @@
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
+import { Toaster } from "@/components/ui/sonner";
 import { i18n } from "@/lib/i18n/config";
 import { sanityFetch } from "@/sanity/lib/live";
 import { profileQuery, settingQuery } from "@/sanity/lib/queries";
@@ -12,7 +13,6 @@ import "../globals.css";
 
 import type { Locale } from "@/lib/i18n/config";
 import type { Metadata } from "next";
-import { Toaster } from "@/components/ui/sonner";
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
@@ -59,11 +59,7 @@ export default async function RootLayout(
   }> &
     Props,
 ) {
-  const params = await props.params;
-
-  // Providing all messages to the client
-  // side is the easiest way to get started
-  const messages = await getMessages();
+  const [params, messages] = await Promise.all([props.params, getMessages()]);
 
   const [settings, profile] = await Promise.all([
     sanityFetch({
@@ -88,13 +84,15 @@ export default async function RootLayout(
             enableSystem
             disableTransitionOnChange
           >
-            <SiteHeader {...params} profile={profile.data?.profile} />
+            <SiteHeader
+              profile={profile.data?.profile}
+              title={settings.data?.title as unknown as string}
+            />
             {props.children}
             <SiteFooter
               {...params}
-              footer={settings.data?.footer as unknown as string}
-              profile={profile.data?.profile}
-              contact={profile.data?.contact}
+              settings={settings.data}
+              profile={profile.data}
             />
           </ThemeProvider>
         </NextIntlClientProvider>

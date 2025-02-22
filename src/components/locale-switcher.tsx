@@ -14,8 +14,10 @@ import { useParams, usePathname } from "next/navigation";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 
 const LocaleSwitcher = () => {
+  const common = useTranslations("common");
   const { lang } = useParams();
   const pathname = usePathname();
 
@@ -30,6 +32,7 @@ const LocaleSwitcher = () => {
       <DropdownMenuTrigger asChild>
         <ExtendedButton size="icon" variant="ghost">
           <Globe className="h-4 w-4" />
+          <span className="sr-only">{common("toggleMenu")}</span>
         </ExtendedButton>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">

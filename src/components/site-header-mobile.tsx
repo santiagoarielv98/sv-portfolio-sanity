@@ -12,6 +12,7 @@ import Link from "next/link";
 import { ExtendedBadge } from "./extended-badge";
 import { ExtendedButton } from "./extended-button";
 import { ExtendedSeparator } from "./extended-separator";
+import { Icon } from "./icon";
 
 type Props = {
   status?: string | null;
@@ -45,27 +46,24 @@ const SiteHeaderMobile = ({ status, onClose }: Props) => {
                   </ExtendedButton>
                 </AccordionTrigger>
                 <AccordionContent className="pt-2 pb-0">
-                  {item.submenu?.map((submenuItem) => {
-                    const Icon = submenuItem.icon;
-                    return (
-                      <ExtendedButton
-                        key={submenuItem.href}
-                        variant="ghost"
-                        size="sm"
-                        className="w-full justify-start pl-6"
-                        asChild
-                        onClick={onClose}
+                  {item.submenu?.map((submenuItem) => (
+                    <ExtendedButton
+                      key={submenuItem.href}
+                      variant="ghost"
+                      size="sm"
+                      className="w-full justify-start pl-6"
+                      asChild
+                      onClick={onClose}
+                    >
+                      <Link
+                        href={`/${lang}${submenuItem.href}`}
+                        className="flex items-center gap-2"
                       >
-                        <Link
-                          href={`/${lang}${submenuItem.href}`}
-                          className="flex items-center gap-2"
-                        >
-                          <Icon className="h-4 w-4" />
-                          {nav(submenuItem.titleKey)}
-                        </Link>
-                      </ExtendedButton>
-                    );
-                  })}
+                        <Icon icon={submenuItem.icon} className="h-4 w-4" />
+                        {nav(submenuItem.titleKey)}
+                      </Link>
+                    </ExtendedButton>
+                  ))}
                 </AccordionContent>
               </AccordionItem>
             </Accordion>

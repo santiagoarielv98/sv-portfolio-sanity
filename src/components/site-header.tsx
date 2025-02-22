@@ -1,19 +1,23 @@
 "use client";
 
-import { Code, Menu, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { useState } from "react";
-import type { ProfileQueryResult } from "../../sanity.types";
 import { ExtendedButton } from "./extended-button";
 import LocaleSwitcher from "./locale-switcher";
 import SiteHeaderDesktop from "./site-header-desktop";
 import SiteHeaderMobile from "./site-header-mobile";
 import { ThemeSwitcher } from "./theme-switcher";
 
+import type { ProfileQueryResult } from "../../sanity.types";
+import { useTranslations } from "next-intl";
+
 type Props = {
   profile: ProfileQueryResult["profile"];
+  title: string;
 };
 
-export function SiteHeader({ profile }: Props) {
+export function SiteHeader({ profile, title }: Props) {
+  const common = useTranslations("common");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
@@ -24,8 +28,7 @@ export function SiteHeader({ profile }: Props) {
             {/* Logo */}
             <ExtendedButton variant="ghost" className="font-bold" asChild>
               <a href="#" className="flex items-center gap-2">
-                <Code className="h-5 w-5" />
-                <span className="font-display">Portfolio</span>
+                <span className="font-display">{title}</span>
               </a>
             </ExtendedButton>
 
@@ -46,6 +49,9 @@ export function SiteHeader({ profile }: Props) {
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
               >
                 {isMenuOpen ? <X /> : <Menu />}
+                <span className="sr-only">
+                  {isMenuOpen ? common("closeMenu") : common("openMenu")}
+                </span>
               </ExtendedButton>
             </div>
           </div>

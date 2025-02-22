@@ -1,31 +1,29 @@
 import { Typography } from "@/components/ui/typography";
 import { navigation } from "@/lib/config/navigation";
 import { Code, Mail } from "lucide-react";
-import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { ExtendedButton } from "./extended-button";
 import { ExtendedCard } from "./extended-card";
 import { ExtendedSeparator } from "./extended-separator";
 import { Icon } from "./icon";
 
-import type { Locale } from "@/lib/i18n/config";
-import type { ProfileQueryResult } from "../../sanity.types";
+import { getLocale, getTranslations } from "next-intl/server";
+import type {
+  ProfileQueryResult,
+  SettingQueryResult,
+} from "../../sanity.types";
 
 type SiteFooterProps = {
-  footer: string;
-  lang: Locale;
-  profile: ProfileQueryResult["profile"];
-  contact: ProfileQueryResult["contact"];
+  settings: SettingQueryResult;
+  profile: ProfileQueryResult;
 };
 
-export function SiteFooter({
-  footer,
-  lang,
-  profile,
-  contact,
-}: SiteFooterProps) {
-  const t = useTranslations("footer");
-  const nav = useTranslations("nav");
+export async function SiteFooter({ profile, settings }: SiteFooterProps) {
+  const [t, lang, nav] = await Promise.all([
+    getTranslations("footer"),
+    getLocale(),
+    getTranslations("nav"),
+  ]);
 
   return (
     <footer className="bg-primary/5 border-primary/10 border-t">
@@ -38,7 +36,7 @@ export function SiteFooter({
                 <Code className="h-5 w-5" />
                 <span className="font-display">
                   {/* Portfolio */}
-                  {profile?.name}
+                  {settings?.title}
                 </span>
               </a>
             </ExtendedButton>
@@ -46,7 +44,7 @@ export function SiteFooter({
               variant="body2"
               className="text-muted-foreground max-w-md"
             >
-              {footer}
+              {settings!.footer as string}
             </Typography>
           </div>
 
@@ -76,7 +74,7 @@ export function SiteFooter({
                   {t("availableFor")}
                 </Typography>
                 <ExtendedButton className="w-full" asChild>
-                  <Link href={`mailto:${contact?.email as string}`}>
+                  <Link href={`mailto:${profile.contact?.email as string}`}>
                     <Mail className="mr-2 h-4 w-4" />
                     {t("getInTouch")}
                   </Link>
@@ -90,11 +88,11 @@ export function SiteFooter({
 
         <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <Typography variant="small" className="text-muted-foreground">
-            © {new Date().getFullYear()} {profile?.name}.{" "}
+            © {new Date().getFullYear()} {profile?.profile?.name}.{" "}
             {t("allRightsReserved")}
           </Typography>
           <div className="flex gap-2">
-            {profile?.socialLinks?.map((social) => (
+            {profile?.profile?.socialLinks?.map((social) => (
               <ExtendedButton
                 key={social.platform as string}
                 variant="ghost"

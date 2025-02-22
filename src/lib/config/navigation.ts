@@ -1,5 +1,3 @@
-import { FolderKanban, Grid2X2 } from "lucide-react";
-
 export const SECTIONS = {
   HOME: "#home",
   ABOUT: "#about",
@@ -24,13 +22,13 @@ export const navigation = [
       {
         titleKey: "projects.section",
         href: SECTIONS.PROJECTS,
-        icon: FolderKanban,
+        icon: "FolderKanban",
         descriptionKey: "projects.sectionDescription",
       },
       {
         titleKey: "projects.all",
         href: ROUTES.PROJECTS,
-        icon: Grid2X2,
+        icon: "Grid2X2",
         descriptionKey: "projects.allDescription",
       },
     ],
