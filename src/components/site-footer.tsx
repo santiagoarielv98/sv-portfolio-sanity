@@ -1,13 +1,13 @@
 import { Typography } from "@/components/ui/typography";
 import { navigation } from "@/lib/config/navigation";
 import { Code, Mail } from "lucide-react";
+import { getLocale, getTranslations } from "next-intl/server";
 import Link from "next/link";
 import { ExtendedButton } from "./extended-button";
 import { ExtendedCard } from "./extended-card";
 import { ExtendedSeparator } from "./extended-separator";
 import { Icon } from "./icon";
 
-import { getLocale, getTranslations } from "next-intl/server";
 import type {
   ProfileQueryResult,
   SettingQueryResult,

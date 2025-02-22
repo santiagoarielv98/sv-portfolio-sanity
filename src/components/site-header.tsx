@@ -4,8 +4,8 @@ import { Menu, X } from "lucide-react";
 import { useState } from "react";
 import { ExtendedButton } from "./extended-button";
 import LocaleSwitcher from "./locale-switcher";
-import SiteHeaderDesktop from "./site-header-desktop";
-import SiteHeaderMobile from "./site-header-mobile";
+import SiteHeaderDesktop from "./header-desktop";
+import SiteHeaderMobile from "./header-mobile";
 import { ThemeSwitcher } from "./theme-switcher";
 
 import type { ProfileQueryResult } from "../../sanity.types";

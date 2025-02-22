@@ -15,6 +15,7 @@ import { ExtendedButton } from "./extended-button";
 import { ExtendedSeparator } from "./extended-separator";
 import LocaleSwitcher from "./locale-switcher";
 import { ThemeSwitcher } from "./theme-switcher";
+import { Icon } from "./icon";
 
 type Props = {
   status?: string | null;
@@ -38,27 +39,24 @@ const SiteHeaderDesktop = ({ status }: Props) => {
               </ExtendedButton>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="start" className="w-[200px]">
-              {item.submenu?.map((submenuItem) => {
-                const Icon = submenuItem.icon;
-                return (
-                  <DropdownMenuItem key={submenuItem.href} asChild>
-                    <Link
-                      href={`/${lang}${submenuItem.href}`}
-                      className="flex items-center gap-2"
-                    >
-                      <Icon className="h-4 w-4" />
-                      <div className="flex flex-col">
-                        <span>{nav(submenuItem.titleKey)}</span>
-                        {submenuItem.descriptionKey && (
-                          <span className="text-muted-foreground text-xs">
-                            {nav(submenuItem.descriptionKey)}
-                          </span>
-                        )}
-                      </div>
-                    </Link>
-                  </DropdownMenuItem>
-                );
-              })}
+              {item.submenu?.map((submenuItem) => (
+                <DropdownMenuItem key={submenuItem.href} asChild>
+                  <Link
+                    href={`/${lang}${submenuItem.href}`}
+                    className="flex items-center gap-2"
+                  >
+                    <Icon icon={submenuItem.icon} className="h-4 w-4" />
+                    <div className="flex flex-col">
+                      <span>{nav(submenuItem.titleKey)}</span>
+                      {submenuItem.descriptionKey && (
+                        <span className="text-muted-foreground text-xs">
+                          {nav(submenuItem.descriptionKey)}
+                        </span>
+                      )}
+                    </div>
+                  </Link>
+                </DropdownMenuItem>
+              ))}
             </DropdownMenuContent>
           </DropdownMenu>
         ) : (

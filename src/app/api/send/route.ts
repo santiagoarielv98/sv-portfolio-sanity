@@ -1,4 +1,4 @@
-import { EmailTemplate } from "@/components/email-template";
+import { EmailTemplate } from "@/components/resend/email-template";
 import { contactFormSchema } from "@/lib/schemas/contact";
 import type { ReactNode } from "react";
 import { Resend } from "resend";
