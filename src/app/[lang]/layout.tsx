@@ -88,7 +88,7 @@ export default async function RootLayout(
             enableSystem
             disableTransitionOnChange
           >
-            <SiteHeader {...params} />
+            <SiteHeader {...params} profile={profile.data?.profile} />
             {props.children}
             <SiteFooter
               {...params}

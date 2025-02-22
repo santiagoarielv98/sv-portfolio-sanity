@@ -1,14 +1,15 @@
+import { Typography } from "@/components/ui/typography";
 import { navigation } from "@/lib/config/navigation";
-import type { Locale } from "@/lib/i18n/config";
 import { Code, Mail } from "lucide-react";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
-import type { ProfileQueryResult } from "../../sanity.types";
 import { ExtendedButton } from "./extended-button";
 import { ExtendedCard } from "./extended-card";
 import { ExtendedSeparator } from "./extended-separator";
 import { Icon } from "./icon";
-import { Typography } from "./ui/typography";
+
+import type { Locale } from "@/lib/i18n/config";
+import type { ProfileQueryResult } from "../../sanity.types";
 
 type SiteFooterProps = {
   footer: string;
