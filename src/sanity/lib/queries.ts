@@ -143,12 +143,20 @@ export const projectDetailQuery = defineQuery(`{
     "project": *[_type == "project" && slug.current == $slug] {
         ${baseProjectsFields},
         status,
-        otherLinks,
+        "otherLinks": otherLinks[]{
+            "title": coalesce(title[$lang], title.es),
+            url,
+        },
         date{
             start,
             end,
         },
         "keyFeatures": keyFeatures[][$lang],
         "content": content[$lang],
+        "gallery": gallery[]{
+            asset->{
+                url,
+            },
+        },
     }[0]
 }`);

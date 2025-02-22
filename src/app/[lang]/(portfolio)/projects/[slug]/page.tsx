@@ -1,66 +1,18 @@
 import { ExtendedBadge } from "@/components/extended-badge";
 import { ExtendedButton } from "@/components/extended-button";
-import {
-  CardContent,
-  CardHeader,
-  CardTitle,
-  ExtendedCard,
-} from "@/components/extended-card";
 import { ExtendedSeparator } from "@/components/extended-separator";
 import { Icon } from "@/components/icon";
-import Blocks from "@/components/portable-text";
 import { Typography } from "@/components/ui/typography";
+import { getFormattedDate } from "@/lib/utils";
 import { sanityFetch } from "@/sanity/lib/live";
 import { projectDetailQuery } from "@/sanity/lib/queries";
-import {
-  ArrowLeft,
-  Calendar,
-  Code,
-  Github,
-  GithubIcon,
-  Globe,
-  Layout,
-} from "lucide-react";
+import { ArrowLeft, Calendar, GithubIcon, Globe } from "lucide-react";
 import { getTranslations } from "next-intl/server";
-import type { PortableTextBlock } from "next-sanity";
 import Image from "next/image";
 import Link from "next/link";
 import type { ProjectDetailQueryResult } from "../../../../../../sanity.types";
-
-// const projectDetail: ProjectDetail = {
-//   title: "Portfolio Website",
-//   description:
-//     "Personal portfolio built with Next.js, Tailwind CSS, and Sanity CMS",
-//   longDescription: `
-//     A modern and responsive portfolio website built with the latest web technologies.
-//     This project showcases my skills and experience in web development, featuring
-//     a clean design, smooth animations, and excellent performance metrics.
-//   `,
-//   image: "https://picsum.photos/seed/portfolio/1920/1080",
-//   gallery: [
-//     "https://picsum.photos/seed/1/800/600",
-//     "https://picsum.photos/seed/2/800/600",
-//     "https://picsum.photos/seed/3/800/600",
-//   ],
-//   technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Sanity"],
-//   features: [
-//     "Responsive design with mobile-first approach",
-//     "Dark mode support with system preference detection",
-//     "SEO optimized with Next.js features",
-//     "Content management with Sanity CMS",
-//     "Performance optimized with lazy loading and image optimization",
-//     "Smooth animations and transitions",
-//   ],
-//   demoUrl: "https://portfolio.dev",
-//   repoUrl: "https://github.com/user/portfolio",
-//   category: "frontend",
-//   startDate: "2024-01",
-//   status: "completed",
-//   links: [
-//     { title: "Documentation", url: "https://docs.portfolio.dev" },
-//     { title: "Design System", url: "https://design.portfolio.dev" },
-//   ],
-// };
+import ProjectContent from "./_sections/project-content";
+import GallerySection from "./_sections/gallery-section";
 
 type Props = {
   params: Promise<{
@@ -83,6 +35,13 @@ export default async function ProjectDetailPage(props: Props) {
   const project = data.project!;
   console.log(project);
 
+  const hasContent = Array.isArray(project.content) && project.content.length;
+  const hasKeyFeatures =
+    Array.isArray(project.keyFeatures) && project.keyFeatures.length;
+
+  const hasProjectDetail = hasContent || hasKeyFeatures;
+  const hasGallery = Array.isArray(project.gallery) && project.gallery.length;
+
   return (
     <main className="relative">
       {/* Global noise overlay */}
@@ -100,7 +59,7 @@ export default async function ProjectDetailPage(props: Props) {
           {/* Back Button */}
           <div className="mb-8">
             <ExtendedButton variant="ghost" size="sm" asChild>
-              <Link href="/projects" className="group">
+              <Link href={`/${params.lang}/projects`} className="group">
                 <ArrowLeft className="mr-2 h-4 w-4 transition-transform group-hover:-translate-x-1" />
                 {common("backToProjects")}
               </Link>
@@ -147,7 +106,12 @@ export default async function ProjectDetailPage(props: Props) {
                     className="w-full justify-start"
                   >
                     <Calendar className="mr-2 h-4 w-4" />
-                    {project.date?.start}
+                    {project.date?.start &&
+                      getFormattedDate(project.date.start)}{" "}
+                    -{" "}
+                    {project.date?.end
+                      ? getFormattedDate(project.date.end)
+                      : "Present"}
                   </ExtendedBadge>
                 </div>
                 <div className="space-y-2">
@@ -216,148 +180,10 @@ export default async function ProjectDetailPage(props: Props) {
       </section>
 
       {/* Project Content */}
-      <section className="bg-primary/5 relative py-20">
-        <div className="absolute inset-0 -z-20">
-          <div className="pattern-connector pattern-connector-top pattern-circuit opacity-70" />
-          <div className="pattern-dots absolute inset-0 opacity-80" />
-          <div className="pattern-connector pattern-connector-bottom pattern-grid opacity-70" />
-        </div>
-        <div className="container mx-auto px-4">
-          <div className="grid gap-8 lg:grid-cols-3">
-            {/* Main Content */}
-            <div className="space-y-8 lg:col-span-2">
-              {/* Description */}
-              {Array.isArray(project.content) && project.content.length && (
-                <ExtendedCard>
-                  <CardHeader>
-                    <CardTitle className="flex items-center gap-2">
-                      <Layout className="h-5 w-5" />
-                      {t("aboutProject")}
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <Blocks value={project.content as PortableTextBlock[]} />
-                  </CardContent>
-                </ExtendedCard>
-              )}
-
-              {/* Features */}
-              {Array.isArray(project.keyFeatures) &&
-                project.keyFeatures.length && (
-                  <ExtendedCard>
-                    <CardHeader>
-                      <CardTitle className="flex items-center gap-2">
-                        <Code className="h-5 w-5" />
-                        {t("keyFeatures")}
-                      </CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <ul className="space-y-4">
-                        {project.keyFeatures?.map((feature, index) => (
-                          <li key={index} className="flex items-start gap-2">
-                            <div className="bg-primary/50 mt-2.5 size-1.5 rounded-full" />
-                            <Typography variant="body1">
-                              {feature as unknown as string}
-                            </Typography>
-                          </li>
-                        ))}
-                      </ul>
-                    </CardContent>
-                  </ExtendedCard>
-                )}
-            </div>
-
-            {/* Sidebar */}
-            <div className="space-y-6">
-              {/* Links Card */}
-              {/* {project?.otherLinks && (
-                <ExtendedCard>
-                  <CardHeader>
-                    <CardTitle className="flex items-center gap-2">
-                      <Link2 className="h-5 w-5" />
-                      Project Links
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent className="space-y-4">
-                    {projectDetail.links.map((link, index) => (
-                      <ExtendedButton
-                        key={index}
-                        variant="ghost"
-                        className="w-full justify-start"
-                        asChild
-                      >
-                        <a
-                          href={link.url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="flex items-center gap-2"
-                        >
-                          <ExternalLink className="h-4 w-4" />
-                          {link.title}
-                        </a>
-                      </ExtendedButton>
-                    ))}
-                  </CardContent>
-                </ExtendedCard>
-              )} */}
-
-              {/* Repository Info */}
-              {project.links?.repo && (
-                <ExtendedCard>
-                  <CardHeader>
-                    <CardTitle className="flex items-center gap-2">
-                      <Github className="h-5 w-5" />
-                      {common("repository")}
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <ExtendedButton
-                      variant="outline"
-                      className="w-full"
-                      asChild
-                    >
-                      <a
-                        href={project.links?.repo}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center gap-2"
-                      >
-                        <GithubIcon className="h-4 w-4" />
-                        {common("source")}
-                      </a>
-                    </ExtendedButton>
-                  </CardContent>
-                </ExtendedCard>
-              )}
-            </div>
-          </div>
-        </div>
-      </section>
+      {hasProjectDetail && <ProjectContent project={project} />}
 
       {/* Gallery Section */}
-      {/* <section className="relative py-20">
-        <div className="absolute inset-0 -z-20">
-          <div className="pattern-connector pattern-connector-top pattern-dots opacity-80" />
-          <div className="pattern-grid pattern-fade-out absolute inset-0 opacity-70" />
-        </div>
-        <div className="container mx-auto px-4">
-          <div className="grid gap-4 sm:grid-cols-2">
-            {project.gallery.map((image, index) => (
-              <div
-                key={index}
-                className="relative aspect-video overflow-hidden rounded-lg"
-              >
-                <Image
-                  src={image}
-                  alt={`Gallery image ${index + 1}`}
-                  fill
-                  className="object-cover transition-transform hover:scale-105"
-                />
-              </div>
-            ))}
-          </div>
-        </div>
-      </section> */}
+      {hasGallery && <GallerySection gallery={project.gallery} />}
     </main>
   );
 }

@@ -46,6 +46,7 @@
       "aboutProject":"Sobre el proyecto",
       "description":"Explora mis últimos proyectos y experimentos. Desde aplicaciones frontend hasta soluciones full-stack, cada proyecto representa un desafío único y una experiencia de aprendizaje.",
       "keyFeatures": "Características clave",
+      "projectLinks": "Enlaces del proyecto",
       "status":{
         "finished": "Finalizado",
         "inProgress": "En Progreso",
