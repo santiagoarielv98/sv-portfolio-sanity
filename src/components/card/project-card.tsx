@@ -76,15 +76,24 @@ const ProjectCard = ({ project }: Props) => {
       <ExtendedSeparator className="mt-auto mb-6" />
       <CardFooter className="gap-4">
         {project.links?.demo && (
-          <ExtendedButton variant="default" size="sm" className="flex-1">
-            <ExternalLink className="mr-1 h-4 w-4" />
-            {t("demo")}
+          <ExtendedButton
+            variant="default"
+            size="sm"
+            className="flex-1"
+            asChild
+          >
+            <Link href={project.links.demo}>
+              <ExternalLink className="mr-1 h-4 w-4" />
+              {t("demo")}
+            </Link>
           </ExtendedButton>
         )}
         {project.links?.repo && (
-          <ExtendedButton variant="solid" size="sm" className="flex-1">
-            <FaGithub className="mr-1 h-4 w-4" />
-            {t("source")}
+          <ExtendedButton variant="solid" size="sm" className="flex-1" asChild>
+            <Link href={project.links.repo}>
+              <FaGithub className="mr-1 h-4 w-4" />
+              {t("source")}
+            </Link>
           </ExtendedButton>
         )}
       </CardFooter>
