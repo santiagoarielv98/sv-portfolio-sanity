@@ -21,7 +21,7 @@ const GallerySection = ({ gallery }: Props) => {
               className="relative aspect-video overflow-hidden rounded-lg"
             >
               <Image
-                src={image as unknown as string}
+                src={image!.asset!.url!}
                 alt={`Gallery image ${index + 1}`}
                 fill
                 className="object-cover transition-transform hover:scale-105"
