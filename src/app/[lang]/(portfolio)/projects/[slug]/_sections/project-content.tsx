@@ -17,12 +17,12 @@ import {
 } from "lucide-react";
 
 import type { PortableTextBlock } from "next-sanity";
-import type { ProjectDetailQueryResult } from "../../../../../../../sanity.types";
+import type { GetProjectDetailQueryResult } from "../../../../../../../sanity.types";
 import { getTranslations } from "next-intl/server";
 import { cn } from "@/lib/utils";
 
 type Props = {
-  project: ProjectDetailQueryResult["project"];
+  project: GetProjectDetailQueryResult["project"];
 };
 const ProjectContent = async ({ project }: Props) => {
   const hasRepo = !!project?.links?.repo;

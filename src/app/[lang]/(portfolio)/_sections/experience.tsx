@@ -5,10 +5,10 @@ import * as motion from "motion/react-client";
 
 import { ExperienceCard } from "@/components/card/experience-card";
 import { SectionHeader } from "@/components/section";
-import type { HomeQueryResult } from "../../../../../sanity.types";
+import type { GetHomeQueryResult } from "../../../../../sanity.types";
 
 type Props = {
-  experiences: HomeQueryResult["experiences"];
+  experiences: GetHomeQueryResult["experiences"];
 };
 
 const ExperienceSection = ({ experiences }: Props) => {

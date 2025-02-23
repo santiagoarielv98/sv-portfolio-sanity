@@ -9,13 +9,13 @@ import { ExtendedSeparator } from "./extended-separator";
 import { Icon } from "./icon";
 
 import type {
-  ProfileQueryResult,
-  SettingQueryResult,
+  GetProfileQueryResult,
+  GetSettingQueryResult,
 } from "../../sanity.types";
 
 type SiteFooterProps = {
-  settings: SettingQueryResult;
-  profile: ProfileQueryResult;
+  settings: GetSettingQueryResult;
+  profile: GetProfileQueryResult;
 };
 
 export async function SiteFooter({ profile, settings }: SiteFooterProps) {

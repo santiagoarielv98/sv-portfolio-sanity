@@ -5,7 +5,7 @@ import { ArrowLeft } from "lucide-react";
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import Link from "next/link";
-import type { ProjectDetailQueryResult } from "../../../../../../sanity.types";
+import type { GetProjectDetailQueryResult } from "../../../../../../sanity.types";
 import GallerySection from "./_sections/gallery-section";
 import HeaderSection from "./_sections/header-section";
 import ProjectContent from "./_sections/project-content";
@@ -20,7 +20,7 @@ type Props = {
 };
 
 const projectSlugs = defineQuery(
-  `*[_type == "project" && defined(slug.current)][].slug.current`,
+  `*[_type == "project" && defined(slug.current)]{"slug": slug.current}`,
 );
 
 export async function generateStaticParams() {
@@ -35,7 +35,7 @@ export async function generateMetadata(props: Props) {
   const { data } = (await sanityFetch({
     query: getProjectDetailQuery,
     params,
-  })) as { data: ProjectDetailQueryResult };
+  })) as { data: GetProjectDetailQueryResult };
   return {
     title: data.project?.title as unknown as string,
     description: data.project?.description as unknown as string,
@@ -49,7 +49,7 @@ export default async function ProjectDetailPage(props: Props) {
   const { data } = (await sanityFetch({
     query: getProjectDetailQuery,
     params,
-  })) as { data: ProjectDetailQueryResult };
+  })) as { data: GetProjectDetailQueryResult };
 
   const project = data.project!;
   console.log(project);

@@ -16,12 +16,12 @@ import { Typography } from "@/components/ui/typography";
 import { SECTIONS } from "@/lib/config/navigation";
 import { useTranslations } from "next-intl";
 
-import type { HomeQueryResult } from "../../../../../sanity.types";
+import type { GetHomeQueryResult } from "../../../../../sanity.types";
 import { Icon } from "@/components/icon";
 
 type Props = {
-  profile: HomeQueryResult["profile"];
-  contact: HomeQueryResult["contact"];
+  profile: GetHomeQueryResult["profile"];
+  contact: GetHomeQueryResult["contact"];
 };
 
 const ContactSection = ({ contact, profile }: Props) => {

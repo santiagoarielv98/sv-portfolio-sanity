@@ -7,11 +7,11 @@ import * as motion from "motion/react-client";
 
 import ProjectCard from "@/components/card/project-card";
 import { SectionHeader } from "@/components/section";
-import type { HomeQueryResult } from "../../../../../sanity.types";
+import type { GetHomeQueryResult } from "../../../../../sanity.types";
 import type { Locale } from "@/lib/i18n/config";
 
 type Props = {
-  projects: HomeQueryResult["featuredProjects"];
+  projects: GetHomeQueryResult["featuredProjects"];
   lang: Locale;
 };
 

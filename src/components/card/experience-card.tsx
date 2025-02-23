@@ -13,10 +13,10 @@ import { Typography } from "@/components/ui/typography";
 import { getFormattedDate } from "@/lib/utils";
 import { Calendar, MapPin } from "lucide-react";
 
-import type { HomeQueryResult } from "../../../sanity.types";
+import type { GetHomeQueryResult } from "../../../sanity.types";
 
 type Props = {
-  experience: HomeQueryResult["experiences"][0];
+  experience: GetHomeQueryResult["experiences"][0];
 };
 
 export const ExperienceCard = ({ experience }: Props) => {

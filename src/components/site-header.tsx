@@ -8,12 +8,12 @@ import SiteHeaderDesktop from "./header-desktop";
 import SiteHeaderMobile from "./header-mobile";
 import { ThemeSwitcher } from "./theme-switcher";
 
-import type { ProfileQueryResult } from "../../sanity.types";
+import type { GetProfileQueryResult } from "../../sanity.types";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 
 type Props = {
-  profile: ProfileQueryResult["profile"];
+  profile: GetProfileQueryResult["profile"];
   title: string;
 };
 

@@ -9,7 +9,7 @@ import { ArrowLeft, Code } from "lucide-react";
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import Link from "next/link";
-import type { ProjectQueryResult } from "../../../../../sanity.types";
+import type { GetProjectQueryResult } from "../../../../../sanity.types";
 import * as motion from "motion/react-client";
 
 type Props = {
@@ -35,7 +35,7 @@ export default async function ProjectsPage(props: Props) {
   const { data } = (await sanityFetch({
     query: getProjectQuery,
     params,
-  })) as { data: ProjectQueryResult };
+  })) as { data: GetProjectQueryResult };
 
   const projects = data.projects;
 

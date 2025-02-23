@@ -1,9 +1,9 @@
 import React from "react";
-import type { ProjectDetailQueryResult } from "../../../../../../../sanity.types";
+import type { GetProjectDetailQueryResult } from "../../../../../../../sanity.types";
 import Image from "next/image";
 
 type Props = {
-  gallery: NonNullable<ProjectDetailQueryResult["project"]>["gallery"];
+  gallery: NonNullable<GetProjectDetailQueryResult["project"]>["gallery"];
 };
 
 const GallerySection = ({ gallery }: Props) => {

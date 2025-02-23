@@ -8,10 +8,10 @@ import { useTranslations } from "next-intl";
 import Image from "next/image";
 import * as motion from "motion/react-client";
 
-import type { HomeQueryResult } from "../../../../../sanity.types";
+import type { GetHomeQueryResult } from "../../../../../sanity.types";
 
 type Props = {
-  profile: HomeQueryResult["profile"];
+  profile: GetHomeQueryResult["profile"];
 };
 
 const AboutSection = ({ profile }: Props) => {
