@@ -60,7 +60,7 @@ const ExperienceSection = ({ experiences }: Props) => {
                     delay: index * 0.2,
                   }}
                   data-direction={index % 2 === 0 ? "left" : "right"}
-                  className="flex items-center gap-8 data-[direction=left]:flex-row data-[direction=right]:flex-row-reverse"
+                  className="flex items-center gap-8 data-[direction=left]:md:flex-row data-[direction=right]:md:flex-row-reverse"
                 >
                   <motion.div
                     initial={{ scale: 0 }}
