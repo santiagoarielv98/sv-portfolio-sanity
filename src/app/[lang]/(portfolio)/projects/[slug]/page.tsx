@@ -24,9 +24,12 @@ const projectSlugs = defineQuery(
 );
 
 export async function generateStaticParams() {
-  return await sanityFetch({
+  const { data: slugs } = await sanityFetch({
     query: projectSlugs,
+    perspective: "published",
+    stega: false,
   });
+  return slugs;
 }
 
 export async function generateMetadata(props: Props) {
@@ -52,7 +55,6 @@ export default async function ProjectDetailPage(props: Props) {
   })) as { data: GetProjectDetailQueryResult };
 
   const project = data.project!;
-  console.log(project);
 
   const hasContent = Array.isArray(project.content) && project.content.length;
   const hasKeyFeatures =
