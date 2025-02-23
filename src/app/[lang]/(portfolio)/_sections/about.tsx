@@ -6,6 +6,7 @@ import { SECTIONS } from "@/lib/config/navigation";
 import { Download, UserRound } from "lucide-react";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
+import * as motion from "motion/react-client";
 
 import type { HomeQueryResult } from "../../../../../sanity.types";
 
@@ -28,16 +29,20 @@ const AboutSection = ({ profile }: Props) => {
         <div className="pattern-connector pattern-connector-bottom pattern-circuit" />
       </div>
       <div className="container mx-auto px-4">
-        {/* Header */}
         <SectionHeader
           title={t("title")}
           badge={t("subtitle")}
           icon={UserRound}
         />
-        {/* Main Content */}
+
         <div className="mx-auto mt-12 grid max-w-6xl gap-12 lg:grid-cols-2">
-          {/* Left Column - Image and Quick Info */}
-          <div className="relative aspect-square overflow-hidden rounded-xl">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="relative aspect-square overflow-hidden rounded-xl"
+          >
             <Image
               src={profile!.avatar!}
               alt={`${common("photoBy")} ${profile!.name}`}
@@ -45,10 +50,15 @@ const AboutSection = ({ profile }: Props) => {
               className="object-cover"
             />
             <div className="from-background/60 absolute inset-0 bg-gradient-to-t" />
-          </div>
+          </motion.div>
 
-          {/* Right Column - Text Content */}
-          <div className="space-y-8">
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="space-y-8"
+          >
             <div>
               <Typography variant="h3" className="mb-4">
                 {t("whoami")}
@@ -93,7 +103,7 @@ const AboutSection = ({ profile }: Props) => {
                 </a>
               </ExtendedButton>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>
