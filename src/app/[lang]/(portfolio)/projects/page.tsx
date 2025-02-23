@@ -154,6 +154,7 @@ export default async function ProjectsPage(props: Props) {
                   duration: 0.5,
                   delay: 0.5 + index * 0.1,
                 }}
+                className="flex"
               >
                 <ProjectCard project={project} />
               </motion.div>

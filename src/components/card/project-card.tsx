@@ -29,7 +29,7 @@ const ProjectCard = ({ project }: Props) => {
   return (
     <ExtendedCard
       variant="default"
-      className="group flex flex-col overflow-hidden"
+      className="group flex w-full flex-col overflow-hidden"
     >
       <div className="relative aspect-video w-full overflow-hidden">
         <div className="from-background/80 to-background/20 absolute inset-0 z-10 bg-gradient-to-t transition-opacity group-hover:opacity-50" />

@@ -45,6 +45,7 @@ const ProjectsSection = ({ projects, lang }: Props) => {
                 duration: 0.5,
                 delay: index * 0.1,
               }}
+              className="flex"
             >
               <ProjectCard project={project} />
             </motion.div>
