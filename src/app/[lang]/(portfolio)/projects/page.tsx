@@ -10,6 +10,7 @@ import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import Link from "next/link";
 import type { ProjectQueryResult } from "../../../../../sanity.types";
+import * as motion from "motion/react-client";
 
 type Props = {
   params: Promise<{
@@ -55,17 +56,27 @@ export default async function ProjectsPage(props: Props) {
 
         <div className="container mx-auto px-4">
           {/* Back to Home Button */}
-          <div className="mb-8">
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5 }}
+            className="mb-8"
+          >
             <ExtendedButton variant="ghost" size="sm" asChild>
               <Link href="/" className="group">
                 <ArrowLeft className="mr-2 h-4 w-4 transition-transform group-hover:-translate-x-1" />
                 {common("backToHome")}
               </Link>
             </ExtendedButton>
-          </div>
+          </motion.div>
 
           {/* Header Section */}
-          <div className="mb-12 space-y-4 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="mb-12 space-y-4 text-center"
+          >
             <ExtendedBadge
               variant="gradient"
               className="mx-auto flex items-center gap-2"
@@ -84,7 +95,7 @@ export default async function ProjectsPage(props: Props) {
             >
               {t("description")}
             </Typography>
-          </div>
+          </motion.div>
 
           {/* <div className="mb-12 flex flex-col gap-6">
             <CategoryFilter categories={categories} />
@@ -128,11 +139,26 @@ export default async function ProjectsPage(props: Props) {
           </div> */}
 
           {/* Projects Grid */}
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+            className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3"
+          >
             {projects.map((project, index) => (
-              <ProjectCard key={index} project={project} />
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{
+                  duration: 0.5,
+                  delay: 0.5 + index * 0.1,
+                }}
+              >
+                <ProjectCard project={project} />
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
     </main>

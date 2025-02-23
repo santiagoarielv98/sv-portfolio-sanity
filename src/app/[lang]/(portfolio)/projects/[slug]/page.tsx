@@ -9,6 +9,7 @@ import type { ProjectDetailQueryResult } from "../../../../../../sanity.types";
 import GallerySection from "./_sections/gallery-section";
 import HeaderSection from "./_sections/header-section";
 import ProjectContent from "./_sections/project-content";
+import * as motion from "motion/react-client";
 
 type Props = {
   params: Promise<{
@@ -64,25 +65,52 @@ export default async function ProjectDetailPage(props: Props) {
         </div>
         <div className="container mx-auto px-4">
           {/* Back Button */}
-          <div className="mb-8">
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5 }}
+            className="mb-8"
+          >
             <ExtendedButton variant="ghost" size="sm" asChild>
               <Link href={`/${params.lang}/projects`} className="group">
                 <ArrowLeft className="mr-2 h-4 w-4 transition-transform group-hover:-translate-x-1" />
                 {common("backToProjects")}
               </Link>
             </ExtendedButton>
-          </div>
+          </motion.div>
 
           {/* Project Header */}
-          <HeaderSection project={project} />
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+          >
+            <HeaderSection project={project} />
+          </motion.div>
         </div>
       </section>
 
       {/* Project Content */}
-      {hasProjectDetail && <ProjectContent project={project} />}
+      {hasProjectDetail && (
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.4 }}
+        >
+          <ProjectContent project={project} />
+        </motion.div>
+      )}
 
       {/* Gallery Section */}
-      {hasGallery && <GallerySection gallery={project.gallery} />}
+      {hasGallery && (
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.6 }}
+        >
+          <GallerySection gallery={project.gallery} />
+        </motion.div>
+      )}
     </main>
   );
 }
