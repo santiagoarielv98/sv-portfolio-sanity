@@ -1,13 +1,14 @@
 import { SECTIONS } from "@/lib/config/navigation";
 import { Briefcase } from "lucide-react";
 import { useTranslations } from "next-intl";
+import * as motion from "motion/react-client";
 
 import { ExperienceCard } from "@/components/card/experience-card";
 import { SectionHeader } from "@/components/section";
-import type { HomeQueryResult } from "../../../../../sanity.types";
+import type { GetHomeQueryResult } from "../../../../../sanity.types";
 
 type Props = {
-  experiences: HomeQueryResult["experiences"];
+  experiences: GetHomeQueryResult["experiences"];
 };
 
 const ExperienceSection = ({ experiences }: Props) => {
@@ -32,28 +33,53 @@ const ExperienceSection = ({ experiences }: Props) => {
 
         {/* Timeline container */}
         <div className="relative mt-12">
-          {/* Línea vertical central */}
-          <div className="from-primary/5 via-primary/20 absolute h-full w-0.5 bg-gradient-to-b to-transparent md:left-1/2" />
+          <motion.div
+            initial={{ height: 0 }}
+            whileInView={{ height: "100%" }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="from-primary/5 via-primary/20 absolute h-full w-0.5 bg-gradient-to-b to-transparent md:left-1/2"
+          />
 
           <div className="space-y-8 md:-space-y-8">
             {experiences.map((experience, index) => {
               return (
-                <div
+                <motion.div
                   key={index}
+                  initial={{
+                    opacity: 0,
+                    x: index % 2 === 0 ? -20 : 20,
+                  }}
+                  whileInView={{
+                    opacity: 1,
+                    x: 0,
+                  }}
+                  viewport={{ once: true }}
+                  transition={{
+                    duration: 0.5,
+                    delay: index * 0.2,
+                  }}
                   data-direction={index % 2 === 0 ? "left" : "right"}
-                  className="flex items-center gap-8 data-[direction=left]:flex-row data-[direction=right]:flex-row-reverse"
+                  className="flex items-center gap-8 data-[direction=left]:md:flex-row data-[direction=right]:md:flex-row-reverse"
                 >
-                  {/* Punto en la línea de tiempo */}
-                  <div className="bg-primary/20 border-primary/30 absolute h-4 w-4 -translate-x-1/2 rounded-full border-2 md:left-1/2" />
+                  <motion.div
+                    initial={{ scale: 0 }}
+                    whileInView={{ scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{
+                      duration: 0.3,
+                      delay: index * 0.2 + 0.2,
+                    }}
+                    className="bg-primary/20 border-primary/30 absolute h-4 w-4 -translate-x-1/2 rounded-full border-2 md:left-1/2"
+                  />
 
-                  {/* Card de experiencia */}
                   <div
                     data-direction={index % 2 === 0 ? "left" : "right"}
                     className="ml-4 md:ml-0 md:w-1/2 data-[direction=left]:md:pr-8 data-[direction=right]:md:pl-8"
                   >
                     <ExperienceCard experience={experience} />
                   </div>
-                </div>
+                </motion.div>
               );
             })}
           </div>

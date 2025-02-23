@@ -18,6 +18,16 @@ export const skillCategoryType = defineType({
       validation: (Rule) => Rule.required(),
     },
     {
+      name: "slug",
+      title: "Slug",
+      type: "slug",
+      options: {
+        source: "title",
+        maxLength: 50,
+      },
+      validation: (Rule) => Rule.required(),
+    },
+    {
       name: "icon",
       title: "Ícono",
       type: "string",

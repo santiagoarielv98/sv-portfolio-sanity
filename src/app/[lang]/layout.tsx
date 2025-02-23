@@ -1,8 +1,9 @@
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
+import { Toaster } from "@/components/ui/sonner";
 import { i18n } from "@/lib/i18n/config";
 import { sanityFetch } from "@/sanity/lib/live";
-import { profileQuery, settingQuery } from "@/sanity/lib/queries";
+import { getProfileQuery, getSettingQuery } from "@/sanity/lib/queries";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import { Space_Grotesk, Urbanist } from "next/font/google";
@@ -12,7 +13,6 @@ import "../globals.css";
 
 import type { Locale } from "@/lib/i18n/config";
 import type { Metadata } from "next";
-import { Toaster } from "@/components/ui/sonner";
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
@@ -34,11 +34,15 @@ type Props = {
 
 export async function generateMetadata({ params }: Props) {
   const { data } = await sanityFetch({
-    query: settingQuery,
+    query: getSettingQuery,
     params,
   });
   return {
-    title: data?.title,
+    title: {
+      default: data!.title!,
+      template: "%s | " + data!.title!,
+      absolute: "",
+    },
     description: data?.description as unknown as string,
     keywords: data?.keywords,
     authors: [{ name: data!.author! }],
@@ -49,32 +53,27 @@ export async function generateStaticParams() {
   return i18n.locales.map((locale) => ({ lang: locale }));
 }
 
-export default async function RootLayout({
-  children,
-  params,
-}: Readonly<{
-  children: React.ReactNode;
-}> &
-  Props) {
-  const { lang } = await params;
-
-  // Providing all messages to the client
-  // side is the easiest way to get started
-  const messages = await getMessages();
+export default async function RootLayout(
+  props: Readonly<{
+    children: React.ReactNode;
+  }> &
+    Props,
+) {
+  const [params, messages] = await Promise.all([props.params, getMessages()]);
 
   const [settings, profile] = await Promise.all([
     sanityFetch({
-      query: settingQuery,
+      query: getSettingQuery,
       params,
     }),
     sanityFetch({
-      query: profileQuery,
+      query: getProfileQuery,
       params,
     }),
   ]);
 
   return (
-    <html lang={lang} suppressHydrationWarning>
+    <html lang={params.lang} suppressHydrationWarning>
       <body
         className={`${spaceGrotesk.variable} ${urbanist.variable} font-urbanist min-h-screen`}
       >
@@ -85,13 +84,15 @@ export default async function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            <SiteHeader lang={lang} />
-            {children}
-            <SiteFooter
-              footer={settings.data?.footer as unknown as string}
-              lang={lang}
+            <SiteHeader
               profile={profile.data?.profile}
-              contact={profile.data?.contact}
+              title={settings.data?.title as unknown as string}
+            />
+            {props.children}
+            <SiteFooter
+              {...params}
+              settings={settings.data}
+              profile={profile.data}
             />
           </ThemeProvider>
         </NextIntlClientProvider>

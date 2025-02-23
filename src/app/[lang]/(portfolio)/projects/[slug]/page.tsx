@@ -1,79 +1,68 @@
-import { ExtendedBadge } from "@/components/extended-badge";
 import { ExtendedButton } from "@/components/extended-button";
-import {
-  CardContent,
-  CardHeader,
-  CardTitle,
-  ExtendedCard,
-} from "@/components/extended-card";
-import { ExtendedSeparator } from "@/components/extended-separator";
-import { Typography } from "@/components/ui/typography";
-import {
-  ArrowLeft,
-  Calendar,
-  Code,
-  ExternalLink,
-  Github,
-  GithubIcon,
-  Globe,
-  Layout,
-  Link2,
-} from "lucide-react";
-import Image from "next/image";
+import { sanityFetch } from "@/sanity/lib/live";
+import { getProjectDetailQuery } from "@/sanity/lib/queries";
+import { ArrowLeft } from "lucide-react";
+import type { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
 import Link from "next/link";
+import type { GetProjectDetailQueryResult } from "../../../../../../sanity.types";
+import GallerySection from "./_sections/gallery-section";
+import HeaderSection from "./_sections/header-section";
+import ProjectContent from "./_sections/project-content";
+import * as motion from "motion/react-client";
+import { defineQuery } from "next-sanity";
 
-interface ProjectDetail {
-  title: string;
-  description: string;
-  longDescription: string;
-  image: string;
-  gallery: string[];
-  technologies: string[];
-  features: string[];
-  demoUrl?: string;
-  repoUrl?: string;
-  category: "frontend" | "backend" | "fullstack";
-  startDate: string;
-  status: "completed" | "in-progress" | "planned";
-  links: Array<{ title: string; url: string }>;
-}
-
-const projectDetail: ProjectDetail = {
-  title: "Portfolio Website",
-  description:
-    "Personal portfolio built with Next.js, Tailwind CSS, and Sanity CMS",
-  longDescription: `
-    A modern and responsive portfolio website built with the latest web technologies.
-    This project showcases my skills and experience in web development, featuring
-    a clean design, smooth animations, and excellent performance metrics.
-  `,
-  image: "https://picsum.photos/seed/portfolio/1920/1080",
-  gallery: [
-    "https://picsum.photos/seed/1/800/600",
-    "https://picsum.photos/seed/2/800/600",
-    "https://picsum.photos/seed/3/800/600",
-  ],
-  technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Sanity"],
-  features: [
-    "Responsive design with mobile-first approach",
-    "Dark mode support with system preference detection",
-    "SEO optimized with Next.js features",
-    "Content management with Sanity CMS",
-    "Performance optimized with lazy loading and image optimization",
-    "Smooth animations and transitions",
-  ],
-  demoUrl: "https://portfolio.dev",
-  repoUrl: "https://github.com/user/portfolio",
-  category: "frontend",
-  startDate: "2024-01",
-  status: "completed",
-  links: [
-    { title: "Documentation", url: "https://docs.portfolio.dev" },
-    { title: "Design System", url: "https://design.portfolio.dev" },
-  ],
+type Props = {
+  params: Promise<{
+    lang: Locale;
+    slug: string;
+  }>;
 };
 
-export default function ProjectDetailPage() {
+const projectSlugs = defineQuery(
+  `*[_type == "project" && defined(slug.current)]{"slug": slug.current}`,
+);
+
+export async function generateStaticParams() {
+  const { data: slugs } = await sanityFetch({
+    query: projectSlugs,
+    perspective: "published",
+    stega: false,
+  });
+  return slugs;
+}
+
+export async function generateMetadata(props: Props) {
+  const params = await props.params;
+
+  const { data } = (await sanityFetch({
+    query: getProjectDetailQuery,
+    params,
+  })) as { data: GetProjectDetailQueryResult };
+  return {
+    title: data.project?.title as unknown as string,
+    description: data.project?.description as unknown as string,
+  } satisfies Metadata;
+}
+
+export default async function ProjectDetailPage(props: Props) {
+  const params = await props.params;
+  const common = await getTranslations("common");
+
+  const { data } = (await sanityFetch({
+    query: getProjectDetailQuery,
+    params,
+  })) as { data: GetProjectDetailQueryResult };
+
+  const project = data.project!;
+
+  const hasContent = Array.isArray(project.content) && project.content.length;
+  const hasKeyFeatures =
+    Array.isArray(project.keyFeatures) && project.keyFeatures.length;
+
+  const hasProjectDetail = hasContent || hasKeyFeatures;
+  const hasGallery = Array.isArray(project.gallery) && project.gallery.length;
+
   return (
     <main className="relative">
       {/* Global noise overlay */}
@@ -89,257 +78,52 @@ export default function ProjectDetailPage() {
         </div>
         <div className="container mx-auto px-4">
           {/* Back Button */}
-          <div className="mb-8">
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5 }}
+            className="mb-8"
+          >
             <ExtendedButton variant="ghost" size="sm" asChild>
-              <Link href="/projects" className="group">
+              <Link href={`/${params.lang}/projects`} className="group">
                 <ArrowLeft className="mr-2 h-4 w-4 transition-transform group-hover:-translate-x-1" />
-                Back to Projects
+                {common("backToProjects")}
               </Link>
             </ExtendedButton>
-          </div>
+          </motion.div>
 
           {/* Project Header */}
-          <div className="mb-12 grid gap-8 lg:grid-cols-2">
-            {/* Left Column - Image */}
-            <div className="relative aspect-video overflow-hidden rounded-xl">
-              <Image
-                src={projectDetail.image}
-                alt={projectDetail.title}
-                fill
-                className="object-cover"
-                priority
-              />
-            </div>
-
-            {/* Right Column - Info */}
-            <div className="space-y-6">
-              <div>
-                <ExtendedBadge variant="gradient" className="mb-4">
-                  {projectDetail.category}
-                </ExtendedBadge>
-                <Typography variant="h1" className="mb-2">
-                  {projectDetail.title}
-                </Typography>
-                <Typography variant="body1" className="text-muted-foreground">
-                  {projectDetail.description}
-                </Typography>
-              </div>
-
-              <ExtendedSeparator />
-
-              {/* Quick Info */}
-              <div className="grid gap-4 sm:grid-cols-2">
-                <div className="space-y-2">
-                  <Typography variant="small" className="text-muted-foreground">
-                    Started
-                  </Typography>
-                  <ExtendedBadge
-                    variant="ghost"
-                    className="w-full justify-start"
-                  >
-                    <Calendar className="mr-2 h-4 w-4" />
-                    {projectDetail.startDate}
-                  </ExtendedBadge>
-                </div>
-                <div className="space-y-2">
-                  <Typography variant="small" className="text-muted-foreground">
-                    Status
-                  </Typography>
-                  <ExtendedBadge
-                    variant={
-                      projectDetail.status === "completed" ? "default" : "ghost"
-                    }
-                    className="w-full justify-start"
-                  >
-                    {projectDetail.status}
-                  </ExtendedBadge>
-                </div>
-              </div>
-
-              <ExtendedSeparator />
-
-              {/* Technologies */}
-              <div className="space-y-2">
-                <Typography variant="small" className="text-muted-foreground">
-                  Technologies
-                </Typography>
-                <div className="flex flex-wrap gap-2">
-                  {projectDetail.technologies.map((tech) => (
-                    <ExtendedBadge key={tech} variant="ghost">
-                      {tech}
-                    </ExtendedBadge>
-                  ))}
-                </div>
-              </div>
-
-              {/* Actions */}
-              <div className="flex flex-wrap gap-4 pt-4">
-                {projectDetail.demoUrl && (
-                  <ExtendedButton variant="default" size="lg" asChild>
-                    <a
-                      href={projectDetail.demoUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <Globe className="mr-2 h-5 w-5" />
-                      Visit Website
-                    </a>
-                  </ExtendedButton>
-                )}
-                {projectDetail.repoUrl && (
-                  <ExtendedButton variant="outline" size="lg" asChild>
-                    <a
-                      href={projectDetail.repoUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <GithubIcon className="mr-2 h-5 w-5" />
-                      View Source
-                    </a>
-                  </ExtendedButton>
-                )}
-              </div>
-            </div>
-          </div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+          >
+            <HeaderSection project={project} />
+          </motion.div>
         </div>
       </section>
 
       {/* Project Content */}
-      <section className="bg-primary/5 relative py-20">
-        <div className="absolute inset-0 -z-20">
-          <div className="pattern-connector pattern-connector-top pattern-circuit opacity-70" />
-          <div className="pattern-dots absolute inset-0 opacity-80" />
-          <div className="pattern-connector pattern-connector-bottom pattern-grid opacity-70" />
-        </div>
-        <div className="container mx-auto px-4">
-          <div className="grid gap-8 lg:grid-cols-3">
-            {/* Main Content */}
-            <div className="space-y-8 lg:col-span-2">
-              {/* Description */}
-              <ExtendedCard>
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <Layout className="h-5 w-5" />
-                    About the Project
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <Typography variant="body1" className="whitespace-pre-line">
-                    {projectDetail.longDescription}
-                  </Typography>
-                </CardContent>
-              </ExtendedCard>
-
-              {/* Features */}
-              <ExtendedCard>
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <Code className="h-5 w-5" />
-                    Key Features
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <ul className="space-y-4">
-                    {projectDetail.features.map((feature, index) => (
-                      <li key={index} className="flex items-start gap-2">
-                        <div className="bg-primary/50 mt-1.5 size-1.5 rounded-full" />
-                        <Typography variant="body1">{feature}</Typography>
-                      </li>
-                    ))}
-                  </ul>
-                </CardContent>
-              </ExtendedCard>
-            </div>
-
-            {/* Sidebar */}
-            <div className="space-y-6">
-              {/* Links Card */}
-              <ExtendedCard>
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <Link2 className="h-5 w-5" />
-                    Project Links
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  {projectDetail.links.map((link, index) => (
-                    <ExtendedButton
-                      key={index}
-                      variant="ghost"
-                      className="w-full justify-start"
-                      asChild
-                    >
-                      <a
-                        href={link.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center gap-2"
-                      >
-                        <ExternalLink className="h-4 w-4" />
-                        {link.title}
-                      </a>
-                    </ExtendedButton>
-                  ))}
-                </CardContent>
-              </ExtendedCard>
-
-              {/* Repository Info */}
-              {projectDetail.repoUrl && (
-                <ExtendedCard>
-                  <CardHeader>
-                    <CardTitle className="flex items-center gap-2">
-                      <Github className="h-5 w-5" />
-                      Repository
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <ExtendedButton
-                      variant="outline"
-                      className="w-full"
-                      asChild
-                    >
-                      <a
-                        href={projectDetail.repoUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center gap-2"
-                      >
-                        <GithubIcon className="h-4 w-4" />
-                        View Source Code
-                      </a>
-                    </ExtendedButton>
-                  </CardContent>
-                </ExtendedCard>
-              )}
-            </div>
-          </div>
-        </div>
-      </section>
+      {hasProjectDetail && (
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.4 }}
+        >
+          <ProjectContent project={project} />
+        </motion.div>
+      )}
 
       {/* Gallery Section */}
-      <section className="relative py-20">
-        <div className="absolute inset-0 -z-20">
-          <div className="pattern-connector pattern-connector-top pattern-dots opacity-80" />
-          <div className="pattern-grid pattern-fade-out absolute inset-0 opacity-70" />
-        </div>
-        <div className="container mx-auto px-4">
-          <div className="grid gap-4 sm:grid-cols-2">
-            {projectDetail.gallery.map((image, index) => (
-              <div
-                key={index}
-                className="relative aspect-video overflow-hidden rounded-lg"
-              >
-                <Image
-                  src={image}
-                  alt={`Gallery image ${index + 1}`}
-                  fill
-                  className="object-cover transition-transform hover:scale-105"
-                />
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      {hasGallery && (
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.6 }}
+        >
+          <GallerySection gallery={project.gallery} />
+        </motion.div>
+      )}
     </main>
   );
 }

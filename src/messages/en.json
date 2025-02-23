@@ -1,6 +1,6 @@
 {
     "availability": {
-      "available": "Available",
+      "available": "Available to work",
       "unavailable": "Unavailable",
       "busy": "Busy"
     },
@@ -9,6 +9,7 @@
       "about": "About",
       "experience": "Experience",
       "projects": {
+        "title": "Projects",
         "section": "Projects Section",
         "sectionDescription": "View featured projects section",
         "all": "All Projects",
@@ -38,6 +39,23 @@
       "more": "More projects",
       "source": "Source Code",
       "demo": "Live Demo"
+    },
+    "projects":{
+      "metadata":{
+        "title":"Projects",
+        "description":"Explore my latest projects and experiments. From frontend applications to full-stack solutions, each project represents a unique challenge and learning experience."
+      },
+      "title":"All Projects",
+      "subtitle":"Projects",
+      "aboutProject":"About the project",
+      "description":"Explore my latest projects and experiments. From frontend applications to full-stack solutions, each project represents a unique challenge and learning experience.",
+      "keyFeatures": "Key Features",
+      "projectLinks": "Project Links",
+      "status":{
+        "finished": "Finished",
+        "inProgress": "In Progress",
+        "planned": "Planned"
+      }
     },
     "skills": {
       "title": "Skills",
@@ -110,6 +128,18 @@
       "location": "Location",
       "socialLinks": "Social Links",
       "connect": "Connect with me",
+      "backToHome": "Back to Home",
+      "backToProjects": "Back to Projects",
+      "clearFilters": "Clear all filters",
+      "source": "Source Code",
+      "demo": "Live Demo",
+      "technologies": "Technologies",
+      "status": "Status",
+      "date": "Date",
+      "repository": "Repository",
+      "openMenu": "Open Menu",
+      "closeMenu": "Close Menu",
+      "toggleMenu": "Toggle Menu",
       "cv": {
         "download": "Download CV",
         "view": "View CV"

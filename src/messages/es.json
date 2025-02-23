@@ -1,6 +1,6 @@
 {
     "availability": {
-      "available": "Disponible",
+      "available": "Disponible para trabajar",
       "unavailable": "No disponible",
       "busy": "Ocupado"
     },
@@ -9,6 +9,7 @@
       "about": "Sobre mí",
       "experience": "Experiencia",
       "projects": {
+        "title": "Proyectos",
         "section": "Sección de Proyectos",
         "sectionDescription": "Ver sección de proyectos destacados",
         "all": "Todos los Proyectos",
@@ -38,6 +39,23 @@
       "more": "Más proyectos",
       "source": "Código fuente",
       "demo": "Demo en vivo"
+    },
+    "projects":{
+      "metadata":{
+        "title":"Proyectos",
+        "description":"Explora mis últimos proyectos y experimentos. Desde aplicaciones frontend hasta soluciones full-stack, cada proyecto representa un desafío único y una experiencia de aprendizaje."
+      },
+      "title":"Todos los Proyectos",
+      "subtitle":"Proyectos",
+      "aboutProject":"Sobre el proyecto",
+      "description":"Explora mis últimos proyectos y experimentos. Desde aplicaciones frontend hasta soluciones full-stack, cada proyecto representa un desafío único y una experiencia de aprendizaje.",
+      "keyFeatures": "Características clave",
+      "projectLinks": "Enlaces del proyecto",
+      "status":{
+        "finished": "Finalizado",
+        "inProgress": "En Progreso",
+        "planned": "Planeado"
+      }
     },
     "skills": {
       "title": "Habilidades",
@@ -110,6 +128,18 @@
       "location": "Ubicación",
       "socialLinks": "Redes sociales",
       "connect": "Conéctate conmigo",
+      "backToHome": "Volver al inicio",
+      "backToProjects": "Volver a proyectos",
+      "clearFilters": "Limpiar todos los filtros",
+      "source": "Código fuente",
+      "demo": "Demo en vivo",
+      "technologies": "Tecnologías",
+      "status": "Estado",
+      "date": "Fecha",
+      "repository": "Repositorio",
+      "openMenu": "Abrir menú",
+      "closeMenu": "Cerrar menú",
+      "toggleMenu": "Alternar menú",
       "cv": {
         "download": "Descargar CV",
         "view": "Ver CV"

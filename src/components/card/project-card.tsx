@@ -14,19 +14,22 @@ import { ExternalLink } from "lucide-react";
 import Image from "next/image";
 import { FaGithub } from "react-icons/fa";
 
-import { useTranslations } from "next-intl";
-import type { HomeQueryResult } from "../../../sanity.types";
+import { useLocale, useTranslations } from "next-intl";
+import type { GetHomeQueryResult } from "../../../sanity.types";
+import Link from "next/link";
+import { Typography } from "../ui/typography";
 
 type Props = {
-  project: HomeQueryResult["featuredProjects"][number];
+  project: GetHomeQueryResult["featuredProjects"][number];
 };
 
 const ProjectCard = ({ project }: Props) => {
+  const locale = useLocale();
   const t = useTranslations("project");
   return (
     <ExtendedCard
       variant="default"
-      className="group flex flex-col overflow-hidden"
+      className="group flex w-full flex-col overflow-hidden"
     >
       <div className="relative aspect-video w-full overflow-hidden">
         <div className="from-background/80 to-background/20 absolute inset-0 z-10 bg-gradient-to-t transition-opacity group-hover:opacity-50" />
@@ -41,7 +44,14 @@ const ProjectCard = ({ project }: Props) => {
 
       <CardHeader className="relative">
         <CardTitle className="group-hover:text-primary transition-colors">
-          {project.title as unknown as string}
+          <Typography asChild variant="h4" className="inline-flex items-center">
+            <Link
+              href={`/${locale}/projects/${project.slug as unknown as string}`}
+            >
+              <span>{project.title as unknown as string}</span>
+              <ExternalLink className="ml-1 h-4 w-4" />
+            </Link>
+          </Typography>
         </CardTitle>
         <CardDescription>
           {project.description as unknown as string}
@@ -66,15 +76,24 @@ const ProjectCard = ({ project }: Props) => {
       <ExtendedSeparator className="mt-auto mb-6" />
       <CardFooter className="gap-4">
         {project.links?.demo && (
-          <ExtendedButton variant="default" size="sm" className="flex-1">
-            <ExternalLink className="mr-1 h-4 w-4" />
-            {t("demo")}
+          <ExtendedButton
+            variant="default"
+            size="sm"
+            className="flex-1"
+            asChild
+          >
+            <Link href={project.links.demo}>
+              <ExternalLink className="mr-1 h-4 w-4" />
+              {t("demo")}
+            </Link>
           </ExtendedButton>
         )}
         {project.links?.repo && (
-          <ExtendedButton variant="solid" size="sm" className="flex-1">
-            <FaGithub className="mr-1 h-4 w-4" />
-            {t("source")}
+          <ExtendedButton variant="solid" size="sm" className="flex-1" asChild>
+            <Link href={project.links.repo}>
+              <FaGithub className="mr-1 h-4 w-4" />
+              {t("source")}
+            </Link>
           </ExtendedButton>
         )}
       </CardFooter>

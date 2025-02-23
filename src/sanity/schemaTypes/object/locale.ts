@@ -58,3 +58,33 @@ export const localeText = defineField({
     },
   },
 });
+
+export const localeBlock = defineField({
+  title: "Bloque de Texto Traducible",
+  name: "localeBlock",
+  type: "object",
+  fieldsets: [
+    {
+      title: "Translations",
+      name: "translations",
+      options: { collapsible: true, collapsed: true },
+    },
+  ],
+  fields: languages.map((locale) => ({
+    title: locale.name,
+    name: locale.code,
+    type: "array",
+    of: [{ type: "block" }],
+    fieldset: locale.defaultLocale ? undefined : "translations",
+  })),
+  preview: {
+    select: {
+      es: "es",
+    },
+    prepare({ es }) {
+      return {
+        title: es,
+      };
+    },
+  },
+});

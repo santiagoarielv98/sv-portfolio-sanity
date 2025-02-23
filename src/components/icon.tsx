@@ -3,7 +3,9 @@ import {
   Briefcase,
   Cloud,
   Code,
+  FolderKanban,
   GraduationCap,
+  Grid2X2,
   Monitor,
   Server,
 } from "lucide-react";
@@ -95,6 +97,8 @@ export const icons: Record<string, LucideIcon | IconType> = {
   shadcn: SiShadcnui,
   mercadopago: SiMercadopago,
   python: FaPython,
+  Grid2X2,
+  FolderKanban,
 };
 
 export const getIcon = (icon?: string) => {
@@ -105,9 +109,9 @@ export const Icon = ({
   icon,
   className,
 }: {
-  icon: string;
+  icon?: string | null;
   className?: string;
 }) => {
-  const Icon = getIcon(icon);
+  const Icon = getIcon(icon ?? "");
   return <Icon className={className} />;
 };

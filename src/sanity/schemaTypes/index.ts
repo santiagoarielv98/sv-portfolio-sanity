@@ -1,7 +1,7 @@
 import type { SchemaTypeDefinition } from "sanity";
 import { contactType } from "./document/contact";
 import { experienceType } from "./document/experience";
-import { localeString, localeText } from "./object/locale";
+import { localeBlock, localeString, localeText } from "./object/locale";
 import { profileType } from "./document/profile";
 import { projectType } from "./document/project";
 import { skillType } from "./document/skill";
@@ -12,6 +12,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
     localeString,
     localeText,
+    localeBlock,
     profileType,
     experienceType,
     projectType,

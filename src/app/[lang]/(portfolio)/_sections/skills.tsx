@@ -7,15 +7,16 @@ import {
   CardTitle,
   ExtendedCard,
 } from "@/components/extended-card";
-import { getIcon } from "@/components/icon";
+import { Icon } from "@/components/icon";
 import { SectionHeader } from "@/components/section";
 import { SECTIONS } from "@/lib/config/navigation";
 import { Brain } from "lucide-react";
 import { useTranslations } from "next-intl";
-import type { HomeQueryResult } from "../../../../../sanity.types";
+import type { GetHomeQueryResult } from "../../../../../sanity.types";
+import * as motion from "motion/react-client";
 
 type Props = {
-  skillCategories: HomeQueryResult["skillCategories"];
+  skillCategories: GetHomeQueryResult["skillCategories"];
 };
 
 const SkillsSection = ({ skillCategories }: Props) => {
@@ -32,18 +33,23 @@ const SkillsSection = ({ skillCategories }: Props) => {
       </div>
       <div className="container mx-auto px-4">
         <SectionHeader title={t("title")} badge={t("subtitle")} icon={Brain} />
+
         <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {skillCategories?.map((category, index) => {
-            const Icon = getIcon(category.icon!);
-            return (
-              <ExtendedCard
-                key={index}
-                className="flex flex-col"
-                variant="default"
-              >
+          {skillCategories?.map((category, index) => (
+            <motion.div
+              key={category.slug!}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{
+                duration: 0.5,
+                delay: (index % 3) * 0.1,
+              }}
+            >
+              <ExtendedCard className="flex flex-col" variant="default">
                 <CardHeader className="flex-row gap-4">
                   <ExtendedButton size="icon" variant="gradient" float="none">
-                    <Icon />
+                    <Icon icon={category.icon} />
                   </ExtendedButton>
                   <div className="flex flex-1 flex-col gap-1.5">
                     <CardTitle>{category.title as unknown as string}</CardTitle>
@@ -56,24 +62,21 @@ const SkillsSection = ({ skillCategories }: Props) => {
                   category.skills.length > 0 && (
                     <CardContent className="flex-1">
                       <div className="flex flex-wrap gap-2">
-                        {category.skills?.map((skill) => {
-                          const Icon = getIcon(skill.icon!);
-                          return (
-                            <ExtendedBadge
-                              key={skill.title as unknown as string}
-                              variant="ghost"
-                            >
-                              <Icon />
-                              {skill.title as unknown as string}
-                            </ExtendedBadge>
-                          );
-                        })}
+                        {category.skills?.map((skill) => (
+                          <ExtendedBadge
+                            key={skill.title as unknown as string}
+                            variant="ghost"
+                          >
+                            <Icon icon={skill.icon} />
+                            {skill.title as unknown as string}
+                          </ExtendedBadge>
+                        ))}
                       </div>
                     </CardContent>
                   )}
               </ExtendedCard>
-            );
-          })}
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>

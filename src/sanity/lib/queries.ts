@@ -23,10 +23,12 @@ const baseProjectsFields = `
         title,
         icon,
     },
+    "slug": slug.current,
+    featured,
     links{
         repo,
         demo,
-    },
+    }
 `;
 
 const experienceFields = `
@@ -58,6 +60,7 @@ const skillByCategoryQuery = defineQuery(`
 
 const skillCategoryFields = `
     title,
+    "slug": slug.current,
     "description": coalesce(description[$lang], description.es),
     "icon": icon,
     "skills": ${skillByCategoryQuery},
@@ -83,8 +86,14 @@ const profileTypeQuery = `
     }
 `;
 
+const projectsQuery = `
+    "projects": *[_type == "project"] | order(date.start desc) {
+        ${baseProjectsFields}
+    }
+`;
+
 const featuredProjectsQuery = `
-    "featuredProjects": *[_type == "project" && featured == true] | order(_updatedAt asc) {
+    "featuredProjects": *[_type == "project" && featured == true] | order(date.start desc) {
         ${baseProjectsFields}
     }
 `;
@@ -96,7 +105,7 @@ const experiencesQuery = `
 `;
 
 const skillCategoriesQuery = `
-    "skillCategories": *[_type == "skillCategory"] {
+    "skillCategories": *[_type == "skillCategory"] | order(order asc) {
         ${skillCategoryFields}
     }
 `;
@@ -107,21 +116,53 @@ const contactQuery = `
     }
 `;
 
-export const settingQuery = defineQuery(`
+export const getSettingQuery = defineQuery(`
     *[_type == "setting"][0] {
         ${settingFields}
     }
 `);
 
-export const profileQuery = defineQuery(`{
+export const getProfileQuery = defineQuery(`{
     ${profileTypeQuery},
     ${contactQuery}
 }`);
 
-export const homeQuery = defineQuery(`{
+export const getHomeQuery = defineQuery(`{
     ${profileTypeQuery},
     ${featuredProjectsQuery},
     ${experiencesQuery},
     ${skillCategoriesQuery},
     ${contactQuery}
+}`);
+
+export const getProjectQuery = defineQuery(`{
+    ${projectsQuery},
+}`);
+
+export const getProjectMetaQuery = defineQuery(`{
+    "project": *[_type == "project" && slug.current == $slug] {
+        ${baseProjectsFields},
+    }[0]
+}`);
+
+export const getProjectDetailQuery = defineQuery(`{
+    "project": *[_type == "project" && slug.current == $slug] {
+        ${baseProjectsFields},
+        status,
+        "otherLinks": otherLinks[]{
+            "title": coalesce(title[$lang], title.es),
+            url,
+        },
+        date{
+            start,
+            end,
+        },
+        "keyFeatures": keyFeatures[][$lang],
+        "content": content[$lang],
+        "gallery": gallery[]{
+            asset->{
+                url,
+            },
+        },
+    }[0]
 }`);
