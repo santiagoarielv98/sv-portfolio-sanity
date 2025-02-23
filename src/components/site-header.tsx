@@ -10,6 +10,7 @@ import { ThemeSwitcher } from "./theme-switcher";
 
 import type { ProfileQueryResult } from "../../sanity.types";
 import { useTranslations } from "next-intl";
+import Link from "next/link";
 
 type Props = {
   profile: ProfileQueryResult["profile"];
@@ -27,9 +28,9 @@ export function SiteHeader({ profile, title }: Props) {
           <div className="flex w-full items-center justify-between gap-6 md:gap-10">
             {/* Logo */}
             <ExtendedButton variant="ghost" className="font-bold" asChild>
-              <a href="#" className="flex items-center gap-2">
+              <Link href="/" className="flex items-center gap-2">
                 <span className="font-display">{title}</span>
-              </a>
+              </Link>
             </ExtendedButton>
 
             {/* Desktop Navigation */}
