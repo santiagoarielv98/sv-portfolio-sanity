@@ -63,8 +63,6 @@ export default async function ProjectDetailPage(props: Props) {
   const hasProjectDetail = hasContent || hasKeyFeatures;
   const hasGallery = Array.isArray(project.gallery) && project.gallery.length;
 
-  console.log(project);
-
   return (
     <main className="relative">
       {/* Global noise overlay */}
