@@ -116,18 +116,18 @@ const contactQuery = `
     }
 `;
 
-export const settingQuery = defineQuery(`
+export const getSettingQuery = defineQuery(`
     *[_type == "setting"][0] {
         ${settingFields}
     }
 `);
 
-export const profileQuery = defineQuery(`{
+export const getProfileQuery = defineQuery(`{
     ${profileTypeQuery},
     ${contactQuery}
 }`);
 
-export const homeQuery = defineQuery(`{
+export const getHomeQuery = defineQuery(`{
     ${profileTypeQuery},
     ${featuredProjectsQuery},
     ${experiencesQuery},
@@ -135,17 +135,17 @@ export const homeQuery = defineQuery(`{
     ${contactQuery}
 }`);
 
-export const projectQuery = defineQuery(`{
+export const getProjectQuery = defineQuery(`{
     ${projectsQuery},
 }`);
 
-export const projectMetaQuery = defineQuery(`{
+export const getProjectMetaQuery = defineQuery(`{
     "project": *[_type == "project" && slug.current == $slug] {
         ${baseProjectsFields},
     }[0]
 }`);
 
-export const projectDetailQuery = defineQuery(`{
+export const getProjectDetailQuery = defineQuery(`{
     "project": *[_type == "project" && slug.current == $slug] {
         ${baseProjectsFields},
         status,

@@ -4,7 +4,7 @@ import { ExtendedButton } from "@/components/extended-button";
 import { ExtendedSeparator } from "@/components/extended-separator";
 import { Typography } from "@/components/ui/typography";
 import { sanityFetch } from "@/sanity/lib/live";
-import { projectQuery } from "@/sanity/lib/queries";
+import { getProjectQuery } from "@/sanity/lib/queries";
 import { ArrowLeft, Code } from "lucide-react";
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
@@ -32,7 +32,7 @@ export default async function ProjectsPage(props: Props) {
   const common = await getTranslations("common");
 
   const { data } = (await sanityFetch({
-    query: projectQuery,
+    query: getProjectQuery,
     params,
   })) as { data: ProjectQueryResult };
 

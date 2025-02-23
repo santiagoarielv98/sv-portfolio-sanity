@@ -1,6 +1,6 @@
 import { ExtendedButton } from "@/components/extended-button";
 import { sanityFetch } from "@/sanity/lib/live";
-import { projectDetailQuery } from "@/sanity/lib/queries";
+import { getProjectDetailQuery } from "@/sanity/lib/queries";
 import { ArrowLeft } from "lucide-react";
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
@@ -21,7 +21,7 @@ export async function generateMetadata(props: Props) {
   const params = await props.params;
 
   const { data } = (await sanityFetch({
-    query: projectDetailQuery,
+    query: getProjectDetailQuery,
     params,
   })) as { data: ProjectDetailQueryResult };
   return {
@@ -35,7 +35,7 @@ export default async function ProjectDetailPage(props: Props) {
   const common = await getTranslations("common");
 
   const { data } = (await sanityFetch({
-    query: projectDetailQuery,
+    query: getProjectDetailQuery,
     params,
   })) as { data: ProjectDetailQueryResult };
 

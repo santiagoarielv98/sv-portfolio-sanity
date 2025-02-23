@@ -1,5 +1,5 @@
 import { sanityFetch } from "@/sanity/lib/live";
-import { homeQuery } from "@/sanity/lib/queries";
+import { getHomeQuery } from "@/sanity/lib/queries";
 import AboutSection from "./_sections/about";
 import type { Locale } from "@/lib/i18n/config";
 import ExperienceSection from "./_sections/experience";
@@ -18,7 +18,7 @@ export default async function Home(props: Props) {
   const params = await props.params;
 
   const { data } = await sanityFetch({
-    query: homeQuery,
+    query: getHomeQuery,
     params,
   });
 

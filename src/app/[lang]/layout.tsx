@@ -3,7 +3,7 @@ import { SiteHeader } from "@/components/site-header";
 import { Toaster } from "@/components/ui/sonner";
 import { i18n } from "@/lib/i18n/config";
 import { sanityFetch } from "@/sanity/lib/live";
-import { profileQuery, settingQuery } from "@/sanity/lib/queries";
+import { getProfileQuery, getSettingQuery } from "@/sanity/lib/queries";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import { Space_Grotesk, Urbanist } from "next/font/google";
@@ -34,7 +34,7 @@ type Props = {
 
 export async function generateMetadata({ params }: Props) {
   const { data } = await sanityFetch({
-    query: settingQuery,
+    query: getSettingQuery,
     params,
   });
   return {
@@ -63,11 +63,11 @@ export default async function RootLayout(
 
   const [settings, profile] = await Promise.all([
     sanityFetch({
-      query: settingQuery,
+      query: getSettingQuery,
       params,
     }),
     sanityFetch({
-      query: profileQuery,
+      query: getProfileQuery,
       params,
     }),
   ]);
