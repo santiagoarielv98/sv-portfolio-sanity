@@ -87,13 +87,13 @@ const profileTypeQuery = `
 `;
 
 const projectsQuery = `
-    "projects": *[_type == "project"] | order(_updatedAt asc) {
+    "projects": *[_type == "project"] | order(date.start desc) {
         ${baseProjectsFields}
     }
 `;
 
 const featuredProjectsQuery = `
-    "featuredProjects": *[_type == "project" && featured == true] | order(_updatedAt asc) {
+    "featuredProjects": *[_type == "project" && featured == true] | order(date.start desc) {
         ${baseProjectsFields}
     }
 `;
