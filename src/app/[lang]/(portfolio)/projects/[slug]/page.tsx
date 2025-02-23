@@ -10,6 +10,7 @@ import GallerySection from "./_sections/gallery-section";
 import HeaderSection from "./_sections/header-section";
 import ProjectContent from "./_sections/project-content";
 import * as motion from "motion/react-client";
+import { defineQuery } from "next-sanity";
 
 type Props = {
   params: Promise<{
@@ -17,6 +18,16 @@ type Props = {
     slug: string;
   }>;
 };
+
+const projectSlugs = defineQuery(
+  `*[_type == "project" && defined(slug.current)][].slug.current`,
+);
+
+export async function generateStaticParams() {
+  return await sanityFetch({
+    query: projectSlugs,
+  });
+}
 
 export async function generateMetadata(props: Props) {
   const params = await props.params;
