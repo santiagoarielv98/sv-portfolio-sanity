@@ -23,7 +23,12 @@ export const ExperienceCard = ({ experience }: Props) => {
   return (
     <ExtendedCard variant="solid">
       <CardHeader className="flex-row gap-4">
-        <ExtendedButton size="icon" variant="gradient" float="none">
+        <ExtendedButton
+          size="icon"
+          variant="gradient"
+          float="none"
+          aria-label={experience.type as unknown as string}
+        >
           <Icon icon={experience.type!} />
         </ExtendedButton>
         <div className="flex flex-1 flex-col gap-1.5">
@@ -57,8 +62,8 @@ export const ExperienceCard = ({ experience }: Props) => {
         ) : (
           <ul>
             {experience.description?.map((desc, descIndex) => (
-              <Typography variant="body1" key={descIndex}>
-                {desc as unknown as string}
+              <Typography asChild variant="body1" key={descIndex}>
+                <li>{desc as unknown as string}</li>
               </Typography>
             ))}
           </ul>

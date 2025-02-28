@@ -166,3 +166,7 @@ export const getProjectDetailQuery = defineQuery(`{
         },
     }[0]
 }`);
+
+export const getAllprojectSlugs = defineQuery(
+  `*[_type == "project" && defined(slug.current)]{"slug": slug.current}`,
+);

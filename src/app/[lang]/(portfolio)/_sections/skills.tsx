@@ -48,7 +48,12 @@ const SkillsSection = ({ skillCategories }: Props) => {
             >
               <ExtendedCard className="flex flex-col" variant="default">
                 <CardHeader className="flex-row gap-4">
-                  <ExtendedButton size="icon" variant="gradient" float="none">
+                  <ExtendedButton
+                    size="icon"
+                    variant="gradient"
+                    float="none"
+                    aria-label={category.title as unknown as string}
+                  >
                     <Icon icon={category.icon} />
                   </ExtendedButton>
                   <div className="flex flex-1 flex-col gap-1.5">

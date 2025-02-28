@@ -397,13 +397,6 @@ export type AllSanitySchemaTypes =
   | LocaleText
   | LocaleString;
 export declare const internalGroqTypeReferenceTo: unique symbol;
-// Source: ./src/app/[lang]/(portfolio)/projects/[slug]/page.tsx
-// Variable: projectSlugs
-// Query: *[_type == "project" && defined(slug.current)]{"slug": slug.current}
-export type ProjectSlugsResult = Array<{
-  slug: string | null;
-}>;
-
 // Source: ./src/sanity/lib/queries.ts
 // Variable: skillByCategoryQuery
 // Query: *[_type == "skill" && references(^._id)] {            title,    icon,    }
@@ -791,12 +784,16 @@ export type GetProjectDetailQueryResult = {
     }> | null;
   } | null;
 };
+// Variable: getAllprojectSlugs
+// Query: *[_type == "project" && defined(slug.current)]{"slug": slug.current}
+export type GetAllprojectSlugsResult = Array<{
+  slug: string | null;
+}>;
 
 // Query TypeMap
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
-    '*[_type == "project" && defined(slug.current)]{"slug": slug.current}': ProjectSlugsResult;
     '\n    *[_type == "skill" && references(^._id)] {\n        \n    title,\n    icon,\n\n    }\n': SkillByCategoryQueryResult;
     '\n    *[_type == "setting"][0] {\n        \n    title,\n    "description": coalesce(description[$lang], description.es),\n    "keywords": keywords,\n    author,\n    "footer": coalesce(footer[$lang], footer.es),\n\n    }\n': GetSettingQueryResult;
     '{\n    \n    "profile": *[_type == "profile"][0] {\n        \n    name,\n    "title": coalesce(title[$lang], title.es),\n    "avatar": image.asset->url,\n    "bio": coalesce(bio[][$lang], bio[].es),\n    "objectives": coalesce(objectives[][$lang], objectives[].es),\n    "socialLinks": socialLinks[]{\n        icon,\n        platform,\n        url,\n    },\n    availability,\n    "resume": resume.asset->url\n\n    }\n,\n    \n    "contact": *[_type == "contact"][0] {\n        \n    email,\n    phone,\n    address,\n\n    }\n\n}': GetProfileQueryResult;
@@ -804,5 +801,6 @@ declare module "@sanity/client" {
     '{\n    \n    "projects": *[_type == "project"] | order(date.start desc) {\n        \n    "title": coalesce(title[$lang], title.es),\n    "description": coalesce(description[$lang], description.es),\n    "thumbnail": thumbnail.asset->url,\n    "skills": skills[]->{\n        title,\n        icon,\n    },\n    "slug": slug.current,\n    featured,\n    links{\n        repo,\n        demo,\n    }\n\n    }\n,\n}': GetProjectQueryResult;
     '{\n    "project": *[_type == "project" && slug.current == $slug] {\n        \n    "title": coalesce(title[$lang], title.es),\n    "description": coalesce(description[$lang], description.es),\n    "thumbnail": thumbnail.asset->url,\n    "skills": skills[]->{\n        title,\n        icon,\n    },\n    "slug": slug.current,\n    featured,\n    links{\n        repo,\n        demo,\n    }\n,\n    }[0]\n}': GetProjectMetaQueryResult;
     '{\n    "project": *[_type == "project" && slug.current == $slug] {\n        \n    "title": coalesce(title[$lang], title.es),\n    "description": coalesce(description[$lang], description.es),\n    "thumbnail": thumbnail.asset->url,\n    "skills": skills[]->{\n        title,\n        icon,\n    },\n    "slug": slug.current,\n    featured,\n    links{\n        repo,\n        demo,\n    }\n,\n        status,\n        "otherLinks": otherLinks[]{\n            "title": coalesce(title[$lang], title.es),\n            url,\n        },\n        date{\n            start,\n            end,\n        },\n        "keyFeatures": keyFeatures[][$lang],\n        "content": content[$lang],\n        "gallery": gallery[]{\n            asset->{\n                url,\n            },\n        },\n    }[0]\n}': GetProjectDetailQueryResult;
+    '*[_type == "project" && defined(slug.current)]{"slug": slug.current}': GetAllprojectSlugsResult;
   }
 }

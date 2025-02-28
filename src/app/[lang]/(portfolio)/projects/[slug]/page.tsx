@@ -1,7 +1,11 @@
 import { ExtendedButton } from "@/components/extended-button";
 import { sanityFetch } from "@/sanity/lib/live";
-import { getProjectDetailQuery } from "@/sanity/lib/queries";
+import {
+  getAllprojectSlugs,
+  getProjectDetailQuery,
+} from "@/sanity/lib/queries";
 import { ArrowLeft } from "lucide-react";
+import * as motion from "motion/react-client";
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import Link from "next/link";
@@ -9,8 +13,6 @@ import type { GetProjectDetailQueryResult } from "../../../../../../sanity.types
 import GallerySection from "./_sections/gallery-section";
 import HeaderSection from "./_sections/header-section";
 import ProjectContent from "./_sections/project-content";
-import * as motion from "motion/react-client";
-import { defineQuery } from "next-sanity";
 
 type Props = {
   params: Promise<{
@@ -19,13 +21,9 @@ type Props = {
   }>;
 };
 
-const projectSlugs = defineQuery(
-  `*[_type == "project" && defined(slug.current)]{"slug": slug.current}`,
-);
-
 export async function generateStaticParams() {
   const { data: slugs } = await sanityFetch({
-    query: projectSlugs,
+    query: getAllprojectSlugs,
     perspective: "published",
     stega: false,
   });

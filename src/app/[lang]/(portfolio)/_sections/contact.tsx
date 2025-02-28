@@ -53,7 +53,12 @@ const ContactSection = ({ contact, profile }: Props) => {
               {/* Email Card */}
               <ExtendedCard variant="solid" className="overflow-hidden">
                 <CardHeader className="flex-row items-center gap-4">
-                  <ExtendedButton size="icon" variant="gradient" float="none">
+                  <ExtendedButton
+                    size="icon"
+                    variant="gradient"
+                    float="none"
+                    aria-label={common("email")}
+                  >
                     <Mail />
                   </ExtendedButton>
                   <div>
@@ -68,7 +73,12 @@ const ContactSection = ({ contact, profile }: Props) => {
               {/* Location Card */}
               <ExtendedCard variant="solid" className="overflow-hidden">
                 <CardHeader className="flex-row items-center gap-4">
-                  <ExtendedButton size="icon" variant="gradient" float="none">
+                  <ExtendedButton
+                    size="icon"
+                    variant="gradient"
+                    float="none"
+                    aria-label={common("location")}
+                  >
                     <MapPin />
                   </ExtendedButton>
                   <div>
@@ -91,6 +101,7 @@ const ContactSection = ({ contact, profile }: Props) => {
                     float="none"
                     className="relative grid place-items-center *:bg-red-500 data-[status=available]:*:bg-green-500 data-[status=busy]:*:bg-yellow-500"
                     data-status={profile?.availability || "unavailable"}
+                    aria-label={common("availability")}
                   >
                     <span className="absolute inline-flex size-4 animate-ping rounded-full opacity-75" />
                     <span className="relative inline-flex size-2.5 rounded-full" />
