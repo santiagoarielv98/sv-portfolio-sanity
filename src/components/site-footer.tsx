@@ -41,15 +41,7 @@ export async function SiteFooter({ user }: SiteFooterProps) {
               <span role="img" aria-label="love">
                 ❤️
               </span>{" "}
-              {t("by")}{" "}
-              <a
-                href="www.example.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="font-bold"
-              >
-                {user.profile?.name}
-              </a>
+              {t("by")} <b className="font-bold">{user.profile?.name}</b>
             </Typography>
           </div>
 
