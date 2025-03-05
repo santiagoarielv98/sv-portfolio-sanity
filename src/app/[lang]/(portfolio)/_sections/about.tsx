@@ -4,15 +4,15 @@ import { SectionHeader } from "@/components/section";
 import { Typography } from "@/components/ui/typography";
 import { SECTIONS } from "@/lib/config/navigation";
 import { Download, UserRound } from "lucide-react";
+import * as motion from "motion/react-client";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
-import * as motion from "motion/react-client";
 
-import type { GetHomeQueryResult } from "@/sanity/types";
 import { urlFor } from "@/sanity/lib/image";
+import type { GetProfileQueryResult } from "@/sanity/types";
 
 type Props = {
-  profile: GetHomeQueryResult["profile"];
+  profile: GetProfileQueryResult["profile"];
 };
 
 const AboutSection = ({ profile }: Props) => {

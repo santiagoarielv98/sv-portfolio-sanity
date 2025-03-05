@@ -1,5 +1,5 @@
-import * as motion from "motion/react-client";
 import { Mail, MapPin } from "lucide-react";
+import * as motion from "motion/react-client";
 
 import { ExtendedButton } from "@/components/extended-button";
 import {
@@ -16,12 +16,12 @@ import { Typography } from "@/components/ui/typography";
 import { SECTIONS } from "@/lib/config/navigation";
 import { useTranslations } from "next-intl";
 
-import type { GetHomeQueryResult } from "@/sanity/types";
 import { Icon } from "@/components/icon";
+import type { GetProfileQueryResult } from "@/sanity/types";
 
 type Props = {
-  profile: GetHomeQueryResult["profile"];
-  contact: GetHomeQueryResult["contact"];
+  profile: GetProfileQueryResult["profile"];
+  contact: GetProfileQueryResult["contact"];
 };
 
 const ContactSection = ({ contact, profile }: Props) => {

@@ -114,11 +114,9 @@ export const getProfileQuery = defineQuery(`{
 }`);
 
 export const getHomeQuery = defineQuery(`{
-    ${profileTypeQuery},
     ${featuredProjectsQuery},
     ${experiencesQuery},
-    ${skillCategoriesQuery},
-    ${contactQuery}
+    ${skillCategoriesQuery}
 }`);
 
 export const getProjectQuery = defineQuery(`{

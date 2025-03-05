@@ -9,11 +9,9 @@ import { ThemeProvider } from "./provider";
 
 import "../globals.css";
 
+import { getUserData } from "@/lib/global-data";
 import type { Locale } from "@/lib/i18n/config";
-import { sanityFetch } from "@/sanity/lib/client";
-import { getProfileQuery } from "@/sanity/lib/queries";
 import type { Metadata } from "next";
-import { cache } from "react";
 
 type Props = {
   params: Promise<{
@@ -52,13 +50,6 @@ export async function generateMetadata() {
 export async function generateStaticParams() {
   return i18n.locales.map((locale) => ({ lang: locale }));
 }
-
-const getUserData = cache(async (params: { lang: Locale }) =>
-  sanityFetch({
-    query: getProfileQuery,
-    params,
-  }),
-);
 
 export default async function RootLayout(
   props: Readonly<{
