@@ -73,7 +73,6 @@ const SiteHeaderDesktop = ({ status }: Props) => {
       {/* Theme Toggle Dropdown */}
 
       <ExtendedSeparator orientation="vertical" className="mx-2 h-6" />
-
       <ExtendedBadge>
         <span
           data-status={status || "unavailable"}
