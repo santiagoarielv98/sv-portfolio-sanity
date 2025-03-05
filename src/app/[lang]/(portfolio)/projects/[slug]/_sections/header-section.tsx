@@ -8,6 +8,7 @@ import { Calendar, GithubIcon, Globe } from "lucide-react";
 import { getTranslations } from "next-intl/server";
 import Image from "next/image";
 import type { GetProjectDetailQueryResult } from "@/sanity/types";
+import { urlFor } from "@/sanity/lib/image";
 
 type Props = {
   project: NonNullable<GetProjectDetailQueryResult["project"]>;
@@ -23,7 +24,7 @@ const HeaderSection = async ({ project }: Props) => {
       {/* Left Column - Image */}
       <div className="relative aspect-video overflow-hidden rounded-xl">
         <Image
-          src={project!.thumbnail!}
+          src={urlFor(project.thumbnail!).url() as string}
           alt={project.title as unknown as string}
           fill
           className="object-cover"
