@@ -44,7 +44,7 @@ const GallerySection = ({ gallery }: Props) => {
               }}
             >
               <Image
-                src={urlFor(image).url()!}
+                src={urlFor(image).width(600).url()!}
                 alt={`Gallery image ${index + 1}`}
                 fill
                 className="object-cover transition-transform hover:scale-105"
