@@ -18,6 +18,7 @@ import { useTranslations } from "next-intl";
 
 import { Icon } from "@/components/icon";
 import type { GetProfileQueryResult } from "@/sanity/types";
+import Link from "next/link";
 
 type Props = {
   profile: GetProfileQueryResult["profile"];
@@ -58,8 +59,11 @@ const ContactSection = ({ contact, profile }: Props) => {
                     variant="gradient"
                     float="none"
                     aria-label={common("email")}
+                    asChild
                   >
-                    <Mail />
+                    <Link href={`mailto:${contact?.email}`} target="_blank">
+                      <Mail />
+                    </Link>
                   </ExtendedButton>
                   <div>
                     <CardTitle className="text-sm">{common("email")}</CardTitle>
@@ -74,12 +78,18 @@ const ContactSection = ({ contact, profile }: Props) => {
               <ExtendedCard variant="solid" className="overflow-hidden">
                 <CardHeader className="flex-row items-center gap-4">
                   <ExtendedButton
+                    asChild
                     size="icon"
                     variant="gradient"
                     float="none"
                     aria-label={common("location")}
                   >
-                    <MapPin />
+                    <Link
+                      href={`https://www.google.com/maps/search/?api=1&query=${contact?.address}`}
+                      target="_blank"
+                    >
+                      <MapPin />
+                    </Link>
                   </ExtendedButton>
                   <div>
                     <CardTitle className="text-sm">

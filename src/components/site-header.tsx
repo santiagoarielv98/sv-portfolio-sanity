@@ -11,6 +11,7 @@ import { ThemeSwitcher } from "./theme-switcher";
 import type { GetProfileQueryResult } from "@/sanity/types";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 type Props = {
   profile: GetProfileQueryResult["profile"];
@@ -19,6 +20,7 @@ type Props = {
 export function SiteHeader({ profile }: Props) {
   const common = useTranslations("common");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const isMobile = useIsMobile();
 
   return (
     <header className="border-primary/10 bg-background/80 supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50 w-full border-b backdrop-blur">
@@ -33,10 +35,10 @@ export function SiteHeader({ profile }: Props) {
             </ExtendedButton>
 
             {/* Desktop Navigation */}
-            <SiteHeaderDesktop status={profile?.availability} />
+            {!isMobile && <SiteHeaderDesktop status={profile?.availability} />}
 
             {/* Mobile Menu Button */}
-            <div className="flex items-center gap-2 md:hidden">
+            <div className="flex items-center gap-2 lg:hidden">
               {/* Language Selector Mobile */}
               <LocaleSwitcher />
 
@@ -58,7 +60,7 @@ export function SiteHeader({ profile }: Props) {
         </nav>
 
         {/* Mobile Menu */}
-        {isMenuOpen && (
+        {isMenuOpen && isMobile && (
           <SiteHeaderMobile
             status={profile?.availability}
             onClose={() => setIsMenuOpen(false)}

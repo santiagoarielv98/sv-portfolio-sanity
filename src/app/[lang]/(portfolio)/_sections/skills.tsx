@@ -66,11 +66,12 @@ const SkillsSection = ({ skillCategories }: Props) => {
                 {Array.isArray(category.skills) &&
                   category.skills.length > 0 && (
                     <CardContent className="flex-1">
-                      <div className="flex flex-wrap gap-2">
+                      <div className="flex flex-wrap gap-4">
                         {category.skills?.map((skill) => (
                           <ExtendedBadge
                             key={skill.title as unknown as string}
                             variant="ghost"
+                            size="lg"
                           >
                             <Icon icon={skill.icon} />
                             {skill.title as unknown as string}

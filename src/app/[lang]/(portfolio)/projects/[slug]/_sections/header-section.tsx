@@ -8,6 +8,7 @@ import { Calendar, GithubIcon, Globe } from "lucide-react";
 import { getTranslations } from "next-intl/server";
 import Image from "next/image";
 import type { GetProjectDetailQueryResult } from "@/sanity/types";
+import { urlFor } from "@/sanity/lib/image";
 
 type Props = {
   project: NonNullable<GetProjectDetailQueryResult["project"]>;
@@ -23,7 +24,7 @@ const HeaderSection = async ({ project }: Props) => {
       {/* Left Column - Image */}
       <div className="relative aspect-video overflow-hidden rounded-xl">
         <Image
-          src={project!.thumbnail!}
+          src={urlFor(project.thumbnail!).url() as string}
           alt={project.title as unknown as string}
           fill
           className="object-cover"
@@ -34,7 +35,7 @@ const HeaderSection = async ({ project }: Props) => {
       {/* Right Column - Info */}
       <div className="space-y-6">
         <div>
-          {/* <ExtendedBadge variant="gradient" className="mb-4">
+          {/* <ExtendedBadge size='md' variant="gradient" className="mb-4">
                   {projectDetail.category}
                 </ExtendedBadge> */}
           <Typography variant="h1" className="mb-2">
@@ -53,7 +54,11 @@ const HeaderSection = async ({ project }: Props) => {
             <Typography variant="small" className="text-muted-foreground">
               {common("date")}
             </Typography>
-            <ExtendedBadge variant="ghost" className="w-full justify-start">
+            <ExtendedBadge
+              size="lg"
+              variant="ghost"
+              className="w-full justify-start"
+            >
               <Calendar className="mr-2 h-4 w-4" />
               {project.date?.start
                 ? getFormattedDate(project.date.start)
@@ -66,6 +71,7 @@ const HeaderSection = async ({ project }: Props) => {
               {common("status")}
             </Typography>
             <ExtendedBadge
+              size="lg"
               variant={project.status === "finished" ? "default" : "ghost"}
               className="w-full justify-start"
             >
@@ -84,7 +90,7 @@ const HeaderSection = async ({ project }: Props) => {
           </Typography>
           <div className="flex flex-wrap gap-2">
             {project.skills?.map((skill) => (
-              <ExtendedBadge key={skill.title} variant="ghost">
+              <ExtendedBadge size="lg" key={skill.title} variant="ghost">
                 <Icon icon={skill.icon!} />
                 {skill.title}
               </ExtendedBadge>

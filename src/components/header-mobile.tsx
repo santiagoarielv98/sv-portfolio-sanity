@@ -25,7 +25,7 @@ const SiteHeaderMobile = ({ status, onClose }: Props) => {
 
   const nav = useTranslations("nav");
   return (
-    <div className="border-primary/10 border-t md:hidden">
+    <div className="border-primary/10 border-t lg:hidden">
       <div className="space-y-4 py-4">
         {navigation.map((item) =>
           item.hasSubmenu ? (
@@ -80,10 +80,15 @@ const SiteHeaderMobile = ({ status, onClose }: Props) => {
           ),
         )}
         <ExtendedSeparator className="my-4" />
-        <ExtendedBadge className="w-full">
-          <span className="relative inline-flex size-2.5 rounded-full" />
-          {available(`${status || "unavailable"}`)}
-        </ExtendedBadge>
+        <div className="mx-auto sm:w-max">
+          <ExtendedBadge className="max-sm:w-full">
+            <span
+              data-status={status || "unavailable"}
+              className="relative inline-flex size-2.5 rounded-full bg-red-500 data-[status=available]:bg-green-500 data-[status=busy]:bg-yellow-500"
+            />
+            {available(`${status || "unavailable"}`)}
+          </ExtendedBadge>
+        </div>
       </div>
     </div>
   );
