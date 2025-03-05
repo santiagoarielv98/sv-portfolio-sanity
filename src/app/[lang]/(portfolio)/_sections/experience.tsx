@@ -5,7 +5,7 @@ import * as motion from "motion/react-client";
 
 import { ExperienceCard } from "@/components/card/experience-card";
 import { SectionHeader } from "@/components/section";
-import type { GetHomeQueryResult } from "../../../../../sanity.types";
+import type { GetHomeQueryResult } from "@/sanity/types";
 
 type Props = {
   experiences: GetHomeQueryResult["experiences"];

@@ -12,7 +12,7 @@ import { SectionHeader } from "@/components/section";
 import { SECTIONS } from "@/lib/config/navigation";
 import { Brain } from "lucide-react";
 import { useTranslations } from "next-intl";
-import type { GetHomeQueryResult } from "../../../../../sanity.types";
+import type { GetHomeQueryResult } from "@/sanity/types";
 import * as motion from "motion/react-client";
 
 type Props = {

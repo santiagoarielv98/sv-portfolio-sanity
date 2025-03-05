@@ -15,7 +15,7 @@ import Image from "next/image";
 import { FaGithub } from "react-icons/fa";
 
 import { useLocale, useTranslations } from "next-intl";
-import type { GetHomeQueryResult } from "../../../sanity.types";
+import type { GetHomeQueryResult } from "@/sanity/types";
 import Link from "next/link";
 import { Typography } from "../ui/typography";
 

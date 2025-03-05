@@ -8,7 +8,7 @@ import { useTranslations } from "next-intl";
 import Image from "next/image";
 import * as motion from "motion/react-client";
 
-import type { GetHomeQueryResult } from "../../../../../sanity.types";
+import type { GetHomeQueryResult } from "@/sanity/types";
 
 type Props = {
   profile: GetHomeQueryResult["profile"];

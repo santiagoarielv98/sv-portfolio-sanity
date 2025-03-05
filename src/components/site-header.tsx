@@ -8,16 +8,15 @@ import SiteHeaderDesktop from "./header-desktop";
 import SiteHeaderMobile from "./header-mobile";
 import { ThemeSwitcher } from "./theme-switcher";
 
-import type { GetProfileQueryResult } from "../../sanity.types";
+import type { GetProfileQueryResult } from "@/sanity/types";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 
 type Props = {
   profile: GetProfileQueryResult["profile"];
-  title: string;
 };
 
-export function SiteHeader({ profile, title }: Props) {
+export function SiteHeader({ profile }: Props) {
   const common = useTranslations("common");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -29,7 +28,7 @@ export function SiteHeader({ profile, title }: Props) {
             {/* Logo */}
             <ExtendedButton variant="ghost" className="font-bold" asChild>
               <Link href="/" className="flex items-center gap-2">
-                <span className="font-display">{title}</span>
+                <span className="font-display">SV Portfolio</span>
               </Link>
             </ExtendedButton>
 

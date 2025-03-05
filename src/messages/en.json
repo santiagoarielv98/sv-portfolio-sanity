@@ -114,6 +114,8 @@
       }
     },
     "footer": {
+      "madeWith": "Made with",
+      "by": "by",
       "quickLinks": "Quick Links",
       "letsConnect": "Let's Connect",
       "availableFor": "Available for freelance opportunities and full-time positions.",
@@ -149,5 +151,8 @@
       "light": "Light",
       "dark": "Dark",
       "system": "System"
+    },
+    "meta": {
+      "description": "My personal portfolio, where I showcase my skills, projects, and professional experience in web development. Specialized in frontend technologies like React, Next.js, and TypeScript, as well as content management tools like Sanity."
     }
   }

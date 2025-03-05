@@ -8,21 +8,17 @@ import { ExtendedCard } from "./extended-card";
 import { ExtendedSeparator } from "./extended-separator";
 import { Icon } from "./icon";
 
-import type {
-  GetProfileQueryResult,
-  GetSettingQueryResult,
-} from "../../sanity.types";
+import type { GetProfileQueryResult } from "@/sanity/types";
 
 type SiteFooterProps = {
-  settings: GetSettingQueryResult;
   profile: GetProfileQueryResult;
 };
 
-export async function SiteFooter({ profile, settings }: SiteFooterProps) {
-  const [t, lang, nav] = await Promise.all([
+export async function SiteFooter({ profile }: SiteFooterProps) {
+  const [t, nav, lang] = await Promise.all([
     getTranslations("footer"),
-    getLocale(),
     getTranslations("nav"),
+    getLocale(),
   ]);
 
   return (
@@ -34,17 +30,26 @@ export async function SiteFooter({ profile, settings }: SiteFooterProps) {
             <ExtendedButton variant="ghost" className="font-bold" asChild>
               <a href="#" className="flex items-center gap-2">
                 <Code className="h-5 w-5" />
-                <span className="font-display">
-                  {/* Portfolio */}
-                  {settings?.title}
-                </span>
+                <span className="font-display">SV Portfolio</span>
               </a>
             </ExtendedButton>
             <Typography
               variant="body2"
               className="text-muted-foreground max-w-md"
             >
-              {settings!.footer as string}
+              {t("madeWith")}{" "}
+              <span role="img" aria-label="love">
+                ❤️
+              </span>{" "}
+              {t("by")}{" "}
+              <a
+                href="www.example.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-bold"
+              >
+                {profile.profile?.name}
+              </a>
             </Typography>
           </div>
 

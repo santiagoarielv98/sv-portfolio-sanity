@@ -9,7 +9,7 @@ import * as motion from "motion/react-client";
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import Link from "next/link";
-import type { GetProjectDetailQueryResult } from "../../../../../../sanity.types";
+import type { GetProjectDetailQueryResult } from "@/sanity/types";
 import GallerySection from "./_sections/gallery-section";
 import HeaderSection from "./_sections/header-section";
 import ProjectContent from "./_sections/project-content";

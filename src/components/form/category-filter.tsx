@@ -2,7 +2,7 @@
 
 import React from "react";
 import { Icon } from "@/components/icon";
-import type { SkillCategory } from "../../../sanity.types";
+import type { SkillCategory } from "@/sanity/types";
 import { ExtendedButton } from "../extended-button";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
