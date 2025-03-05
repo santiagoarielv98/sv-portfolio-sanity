@@ -16,18 +16,24 @@ type Props = {
   }>;
 };
 
+// Improve caching for homepage data
 const getPortfolioData = cache(async (params: { lang: Locale }) =>
   sanityFetch({
     query: getHomeQuery,
     params,
+    revalidate: 259200, // 3 days
+    tags: ["home", "projects", "experience", "skills"],
+    cache: "force-cache",
   }),
 );
 
-export const revalidate = 3600;
+// Set to 3 days - homepage data doesn't change frequently
+export const revalidate = 259200;
 
 export default async function Home(props: Props) {
   const params = await props.params;
 
+  // Using Promise.all for concurrent data fetching
   const [data, user] = await Promise.all([
     getPortfolioData(params),
     getUserData(params),
@@ -42,7 +48,7 @@ export default async function Home(props: Props) {
       <SkillsSection skillCategories={data.skillCategories} {...params} />
       <ContactSection
         profile={user.profile}
-        contact={data.contact}
+        contact={user.contact}
         {...params}
       />
     </main>

@@ -20,11 +20,14 @@ type Props = {
   }>;
 };
 
-export const revalidate = 3600;
+// Extend revalidation to 24 hours
+export const revalidate = 86400;
 
 export async function generateStaticParams() {
   const slugs = await sanityFetch({
     query: getAllprojectSlugs,
+    revalidate: 86400, // 24 hours
+    tags: ["project-slugs"],
   });
   return slugs;
 }
@@ -35,6 +38,8 @@ export async function generateMetadata(props: Props) {
   const data = await sanityFetch({
     query: getProjectDetailQuery,
     params,
+    revalidate: 86400, // 24 hours
+    tags: ["project", `project-${params.slug}`],
   });
   return {
     title: data.project?.title as unknown as string,
@@ -46,9 +51,12 @@ export default async function ProjectDetailPage(props: Props) {
   const params = await props.params;
   const common = await getTranslations("common");
 
+  // Fetch with project-specific tags
   const data = await sanityFetch({
     query: getProjectDetailQuery,
     params,
+    revalidate: 86400, // 24 hours
+    tags: ["project", `project-${params.slug}`],
   });
 
   const project = data.project!;
@@ -75,28 +83,19 @@ export default async function ProjectDetailPage(props: Props) {
         </div>
         <div className="container mx-auto px-4">
           {/* Back Button */}
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5 }}
-            className="mb-8"
-          >
+          <div className="mb-8">
             <ExtendedButton variant="ghost" size="sm" asChild>
               <Link href={`/${params.lang}/projects`} className="group">
                 <ArrowLeft className="mr-2 h-4 w-4 transition-transform group-hover:-translate-x-1" />
                 {common("backToProjects")}
               </Link>
             </ExtendedButton>
-          </motion.div>
+          </div>
 
           {/* Project Header */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-          >
+          <div>
             <HeaderSection project={project} />
-          </motion.div>
+          </div>
         </div>
       </section>
 
