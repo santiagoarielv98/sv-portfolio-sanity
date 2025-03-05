@@ -31,6 +31,9 @@ export const urbanist = Urbanist({
   variable: "--font-urbanist",
 });
 
+// Seven days revalidation for layout
+export const revalidate = 604800;
+
 export async function generateMetadata() {
   const messages = await getTranslations("meta");
 
@@ -59,6 +62,7 @@ export default async function RootLayout(
 ) {
   const [params, messages] = await Promise.all([props.params, getMessages()]);
 
+  // User data is already optimized in global-data.ts
   const user = await getUserData(params);
 
   return (
