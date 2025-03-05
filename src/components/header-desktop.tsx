@@ -28,7 +28,7 @@ const SiteHeaderDesktop = ({ status }: Props) => {
   const nav = useTranslations("nav");
 
   return (
-    <div className="hidden md:flex md:items-center md:gap-6">
+    <div className="hidden md:gap-6 lg:flex lg:items-center">
       {navigation.map((item) =>
         item.hasSubmenu ? (
           <DropdownMenu key={item.name}>
