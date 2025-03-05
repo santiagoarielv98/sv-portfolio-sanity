@@ -4,7 +4,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 import * as React from "react";
 
 const extendedBadgeVariants = cva(
-  "inline-flex items-center justify-center rounded-md text-xs font-semibold w-fit whitespace-nowrap shrink-0 [&>svg]:size-3 gap-1.5 px-3 py-1 transition-all duration-300 backdrop-blur-sm relative group",
+  "inline-flex items-center justify-center rounded-md font-semibold w-fit whitespace-nowrap shrink-0 gap-1.5 transition-all duration-300 backdrop-blur-sm relative group",
   {
     variants: {
       variant: {
@@ -38,6 +38,13 @@ const extendedBadgeVariants = cva(
           "border border-secondary/20",
         ].join(" "),
       },
+      size: {
+        xs: "text-[0.65rem] px-2 py-0.5 [&>svg]:size-2.5",
+        sm: "text-xs px-2.5 py-0.5 [&>svg]:size-3",
+        md: "text-xs px-3 py-1 [&>svg]:size-3.5",
+        lg: "text-sm px-3.5 py-1.5 [&>svg]:size-4",
+        xl: "text-base px-4 py-2 [&>svg]:size-4.5",
+      },
       // glow: {
       //   none: "",
       //   xs: "hover:shadow-[0_0_10px_rgba(var(--primary),0.1)]",
@@ -48,6 +55,7 @@ const extendedBadgeVariants = cva(
     },
     defaultVariants: {
       variant: "default",
+      size: "md",
       // glow: "md",
     },
   },
@@ -56,6 +64,7 @@ const extendedBadgeVariants = cva(
 function ExtendedBadge({
   className,
   variant,
+  size,
   // glow,
   asChild = false,
   ...props
@@ -69,6 +78,7 @@ function ExtendedBadge({
       className={cn(
         extendedBadgeVariants({
           variant,
+          size,
           // glow,
         }),
         className,

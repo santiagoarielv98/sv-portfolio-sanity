@@ -17,7 +17,8 @@ type Props = {
   }>;
 };
 
-export const revalidate = 0;
+// Extend revalidation to 24 hours
+export const revalidate = 86400;
 
 export async function generateMetadata() {
   const t = await getTranslations("projects");
@@ -37,7 +38,7 @@ export default async function ProjectsPage(props: Props) {
   const data = await sanityFetch({
     query: getProjectQuery,
     params,
-    revalidate: 0, // 24 hours
+    revalidate: 86400, // 24 hours
     tags: ["project", "projects-list"],
   });
 
