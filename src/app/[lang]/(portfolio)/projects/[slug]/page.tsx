@@ -104,7 +104,7 @@ export default async function ProjectDetailPage(props: Props) {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.4 }}
+          transition={{ duration: 0.5 }}
         >
           <ProjectContent project={project} />
         </motion.div>
@@ -115,7 +115,7 @@ export default async function ProjectDetailPage(props: Props) {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.6 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
         >
           <GallerySection gallery={project.gallery} />
         </motion.div>
