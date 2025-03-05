@@ -7,7 +7,7 @@ import { getFormattedDate } from "@/lib/utils";
 import { Calendar, GithubIcon, Globe } from "lucide-react";
 import { getTranslations } from "next-intl/server";
 import Image from "next/image";
-import type { GetProjectDetailQueryResult } from "../../../../../../../sanity.types";
+import type { GetProjectDetailQueryResult } from "@/sanity/types";
 
 type Props = {
   project: NonNullable<GetProjectDetailQueryResult["project"]>;

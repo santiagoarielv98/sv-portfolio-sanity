@@ -15,9 +15,10 @@ import Image from "next/image";
 import { FaGithub } from "react-icons/fa";
 
 import { useLocale, useTranslations } from "next-intl";
-import type { GetHomeQueryResult } from "../../../sanity.types";
+import type { GetHomeQueryResult } from "@/sanity/types";
 import Link from "next/link";
 import { Typography } from "../ui/typography";
+import { urlFor } from "@/sanity/lib/image";
 
 type Props = {
   project: GetHomeQueryResult["featuredProjects"][number];
@@ -34,7 +35,9 @@ const ProjectCard = ({ project }: Props) => {
       <div className="relative aspect-video w-full overflow-hidden">
         <div className="from-background/80 to-background/20 absolute inset-0 z-10 bg-gradient-to-t transition-opacity group-hover:opacity-50" />
         <Image
-          src={project.thumbnail!}
+          src={
+            urlFor(project.thumbnail!).width(800).height(450).url() as string
+          }
           alt={project.title as unknown as string}
           fill
           className="object-cover transition-transform duration-500 group-hover:scale-105"

@@ -1,5 +1,5 @@
 import { ExtendedButton } from "@/components/extended-button";
-import { sanityFetch } from "@/sanity/lib/live";
+import { sanityFetch } from "@/sanity/lib/client";
 import {
   getAllprojectSlugs,
   getProjectDetailQuery,
@@ -9,7 +9,6 @@ import * as motion from "motion/react-client";
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import Link from "next/link";
-import type { GetProjectDetailQueryResult } from "../../../../../../sanity.types";
 import GallerySection from "./_sections/gallery-section";
 import HeaderSection from "./_sections/header-section";
 import ProjectContent from "./_sections/project-content";
@@ -21,11 +20,11 @@ type Props = {
   }>;
 };
 
+export const revalidate = 3600;
+
 export async function generateStaticParams() {
-  const { data: slugs } = await sanityFetch({
+  const slugs = await sanityFetch({
     query: getAllprojectSlugs,
-    perspective: "published",
-    stega: false,
   });
   return slugs;
 }
@@ -33,10 +32,10 @@ export async function generateStaticParams() {
 export async function generateMetadata(props: Props) {
   const params = await props.params;
 
-  const { data } = (await sanityFetch({
+  const data = await sanityFetch({
     query: getProjectDetailQuery,
     params,
-  })) as { data: GetProjectDetailQueryResult };
+  });
   return {
     title: data.project?.title as unknown as string,
     description: data.project?.description as unknown as string,
@@ -47,10 +46,10 @@ export default async function ProjectDetailPage(props: Props) {
   const params = await props.params;
   const common = await getTranslations("common");
 
-  const { data } = (await sanityFetch({
+  const data = await sanityFetch({
     query: getProjectDetailQuery,
     params,
-  })) as { data: GetProjectDetailQueryResult };
+  });
 
   const project = data.project!;
 

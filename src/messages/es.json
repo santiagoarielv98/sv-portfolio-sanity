@@ -114,6 +114,8 @@
       }
     },
     "footer": {
+      "madeWith": "Hecho con",
+      "by": "por",
       "quickLinks": "Enlaces rápidos",
       "letsConnect": "Conéctate conmigo",
       "availableFor": "Disponible para oportunidades freelance y posiciones de tiempo completo.",
@@ -149,5 +151,8 @@
       "light": "Claro",
       "dark": "Oscuro",
       "system": "Sistema"
+    },
+    "meta": {
+      "description": "Mi portafolio personal, donde muestro mis habilidades, proyectos y experiencia profesional en desarrollo web. Especializado en tecnologías frontend como React, Next.js y TypeScript, además de herramientas de gestión de contenido como Sanity."
     }
   }

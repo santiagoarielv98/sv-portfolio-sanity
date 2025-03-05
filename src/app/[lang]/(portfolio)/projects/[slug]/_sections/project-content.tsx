@@ -17,7 +17,7 @@ import {
 } from "lucide-react";
 
 import type { PortableTextBlock } from "next-sanity";
-import type { GetProjectDetailQueryResult } from "../../../../../../../sanity.types";
+import type { GetProjectDetailQueryResult } from "@/sanity/types";
 import { getTranslations } from "next-intl/server";
 import { cn } from "@/lib/utils";
 

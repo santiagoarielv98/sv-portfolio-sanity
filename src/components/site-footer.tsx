@@ -8,21 +8,17 @@ import { ExtendedCard } from "./extended-card";
 import { ExtendedSeparator } from "./extended-separator";
 import { Icon } from "./icon";
 
-import type {
-  GetProfileQueryResult,
-  GetSettingQueryResult,
-} from "../../sanity.types";
+import type { GetProfileQueryResult } from "@/sanity/types";
 
 type SiteFooterProps = {
-  settings: GetSettingQueryResult;
-  profile: GetProfileQueryResult;
+  user: GetProfileQueryResult;
 };
 
-export async function SiteFooter({ profile, settings }: SiteFooterProps) {
-  const [t, lang, nav] = await Promise.all([
+export async function SiteFooter({ user }: SiteFooterProps) {
+  const [t, nav, lang] = await Promise.all([
     getTranslations("footer"),
-    getLocale(),
     getTranslations("nav"),
+    getLocale(),
   ]);
 
   return (
@@ -34,17 +30,26 @@ export async function SiteFooter({ profile, settings }: SiteFooterProps) {
             <ExtendedButton variant="ghost" className="font-bold" asChild>
               <a href="#" className="flex items-center gap-2">
                 <Code className="h-5 w-5" />
-                <span className="font-display">
-                  {/* Portfolio */}
-                  {settings?.title}
-                </span>
+                <span className="font-display">SV Portfolio</span>
               </a>
             </ExtendedButton>
             <Typography
               variant="body2"
               className="text-muted-foreground max-w-md"
             >
-              {settings!.footer as string}
+              {t("madeWith")}{" "}
+              <span role="img" aria-label="love">
+                ❤️
+              </span>{" "}
+              {t("by")}{" "}
+              <a
+                href="www.example.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-bold"
+              >
+                {user.profile?.name}
+              </a>
             </Typography>
           </div>
 
@@ -74,7 +79,7 @@ export async function SiteFooter({ profile, settings }: SiteFooterProps) {
                   {t("availableFor")}
                 </Typography>
                 <ExtendedButton className="w-full" asChild>
-                  <Link href={`mailto:${profile.contact?.email as string}`}>
+                  <Link href={`mailto:${user.contact?.email as string}`}>
                     <Mail className="mr-2 h-4 w-4" />
                     {t("getInTouch")}
                   </Link>
@@ -88,11 +93,11 @@ export async function SiteFooter({ profile, settings }: SiteFooterProps) {
 
         <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <Typography variant="small" className="text-muted-foreground">
-            © {new Date().getFullYear()} {profile?.profile?.name}.{" "}
+            © {new Date().getFullYear()} {user?.profile?.name}.{" "}
             {t("allRightsReserved")}
           </Typography>
           <div className="flex gap-2">
-            {profile?.profile?.socialLinks?.map((social) => (
+            {user?.profile?.socialLinks?.map((social) => (
               <ExtendedButton
                 key={social.platform as string}
                 variant="ghost"

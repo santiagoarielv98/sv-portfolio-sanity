@@ -2,29 +2,18 @@ import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { Toaster } from "@/components/ui/sonner";
 import { i18n } from "@/lib/i18n/config";
-import { sanityFetch } from "@/sanity/lib/live";
-import { getProfileQuery, getSettingQuery } from "@/sanity/lib/queries";
 import { NextIntlClientProvider } from "next-intl";
-import { getMessages } from "next-intl/server";
+import { getMessages, getTranslations } from "next-intl/server";
 import { Space_Grotesk, Urbanist } from "next/font/google";
 import { ThemeProvider } from "./provider";
 
 import "../globals.css";
 
 import type { Locale } from "@/lib/i18n/config";
+import { sanityFetch } from "@/sanity/lib/client";
+import { getProfileQuery } from "@/sanity/lib/queries";
 import type { Metadata } from "next";
-
-const spaceGrotesk = Space_Grotesk({
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-space",
-});
-
-const urbanist = Urbanist({
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-urbanist",
-});
+import { cache } from "react";
 
 type Props = {
   params: Promise<{
@@ -32,26 +21,44 @@ type Props = {
   }>;
 };
 
-export async function generateMetadata({ params }: Props) {
-  const { data } = await sanityFetch({
-    query: getSettingQuery,
-    params,
-  });
+export const spaceGrotesk = Space_Grotesk({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-space",
+});
+
+export const urbanist = Urbanist({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-urbanist",
+});
+
+export async function generateMetadata() {
+  const messages = await getTranslations("meta");
+
   return {
     title: {
-      default: data!.title!,
-      template: "%s | " + data!.title!,
+      default: "SV Portfolio",
+      template: "%s | " + "SV Portfolio",
       absolute: "",
     },
-    description: data?.description as unknown as string,
-    keywords: data?.keywords,
-    authors: [{ name: data!.author! }],
-  } satisfies Metadata;
+    description: messages("description"),
+    keywords:
+      "portafolio, proyectos, experiencia, habilidades, desarrollo web, frontend, React, Next.js, TypeScript, Sanity",
+    authors: [{ name: "Santiago Villanueva" }],
+  } as Metadata;
 }
 
 export async function generateStaticParams() {
   return i18n.locales.map((locale) => ({ lang: locale }));
 }
+
+const getUserData = cache(async (params: { lang: Locale }) =>
+  sanityFetch({
+    query: getProfileQuery,
+    params,
+  }),
+);
 
 export default async function RootLayout(
   props: Readonly<{
@@ -61,16 +68,7 @@ export default async function RootLayout(
 ) {
   const [params, messages] = await Promise.all([props.params, getMessages()]);
 
-  const [settings, profile] = await Promise.all([
-    sanityFetch({
-      query: getSettingQuery,
-      params,
-    }),
-    sanityFetch({
-      query: getProfileQuery,
-      params,
-    }),
-  ]);
+  const user = await getUserData(params);
 
   return (
     <html lang={params.lang} suppressHydrationWarning>
@@ -84,16 +82,9 @@ export default async function RootLayout(
             enableSystem
             disableTransitionOnChange
           >
-            <SiteHeader
-              profile={profile.data?.profile}
-              title={settings.data?.title as unknown as string}
-            />
+            <SiteHeader profile={user.profile} />
             {props.children}
-            <SiteFooter
-              {...params}
-              settings={settings.data}
-              profile={profile.data}
-            />
+            <SiteFooter {...params} user={user} />
           </ThemeProvider>
         </NextIntlClientProvider>
         <Toaster richColors />

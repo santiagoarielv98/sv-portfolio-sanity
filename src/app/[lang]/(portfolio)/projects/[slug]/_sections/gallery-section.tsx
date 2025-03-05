@@ -1,5 +1,5 @@
 import React from "react";
-import type { GetProjectDetailQueryResult } from "../../../../../../../sanity.types";
+import type { GetProjectDetailQueryResult } from "@/sanity/types";
 import Image from "next/image";
 
 type Props = {
