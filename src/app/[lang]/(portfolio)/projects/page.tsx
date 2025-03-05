@@ -3,20 +3,21 @@ import { ExtendedBadge } from "@/components/extended-badge";
 import { ExtendedButton } from "@/components/extended-button";
 import { ExtendedSeparator } from "@/components/extended-separator";
 import { Typography } from "@/components/ui/typography";
-import { sanityFetch } from "@/sanity/lib/live";
+import { sanityFetch } from "@/sanity/lib/client";
 import { getProjectQuery } from "@/sanity/lib/queries";
 import { ArrowLeft, Code } from "lucide-react";
+import * as motion from "motion/react-client";
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import Link from "next/link";
-import type { GetProjectQueryResult } from "@/sanity/types";
-import * as motion from "motion/react-client";
 
 type Props = {
   params: Promise<{
     lang: Locale;
   }>;
 };
+
+export const revalidate = 3600;
 
 export async function generateMetadata() {
   const t = await getTranslations("projects");
@@ -32,10 +33,10 @@ export default async function ProjectsPage(props: Props) {
   const t = await getTranslations("projects");
   const common = await getTranslations("common");
 
-  const { data } = (await sanityFetch({
+  const data = await sanityFetch({
     query: getProjectQuery,
     params,
-  })) as { data: GetProjectQueryResult };
+  });
 
   const projects = data.projects;
 

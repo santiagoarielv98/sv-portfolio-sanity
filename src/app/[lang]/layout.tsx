@@ -2,17 +2,18 @@ import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { Toaster } from "@/components/ui/sonner";
 import { i18n } from "@/lib/i18n/config";
-import { sanityFetch } from "@/sanity/lib/live";
-import { getProfileQuery } from "@/sanity/lib/queries";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages, getTranslations } from "next-intl/server";
-import { ThemeProvider } from "./provider";
 import { Space_Grotesk, Urbanist } from "next/font/google";
+import { ThemeProvider } from "./provider";
 
 import "../globals.css";
 
 import type { Locale } from "@/lib/i18n/config";
+import { sanityFetch } from "@/sanity/lib/client";
+import { getProfileQuery } from "@/sanity/lib/queries";
 import type { Metadata } from "next";
+import { cache } from "react";
 
 type Props = {
   params: Promise<{
@@ -48,11 +49,16 @@ export async function generateMetadata() {
   } as Metadata;
 }
 
-export const revalidate = 3600;
-
 export async function generateStaticParams() {
   return i18n.locales.map((locale) => ({ lang: locale }));
 }
+
+const getUserData = cache(async (params: { lang: Locale }) =>
+  sanityFetch({
+    query: getProfileQuery,
+    params,
+  }),
+);
 
 export default async function RootLayout(
   props: Readonly<{
@@ -62,10 +68,7 @@ export default async function RootLayout(
 ) {
   const [params, messages] = await Promise.all([props.params, getMessages()]);
 
-  const profile = await sanityFetch({
-    query: getProfileQuery,
-    params,
-  });
+  const user = await getUserData(params);
 
   return (
     <html lang={params.lang} suppressHydrationWarning>
@@ -79,9 +82,9 @@ export default async function RootLayout(
             enableSystem
             disableTransitionOnChange
           >
-            <SiteHeader profile={profile.data?.profile} />
+            <SiteHeader profile={user.profile} />
             {props.children}
-            <SiteFooter {...params} profile={profile.data} />
+            <SiteFooter {...params} user={user} />
           </ThemeProvider>
         </NextIntlClientProvider>
         <Toaster richColors />

@@ -72,14 +72,6 @@ const contactFields = `
     address,
 `;
 
-const settingFields = `
-    title,
-    "description": coalesce(description[$lang], description.es),
-    "keywords": keywords,
-    author,
-    "footer": coalesce(footer[$lang], footer.es),
-`;
-
 const profileTypeQuery = `
     "profile": *[_type == "profile"][0] {
         ${profileFields}
@@ -115,12 +107,6 @@ const contactQuery = `
         ${contactFields}
     }
 `;
-
-export const getSettingQuery = defineQuery(`
-    *[_type == "setting"][0] {
-        ${settingFields}
-    }
-`);
 
 export const getProfileQuery = defineQuery(`{
     ${profileTypeQuery},

@@ -11,10 +11,10 @@ import { Icon } from "./icon";
 import type { GetProfileQueryResult } from "@/sanity/types";
 
 type SiteFooterProps = {
-  profile: GetProfileQueryResult;
+  user: GetProfileQueryResult;
 };
 
-export async function SiteFooter({ profile }: SiteFooterProps) {
+export async function SiteFooter({ user }: SiteFooterProps) {
   const [t, nav, lang] = await Promise.all([
     getTranslations("footer"),
     getTranslations("nav"),
@@ -48,7 +48,7 @@ export async function SiteFooter({ profile }: SiteFooterProps) {
                 rel="noopener noreferrer"
                 className="font-bold"
               >
-                {profile.profile?.name}
+                {user.profile?.name}
               </a>
             </Typography>
           </div>
@@ -79,7 +79,7 @@ export async function SiteFooter({ profile }: SiteFooterProps) {
                   {t("availableFor")}
                 </Typography>
                 <ExtendedButton className="w-full" asChild>
-                  <Link href={`mailto:${profile.contact?.email as string}`}>
+                  <Link href={`mailto:${user.contact?.email as string}`}>
                     <Mail className="mr-2 h-4 w-4" />
                     {t("getInTouch")}
                   </Link>
@@ -93,11 +93,11 @@ export async function SiteFooter({ profile }: SiteFooterProps) {
 
         <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <Typography variant="small" className="text-muted-foreground">
-            © {new Date().getFullYear()} {profile?.profile?.name}.{" "}
+            © {new Date().getFullYear()} {user?.profile?.name}.{" "}
             {t("allRightsReserved")}
           </Typography>
           <div className="flex gap-2">
-            {profile?.profile?.socialLinks?.map((social) => (
+            {user?.profile?.socialLinks?.map((social) => (
               <ExtendedButton
                 key={social.platform as string}
                 variant="ghost"

@@ -9,6 +9,7 @@ import Image from "next/image";
 import * as motion from "motion/react-client";
 
 import type { GetHomeQueryResult } from "@/sanity/types";
+import { urlFor } from "@/sanity/lib/image";
 
 type Props = {
   profile: GetHomeQueryResult["profile"];
@@ -44,7 +45,9 @@ const AboutSection = ({ profile }: Props) => {
             className="relative aspect-square overflow-hidden rounded-xl"
           >
             <Image
-              src={profile!.avatar!}
+              src={
+                urlFor(profile!.avatar!).width(800).height(800).url() as string
+              }
               alt={`${common("photoBy")} ${profile!.name}`}
               fill
               className="object-cover"
