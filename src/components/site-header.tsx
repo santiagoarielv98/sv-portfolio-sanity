@@ -35,7 +35,9 @@ export function SiteHeader({ profile }: Props) {
             </ExtendedButton>
 
             {/* Desktop Navigation */}
-            {!isDesktopView && <SiteHeaderDesktop status={profile?.availability} />}
+            {!isDesktopView && (
+              <SiteHeaderDesktop status={profile?.availability} />
+            )}
 
             {/* Mobile Menu Button */}
             <div className="flex items-center gap-2 lg:hidden">

@@ -1,9 +1,7 @@
 import * as React from "react";
 
 export function useBreakpoint(breakpoint: number): boolean {
-  const [isBelow, setIsBelow] = React.useState<boolean | undefined>(
-    undefined,
-  );
+  const [isBelow, setIsBelow] = React.useState<boolean | undefined>(undefined);
 
   React.useEffect(() => {
     const mql = window.matchMedia(`(max-width: ${breakpoint - 1}px)`);
