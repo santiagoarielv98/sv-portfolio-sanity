@@ -6,6 +6,7 @@ import { NextIntlClientProvider } from "next-intl";
 import { getMessages, getTranslations } from "next-intl/server";
 import { Space_Grotesk, Urbanist } from "next/font/google";
 import { ThemeProvider } from "./provider";
+import { GoogleAnalytics } from "@next/third-parties/google";
 
 import "../globals.css";
 
@@ -84,6 +85,7 @@ export default async function RootLayout(
         </NextIntlClientProvider>
         <Toaster richColors />
       </body>
+      <GoogleAnalytics gaId="G-JKNJEKCSQH" />
     </html>
   );
 }
