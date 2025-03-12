@@ -42,7 +42,7 @@ const ProjectContent = async ({ project }: Props) => {
         <div className="pattern-dots absolute inset-0 opacity-80" />
         <div className="pattern-connector pattern-connector-bottom pattern-grid opacity-70" />
       </div>
-      <div className="container mx-auto md:px-4">
+      <div className="container mx-auto px-2 md:px-4">
         {/* Add SectionHeader with FileText icon */}
         <div className="mb-12">
           <SectionHeader
