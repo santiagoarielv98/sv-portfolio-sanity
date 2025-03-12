@@ -6,20 +6,21 @@ import {
   ExtendedCard,
 } from "@/components/extended-card";
 import Blocks from "@/components/portable-text";
+import { SectionHeader } from "@/components/section";
 import { Typography } from "@/components/ui/typography";
+import { cn } from "@/lib/utils";
+import type { GetProjectDetailQueryResult } from "@/sanity/types";
 import {
   Code,
   ExternalLink,
+  FileText,
   Github,
   GithubIcon,
   Layout,
   Link2,
 } from "lucide-react";
-
 import type { PortableTextBlock } from "next-sanity";
-import type { GetProjectDetailQueryResult } from "@/sanity/types";
 import { getTranslations } from "next-intl/server";
-import { cn } from "@/lib/utils";
 
 type Props = {
   project: GetProjectDetailQueryResult["project"];
@@ -32,7 +33,6 @@ const ProjectContent = async ({ project }: Props) => {
   const activeSidebar = hasLinks || (hasContent && hasRepo);
 
   const t = await getTranslations("projects");
-
   const common = await getTranslations("common");
 
   return (
@@ -42,7 +42,16 @@ const ProjectContent = async ({ project }: Props) => {
         <div className="pattern-dots absolute inset-0 opacity-80" />
         <div className="pattern-connector pattern-connector-bottom pattern-grid opacity-70" />
       </div>
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-2 md:px-4">
+        {/* Add SectionHeader with FileText icon */}
+        <div className="mb-12">
+          <SectionHeader
+            title={t("content.title")}
+            badge={t("content.subtitle")}
+            icon={FileText}
+          />
+        </div>
+
         <div
           className={cn(
             "grid gap-8",

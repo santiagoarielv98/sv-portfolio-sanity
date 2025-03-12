@@ -1,21 +1,25 @@
 "use client";
 
-import React, { useState } from "react";
-import type { GetProjectDetailQueryResult } from "@/sanity/types";
-import Image from "next/image";
+import { SectionHeader } from "@/components/section";
 import { urlFor } from "@/sanity/lib/image";
+import type { GetProjectDetailQueryResult } from "@/sanity/types";
+import { Images, Maximize2 } from "lucide-react";
+import { useTranslations } from "next-intl";
+import Image from "next/image";
+import { useState } from "react";
 import Lightbox from "yet-another-react-lightbox";
-import "yet-another-react-lightbox/styles.css";
-import Zoom from "yet-another-react-lightbox/plugins/zoom";
 import Counter from "yet-another-react-lightbox/plugins/counter";
 import "yet-another-react-lightbox/plugins/counter.css";
-import { Maximize2 } from "lucide-react";
+import Zoom from "yet-another-react-lightbox/plugins/zoom";
+import "yet-another-react-lightbox/styles.css";
 
 type Props = {
   gallery: NonNullable<GetProjectDetailQueryResult["project"]>["gallery"];
 };
 
 const GallerySection = ({ gallery }: Props) => {
+  const t = useTranslations("gallery");
+
   const [isOpen, setIsOpen] = useState(false);
   const [photoIndex, setPhotoIndex] = useState(0);
 
@@ -33,6 +37,7 @@ const GallerySection = ({ gallery }: Props) => {
         <div className="pattern-grid pattern-fade-out absolute inset-0 opacity-70" />
       </div>
       <div className="container mx-auto px-4">
+        <SectionHeader title={t("title")} badge={t("subtitle")} icon={Images} />
         <div className="grid gap-4 sm:grid-cols-2">
           {gallery?.map((image, index) => (
             <div
