@@ -22,7 +22,7 @@ export default function Blocks({ value }: Props) {
       return (
         <div
           key={block._key}
-          className="prose-lg prose-h2:max-w-[32ch] prose-h2:text-5xl"
+          className="prose prose-base lg:prose-lg dark:prose-invert prose-li:marker:text-primary"
         >
           <PortableText value={value} components={portableTextComponents} />
         </div>

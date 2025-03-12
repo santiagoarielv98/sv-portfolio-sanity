@@ -1,158 +1,166 @@
 {
-    "availability": {
-      "available": "Available to work",
-      "unavailable": "Unavailable",
-      "busy": "Busy"
-    },
-    "nav": {
-      "home": "Home",
-      "about": "About",
-      "experience": "Experience",
-      "projects": {
-        "title": "Projects",
-        "section": "Projects Section",
-        "sectionDescription": "View featured projects section",
-        "all": "All Projects",
-        "allDescription": "Browse complete projects catalog"
-      },
-      "skills": "Skills",
-      "contact": "Contact"
-    },
-    "hero": {
-      "title": "Welcome to my portfolio",
-      "subtitle": "Full Stack Developer specialized in creating high-performance web applications with innovative technologies. 🚀",
-      "cta": "Get in touch"
-    },
-    "about": {
-      "title": "About me",
-      "subtitle": "Get to know me better",
-      "whoami": "Who am I?",
-      "goals": "My goals"
-    },
-    "experience": {
-      "title": "Experience",
-      "subtitle": "My professional journey"
-    },
-    "project": {
+  "availability": {
+    "available": "Available to work",
+    "unavailable": "Unavailable",
+    "busy": "Busy"
+  },
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "experience": "Experience",
+    "projects": {
       "title": "Projects",
-      "subtitle": "Some of my work",
-      "more": "More projects",
-      "source": "Source Code",
-      "demo": "Live Demo"
+      "section": "Projects Section",
+      "sectionDescription": "View featured projects section",
+      "all": "All Projects",
+      "allDescription": "Browse complete projects catalog"
     },
-    "projects":{
-      "metadata":{
-        "title":"Projects",
-        "description":"Explore my latest projects and experiments. From frontend applications to full-stack solutions, each project represents a unique challenge and learning experience."
+    "skills": "Skills",
+    "contact": "Contact"
+  },
+  "hero": {
+    "title": "Welcome to my portfolio",
+    "subtitle": "Full Stack Developer specialized in creating high-performance web applications with innovative technologies. 🚀",
+    "cta": "Get in touch"
+  },
+  "about": {
+    "title": "About me",
+    "subtitle": "Get to know me better",
+    "whoami": "Who am I?",
+    "goals": "My goals"
+  },
+  "experience": {
+    "title": "Experience",
+    "subtitle": "My professional journey"
+  },
+  "project": {
+    "title": "Projects",
+    "subtitle": "Some of my work",
+    "more": "More projects",
+    "source": "Source Code",
+    "demo": "Live Demo"
+  },
+  "projects": {
+    "metadata": {
+      "title": "Projects",
+      "description": "Explore my latest projects and experiments. From frontend applications to full-stack solutions, each project represents a unique challenge and learning experience."
+    },
+    "title": "All Projects",
+    "subtitle": "Projects",
+    "aboutProject": "About the project",
+    "description": "Explore my latest projects and experiments. From frontend applications to full-stack solutions, each project represents a unique challenge and learning experience.",
+    "keyFeatures": "Key Features",
+    "projectLinks": "Project Links",
+    "status": {
+      "finished": "Finished",
+      "inProgress": "In Progress",
+      "planned": "Planned"
+    },
+    "content": {
+      "title": "Project Details",
+      "subtitle": "Detailed information"
+    }
+  },
+  "skills": {
+    "title": "Skills",
+    "subtitle": "My technical expertise"
+  },
+  "contact": {
+    "title": "Contact",
+    "subtitle": "Let's talk",
+    "form": {
+      "title": "Send me a message",
+      "subtitle": "Fill out the form below and I'll get back to you as soon as possible.",
+      "success": {
+        "title": "Message sent!",
+        "message": "Your message has been sent successfully. Thank you for contacting me!"
       },
-      "title":"All Projects",
-      "subtitle":"Projects",
-      "aboutProject":"About the project",
-      "description":"Explore my latest projects and experiments. From frontend applications to full-stack solutions, each project represents a unique challenge and learning experience.",
-      "keyFeatures": "Key Features",
-      "projectLinks": "Project Links",
-      "status":{
-        "finished": "Finished",
-        "inProgress": "In Progress",
-        "planned": "Planned"
-      }
-    },
-    "skills": {
-      "title": "Skills",
-      "subtitle": "My technical expertise"
-    },
-    "contact": {
-      "title": "Contact",
-      "subtitle": "Let's talk",
-      "form": {
-        "title": "Send me a message",
-        "subtitle": "Fill out the form below and I'll get back to you as soon as possible.",
-        "success": {
-          "title": "Message sent!",
-          "message": "Your message has been sent successfully. Thank you for contacting me!"
-        },
-        "error": {
-          "title": "Error!",
-          "message": "An error occurred while sending your message. Please try again later."
-        },
+      "error": {
+        "title": "Error!",
+        "message": "An error occurred while sending your message. Please try again later."
+      },
+      "name": {
+        "label": "Name",
+        "placeholder": "Your name"
+      },
+      "email": {
+        "label": "Email",
+        "placeholder": "your@email.com"
+      },
+      "subject": {
+        "label": "Subject",
+        "placeholder": "What's this about?"
+      },
+      "message": {
+        "label": "Message",
+        "placeholder": "Write your message here"
+      },
+      "send": "Send message",
+      "sending": "Sending...",
+      "errors": {
         "name": {
-          "label": "Name",
-          "placeholder": "Your name"
+          "min": "Name must be at least 2 characters",
+          "required": "Name is required"
         },
         "email": {
-          "label": "Email",
-          "placeholder": "your@email.com"
+          "invalid": "Invalid email address",
+          "required": "Email is required"
         },
         "subject": {
-          "label": "Subject",
-          "placeholder": "What's this about?"
+          "max": "Subject must be less than 50 characters",
+          "required": "Subject is required"
         },
         "message": {
-          "label": "Message",
-          "placeholder": "Write your message here"
-        },
-        "send": "Send message",
-        "sending": "Sending...",
-        "errors": {
-          "name": {
-            "min": "Name must be at least 2 characters",
-            "required": "Name is required"
-          },
-          "email": {
-            "invalid": "Invalid email address",
-            "required": "Email is required"
-          },
-          "subject": {
-            "max": "Subject must be less than 50 characters",
-            "required": "Subject is required"
-          },
-          "message": {
-            "min": "Message must be at least 5 characters",
-            "required": "Message is required"
-          }
+          "min": "Message must be at least 5 characters",
+          "required": "Message is required"
         }
       }
-    },
-    "footer": {
-      "madeWith": "Made with",
-      "by": "by",
-      "quickLinks": "Quick Links",
-      "letsConnect": "Let's Connect",
-      "availableFor": "Available for freelance opportunities and full-time positions.",
-      "getInTouch": "Get in Touch",
-      "allRightsReserved": "All rights reserved."
-    },
-    "common": {
-      "photoBy": "Photo by",
-      "availability": "Availability",
-      "email": "Email",
-      "phone": "Phone",
-      "location": "Location",
-      "socialLinks": "Social Links",
-      "connect": "Connect with me",
-      "backToHome": "Back to Home",
-      "backToProjects": "Back to Projects",
-      "clearFilters": "Clear all filters",
-      "source": "Source Code",
-      "demo": "Live Demo",
-      "technologies": "Technologies",
-      "status": "Status",
-      "date": "Date",
-      "repository": "Repository",
-      "openMenu": "Open Menu",
-      "closeMenu": "Close Menu",
-      "toggleMenu": "Toggle Menu",
-      "cv": {
-        "download": "Download CV",
-        "view": "View CV"
-      }
-    },
-    "theme": {
-      "light": "Light",
-      "dark": "Dark",
-      "system": "System"
-    },
-    "meta": {
-      "description": "My personal portfolio, where I showcase my skills, projects, and professional experience in web development. Specialized in frontend technologies like React, Next.js, and TypeScript, as well as content management tools like Sanity."
     }
+  },
+  "footer": {
+    "madeWith": "Made with",
+    "by": "by",
+    "quickLinks": "Quick Links",
+    "letsConnect": "Let's Connect",
+    "availableFor": "Available for freelance opportunities and full-time positions.",
+    "getInTouch": "Get in Touch",
+    "allRightsReserved": "All rights reserved."
+  },
+  "common": {
+    "photoBy": "Photo by",
+    "availability": "Availability",
+    "email": "Email",
+    "phone": "Phone",
+    "location": "Location",
+    "socialLinks": "Social Links",
+    "connect": "Connect with me",
+    "backToHome": "Back to Home",
+    "backToProjects": "Back to Projects",
+    "clearFilters": "Clear all filters",
+    "source": "Source Code",
+    "demo": "Live Demo",
+    "technologies": "Technologies",
+    "status": "Status",
+    "date": "Date",
+    "repository": "Repository",
+    "openMenu": "Open Menu",
+    "closeMenu": "Close Menu",
+    "toggleMenu": "Toggle Menu",
+    "cv": {
+      "download": "Download CV",
+      "view": "View CV"
+    }
+  },
+  "theme": {
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System"
+  },
+  "meta": {
+    "description": "My personal portfolio, where I showcase my skills, projects, and professional experience in web development. Specialized in frontend technologies like React, Next.js, and TypeScript, as well as content management tools like Sanity."
+  },
+  "gallery": {
+    "title": "Gallery",
+    "subtitle": "Project images"
   }
+}
