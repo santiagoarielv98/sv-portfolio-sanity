@@ -42,7 +42,7 @@ const AboutSection = ({ profile }: Props) => {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="relative aspect-square overflow-hidden rounded-xl"
+            className="relative aspect-square overflow-hidden"
           >
             <Image
               src={
@@ -50,9 +50,9 @@ const AboutSection = ({ profile }: Props) => {
               }
               alt={`${common("photoBy")} ${profile!.name}`}
               fill
-              className="object-cover"
+              className="object-cover [mask-image:linear-gradient(black_90%,transparent_100%)]"
+              // que sea un circulo que este en la parte inferior
             />
-            <div className="from-background/60 absolute inset-0 bg-gradient-to-t" />
           </motion.div>
 
           <motion.div

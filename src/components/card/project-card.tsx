@@ -32,8 +32,7 @@ const ProjectCard = ({ project }: Props) => {
       variant="default"
       className="group flex w-full flex-col overflow-hidden"
     >
-      <div className="relative aspect-video w-full overflow-hidden">
-        <div className="from-background/80 to-background/20 absolute inset-0 z-10 bg-gradient-to-t transition-opacity group-hover:opacity-50" />
+      <div className="relative aspect-video w-full overflow-hidden border-b">
         <Image
           src={urlFor(project.thumbnail!).width(600).url()}
           alt={project.title as unknown as string}
@@ -78,7 +77,7 @@ const ProjectCard = ({ project }: Props) => {
       <CardFooter className="gap-4">
         {project.links?.demo && (
           <ExtendedButton
-            variant="default"
+            variant="gradient"
             size="sm"
             className="flex-1"
             asChild

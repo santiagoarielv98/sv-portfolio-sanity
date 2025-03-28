@@ -16,13 +16,12 @@ const extendedCardNeonVariants = cva(
     variants: {
       variant: {
         default: [
-          "bg-gradient-to-br from-background/60 via-background/80 to-background/60",
           "border-2 border-primary/20",
           "shadow-[0_0_25px_rgba(var(--primary),0.1)]",
           "[&>*]:relative [&>*]:z-[2]",
         ].join(" "),
         solid: [
-          "bg-primary/10",
+          "dark:bg-primary/10",
           "border-2 border-primary/30",
           "[&>*]:relative [&>*]:z-[2]",
         ].join(" "),

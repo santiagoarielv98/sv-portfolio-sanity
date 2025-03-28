@@ -9,33 +9,34 @@ const extendedBadgeVariants = cva(
     variants: {
       variant: {
         default: [
-          "bg-gradient-to-r from-primary/15 via-secondary/15 to-accent/15",
-          "text-primary/80 border border-primary/30",
+          "bg-gradient-to-r from-primary/20 via-secondary/20 to-accent/20",
+          "text-primary font-bold",
+          "border border-primary/30",
         ].join(" "),
         solid: [
           "bg-primary/20",
-          "text-primary font-medium",
+          "text-primary font-bold",
           "border border-primary/30",
         ].join(" "),
         ghost: [
           "bg-primary/10",
-          "text-primary/80 font-medium",
+          "text-primary font-bold",
           "border border-transparent",
         ].join(" "),
         outline: [
           "bg-transparent",
           "border border-primary",
-          "text-primary font-medium",
+          "text-primary font-bold",
         ].join(" "),
         gradient: [
           "bg-gradient-to-r from-primary/20 via-secondary/20 to-accent/20",
-          "text-primary font-medium",
+          "text-primary font-bold",
           "border border-primary/30",
         ].join(" "),
         secondary: [
-          "bg-secondary/10",
-          "text-secondary font-medium",
-          "border border-secondary/20",
+          "bg-secondary/20",
+          "text-secondary-foreground font-bold",
+          "border border-secondary/30",
         ].join(" "),
       },
       size: {
@@ -45,18 +46,10 @@ const extendedBadgeVariants = cva(
         lg: "text-sm px-3.5 py-1.5 [&>svg]:size-4",
         xl: "text-base px-4 py-2 [&>svg]:size-4.5",
       },
-      // glow: {
-      //   none: "",
-      //   xs: "hover:shadow-[0_0_10px_rgba(var(--primary),0.1)]",
-      //   sm: "hover:shadow-[0_0_15px_rgba(var(--primary),0.15)]",
-      //   md: "hover:shadow-[0_0_20px_rgba(var(--primary),0.2)]",
-      //   lg: "hover:shadow-[0_0_25px_rgba(var(--primary),0.25)]",
-      // },
     },
     defaultVariants: {
       variant: "default",
       size: "md",
-      // glow: "md",
     },
   },
 );
@@ -65,7 +58,6 @@ function ExtendedBadge({
   className,
   variant,
   size,
-  // glow,
   asChild = false,
   ...props
 }: React.ComponentProps<"span"> &
@@ -79,7 +71,6 @@ function ExtendedBadge({
         extendedBadgeVariants({
           variant,
           size,
-          // glow,
         }),
         className,
       )}

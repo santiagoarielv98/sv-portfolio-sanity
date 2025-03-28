@@ -12,24 +12,24 @@
   --card-foreground: hsl(235, 85%, 12%);
   --popover: hsl(230, 25%, 99%);
   --popover-foreground: hsl(235, 85%, 12%);
-  --primary: hsl(280, 100%, 65%);
+  --primary: hsl(280, 100%, 55%);  /* Más oscuro para mejor contraste */
   --primary-foreground: hsl(0, 0%, 100%);
-  --secondary: hsl(190, 100%, 55%);
-  --secondary-foreground: hsl(235, 85%, 12%);
+  --secondary: hsl(190, 100%, 45%);  /* Más oscuro para mejor contraste */
+  --secondary-foreground: hsl(0, 0%, 100%);  /* Cambiado a blanco para contraste */
   --muted: hsl(230, 20%, 90%);
-  --muted-foreground: hsl(235, 30%, 40%);
-  --accent: hsl(330, 100%, 65%);
-  --accent-foreground: hsl(0, 0%, 100%);
+  --muted-foreground: hsl(235, 30%, 30%);  /* Más oscuro para mejor contraste */
+  --accent: hsl(330, 100%, 55%);  /* Más oscuro para mejor contraste */
+  --accent-foreground: hsl(0, 0%, 100%);  /* Cambiado a blanco para contraste */
   --destructive: hsl(0, 100%, 60%);
   --destructive-foreground: hsl(0, 0%, 100%);
   --border: hsl(230, 20%, 85%);
   --input: hsl(230, 20%, 85%);
-  --ring: hsl(260, 100%, 60%);
-  --chart-1: hsl(320, 100%, 60%);
-  --chart-2: hsl(180, 100%, 50%);
-  --chart-3: hsl(260, 100%, 60%);
-  --chart-4: hsl(120, 100%, 50%);
-  --chart-5: hsl(40, 100%, 50%);
+  --ring: hsl(260, 100%, 50%);  /* Más oscuro para mejor contraste */
+  --chart-1: hsl(320, 100%, 50%);  /* Más oscuro para mejor contraste */
+  --chart-2: hsl(180, 100%, 40%);  /* Más oscuro para mejor contraste */
+  --chart-3: hsl(260, 100%, 50%);  /* Más oscuro para mejor contraste */
+  --chart-4: hsl(120, 100%, 40%);  /* Más oscuro para mejor contraste */
+  --chart-5: hsl(40, 100%, 40%);   /* Más oscuro para mejor contraste */
   --radius: 0.6rem;
 }
 
