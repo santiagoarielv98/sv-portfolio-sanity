@@ -1,36 +1,72 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# SV Portfolio Sanity
 
-## Getting Started
+Proyecto de portfolio personal desarrollado con Next.js 15, React 19, TypeScript y Sanity CMS. Este proyecto está pensado para ser un sitio web moderno, interactivo y multilingüe que muestra mis proyectos, experiencia, skills y servicios.
 
-First, run the development server:
+## Tecnologías Principales
+
+- **Next.js 15**: Framework React con soporte para SSR, SSG y ISR
+- **React 19**: La versión más reciente de React con nuevas características
+- **TypeScript**: Tipado estático para JavaScript
+- **Sanity CMS**: CMS headless para gestionar el contenido
+- **Tailwind CSS 4**: Framework CSS utility-first para diseño rápido
+- **next-intl**: Internacionalización para soporte multilingüe
+- **React Hook Form**: Manejo de formularios
+- **Zod**: Validación de datos
+- **Resend**: Envío de emails
+
+## Características
+
+- 🌐 **Multilingüe**: Soporte para Español e Inglés
+- 🌓 **Tema Claro/Oscuro**: Cambio de tema basado en preferencias del usuario
+- 📱 **Responsive**: Diseño adaptable a todo tipo de dispositivos
+- ⚡ **Rendimiento**: Optimizado para una carga rápida y SEO
+- 📊 **CMS**: Administración de contenido con Sanity Studio integrado
+
+## Configuración del Proyecto
+
+### Requisitos previos
+
+- Node.js 20.x o superior
+- NPM 10.x o superior
+
+### Instalación
 
 ```bash
+# Clonar el repositorio
+git clone https://github.com/santiagoarielv98/sv-portfolio-sanity.git
+cd sv-portfolio-sanity
+
+# Instalar dependencias
+npm install
+
+# Iniciar servidor de desarrollo
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+El servidor de desarrollo estará disponible en http://localhost:3000.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Scripts
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- `npm run dev`: Inicia el servidor de desarrollo con Turbopack
+- `npm run build`: Compila el proyecto para producción
+- `npm run start`: Inicia el servidor de producción
+- `npm run lint`: Ejecuta ESLint para verificar el código
+- `npm run typegen`: Genera los tipos de TypeScript para Sanity
 
-## Learn More
+## Estructura de Directorios
 
-To learn more about Next.js, take a look at the following resources:
+- `src/app`: Rutas y componentes de la aplicación
+- `src/app/(studio)`: Configuración del Studio de Sanity
+- `src/app/[lang]`: Rutas multilingües
+- `src/app/api`: API Routes para formularios y otros servicios
+- `src/components`: Componentes reutilizables
+- `src/lib`: Utilidades, hooks y configuraciones
+- `src/schemas`: Esquemas de Sanity CMS
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Despliegue
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+El proyecto está optimizado para ser desplegado en Vercel. También puede ser desplegado en cualquier otra plataforma que soporte Next.js.
 
-## Deploy on Vercel
+## Licencia
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Este proyecto es de código abierto bajo la licencia MIT.
