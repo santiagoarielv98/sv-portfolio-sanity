@@ -1,5 +1,6 @@
 import type { LucideIcon } from "lucide-react";
 import {
+  Brain,
   Briefcase,
   Cloud,
   Code,
@@ -26,6 +27,7 @@ import {
   FaUsers,
 } from "react-icons/fa";
 import {
+  SiCloudinary,
   SiAngular,
   SiAxios,
   SiDocker,
@@ -51,14 +53,18 @@ import {
   SiSwagger,
   SiTailwindcss,
   SiTypescript,
+  SiMaterialdesign,
 } from "react-icons/si";
 
 export const icons: Record<string, LucideIcon | IconType> = {
+  ai: Brain,
   job: Briefcase,
   education: GraduationCap,
+  materialangular: SiMaterialdesign,
   monitor: Monitor,
   server: Server,
   cloud: Cloud,
+  cloudinary: SiCloudinary,
   typescript: SiTypescript,
   react: FaReact,
   redux: SiRedux,
