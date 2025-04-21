@@ -85,7 +85,7 @@ const projectsQuery = `
 `;
 
 const featuredProjectsQuery = `
-    "featuredProjects": *[_type == "project" && featured == true] | order(date.start desc) {
+    "featuredProjects": *[_type == "project" && featured == true] | order(date.start desc)[0...6] {
         ${baseProjectsFields}
     }
 `;
